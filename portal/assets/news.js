@@ -1,7 +1,21 @@
 // Generado automáticamente por scripts/update-news.mjs. No editar a mano.
 window.PREP_NEWS = {
-  "actualizado": "2026-11-05T08:06:06.556Z",
+  "actualizado": "2026-11-05T12:04:17.064Z",
   "items": [
+    {
+      "titulo": "Interior y la Confederación Estatal de Asociaciones Vecinales refuerzan la participación ciudadana en protección civil y gestión de emergencias",
+      "enlace": "https://news.google.com/rss/articles/CBMipwJBVV95cUxPN2QtUDFDcVYwdlN1cmwtOGtDSEtBQmRGVk5GSmd2dTQwTC11cTBTMS1ybHlqVXJMRm1Qb2xfb3p4R1VoOF9ibkpIMFRzVnN4cldHUDU5TzNSRVNULTBnZWxCTDJ1eUpmU3diWlpUSmt1cVRyalVjczV3c0J0dDd4S2N0T2NCX0JxSmFVOVIyUHJjMnJDdFNJNW4tc2o2bzdNN2tRSy1qWFlBMXEzQmJqQjd5NWF0Q2hLYmNaM1hrVS1OVXRNd2xqT0RHeVRTSTNYSDlJV2Vsc2RucDlIcmE4NXBzLUpSeUZoOFlRelUwMWFRbjVYZGNLYS1XQ0ZJVlcwMGRWTHpMUXdwUDdvZHRoa3NWZEZuRUhZbm95M3VrTVloOXNmOVY4?oc=5",
+      "fuente": "ministerio-interior",
+      "fecha": "2026-11-05T10:47:08.000Z",
+      "tema": "Desastres naturales"
+    },
+    {
+      "titulo": "La AIE insta a revisar el apagón nuclear «caso por caso» para blindar la seguridad del suministro eléctrico",
+      "enlace": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPcjFNa2hSWjduUk9WV291TC1fT0VHQ2syR1ZMTmNlMnJFT1JUNFJxaEJaS2RYclc1X1VuSUV1NGE2MXdKR3VycXE3b0o4RnVyX2MwaFhSRTJLSXc4R2Y1c0tMb3h1a3Y5cWZLOFZ2eEd2SWhYeUNDaEFBOGpGWVJ0NUU0ZE9oWDQ2dFlLR1NUSjAyYmlQMU5xSC1MYkRPcnBUdTY2bXA5VnJ6UUp3bnfSAbMBQVVfeXFMTlBlYkxoZ01nczkzRG1ISUN4c3hMY0lscXM2MUpMaVlqLTExYkZaZkdZemthaTBTTnl5Ni1LUnVrZElQcjhBamUzOGQ4enhPVzM0NGtUNkVzTE15RTVNSXVPRzBWWExNUG5sTGZTSjVoT1h0enQ5N2NNQ2t0dTR1SUVnWnU4YVlnWGVqY2lUY3NRVmRaTTdia1p2OGNFYTdwdU0tMWlfU0tNMC0wd1NnRUxqQmc?oc=5",
+      "fuente": "El Correo",
+      "fecha": "2026-11-05T09:41:32.000Z",
+      "tema": "Apagones"
+    },
     {
       "titulo": "Aclara Protección Civil que mochila de emergencia no representa alerta por desastre",
       "enlace": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNSlcwQ2VFeXduRXI1cUNiV3ZyMFI4Y09fMl9vaEtPRFdJS2pRT1RLZzRTNnhmN2JUanc2NnZESlpCamNrNEVIVWNIakNyYnZ2MXB4a1p4NkQ1VDZjV1RhcU5Zd201a3N5TlZ6b25hblNSbzNXRHhTSWVkT091YVl2TlNZV2V6MjFUNGVZN1lSbm9MTElLZ0JZaUdCd0ljY1RnT1F3bHFQWWFtbDjSAbABQVVfeXFMT29GVTJyU0V1Z1dpNnlXRmFuYWVpX3pkakpVSjdVWkdfejhQYXpsbWxzekplYnBvYWNXdEhLYjVBTE15OXJPQllyOGtYeFdNbE1uTmF3V0c5aWxsVWMxQ3JWeUFXVVljX1dMZXdtaW1uLVVDQld4SnhEb1FoZmprWTZhdmR2SHNvb0VDak1ZdHFFNUhHSjdEbkNqcmZlQVR4NW1yMkI4c2ZMYnI0clVKM2I?oc=5",
@@ -17,11 +31,46 @@ window.PREP_NEWS = {
       "tema": "Protección civil"
     },
     {
+      "titulo": "Un ciberataque arruina alimentos en supermercados europeos",
+      "enlace": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNc2h1UjBmdjlWekxta1V4MWpfanNpQzFuMnN1UkRkWDdjemExSld5amh3emw5bVlhTjdYanFBa2JaZzc4Y1VDRlZQR2dOb3owR20wY1owckFSYWJhZzFQeVJtbzlGYzVsbjBXZDYzdU1Gemw2SUt2b2thZC1kRm82QmkycDFhU0NHNVIwOA?oc=5",
+      "fuente": "GNDiario",
+      "fecha": "2026-11-04T15:00:00.000Z",
+      "tema": "Ciberataques"
+    },
+    {
       "titulo": "Las farmacias de Asturias alertan del desabastecimiento de un fármaco para la hipertensión: «Todos lo piden para el pelo»",
       "enlace": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPUEc1dC0zS0ZBX25QUnRkeHJGejZfcUMzcWgwLWtub0FoazdMMWxBNzBxeGUwZ1hLN29Ea1dBOFlyRmp3dFhFZU9HUGtvWUdSS25pZE5MeHZ2Wks1Wk0wTGFIcEtVT3JoQms4TFhRRVJZbzNSRTZZQTdLSktfUnUwV1dlU0tscEExVEExTmt0ajhHWF9ZRWdhcVR4MVpQdjZxYUstb3hwcDJsU1NCaXR6X3NMWnJDMDFpVjVz0gHAAUFVX3lxTE9uTVJlS1N1UGlZWTFTUzBFVEdMWkdxZC1CaFZFZV9SWERCYnc4Qm95YmxFTHVNaHJ1VGZ1d2VjS1Y4YTUwQ2k2WElmeGZWbDU4Tnh3VFZSS3lIZnpkYzRkYUtVWndMLVJwN290T0NaWlZfc3d0dmhMb2VOdksyYWY3MUVndm5GcHVoUFRrVkR3NDNEeVd4bEdNS3RBTUlpQlpaaHg4UWZYLUZtZ3JYRUR2OWRYdGVEZ0FFVVN1YlNfaA?oc=5",
       "fuente": "El Comercio",
       "fecha": "2026-11-04T13:31:48.000Z",
       "tema": "Suministro"
+    },
+    {
+      "titulo": "Nuevo apagón en La Palma: un corte parcial afecta a 13.740 suministros durante 22 minutos",
+      "enlace": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNRWtYMnJyOFlycTE2Q0J3eXRpd0FEWUphenJ2WWJTdXloa0pPUHk5djMwRTVOU095NzRJeVBxNWcwS3FmaEhWUXNNZlhyTXR0TW1SS0RLLVZLU0lfYmRpMUZOU21tbnRRTU1NMDJwdG55Nm1VQTBNUWpjcE5UWWxkWHp4RENWYmwzY0puRDlZbmFQSDFyU3AzN1VhenJJM1pvdFU3X2NTR1huck02eWdjR0hTZjRzZ9IBuwFBVV95cUxPcF9UUVZMRGc1WW1DS2xLNW0zOE9peEFYRHpHejQ3cEdiU2NhaU5OM3VNRnc2TDNvYTFYb0ZDd1BYb3dHaTVNbnFGMDlMbUxnQlF4cFdvd0xHMlR5T3c5WVlxSy15cEp0MExEbXMwZ3puYldSQWtnSkg2cW9Ld3Q5N25fMHdTUk9JQ0hDQjc4SXFWMnRyb01pS0kwNDkyRS1Ta2VQcy1Hem9KY1lhV2o3c2hoMXBwNVNaMGxJ?oc=5",
+      "fuente": "El Boletín",
+      "fecha": "2026-11-04T11:28:47.000Z",
+      "tema": "Apagones"
+    },
+    {
+      "titulo": "La Palma sufre un segundo apagón en tres días: más de 13.000 suministros afectados",
+      "enlace": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPYk14OVN5S001NER3WGdXZFRmNnpiMHZBTEVGdl95VlNuRUVSWXZJdTVGei1xRmZGYjg2WmpJU1otZEFTSmJSV2prOWtQZlJ2VWdhMU1ac253LWdqRUxWTlJzOFZyTHNYMW44Nl9LMmhBYzEwOXlRT2xGWEM3aDB1SFRZNEZNRUM2UzFZVzlEQW4?oc=5",
+      "fuente": "Eldía",
+      "fecha": "2026-11-04T11:27:53.000Z",
+      "tema": "Apagones"
+    },
+    {
+      "titulo": "Oliva acumula más de 120 litros en 72 horas: la vaguada retrógrada vuelve a dejar lluvias en la zona de la dana Adam",
+      "enlace": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOd0NLSVB3dW42c0l4QkR3TTJhZEhMc0Q5U3hCWXNma19lNXBWQldQSUJrUEpwdVdyZ1ZtTV92UXpnTE1ma1ZfRW9pSWNVRHVNSDZYN3ppMEVzeGpqNU9xUmdaUlJFVUdGU1FYcXlqSmJNZTlQaGdtWDJKdW4ybXlrVFZKeENiOG5JM3BqNEF4aHNwLUZmZFVGcGpjVjF4SjlmRXd6RGY1eU5yYlJGbDE2bEpWYTZrS3d2OUw5ekxic0JMeGpn?oc=5",
+      "fuente": "elperiodic.com",
+      "fecha": "2026-11-04T10:06:48.000Z",
+      "tema": "Desastres naturales"
+    },
+    {
+      "titulo": "La mancomunidad Hoya de Buñol Chiva licita por 2 millones de euros el refuerzo de su equipamiento de protección civil frente a futuras Danas",
+      "enlace": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxNT1VRU3psS3gzVENhYmYteUVxaEVVbXBWUmtFUWFHRnJMYllxMjZ6dFBuSjlFWFEzTjkweTFRQ09ubnlSOFZTS1B2bVRmTVFlUC1DYmZBWmY4QVdvNkNsdHdHYlNteW9fSEdNeHlyYm5MNXg3N1ROZUl1OWc0TkxseTFWSlZOal96aGJEQmJvWmJFOWhKWTVaQkkxOENFTkhhN3ZLVERrT0NwcE5Mc1lLY0pNQkpISl9USS12YUI4encwN2xMMER5dS1IcXVhaGVuUGVNR0ZaR3BDREdKTENaNFJnYjVNS0dXOGpzU1BhWGR4dEF3?oc=5",
+      "fuente": "- hoyunclick",
+      "fecha": "2026-11-04T09:05:17.000Z",
+      "tema": "Desastres naturales"
     },
     {
       "titulo": "¿Qué está pasando en Europa? Esto se sabe del gran apagón por 72 horas y si afectará a México",
@@ -38,6 +87,20 @@ window.PREP_NEWS = {
       "tema": "Protección civil"
     },
     {
+      "titulo": "CNPC descarta alerta extraordinaria por campaña de mochila de emergencia",
+      "enlace": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQWjRKRFZlTDFoYklRYkg2VS1PcUZoZnFWa2ZSZklERkgzWEJQUHMxejh4MC0xV2QzVWpDNjRmMHRyTVcyUkF4RE5MTlFwcU5BMGlhVC1ITjBFR0paNE05ZUxIZEVDS2xQOVAzY3BybEkxbklTc1l1Q2RuY09xZUVGc2luUGd1NUhmYnBBUE1XbDdiSDViOVczMTBLSHp2MXpqY0FfYU5leEZlVk1CeEYxbC15Yw?oc=5",
+      "fuente": "Primera Plana Puebla",
+      "fecha": "2026-11-03T23:59:06.000Z",
+      "tema": "Protección civil"
+    },
+    {
+      "titulo": "Ante alerta de gobiernos mundiales: Esto debe tener un kit de emergencia en Chile según SENAPRED",
+      "enlace": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPaU9rUmFRRV9XMVZpTmFuZzg3Q2tULU1UdS14b3JUTW9EVjllYlVORmk4VDNhOFo1eXJwZ181WE8wOF9qMDM2bnlNem40WmJWb0lvM1VxMDJ3YWVJczlMTFVVUTd3U2FZVU9ETWxTWEpyT3NHRTNOY1YtNFdBZV9qUkZaTjhjdFVkZW5PX21SMEFhcTBPVEc3R1ZZSVNQSUV2RFlVTzFKQkVsN2lQY3RjcmRKSGNMYl81X0Q0b2F1WnBuR1ZUbWxFaXJ30gHPAUFVX3lxTE9ERGVaSlVDVmdPSnJta3BCVkZPaVUzbF9PYmdYT2pHbENXVHhkSGc3R3A3SXNSd0tYMXQwZGhUbWo4ZXpPYkFmc1BaMVowVG1hLUJxa29JUlE2WW12cVREdm5YVS00RUdhaHdWcXdoR1VIaHdCQjlSaUNXcXpqLXZtMUVyLUxXZTNRV093Y19oNFF6eDVUamNzZjV6NjQ0RVAwMXVYeURWMFJjUEhYTkk2U1FHUjIyVFFHV0tjeE5oYWtiOHFiTGxzX1V2MkJ2bw?oc=5",
+      "fuente": "Rock&Pop",
+      "fecha": "2026-11-03T21:00:07.000Z",
+      "tema": "Protección civil"
+    },
+    {
       "titulo": "Kit de emergencia 72 horas, la UE presenta su guía oficial",
       "enlace": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNU0hmdlBPQVBjNzljUGQyWVkxWFlxMTZQclJEY25KaGE1ZTNXN3NsRXdkZVBXUzF1dE0tY3VTQ0ozZlJmbjlCMFFBbHRSMHFncmMwZElXVGFmMEVrUWlBMlBSVVRIRUh1MEdUa0w2c3BXTV82czhPbGE2WVl5R3REOUJjWmJWQkZyMGc?oc=5",
       "fuente": "Pasquale Pillitteri",
@@ -50,6 +113,27 @@ window.PREP_NEWS = {
       "fuente": "ViveUSA.mx",
       "fecha": "2026-11-03T19:44:00.000Z",
       "tema": "Suministro"
+    },
+    {
+      "titulo": "¿Necesitas una mochila de emergencia? El origen de la alerta que varios países han enviado",
+      "enlace": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNczJwS2xmT1E4dUdHQW9DMFIwN0FXQjAzREhPN3NJN2Q5TVdMaDBiSWN2NFlhT25TTGtZbDNnclFRbkRZMzZvbV9VNFpMS2d1X0lWekpsNTZqOER0bmpaY1UxU29PRzFEbDlpeGRMS00zbzBRcUVGV2YwMi1hMVREQkllejlZNUxIdUtMeXE4N1dxN3dzWS1YTlZXN1pDYXBDVzkwdTFR0gGzAUFVX3lxTFAwQnRZMWZ5bmlTcUZDRmduMnNkQm9FbmdJRnZ6UjVfZElReDBBSGRNamlXTG84WkdTTWk2b0lRQkpXbGNNRjBBTU1EWWZQSzdfU01EdkNxNTRPdTNQem43ZXVfZUVYZUtfcTA5Wk43RV9uMnpMN1dQYkFsNVhWNDJuZzlvbTdhZWFTSWpTeGE1S1RJWlI0SDRnRF9XWHppVkdKczc2TnowZkQ2dlotVEZXVmdn?oc=5",
+      "fuente": "Expansión",
+      "fecha": "2026-11-03T18:51:00.000Z",
+      "tema": "Protección civil"
+    },
+    {
+      "titulo": "Qué debe contener un kit de emergencia en casa para apagones: las claves de un oficial del Ejército español",
+      "enlace": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOcHpUQVVLMkZTR1dzaWNrMzgzaXh0Sm1GNW14eTRFSi11dzJPWU1YTWx1b2ozQ0ktMTRHTDBXNnczOHVWVTBSdmt4NHhFaW9UVERQQlc3a2hkbEg3ZERCUVRmQzNEWm1tYnJUejctUkx2V19PRWgycWVxWUVZWTBULU4yN0VhVU1Gc2h5ZUNBUTNoUjJMbGNTUmljaGZjVkxFOTZUbEhGYVlMZ2hrWEpxb1BQclAxV0F2RThkZllfalFPMGJsc0txMFRrTFV6RVg2MnlHcTAzSHJfazRxaTdEQnhTdWLSAfgBQVVfeXFMTzk4dFROVi1mQ1Z4eENVMDdLem9aUHpDc2l2R0RyeVB5bUE2YWhJd0lZa1EyWnRpX2RZNGVRR2ViUkxMTEtGbnBUTnZJUTdqV1U2aHkwRVpTLU8yYWFIS25HZDRBeEhiNkd5QXZYM1lNaFYwNDdiV21WN05wTXNLNmpvS3hoWExYVGpCd3pUa0dPdUhNOHFaS3ZKdXNVa1NaS21yUXQ2MWJFUFk5MDVsU2ljZ2NKblNMYXB5NFV3RFBvR3JTclRSQTF1V2tPYTN2bE83SmgwUWg3cDQyVU14TXBJMFRlRTVlNVVEM2lRX1E0M3IxMnNQSnc?oc=5",
+      "fuente": "La Razón",
+      "fecha": "2026-11-03T16:51:27.000Z",
+      "tema": "Apagones"
+    },
+    {
+      "titulo": "El kit de emergencia de 72 horas que Reino Unido aconseja tener en casa ante una crisis",
+      "enlace": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPa0tTSlhCWU1KQ2wwM3g2QzNBTlMzMlkxdVpPMUlMWmFtUFlQNzN2WFM4cENQVXlGMVc0Uks2UTUzcTBscmVZcklGQk1Xc2pwOHhjcmxZNW93UXdJNmdKckEzaUJDM01RSmZYSjN6RHVTb3lFNkRiaUNoajF6cllBZWJaUFhxbkljeUFKT25ZZnIzNVZfS2gzSXdnVEJOd0xKd3REN1FPMEQ5WlVZ0gGyAUFVX3lxTE1HdHUxY09IdDFSWXFrMWpKeXlEQWpYOVFUZmFVLTNvVV9HU0NJa1RBcm8wNnAyX0RheWxfRHRhUGh5dUFhTTFZQ2dvVk9HTVhpUW1wSnZmekZ2SlplQmRRQ2ZjY2Qya3RQanB2RmR3ZE1vaURvNTJSNGxXVVVwRDJId21Gc0JzX1g2MFZWLTRaZkxSUnlZeVl1N3FfYWlXWXcydXFxSy1iSEt6OXpfSGJSclE?oc=5",
+      "fuente": "Las Provincias",
+      "fecha": "2026-11-03T00:15:19.000Z",
+      "tema": "Protección civil"
     },
     {
       "titulo": "CDMX te recuerda la mochila de emergencia en medio de llamado mundial a almacenar suministros",
