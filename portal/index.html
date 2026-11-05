@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Preparados 72h · Portal de supervivencia y preparación familiar</title>
+  <meta name="description" content="Mochila de 72 horas, calculadora de reservas, plan familiar y consejos de preparación ante apagones, ciberataques y otras emergencias.">
+  <meta name="theme-color" content="#2f3d2c">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#inicio"><img src="assets/icon.svg" alt="" width="28" height="28"> Preparados<span>72h</span></a>
+      <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menú</button>
+      <nav id="nav" class="nav">
+        <a href="#alerta">Alerta</a>
+        <a href="#calculadora">Calculadora</a>
+        <a href="#mochila">Mochila 72h</a>
+        <a href="#plan">Plan familiar</a>
+        <a href="#consejos">Consejos</a>
+        <a href="#paises">Por país</a>
+      </nav>
+      <span id="net" class="net" title="Estado de conexión"></span>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section id="inicio" class="hero">
+      <div class="wrap hero-inner">
+        <p class="eyebrow">Supervivencia urbana · Preparación familiar</p>
+        <h1>Tu hogar, listo para las primeras 72 horas.</h1>
+        <p class="lead">Apagones, cortes logísticos, ciberataques o desastres naturales: en cualquiera de ellos tu familia puede pasar varios días sin ayuda externa. Prepararse no es entrar en pánico ni acaparar. Es tener lo esencial organizado y al día.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#calculadora">Calcular mis reservas</a>
+          <a class="btn btn-ghost" href="#mochila">Preparar la mochila</a>
+        </div>
+        <div class="stats" id="hero-stats"></div>
+      </div>
+    </section>
+
+    <!-- ALERTA -->
+    <section id="alerta" class="section">
+      <div class="wrap">
+        <div class="alert-card">
+          <div class="alert-head">
+            <span class="badge badge-warn">Actualidad</span>
+            <time id="alerta-fecha"></time>
+          </div>
+          <h2 id="alerta-titulo"></h2>
+          <p id="alerta-resumen"></p>
+          <details>
+            <summary>Ver los datos clave</summary>
+            <dl class="kv" id="alerta-datos"></dl>
+          </details>
+          <p class="note">¿Qué tiene que ver contigo? Un fallo en la cadena de frío o en la logística puede vaciar las neveras de las tiendas en pocas horas. Con una reserva básica en casa, tu familia no depende de que la tienda esté abierta.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALCULADORA -->
+    <section id="calculadora" class="section section-alt">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Calculadora de reservas</h2>
+          <p>Indica quién vive en casa y cuántos días quieres cubrir. Calculamos el agua (unos 3 L por persona y día, según las recomendaciones oficiales) y una estimación de la comida y el resto de suministros.</p>
+        </header>
+        <div class="calc">
+          <form id="calc-form" class="card calc-form" autocomplete="off">
+            <fieldset>
+              <legend>Horizonte</legend>
+              <div class="seg" role="radiogroup">
+                <label><input type="radio" name="dias" value="3" checked><span>72 h</span></label>
+                <label><input type="radio" name="dias" value="7"><span>1 semana</span></label>
+                <label><input type="radio" name="dias" value="10"><span>10 días</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="steppers">
+              <legend>Personas en el hogar</legend>
+              <div class="stepper"><span>Adultos</span><div><button type="button" data-step="-1" data-for="adultos" aria-label="Quitar un adulto">−</button><input type="number" id="adultos" name="adultos" min="0" max="20" value="2"><button type="button" data-step="1" data-for="adultos" aria-label="Añadir un adulto">+</button></div></div>
+              <div class="stepper"><span>Niños (2–12)</span><div><button type="button" data-step="-1" data-for="ninos" aria-label="Quitar un niño">−</button><input type="number" id="ninos" name="ninos" min="0" max="20" value="1"><button type="button" data-step="1" data-for="ninos" aria-label="Añadir un niño">+</button></div></div>
+              <div class="stepper"><span>Bebés (0–2)</span><div><button type="button" data-step="-1" data-for="bebes" aria-label="Quitar un bebé">−</button><input type="number" id="bebes" name="bebes" min="0" max="10" value="0"><button type="button" data-step="1" data-for="bebes" aria-label="Añadir un bebé">+</button></div></div>
+              <div class="stepper"><span>Mayores de 70</span><div><button type="button" data-step="-1" data-for="mayores" aria-label="Quitar una persona mayor">−</button><input type="number" id="mayores" name="mayores" min="0" max="10" value="0"><button type="button" data-step="1" data-for="mayores" aria-label="Añadir una persona mayor">+</button></div></div>
+              <div class="stepper"><span>Mascotas</span><div><button type="button" data-step="-1" data-for="mascotas" aria-label="Quitar una mascota">−</button><input type="number" id="mascotas" name="mascotas" min="0" max="10" value="0"><button type="button" data-step="1" data-for="mascotas" aria-label="Añadir una mascota">+</button></div></div>
+            </fieldset>
+            <label class="check"><input type="checkbox" name="medicacion" id="medicacion"> Alguien toma medicación crónica</label>
+          </form>
+          <div class="card calc-out" aria-live="polite">
+            <h3 id="calc-title">Para 72 horas</h3>
+            <div class="big-nums" id="calc-big"></div>
+            <ul class="calc-list" id="calc-list"></ul>
+            <p class="small muted">Son estimaciones orientativas: unas 2.000 kcal por adulto y día y 1.400 kcal por niño. Ajústalas según tu dieta, el clima y vuestra salud. Compra poco a poco y no de golpe.</p>
+            <button type="button" class="btn btn-ghost btn-sm" data-print="calculadora">Imprimir resultado</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOCHILA -->
+    <section id="mochila" class="section">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Checklist: mochila de 72 horas</h2>
+          <p>Marca lo que ya tienes. Tu progreso se guarda en este dispositivo, sin cuentas ni servidores.</p>
+        </header>
+        <div class="progress-row">
+          <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Progreso de la mochila"><div id="progress-bar"></div></div>
+          <strong id="progress-txt">0%</strong>
+        </div>
+        <div class="toolbar">
+          <label class="check"><input type="checkbox" id="show-extra"> Incluir artículos para una semana o más</label>
+          <div class="toolbar-actions">
+            <button type="button" class="btn btn-ghost btn-sm" data-print="mochila">Imprimir</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="reset-checklist">Reiniciar</button>
+          </div>
+        </div>
+        <div class="grid-cards" id="checklist"></div>
+
+        <div class="card review">
+          <div>
+            <h3>Recordatorio de revisión</h3>
+            <p id="review-status" class="muted">Todavía no has registrado ninguna revisión.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" id="review-btn">He revisado la mochila hoy</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLAN FAMILIAR -->
+    <section id="plan" class="section section-alt">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Plan familiar de emergencia</h2>
+          <p>Rellénalo con tu familia, imprímelo y guarda una copia en la mochila. Si no hay cobertura, el papel sigue funcionando.</p>
+        </header>
+        <form id="plan-form" class="card plan-form" autocomplete="off">
+          <div class="plan-grid">
+            <label>Punto de encuentro cerca de casa<input name="encuentro1" placeholder="Ej.: portal del colegio de la calle Mayor"></label>
+            <label>Punto de encuentro fuera del barrio<input name="encuentro2" placeholder="Ej.: casa de los abuelos"></label>
+            <label>Contacto fuera de la zona<input name="contactoFuera" placeholder="Nombre y teléfono"></label>
+            <label>Centro de salud u hospital más cercano<input name="hospital" placeholder="Nombre y dirección"></label>
+            <label>¿Quién recoge a los niños?<input name="ninos" placeholder="Nombre y alternativa"></label>
+            <label>Mascotas: ¿quién se encarga?<input name="mascotas" placeholder="Nombre"></label>
+          </div>
+          <label>Contactos de emergencia (uno por línea)<textarea name="contactos" rows="4" placeholder="Emergencias: 112&#10;Mamá: 600 000 000&#10;Vecino 3ºB: 600 000 001"></textarea></label>
+          <label>Si no hay teléfono, acordamos…<textarea name="sinTelefono" rows="3" placeholder="Ej.: si no podemos hablar, vamos al punto 1 a las horas en punto; si no hay nadie, dejamos una nota y vamos al punto 2."></textarea></label>
+          <label>Necesidades médicas y alergias<textarea name="medico" rows="2" placeholder="Medicación, dosis, alergias…"></textarea></label>
+          <div class="plan-actions">
+            <span class="muted small" id="plan-saved">Se guarda automáticamente en este dispositivo.</span>
+            <button type="button" class="btn btn-primary btn-sm" data-print="plan">Imprimir plan</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- CONSEJOS -->
+    <section id="consejos" class="section">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Consejos prácticos</h2>
+          <p>Lo esencial que recomiendan los servicios de protección civil.</p>
+        </header>
+        <div class="tips" id="tips"></div>
+
+        <div class="card blackout">
+          <h3>⚡ Si se va la luz</h3>
+          <ol>
+            <li><strong>Mantén cerrados la nevera y el congelador.</strong> Un congelador lleno conserva el frío unas 48 h y uno a medias, unas 24 h.</li>
+            <li><strong>Consume primero lo más perecedero:</strong> lácteos, carne y pescado frescos, y las sobras.</li>
+            <li><strong>Pon la radio</strong> y sigue solo las fuentes oficiales. No difundas rumores.</li>
+            <li><strong>Ahorra batería:</strong> activa el modo avión cuando no necesites el móvil y guarda la batería externa para las llamadas.</li>
+            <li><strong>Desenchufa los aparatos sensibles</strong> para protegerlos del pico de tensión cuando vuelva la luz.</li>
+            <li><strong>Nunca uses generadores, barbacoas ni hornillos de gas en interiores:</strong> hay riesgo de intoxicación por monóxido de carbono.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAÍSES -->
+    <section id="paises" class="section section-alt">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>¿Cuánto recomienda cada país?</h2>
+          <p>Los horizontes oficiales van de 72 horas a 10 días. Pulsa una fila para llevar ese horizonte a la calculadora.</p>
+        </header>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>País o región</th><th>Horizonte recomendado</th><th></th></tr></thead>
+            <tbody id="paises-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- FUENTES -->
+    <section id="fuentes" class="section">
+      <div class="wrap">
+        <h2>Fuentes</h2>
+        <ul class="sources" id="fuentes-list"></ul>
+        <p class="small muted">Este portal es informativo y no sustituye a las indicaciones de las autoridades de protección civil. En una emergencia, llama al <strong>112</strong> (UE) o al <strong>911</strong> (México).</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p><strong>Preparados72h</strong> · MVP · Funciona sin conexión una vez cargado. Tus datos no salen de este dispositivo.</p>
+    </div>
+  </footer>
+
+  <!-- Contenedor para imprimir -->
+  <div id="print-area" aria-hidden="true"></div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

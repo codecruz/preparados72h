@@ -1,0 +1,11 @@
+{
+  "name": "Preparados72h · Portal de preparación familiar",
+  "short_name": "Preparados72h",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f3ec",
+  "theme_color": "#2f3d2c",
+  "icons": [{ "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
