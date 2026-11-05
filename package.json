@@ -1,0 +1,19 @@
+{
+  "name": "preparados72h",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Portal y app Android de preparación familiar (mochila 72h)",
+  "scripts": {
+    "news": "node scripts/update-news.mjs",
+    "sync": "cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/core": "^8.6.0",
+    "@capacitor/local-notifications": "^8.3.1",
+    "@capacitor/share": "^8.0.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.6.0"
+  }
+}

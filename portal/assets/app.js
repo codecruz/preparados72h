@@ -12,6 +12,21 @@
     set(k, v) { try { localStorage.setItem("prep72." + k, JSON.stringify(v)); } catch { /* sin persistencia */ } },
   };
 
+  // App Android (Capacitor): los plugins nativos se exponen en window.Capacitor.Plugins
+  const Cap = window.Capacitor;
+  const NATIVE = !!(Cap && typeof Cap.isNativePlatform === "function" && Cap.isNativePlatform());
+  const plugin = (name) => (NATIVE && Cap.Plugins && Cap.Plugins[name]) || null;
+  if (NATIVE) document.documentElement.classList.add("native");
+
+  /* ---------- SOS ---------- */
+  const sosBtn = $("#sos-btn"), sosMenu = $("#sos-menu");
+  sosBtn.addEventListener("click", () => {
+    const open = sosMenu.hidden;
+    sosMenu.hidden = !open;
+    sosBtn.setAttribute("aria-expanded", String(open));
+  });
+  document.addEventListener("click", (e) => { if (!e.target.closest("#sos")) { sosMenu.hidden = true; sosBtn.setAttribute("aria-expanded", "false"); } });
+
   /* ---------- Navegación ---------- */
   const menuBtn = $(".menu-btn"), nav = $("#nav");
   menuBtn.addEventListener("click", () => {
@@ -186,7 +201,27 @@
     if (daysLeft < 0) { el.textContent = `Última revisión: ${f(lastD)}. ¡Ya toca revisar! Han pasado ${-daysLeft} días desde la fecha prevista.`; el.classList.add("warn"); }
     else { el.textContent = `Última revisión: ${f(lastD)}. Próxima: ${f(next)} (dentro de ${daysLeft} días).`; el.classList.add("ok"); }
   }
-  $("#review-btn").addEventListener("click", () => { store.set("lastReview", new Date().toISOString()); renderReview(); });
+  $("#review-btn").addEventListener("click", async () => {
+    const now = new Date();
+    store.set("lastReview", now.toISOString());
+    renderReview();
+    // En la app: notificación local dentro de 6 meses (sustituye a la anterior)
+    const LN = plugin("LocalNotifications");
+    if (!LN) return;
+    try {
+      const perm = await LN.requestPermissions();
+      if (perm.display !== "granted") { $("#review-status").textContent += " Activa las notificaciones de la app para recibir el aviso."; return; }
+      const at = new Date(now); at.setMonth(at.getMonth() + 6); at.setHours(10, 0, 0, 0);
+      await LN.cancel({ notifications: [{ id: 1 }] }).catch(() => {});
+      await LN.schedule({ notifications: [{
+        id: 1,
+        title: "Toca revisar la mochila de 72 h",
+        body: "Han pasado 6 meses: rota los alimentos, revisa las caducidades y cambia las pilas.",
+        schedule: { at, allowWhileIdle: true },
+      }] });
+      $("#review-status").textContent += " Te avisaremos con una notificación.";
+    } catch { /* sin notificaciones */ }
+  });
   renderReview();
 
   /* ---------- Plan familiar ---------- */
@@ -256,7 +291,9 @@
   // Dentro de un iframe aislado (p. ej. un artifact) no se puede imprimir: se copia el texto.
   let embedded = false;
   try { embedded = window.top !== window.self; } catch { embedded = true; }
-  if (embedded) $$("[data-print]").forEach((b) => (b.textContent = "Copiar texto"));
+  if (NATIVE) $$("[data-print]").forEach((b) => (b.textContent = "Compartir"));
+  else if (embedded) $$("[data-print]").forEach((b) => (b.textContent = "Copiar texto"));
+  const SHARE_TITLES = { plan: "Plan familiar de emergencia", mochila: "Checklist de la mochila de 72 h", calculadora: "Reservas del hogar" };
 
   function htmlToText(html) {
     const tmp = document.createElement("div");
@@ -272,6 +309,13 @@
     if (!btn) return;
     const which = btn.dataset.print;
     const html = which === "plan" ? buildPlanPrint() : which === "mochila" ? buildChecklistPrint() : buildCalcPrint();
+    const Share = plugin("Share");
+    if (Share) {
+      // En la app: menú de compartir de Android (WhatsApp, correo, Drive, notas…)
+      try { await Share.share({ title: SHARE_TITLES[which], text: htmlToText(html), dialogTitle: "Compartir " + SHARE_TITLES[which].toLowerCase() }); }
+      catch { /* el usuario canceló */ }
+      return;
+    }
     if (embedded) {
       const label = btn.textContent;
       try { await navigator.clipboard.writeText(htmlToText(html)); btn.textContent = "Copiado ✓"; }
@@ -287,7 +331,7 @@
 
   /* ---------- Offline (PWA) ---------- */
   try {
-    if (!embedded && "serviceWorker" in navigator && location.protocol.startsWith("http")) {
+    if (!embedded && !NATIVE && "serviceWorker" in navigator && location.protocol.startsWith("http")) {
       navigator.serviceWorker.register("sw.js").catch(() => {});
     }
   } catch { /* sin service worker */ }

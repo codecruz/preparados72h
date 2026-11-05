@@ -251,3 +251,14 @@ legend { font-weight: 700; margin-bottom: .6rem; }
 .badge-myth { background: color-mix(in srgb, var(--ember) 18%, transparent); color: var(--ember); margin-right: .35rem; }
 .badge-real { background: color-mix(in srgb, var(--moss) 22%, transparent); color: var(--moss); margin-right: .35rem; }
 @media (max-width: 700px) { .myth { grid-template-columns: 1fr; } .lessons { grid-template-columns: 1fr; } }
+
+/* SOS */
+.sos { position: fixed; right: 1rem; bottom: 1rem; z-index: 60; display: flex; flex-direction: column; align-items: flex-end; gap: .6rem; }
+.sos-btn { width: 60px; height: 60px; border-radius: 50%; border: 3px solid #fff; background: #b3261e; color: #fff; font: inherit; font-weight: 800; letter-spacing: .04em; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.3); }
+.sos-btn:active { transform: scale(.96); }
+.sos-menu { max-width: calc(100vw - 2rem); background: var(--card); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); padding: .4rem; min-width: 260px; }
+.sos-menu a { display: block; padding: .75rem .9rem; border-radius: 10px; text-decoration: none; color: var(--ink); }
+.sos-menu a:hover { background: var(--bg-alt); }
+.sos-menu strong { color: #b3261e; font-size: 1.15rem; margin-right: .5rem; }
+.footer { padding-bottom: 5.5rem; }
+@media print { .sos { display: none !important; } }

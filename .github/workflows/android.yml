@@ -1,0 +1,88 @@
+name: App Android (APK)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "portal/**"
+      - "android/**"
+      - "package.json"
+      - "package-lock.json"
+      - "capacitor.config.json"
+      - ".github/workflows/android.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-apk
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      APP_VERSION_CODE: ${{ github.run_number }}
+      HAS_KEY: ${{ secrets.ANDROID_KEYSTORE_B64 != '' }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Dependencias
+        run: npm ci --no-audit --no-fund
+
+      - name: Noticias frescas para el APK (sin commit)
+        run: node scripts/update-news.mjs || echo "No se pudieron actualizar las noticias; se usan las del repo."
+
+      - name: Copiar la web al proyecto Android
+        run: npx cap sync android
+
+      - name: Preparar keystore de release
+        if: env.HAS_KEY == 'true'
+        run: echo "${{ secrets.ANDROID_KEYSTORE_B64 }}" | base64 -d > "$RUNNER_TEMP/release.jks"
+
+      - name: Compilar APK firmado (release)
+        if: env.HAS_KEY == 'true'
+        working-directory: android
+        env:
+          ANDROID_KEYSTORE_PATH: ${{ runner.temp }}/release.jks
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon assembleRelease
+          cp app/build/outputs/apk/release/app-release.apk "$GITHUB_WORKSPACE/Preparados72h-0.1.${APP_VERSION_CODE}.apk"
+
+      - name: Compilar APK de depuración (sin keystore configurado)
+        if: env.HAS_KEY != 'true'
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon assembleDebug
+          cp app/build/outputs/apk/debug/app-debug.apk "$GITHUB_WORKSPACE/Preparados72h-0.1.${APP_VERSION_CODE}-debug.apk"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Preparados72h-apk
+          path: Preparados72h-*.apk
+
+      - name: Publicar como release (descarga directa desde el móvil)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          APK=$(ls Preparados72h-*.apk)
+          TIPO=$([ "$HAS_KEY" = "true" ] && echo "firmado" || echo "de depuración")
+          gh release create "android-v0.1.${APP_VERSION_CODE}" "$APK" \
+            --title "Preparados72h Android 0.1.${APP_VERSION_CODE}" \
+            --notes "APK $TIPO generado automáticamente a partir de ${GITHUB_SHA::7}. Para instalarlo: descárgalo en el móvil, ábrelo y permite instalar apps de esta fuente." \
+            --prerelease

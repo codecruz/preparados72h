@@ -1,0 +1,9 @@
+{
+  "appId": "com.codecruz.preparados72h",
+  "appName": "Preparados72h",
+  "webDir": "portal",
+  "android": { "backgroundColor": "#2f3d2c" },
+  "plugins": {
+    "LocalNotifications": { "smallIcon": "ic_stat_notify", "iconColor": "#c8611f" }
+  }
+}
