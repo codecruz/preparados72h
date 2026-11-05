@@ -131,8 +131,17 @@
     updateProgress();
   });
   showExtra.addEventListener("change", () => { store.set("showExtra", showExtra.checked); renderChecklist(); });
-  $("#reset-checklist").addEventListener("click", () => {
-    if (!confirm("¿Desmarcar todos los elementos de la checklist?")) return;
+  // Confirmación en dos toques (confirm() no está disponible en todos los entornos)
+  const resetBtn = $("#reset-checklist");
+  let resetTimer;
+  resetBtn.addEventListener("click", () => {
+    if (!resetBtn.dataset.armed) {
+      resetBtn.dataset.armed = "1";
+      resetBtn.textContent = "¿Seguro? Pulsa otra vez";
+      resetTimer = setTimeout(() => { delete resetBtn.dataset.armed; resetBtn.textContent = "Reiniciar"; }, 3000);
+      return;
+    }
+    clearTimeout(resetTimer); delete resetBtn.dataset.armed; resetBtn.textContent = "Reiniciar";
     checked = {}; store.set("checklist", checked); renderChecklist();
   });
   renderChecklist();
@@ -212,18 +221,42 @@
   function buildCalcPrint() {
     return `<h1>Reservas del hogar</h1><h2>${esc($("#calc-title").textContent)}</h2>${$("#calc-big").outerHTML}<ul>${$("#calc-list").innerHTML}</ul>`;
   }
-  document.addEventListener("click", (e) => {
+  // Dentro de un iframe aislado (p. ej. un artifact) no se puede imprimir: se copia el texto.
+  let embedded = false;
+  try { embedded = window.top !== window.self; } catch { embedded = true; }
+  if (embedded) $$("[data-print]").forEach((b) => (b.textContent = "Copiar texto"));
+
+  function htmlToText(html) {
+    const tmp = document.createElement("div");
+    tmp.style.cssText = "position:fixed;left:-9999px;top:0;width:600px";
+    tmp.innerHTML = html;
+    document.body.appendChild(tmp);
+    const txt = tmp.innerText.replace(/\n{3,}/g, "\n\n").trim();
+    document.body.removeChild(tmp);
+    return txt;
+  }
+  document.addEventListener("click", async (e) => {
     const btn = e.target.closest("[data-print]");
     if (!btn) return;
     const which = btn.dataset.print;
-    printArea.innerHTML = which === "plan" ? buildPlanPrint() : which === "mochila" ? buildChecklistPrint() : buildCalcPrint();
+    const html = which === "plan" ? buildPlanPrint() : which === "mochila" ? buildChecklistPrint() : buildCalcPrint();
+    if (embedded) {
+      const label = btn.textContent;
+      try { await navigator.clipboard.writeText(htmlToText(html)); btn.textContent = "Copiado ✓"; }
+      catch { btn.textContent = "No se pudo copiar"; }
+      setTimeout(() => (btn.textContent = label), 1800);
+      return;
+    }
+    printArea.innerHTML = html;
     document.body.classList.add("printing");
     window.print();
   });
   addEventListener("afterprint", () => { document.body.classList.remove("printing"); printArea.innerHTML = ""; });
 
   /* ---------- Offline (PWA) ---------- */
-  if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
-    navigator.serviceWorker.register("sw.js").catch(() => {});
-  }
+  try {
+    if (!embedded && "serviceWorker" in navigator && location.protocol.startsWith("http")) {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    }
+  } catch { /* sin service worker */ }
 })();
