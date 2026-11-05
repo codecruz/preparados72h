@@ -211,3 +211,13 @@ legend { font-weight: 700; margin-bottom: .6rem; }
   #print-area .big-nums strong { font-size: 18pt; display: block; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+/* Tabla de países en móvil: filas como tarjetas apiladas */
+@media (max-width: 600px) {
+  .table thead { display: none; }
+  .table tr { display: block; padding: .9rem 1rem; border-bottom: 1px solid var(--line); }
+  .table tbody tr:last-child { border-bottom: 0; }
+  .table td { display: block; padding: 0; border: 0; }
+  .table td:first-child { font-weight: 650; margin-bottom: .4rem; }
+  .table .go { text-align: left; margin-top: .4rem; font-size: .9rem; }
+}
