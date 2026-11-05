@@ -6,14 +6,13 @@ App Android hecha con [Capacitor 8](https://capacitorjs.com/) que empaqueta la w
 - **Compartir** el plan familiar, la checklist o el resultado de la calculadora con el menú de Android (WhatsApp, correo, Drive…). Sustituye a «Imprimir».
 - **Notificación local** 6 meses después de pulsar «He revisado la mochila hoy».
 - **Botón SOS** con 112 y 911 (abre el marcador del teléfono).
-- Las noticias del APK son las del momento en que se compiló.
+- **Sin sección de noticias:** dentro del APK no se actualizarían, así que solo se muestran en la web.
 
 ## Cómo se compila
 `.github/workflows/android.yml` se ejecuta con cada push que toca `portal/`, `android/` o la configuración de Capacitor, y también a mano desde *Actions*. El proceso:
-1. Actualiza las noticias.
-2. Ejecuta `npx cap sync android`.
-3. Compila con Gradle.
-4. Publica el APK como **release** (`android-v0.1.N`), que se puede descargar desde el móvil.
+1. Ejecuta `npx cap sync android`.
+2. Compila con Gradle.
+3. Publica el APK como **release** (`android-v0.1.N`), que se puede descargar desde el móvil.
 
 ### Firma
 - **Sin secretos:** se genera un APK de **depuración**. Funciona, pero para instalar una versión nueva hay que desinstalar antes la anterior.

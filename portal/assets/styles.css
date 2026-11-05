@@ -262,3 +262,6 @@ legend { font-weight: 700; margin-bottom: .6rem; }
 .sos-menu strong { color: #b3261e; font-size: 1.15rem; margin-right: .5rem; }
 .footer { padding-bottom: 5.5rem; }
 @media print { .sos { display: none !important; } }
+
+/* App Android: sin sección de noticias (no se actualizan dentro del APK) */
+.native #noticias, .native .nav a[href="#noticias"] { display: none !important; }

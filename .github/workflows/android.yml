@@ -42,9 +42,6 @@ jobs:
       - name: Dependencias
         run: npm ci --no-audit --no-fund
 
-      - name: Noticias frescas para el APK (sin commit)
-        run: node scripts/update-news.mjs || echo "No se pudieron actualizar las noticias; se usan las del repo."
-
       - name: Copiar la web al proyecto Android
         run: npx cap sync android
 
