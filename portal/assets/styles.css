@@ -234,3 +234,20 @@ legend { font-weight: 700; margin-bottom: .6rem; }
 .news .t { font-weight: 650; line-height: 1.35; }
 .news .tag { font-weight: 700; color: var(--ember); text-transform: uppercase; letter-spacing: .05em; font-size: .72rem; }
 .news-empty { color: var(--muted); }
+
+/* Comunidad */
+.toggles { display: flex; flex-direction: column; gap: .4rem; }
+.lessons { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; margin-bottom: 2.5rem; }
+.lesson { display: flex; gap: .9rem; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.15rem 1.25rem; }
+.lesson-i { font-size: 1.6rem; line-height: 1; flex: none; width: 2.6rem; height: 2.6rem; display: grid; place-items: center; background: var(--bg-alt); border-radius: 10px; }
+.lesson h3 { margin-bottom: .3rem; font-size: 1.02rem; }
+.lesson p { margin: 0; color: var(--muted); font-size: .95rem; }
+.sub-h { font-size: 1.3rem; margin-bottom: 1rem; }
+.myths { display: grid; gap: .75rem; }
+.myth { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.25rem; display: grid; grid-template-columns: 1fr 1.4fr; gap: .5rem 1.5rem; align-items: start; }
+.myth p { margin: 0; }
+.myth-m { font-weight: 650; }
+.myth-r { color: var(--muted); }
+.badge-myth { background: color-mix(in srgb, var(--ember) 18%, transparent); color: var(--ember); margin-right: .35rem; }
+.badge-real { background: color-mix(in srgb, var(--moss) 22%, transparent); color: var(--moss); margin-right: .35rem; }
+@media (max-width: 700px) { .myth { grid-template-columns: 1fr; } .lessons { grid-template-columns: 1fr; } }

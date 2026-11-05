@@ -125,11 +125,14 @@
   let checked = store.get("checklist", {});
   const showExtra = $("#show-extra");
   showExtra.checked = store.get("showExtra", false);
+  const showGetHome = $("#show-gethome");
+  showGetHome.checked = store.get("showGetHome", false);
+  const visibleCats = () => D.checklist.filter((c) => (!c.extra || showExtra.checked) && (!c.gethome || showGetHome.checked));
 
   function renderChecklist() {
-    const cats = D.checklist.filter((c) => !c.extra || showExtra.checked);
+    const cats = visibleCats();
     $("#checklist").innerHTML = cats.map((c) => `
-      <article class="card check-card${c.extra ? " extra" : ""}">
+      <article class="card check-card${c.extra || c.gethome ? " extra" : ""}">
         <h3><span aria-hidden="true">${c.icono}</span> ${esc(c.categoria)}</h3>
         <ul>${c.items.map((it) => `
           <li><label class="check"><input type="checkbox" data-id="${it.id}"${checked[it.id] ? " checked" : ""}> <span>${esc(it.texto)}</span></label></li>`).join("")}
@@ -138,7 +141,7 @@
     updateProgress();
   }
   function updateProgress() {
-    const ids = D.checklist.filter((c) => !c.extra || showExtra.checked).flatMap((c) => c.items.map((i) => i.id));
+    const ids = visibleCats().flatMap((c) => c.items.map((i) => i.id));
     const done = ids.filter((id) => checked[id]).length;
     const pct = ids.length ? Math.round((done / ids.length) * 100) : 0;
     $("#progress-bar").style.width = pct + "%";
@@ -154,6 +157,7 @@
     updateProgress();
   });
   showExtra.addEventListener("change", () => { store.set("showExtra", showExtra.checked); renderChecklist(); });
+  showGetHome.addEventListener("change", () => { store.set("showGetHome", showGetHome.checked); renderChecklist(); });
   // Confirmación en dos toques (confirm() no está disponible en todos los entornos)
   const resetBtn = $("#reset-checklist");
   let resetTimer;
@@ -215,6 +219,11 @@
   $("#paises-body").addEventListener("click", (e) => { const tr = e.target.closest("tr"); if (tr) useCountry(tr); });
   $("#paises-body").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); const tr = e.target.closest("tr"); if (tr) useCountry(tr); } });
 
+  $("#lessons").innerHTML = D.comunidad.map((l) => `
+    <article class="lesson"><span class="lesson-i" aria-hidden="true">${l.icono}</span><div><h3>${esc(l.titulo)}</h3><p>${esc(l.texto)}</p></div></article>`).join("");
+  $("#myths").innerHTML = D.mitos.map((m) => `
+    <article class="myth"><p class="myth-m"><span class="badge badge-myth">Mito</span> ${esc(m.mito)}</p><p class="myth-r"><span class="badge badge-real">Realidad</span> ${esc(m.realidad)}</p></article>`).join("");
+
   $("#fuentes-list").innerHTML = D.fuentes.map((f) => `<li>${esc(f)}</li>`).join("");
 
   /* ---------- Impresión por sección ---------- */
@@ -236,7 +245,7 @@
       <p>Emergencias: 112 (UE) · 911 (México). Impreso el ${new Date().toLocaleDateString("es-ES")}.</p>`;
   }
   function buildChecklistPrint() {
-    const cats = D.checklist.filter((c) => !c.extra || showExtra.checked);
+    const cats = visibleCats();
     return `<h1>Mochila de 72 horas: checklist</h1>` + cats.map((c) => `<h2>${esc(c.categoria)}</h2><ul class="print-check">${
       c.items.map((i) => `<li>${checked[i.id] ? "☑" : "☐"} ${esc(i.texto)}</li>`).join("")}</ul>`).join("") +
       `<p>Revisar cada 6 meses. Impreso el ${new Date().toLocaleDateString("es-ES")}.</p>`;

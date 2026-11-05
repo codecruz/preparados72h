@@ -24,6 +24,7 @@
         <a href="#mochila">Mochila 72h</a>
         <a href="#plan">Plan familiar</a>
         <a href="#consejos">Consejos</a>
+        <a href="#comunidad">Comunidad</a>
         <a href="#paises">Por país</a>
       </nav>
       <span id="net" class="net" title="Estado de conexión"></span>
@@ -127,7 +128,10 @@
           <strong id="progress-txt">0%</strong>
         </div>
         <div class="toolbar">
-          <label class="check"><input type="checkbox" id="show-extra"> Incluir artículos para una semana o más</label>
+          <div class="toggles">
+            <label class="check"><input type="checkbox" id="show-extra"> Incluir artículos para una semana o más</label>
+            <label class="check"><input type="checkbox" id="show-gethome"> Incluir bolsa para volver a casa</label>
+          </div>
           <div class="toolbar-actions">
             <button type="button" class="btn btn-ghost btn-sm" data-print="mochila">Imprimir</button>
             <button type="button" class="btn btn-ghost btn-sm" id="reset-checklist">Reiniciar</button>
@@ -192,6 +196,20 @@
             <li><strong>Nunca uses generadores, barbacoas ni hornillos de gas en interiores:</strong> hay riesgo de intoxicación por monóxido de carbono.</li>
           </ol>
         </div>
+      </div>
+    </section>
+
+    <!-- COMUNIDAD -->
+    <section id="comunidad" class="section section-alt">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Lo que enseña la comunidad</h2>
+          <p>Lecciones que se repiten entre los preparacionistas de <a href="https://www.reddit.com/r/prepping/" target="_blank" rel="noopener noreferrer">r/prepping</a>, muchos de los cuales han pasado apagones, temporales o incluso guerras. Las resumimos y las contrastamos con las recomendaciones oficiales.</p>
+        </header>
+        <div class="lessons" id="lessons"></div>
+
+        <h3 class="sub-h">Mitos y realidades</h3>
+        <div class="myths" id="myths"></div>
       </div>
     </section>
 
