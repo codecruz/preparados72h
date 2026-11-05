@@ -19,6 +19,7 @@
       <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menú</button>
       <nav id="nav" class="nav">
         <a href="#alerta">Alerta</a>
+        <a href="#noticias">Noticias</a>
         <a href="#calculadora">Calculadora</a>
         <a href="#mochila">Mochila 72h</a>
         <a href="#plan">Plan familiar</a>
@@ -60,6 +61,19 @@
           </details>
           <p class="note">¿Qué tiene que ver contigo? Un fallo en la cadena de frío o en la logística puede vaciar las neveras de las tiendas en pocas horas. Con una reserva básica en casa, tu familia no depende de que la tienda esté abierta.</p>
         </div>
+      </div>
+    </section>
+
+    <!-- NOTICIAS (se actualizan a diario con GitHub Actions) -->
+    <section id="noticias" class="section">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Últimas noticias</h2>
+          <p>Se recopilan cada día de forma automática a partir de medios en español e inglés. <span id="news-updated" class="muted"></span></p>
+        </header>
+        <div class="chips" id="news-chips" role="group" aria-label="Filtrar noticias por tema"></div>
+        <ul class="news" id="news-list"></ul>
+        <p class="small muted">Enlaces a medios externos. La selección es automática: contrasta siempre con las fuentes oficiales.</p>
       </div>
     </section>
 
@@ -217,6 +231,7 @@
   <div id="print-area" aria-hidden="true"></div>
 
   <script src="assets/data.js"></script>
+  <script src="assets/news.js"></script>
   <script src="assets/app.js"></script>
 </body>
 </html>

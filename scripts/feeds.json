@@ -1,0 +1,21 @@
+{
+  "_comentario": "Feeds RSS que se revisan a diario. 'busqueda: true' = feed de búsqueda ya filtrado por tema (umbral de relevancia más bajo).",
+  "maxDiasNoticia": 14,
+  "maxDiasHistorico": 30,
+  "maxNoticias": 40,
+  "feeds": [
+    { "nombre": "Google Noticias · ciberataques a infraestructuras", "busqueda": true,
+      "url": "https://news.google.com/rss/search?q=ciberataque+(supermercados+OR+infraestructuras+OR+refrigeraci%C3%B3n+OR+red+el%C3%A9ctrica)+when:7d&hl=es&gl=ES&ceid=ES:es" },
+    { "nombre": "Google Noticias · protección civil y kit de emergencia", "busqueda": true,
+      "url": "https://news.google.com/rss/search?q=(%22kit+de+emergencia%22+OR+%22mochila+de+emergencia%22+OR+%22protecci%C3%B3n+civil%22+OR+%2272+horas%22)+when:7d&hl=es&gl=ES&ceid=ES:es" },
+    { "nombre": "Google Noticias · apagones y desabastecimiento", "busqueda": true,
+      "url": "https://news.google.com/rss/search?q=(apag%C3%B3n+OR+desabastecimiento+OR+%22cadena+de+fr%C3%ADo%22)+when:7d&hl=es&gl=ES&ceid=ES:es" },
+    { "nombre": "Google Noticias · México protección civil", "busqueda": true,
+      "url": "https://news.google.com/rss/search?q=(%22protecci%C3%B3n+civil%22+OR+%22mochila+de+emergencia%22)+when:7d&hl=es-419&gl=MX&ceid=MX:es-419" },
+    { "nombre": "El País", "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada" },
+    { "nombre": "20minutos", "url": "https://www.20minutos.es/rss/" },
+    { "nombre": "El Financiero", "url": "https://www.elfinanciero.com.mx/arc/outboundfeeds/rss/?outputType=xml" },
+    { "nombre": "BBC News", "url": "https://feeds.bbci.co.uk/news/world/rss.xml" },
+    { "nombre": "BBC News", "url": "https://feeds.bbci.co.uk/news/technology/rss.xml" }
+  ]
+}

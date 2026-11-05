@@ -38,6 +38,29 @@
   $("#alerta-resumen").textContent = D.alerta.resumen;
   $("#alerta-datos").innerHTML = D.alerta.datos.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
 
+  /* ---------- Noticias ---------- */
+  const NEWS = window.PREP_NEWS || { items: [] };
+  const newsItems = (NEWS.items || []).filter((n) => /^https?:\/\//.test(n.enlace));
+  const rel = (iso) => {
+    const day = (t) => { const x = new Date(t); x.setHours(0, 0, 0, 0); return x.getTime(); };
+    const d = Math.round((day(Date.now()) - day(Date.parse(iso))) / 86400000);
+    return d <= 0 ? "hoy" : d === 1 ? "ayer" : `hace ${d} días`;
+  };
+  if (NEWS.actualizado) $("#news-updated").textContent = `Última actualización: ${new Date(NEWS.actualizado).toLocaleString("es-ES", { day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" })}.`;
+  const temas = ["Todas", ...new Set(newsItems.map((n) => n.tema))];
+  let temaSel = "Todas";
+  function renderNews() {
+    $("#news-chips").innerHTML = temas.length > 2 ? temas.map((t) => `<button type="button" class="chip" aria-pressed="${t === temaSel}" data-tema="${esc(t)}">${esc(t)}</button>`).join("") : "";
+    const list = newsItems.filter((n) => temaSel === "Todas" || n.tema === temaSel);
+    $("#news-list").innerHTML = list.length ? list.map((n) => `
+      <li><a href="${esc(n.enlace)}" target="_blank" rel="noopener noreferrer">
+        <span class="meta"><span class="tag">${esc(n.tema)}</span><span>${esc(n.fuente)}</span><span>· ${rel(n.fecha)}</span></span>
+        <span class="t">${esc(n.titulo)}</span>
+      </a></li>`).join("") : `<li class="news-empty">Aún no hay noticias recopiladas.</li>`;
+  }
+  $("#news-chips").addEventListener("click", (e) => { const b = e.target.closest("[data-tema]"); if (b) { temaSel = b.dataset.tema; renderNews(); } });
+  renderNews();
+
   /* ---------- Calculadora ---------- */
   const form = $("#calc-form");
   const savedCalc = store.get("calc", null);
