@@ -83,13 +83,13 @@
       <div class="wrap">
         <header class="section-head">
           <h2>Calculadora de reservas</h2>
-          <p>Indica quién vive en casa y cuántos días quieres cubrir. Calculamos el agua (unos 3 L por persona y día, según las recomendaciones oficiales) y una estimación de la comida y el resto de suministros.</p>
+          <p>Indica quién vive en casa, cuántos días quieres cubrir y si hay alergias, intolerancias o dietas especiales. Calculamos el agua (unos 3 L por persona y día, según las recomendaciones oficiales), una lista de compra orientativa y el resto de suministros.</p>
         </header>
         <div class="calc">
-          <form id="calc-form" class="card calc-form" autocomplete="off">
+          <form id="calc-form" class="card calc-form" autocomplete="off" novalidate>
             <fieldset>
               <legend>Horizonte</legend>
-              <div class="seg" role="radiogroup">
+              <div class="seg" role="radiogroup" aria-label="Días a cubrir">
                 <label><input type="radio" name="dias" value="3" checked><span>72 h</span></label>
                 <label><input type="radio" name="dias" value="7"><span>1 semana</span></label>
                 <label><input type="radio" name="dias" value="10"><span>10 días</span></label>
@@ -97,19 +97,44 @@
             </fieldset>
             <fieldset class="steppers">
               <legend>Personas en el hogar</legend>
-              <div class="stepper"><span>Adultos</span><div><button type="button" data-step="-1" data-for="adultos" aria-label="Quitar un adulto">−</button><input type="number" id="adultos" name="adultos" min="0" max="20" value="2"><button type="button" data-step="1" data-for="adultos" aria-label="Añadir un adulto">+</button></div></div>
-              <div class="stepper"><span>Niños (2–12)</span><div><button type="button" data-step="-1" data-for="ninos" aria-label="Quitar un niño">−</button><input type="number" id="ninos" name="ninos" min="0" max="20" value="1"><button type="button" data-step="1" data-for="ninos" aria-label="Añadir un niño">+</button></div></div>
-              <div class="stepper"><span>Bebés (0–2)</span><div><button type="button" data-step="-1" data-for="bebes" aria-label="Quitar un bebé">−</button><input type="number" id="bebes" name="bebes" min="0" max="10" value="0"><button type="button" data-step="1" data-for="bebes" aria-label="Añadir un bebé">+</button></div></div>
-              <div class="stepper"><span>Mayores de 70</span><div><button type="button" data-step="-1" data-for="mayores" aria-label="Quitar una persona mayor">−</button><input type="number" id="mayores" name="mayores" min="0" max="10" value="0"><button type="button" data-step="1" data-for="mayores" aria-label="Añadir una persona mayor">+</button></div></div>
-              <div class="stepper"><span>Mascotas</span><div><button type="button" data-step="-1" data-for="mascotas" aria-label="Quitar una mascota">−</button><input type="number" id="mascotas" name="mascotas" min="0" max="10" value="0"><button type="button" data-step="1" data-for="mascotas" aria-label="Añadir una mascota">+</button></div></div>
+              <div class="stepper"><span>Adultos y adolescentes</span><div><button type="button" data-step="-1" data-for="adultos" aria-label="Quitar: un adulto">−</button><input type="number" id="adultos" name="adultos" min="0" max="20" value="2" inputmode="numeric"><button type="button" data-step="1" data-for="adultos" aria-label="Añadir: un adulto">+</button></div></div>
+              <div class="stepper"><span>Niños (2–12 años)</span><div><button type="button" data-step="-1" data-for="ninos" aria-label="Quitar: un niño">−</button><input type="number" id="ninos" name="ninos" min="0" max="20" value="1" inputmode="numeric"><button type="button" data-step="1" data-for="ninos" aria-label="Añadir: un niño">+</button></div></div>
+              <div class="stepper"><span>Bebés (0–2 años)</span><div><button type="button" data-step="-1" data-for="bebes" aria-label="Quitar: un bebé">−</button><input type="number" id="bebes" name="bebes" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="bebes" aria-label="Añadir: un bebé">+</button></div></div>
+              <div class="stepper"><span>Mayores de 70</span><div><button type="button" data-step="-1" data-for="mayores" aria-label="Quitar: una persona mayor">−</button><input type="number" id="mayores" name="mayores" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="mayores" aria-label="Añadir: una persona mayor">+</button></div></div>
+              <label class="check sub-check" id="lactancia-row" hidden><input type="checkbox" name="lactancia" id="lactancia"> <span>Hay una madre que da el pecho</span></label>
             </fieldset>
-            <label class="check"><input type="checkbox" name="medicacion" id="medicacion"> Alguien toma medicación crónica</label>
+            <fieldset class="steppers">
+              <legend>Mascotas</legend>
+              <div class="stepper"><span>Perros</span><div><button type="button" data-step="-1" data-for="perros" aria-label="Quitar: un perro">−</button><input type="number" id="perros" name="perros" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="perros" aria-label="Añadir: un perro">+</button></div></div>
+              <div class="stepper"><span>Gatos u otras pequeñas</span><div><button type="button" data-step="-1" data-for="gatos" aria-label="Quitar: un gato">−</button><input type="number" id="gatos" name="gatos" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="gatos" aria-label="Añadir: un gato">+</button></div></div>
+            </fieldset>
+            <fieldset>
+              <legend>Salud y alimentación</legend>
+              <label class="check"><input type="checkbox" name="medicacion" id="medicacion"> Alguien toma medicación crónica</label>
+              <p class="small muted need-help">Marca las necesidades que haya en casa e indica cuántas personas las tienen:</p>
+              <div class="needs" id="necesidades"></div>
+              <label class="check sub-check"><input type="checkbox" name="todaLaFamilia" id="todaLaFamilia"> <span>Todo el hogar come la versión segura <span class="muted small">(recomendado con celiaquía o alergias graves)</span></span></label>
+            </fieldset>
           </form>
           <div class="card calc-out" aria-live="polite">
-            <h3 id="calc-title">Para 72 horas</h3>
-            <div class="big-nums" id="calc-big"></div>
-            <ul class="calc-list" id="calc-list"></ul>
-            <p class="small muted">Son estimaciones orientativas: unas 2.000 kcal por adulto y día y 1.400 kcal por niño. Ajústalas según tu dieta, el clima y vuestra salud. Compra poco a poco y no de golpe.</p>
+            <div id="calc-result">
+              <h3 id="calc-title">Para 72 horas</h3>
+              <div id="calc-errores"></div>
+              <div class="big-nums" id="calc-big"></div>
+              <div id="calc-compra-wrap">
+                <h4 class="calc-h">Lista de compra orientativa</h4>
+                <ul class="grupos" id="calc-grupos"></ul>
+              </div>
+              <div id="calc-sum-wrap">
+                <h4 class="calc-h">Otros suministros</h4>
+                <ul class="calc-list" id="calc-list"></ul>
+              </div>
+              <div id="calc-avisos-wrap">
+                <h4 class="calc-h">A tener en cuenta</h4>
+                <ul class="calc-avisos" id="calc-avisos"></ul>
+              </div>
+            </div>
+            <p class="small muted">Son estimaciones orientativas por persona y día: unas 2.000 kcal por adulto, 1.800 por mayor de 70 y 1.400 por niño; los bebés, aparte. Ajústalas según vuestra salud, la actividad y el clima, y consulta con tu médico si hay una dieta prescrita. Compra poco a poco, no de golpe.</p>
             <button type="button" class="btn btn-ghost btn-sm" data-print="calculadora">Imprimir resultado</button>
           </div>
         </div>
@@ -258,6 +283,7 @@
   <div id="print-area" aria-hidden="true"></div>
 
   <script src="assets/data.js"></script>
+  <script src="assets/calc.js"></script>
   <script src="assets/news.js"></script>
   <script src="assets/app.js"></script>
 </body>

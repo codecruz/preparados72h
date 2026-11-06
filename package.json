@@ -5,7 +5,8 @@
   "description": "Portal y app Android de preparación familiar (mochila 72h)",
   "scripts": {
     "news": "node scripts/update-news.mjs",
-    "sync": "cap sync android"
+    "sync": "cap sync android",
+    "test": "node --test tests/"
   },
   "dependencies": {
     "@capacitor/android": "^8.6.0",

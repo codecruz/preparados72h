@@ -265,3 +265,30 @@ legend { font-weight: 700; margin-bottom: .6rem; }
 
 /* App Android: sin sección de noticias (no se actualizan dentro del APK) */
 .native #noticias, .native .nav a[href="#noticias"] { display: none !important; }
+
+/* Calculadora: necesidades y resultado detallado */
+.sub-check { margin-top: .6rem; font-size: .93rem; }
+.need-help { margin: .9rem 0 .5rem; }
+.needs { display: grid; gap: .15rem; margin-bottom: .4rem; }
+.need { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .25rem .75rem; padding: .3rem 0; border-bottom: 1px dashed var(--line); }
+.need:last-child { border-bottom: 0; }
+.need .check { font-size: .93rem; }
+.need-n { display: flex; align-items: center; gap: .4rem; margin-left: auto; font-size: .85rem; color: var(--muted); }
+.need-n[hidden] { display: none; }
+.need-n input { width: 3.6rem; font: inherit; text-align: center; padding: .25rem; border: 1.5px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); }
+.calc-h { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 1.3rem 0 .6rem; }
+.calc-error { background: var(--warn-bg); border-left: 4px solid var(--ember); padding: .6rem .8rem; border-radius: 8px; color: var(--ink); font-weight: 600; margin: .5rem 0; }
+.grupos { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
+.grp { border: 1px solid var(--line); border-radius: 10px; padding: .6rem .8rem; background: var(--bg); }
+.grp-h { display: block; font-size: .92rem; margin-bottom: .3rem; }
+.grp-row { display: grid; grid-template-columns: 2.4rem 1fr; gap: .5rem; align-items: baseline; font-size: .9rem; padding: .2rem 0; }
+.grp-row + .grp-row { border-top: 1px dashed var(--line); }
+.qty { font-weight: 800; font-size: 1.15rem; color: var(--ember); text-align: right; }
+.grp-row .u { font-weight: 600; }
+.grp-row em { color: var(--muted); font-style: normal; font-size: .85rem; }
+.tag-safe { display: inline-block; font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; padding: .05rem .4rem; border-radius: 5px; background: color-mix(in srgb, var(--moss) 22%, transparent); color: var(--moss); }
+.grp-row.safe .qty { color: var(--moss); }
+.calc-avisos { padding-left: 1.1rem; margin: 0; font-size: .9rem; }
+.calc-avisos li { margin-bottom: .5rem; }
+.calc-avisos li.consejo { list-style: "💡 "; color: var(--muted); }
+#calc-result [hidden] { display: none; }

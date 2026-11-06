@@ -76,62 +76,119 @@
   $("#news-chips").addEventListener("click", (e) => { const b = e.target.closest("[data-tema]"); if (b) { temaSel = b.dataset.tema; renderNews(); } });
   renderNews();
 
-  /* ---------- Calculadora ---------- */
+  /* ---------- Calculadora (lógica en assets/calc.js, con tests) ---------- */
+  const C = window.PrepCalc;
   const form = $("#calc-form");
-  const savedCalc = store.get("calc", null);
-  if (savedCalc) {
-    for (const [k, v] of Object.entries(savedCalc)) {
-      const el = form.elements[k];
-      if (!el) continue;
-      if (k === "dias") $$('input[name="dias"]', form).forEach((r) => (r.checked = r.value === String(v)));
-      else if (el.type === "checkbox") el.checked = !!v;
-      else el.value = v;
+  const PERSONAS = ["adultos", "ninos", "bebes", "mayores", "perros", "gatos"];
+  const plural = (n, s, p) => `${n} ${n === 1 ? s : p}`;
+
+  $("#necesidades").innerHTML = C.NECESIDADES.map((n) => `
+    <div class="need" data-need="${n.id}">
+      <label class="check"><input type="checkbox" data-need-check="${n.id}"> <span>${esc(n.etiqueta)}</span></label>
+      <label class="need-n" hidden><span>Personas</span> <input type="number" data-need-n="${n.id}" min="1" max="20" value="1" inputmode="numeric" aria-label="Personas con ${esc(n.etiqueta.toLowerCase())}"></label>
+    </div>`).join("");
+
+  function readForm() {
+    const v = { dias: Number(($('input[name="dias"]:checked', form) || {}).value) };
+    for (const k of PERSONAS) v[k] = form.elements[k].value;
+    v.lactancia = form.elements.lactancia.checked;
+    v.medicacion = form.elements.medicacion.checked;
+    v.todaLaFamilia = form.elements.todaLaFamilia.checked;
+    v.necesidades = {};
+    for (const n of C.NECESIDADES) {
+      if ($(`[data-need-check="${n.id}"]`, form).checked) v.necesidades[n.id] = $(`[data-need-n="${n.id}"]`, form).value;
+    }
+    return v;
+  }
+
+  function writeForm(v) {
+    const dias = C.HORIZONTES.includes(Number(v.dias)) ? String(v.dias) : "3";
+    $$('input[name="dias"]', form).forEach((r) => (r.checked = r.value === dias));
+    // Solo se escriben los campos presentes: lo que falte conserva el valor por defecto del formulario
+    for (const k of PERSONAS) if (v[k] != null && v[k] !== "") form.elements[k].value = C.sanear({ [k]: v[k] })[k];
+    form.elements.lactancia.checked = !!v.lactancia;
+    form.elements.medicacion.checked = !!v.medicacion;
+    form.elements.todaLaFamilia.checked = !!v.todaLaFamilia;
+    for (const n of C.NECESIDADES) {
+      const on = !!(v.necesidades && v.necesidades[n.id] != null);
+      $(`[data-need-check="${n.id}"]`, form).checked = on;
+      if (on) $(`[data-need-n="${n.id}"]`, form).value = v.necesidades[n.id];
     }
   }
-  const num = (name) => Math.max(0, Math.min(99, parseInt(form.elements[name].value, 10) || 0));
+
+  // Ajusta lo que se ve a lo que se calcula (negativos, decimales, límites) sin pelearse con el usuario mientras escribe
+  function normalizar() {
+    const s = C.sanear(readForm());
+    for (const k of PERSONAS) if (String(form.elements[k].value) !== String(s[k])) form.elements[k].value = s[k];
+    const max = Math.max(1, s.adultos + s.ninos + s.mayores);
+    for (const n of C.NECESIDADES) {
+      const inp = $(`[data-need-n="${n.id}"]`, form);
+      inp.max = max;
+      const val = Math.trunc(Number(inp.value));
+      inp.value = Number.isFinite(val) ? Math.min(max, Math.max(1, val)) : 1;
+    }
+  }
+
+  const saved = store.get("calc", null);
+  if (saved && typeof saved === "object") { try { writeForm(saved); } catch { /* estado guardado no válido */ } }
+  normalizar();
 
   function calc() {
-    const dias = parseInt($('input[name="dias"]:checked', form).value, 10);
-    const a = num("adultos"), n = num("ninos"), b = num("bebes"), m = num("mayores"), p = num("mascotas");
-    const med = form.elements.medicacion.checked;
-    const personas = a + n + b + m;
-    store.set("calc", { dias, adultos: a, ninos: n, bebes: b, mayores: m, mascotas: p, medicacion: med });
+    const raw = readForm();
+    const r = C.compute(raw);
+    const i = r.entrada;
+    // Guardamos lo que el usuario marcó (incluidas necesidades aunque ahora no haya comensales)
+    store.set("calc", { ...raw, ...Object.fromEntries(PERSONAS.map((k) => [k, i[k]])), dias: i.dias });
 
-    const aguaPersonas = personas * 3 * dias;
-    const aguaMascotas = p * 1 * dias;
-    const agua = aguaPersonas + aguaMascotas;
-    const kcal = ((a + m) * 2000 + n * 1400) * dias;
-    const kgComida = kcal / 2500; // mezcla de conservas y alimentos secos ≈ 2,5 kcal/g
-    const latas = Math.ceil(kcal / 400); // ración equivalente ≈ 400 kcal
+    $("#lactancia-row").hidden = i.bebes === 0;
+    for (const n of C.NECESIDADES) $(`[data-need="${n.id}"] .need-n`, form).hidden = !$(`[data-need-check="${n.id}"]`, form).checked;
 
-    $("#calc-title").textContent = `Para ${dias === 3 ? "72 horas" : dias + " días"} · ${personas} ${personas === 1 ? "persona" : "personas"}${p ? ` y ${p} ${p === 1 ? "mascota" : "mascotas"}` : ""}`;
-    $("#calc-big").innerHTML = `
-      <div><strong>${fmt(agua)} L</strong><span>de agua (${fmt(Math.ceil(agua / 5))} garrafas de 5 L)</span></div>
-      <div><strong>${fmt(kcal)}</strong><span>kcal en total (unos ${fmt(kgComida, 1)} kg de comida)</span></div>`;
+    const errores = r.avisos.filter((a) => a.tipo === "error");
+    $("#calc-errores").innerHTML = errores.map((a) => `<p class="calc-error" role="alert">${esc(a.texto)}</p>`).join("");
 
-    const items = [];
-    if (personas === 0 && p === 0) items.push("Añade al menos una persona para calcular.");
-    else {
-      items.push(`<b>${fmt(latas)}</b> raciones no perecederas (conservas, legumbres, barras… de unas 400 kcal cada una)`);
-      items.push(`<b>${Math.max(1, a + m)}</b> ${a + m === 1 ? "linterna" : "linternas"} y <b>${2 + Math.floor(dias / 3)}</b> juegos de pilas de repuesto`);
-      items.push(`<b>1</b> radio de pilas o de manivela y <b>${Math.max(1, Math.ceil((a + m) / 2))}</b> ${Math.ceil((a + m) / 2) > 1 ? "baterías externas" : "batería externa"}`);
-      items.push(`<b>${personas}</b> ${personas === 1 ? "manta térmica" : "mantas térmicas"} y <b>${Math.max(1, Math.ceil((personas * dias) / 4))}</b> rollos de papel higiénico`);
-      items.push(`Efectivo en billetes pequeños para <b>${dias}</b> días de compras básicas`);
-      if (b) items.push(`<b>${fmt(b * 7 * dias)}</b> pañales y leche de fórmula para ${dias} días (prepárala con agua embotellada)`);
-      if (m) items.push(`Personas mayores: gafas de repuesto, audífonos con pilas y ayudas técnicas`);
-      if (med || m) items.push(`Medicación para <b>${dias + 7}</b> días (horizonte + 1 semana de margen) y copia de las recetas`);
-      if (p) items.push(`Mascotas: <b>${fmt(aguaMascotas)} L</b> de agua (incluidos arriba), comida para ${dias} días, correa y transportín`);
+    if (r.vacio) {
+      $("#calc-title").textContent = "¿Quién vive en casa?";
+      $("#calc-big").innerHTML = "";
+      for (const id of ["#calc-compra-wrap", "#calc-sum-wrap", "#calc-avisos-wrap"]) $(id).hidden = true;
+      return;
     }
-    $("#calc-list").innerHTML = items.map((i) => `<li>${i}</li>`).join("");
+    const mascotas = [i.perros && plural(i.perros, "perro", "perros"), i.gatos && plural(i.gatos, "gato", "gatos")].filter(Boolean).join(" y ");
+    $("#calc-title").textContent = `Para ${r.dias === 3 ? "72 horas" : r.dias + " días"} · ${plural(r.personas, "persona", "personas")}${mascotas ? " y " + mascotas : ""}`;
+    $("#calc-big").innerHTML = `
+      <div><strong>${fmt(r.agua.total, 1)} L</strong><span>de agua (${plural(r.agua.garrafas5L, "garrafa", "garrafas")} de 5 L)</span></div>
+      ${r.kcal.total ? `<div><strong>${fmt(r.kcal.total)}</strong><span>kcal en total (unos ${fmt(r.kgComida, 1)} kg de comida)</span></div>`
+                     : `<div><strong>Bebés</strong><span>su alimentación va aparte (más abajo)</span></div>`}`;
+
+    $("#calc-compra-wrap").hidden = r.grupos.length === 0;
+    $("#calc-grupos").innerHTML = r.grupos.map((g) => {
+      const fila = (p, segura) => `
+        <div class="grp-row${segura ? " safe" : ""}">
+          <span class="qty">${p.cantidad}</span>
+          <span><span class="u">${esc(p.cantidad === 1 ? p.unidad.s : p.unidad.p)}</span> · ${segura ? '<span class="tag-safe">Versión segura</span> ' : ""}${esc(p.texto)}${g.base && g.segura ? ` <em>(para ${plural(p.personas, "persona", "personas")})</em>` : ""}</span>
+        </div>`;
+      return `<li class="grp"><strong class="grp-h">${esc(g.nombre)}</strong>${g.base ? fila(g.base, false) : ""}${g.segura ? fila(g.segura, true) : ""}</li>`;
+    }).join("");
+
+    $("#calc-sum-wrap").hidden = false;
+    $("#calc-list").innerHTML = r.suministros.map((x) => `<li>${esc(x.texto).replace(/(^|\s)(\d[\d.,]*)(?=\s)/g, "$1<b>$2</b>")}</li>`).join("");
+
+    const info = r.avisos.filter((a) => a.tipo !== "error");
+    $("#calc-avisos-wrap").hidden = info.length === 0;
+    $("#calc-avisos").innerHTML = info.map((a) => {
+      const t = esc(a.texto), k = t.indexOf(":");
+      return `<li class="${a.tipo}">${a.necesidad && k > 0 ? `<strong>${t.slice(0, k)}:</strong>${t.slice(k + 1)}` : t}</li>`;
+    }).join("");
   }
+
   form.addEventListener("input", calc);
-  form.addEventListener("change", calc);
+  form.addEventListener("change", (e) => { if (e.target.type === "number") normalizar(); calc(); });
   form.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-step]");
     if (!btn) return;
     const input = form.elements[btn.dataset.for];
-    const v = (parseInt(input.value, 10) || 0) + parseInt(btn.dataset.step, 10);
+    const v = (Math.trunc(Number(input.value)) || 0) + Number(btn.dataset.step);
     input.value = Math.max(+input.min, Math.min(+input.max, v));
+    normalizar();
     calc();
   });
   calc();
@@ -286,7 +343,10 @@
       `<p>Revisar cada 6 meses. Impreso el ${new Date().toLocaleDateString("es-ES")}.</p>`;
   }
   function buildCalcPrint() {
-    return `<h1>Reservas del hogar</h1><h2>${esc($("#calc-title").textContent)}</h2>${$("#calc-big").outerHTML}<ul>${$("#calc-list").innerHTML}</ul>`;
+    const r = $("#calc-result").cloneNode(true);
+    r.querySelectorAll("[hidden]").forEach((el) => el.parentNode.removeChild(el));
+    const h = r.querySelector("#calc-title"); if (h) h.outerHTML = `<h2>${esc(h.textContent)}</h2>`;
+    return `<h1>Reservas del hogar</h1>${r.innerHTML}<p>Estimación orientativa de Preparados72h · ${new Date().toLocaleDateString("es-ES")}</p>`;
   }
   // Dentro de un iframe aislado (p. ej. un artifact) no se puede imprimir: se copia el texto.
   let embedded = false;

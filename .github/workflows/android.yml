@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - "portal/**"
+      - "tests/**"
       - "android/**"
       - "package.json"
       - "package-lock.json"
@@ -41,6 +42,9 @@ jobs:
 
       - name: Dependencias
         run: npm ci --no-audit --no-fund
+
+      - name: Tests de la calculadora
+        run: npm test
 
       - name: Copiar la web al proyecto Android
         run: npx cap sync android
