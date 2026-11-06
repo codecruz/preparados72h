@@ -1,4 +1,4 @@
-// Tests de la calculadora de reservas: node --test tests/
+// Tests de la calculadora de reservas: npm test
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
