@@ -1,7 +1,84 @@
 // Generado automáticamente por scripts/update-news.mjs. No editar a mano.
 window.PREP_NEWS = {
-  "actualizado": "2026-11-05T12:04:59.061Z",
+  "actualizado": "2026-11-06T13:30:10.056Z",
   "items": [
+    {
+      "titulo": "Protección Civil mantiene la alerta por lluvias en la Península y Canarias hasta la próxima semana por la borrasca Bruna",
+      "enlace": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxQQ2Y1bVVlcGR2Y1F5Q1huRmhIbVBOMHZCSklJTm5GZ3BlQzRubmZWN0pTbmNhX1pWNTJFQ0ZUUFFNWVFpb213NjhJUlhLX2RGS0lmNnZIcWRvcm8ydEVqb1BtXzhZYkduQlFxYmNHRHNWd2JIS0ZRbEx6Y0RxU0RjUFN1WjY0NkVUeDdGR2pzMllpUmRPNU5zNjBPMFpDei1IU3YxSDFOblc5SUVoR3EwRkRfQUdXZnp6Z29CU0cycmNIQlFPdE1xdWdQdmxZQnNZcXZ5ZzA0VXRHQ1dzVmhzS2hnenA5VXN1?oc=5",
+      "fuente": "Europa Press",
+      "fecha": "2026-11-06T13:22:47.000Z",
+      "tema": "Protección civil"
+    },
+    {
+      "titulo": "Oferta antiapagones: si tienes miedo a otro, esta batería con panel solar es un auténtico salvavidas",
+      "enlace": "https://www.20minutos.es/ofertas-descuentos/comprar-bateria-portatil-panel-solar-allpowers-r600_7057975_0.html",
+      "fuente": "20minutos",
+      "fecha": "2026-11-06T11:00:00.000Z",
+      "tema": "Apagones"
+    },
+    {
+      "titulo": "3 kits de supervivencia para apagones de 72 horas: con radio autónoma, batería externa y linterna incorporada",
+      "enlace": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQSFlQc1JoVUJhMEJXRzlRLW83Y050TzhFNlh4Vm9sQlA4d0puZDluX1VhSFF1OXVIUTU5UFZwNVJQQkJnLUtaQldiV2pVVmcwQWVmOVZVYWpVTjN5cWFQbHpMS21sZm9PanpTbEhoVTdDdWwtNFlPMlRTQU9tZXVsSy1sbzAtck1mQWZSb3p5OEJaR0ZneVRkaUp2ZU1CVVFzR0FpSEUwdVk?oc=5",
+      "fuente": "Diez Minutos ES",
+      "fecha": "2026-11-06T09:16:07.000Z",
+      "tema": "Apagones"
+    },
+    {
+      "titulo": "Protección Civil de Granada se forma para actuar ante accidentes e incendios hasta la llegada de especialistas",
+      "enlace": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPeWFSUGZUeWhEUlFWMWV0cVJyNkpybl9LTEFfTk1NNHJ5TnFsd3VjRjBDMjBKSzN2b3M1QXo0Uk5uQ2VXQ1pEeE5XNk84U0JIOTk0dEZHRHNYT1dWWVl0b0tCOElRT2dyakRRcHgyZXBhM3JBSWFwZllYNFZhWjVuc1lvUXZTZWN4ZV9FYXpqT0pHSGVldEtTUGU0LWlqX011M1ByMw?oc=5",
+      "fuente": "La Noción",
+      "fecha": "2026-11-06T08:49:41.000Z",
+      "tema": "Desastres naturales"
+    },
+    {
+      "titulo": "IA facilita ciberataques: Robo y filtración de datos de empresas mexicanas se disparan en 2026",
+      "enlace": "https://www.elfinanciero.com.mx/empresas/2026/11/06/ia-facilita-ciberataques-robo-y-filtracion-de-datos-de-empresas-mexicanas-se-disparan-en-2026/",
+      "fuente": "El Financiero",
+      "fecha": "2026-11-06T07:32:00.000Z",
+      "tema": "Ciberataques"
+    },
+    {
+      "titulo": "🌧️ Alertan por lluvias intensas de hasta 150 milímetros, fuertes vientos y bajas temperaturas en Coahuila La Subsecretaría de Protección Civil del Estado informó que el frente frío número 4 provocará condiciones de inestabilidad meteorológica en distintas r",
+      "enlace": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxQSU83WExLRHBReWZmVWNhdDNTQ3Z6V1RLa1ZMemVWM3o4ODk5YWZDdUFoTENrRWRTeWc1Qll1R2w4aTd2RzBpYUpWLXBKNGRUd295c3RQcGFtLVVYTEdOb2ZmVW9QdmlxZXRBVUIwaVlvTk42cnptMnVEelAwR2ZMN0ZIZmJ5b1FUN1RCMXFPcDdKbzBNMHM5M3JMY0NiQjRjRTlKMnJHb1BLdHNyZ0R6UVdkNWhhVmJMNHRVZkExZnd5eHJFT1RqOGZlc0haS2FYUWlyNTdEbDNacnh2ZGtGYTJkV18zd25vTEdULUtnX0R2UzFh?oc=5",
+      "fuente": "Facebook",
+      "fecha": "2026-11-06T04:10:10.000Z",
+      "tema": "Protección civil"
+    },
+    {
+      "titulo": "Así es el kit de emergencia de 72 horas que vuelve a recomendar Bruselas: qué lleva y cómo prepararlo",
+      "enlace": "https://www.20minutos.es/internacional/asi-es-kit-emergencia-72-horas-que-vuelve-recomendar-bruselas-que-debe-llevar-como-prepararlo_7057557_0.html",
+      "fuente": "20minutos",
+      "fecha": "2026-11-06T04:00:00.000Z",
+      "tema": "Ciberataques"
+    },
+    {
+      "titulo": "Muchos países recomiendan almacenar suministros esenciales para 72 horas: ¿Cómo está respondiendo Vietnam?",
+      "enlace": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1IeV9OejhxN3ZxWHhndEhsTTJTTmpHNnQzZ0ZQYTJ2SF9oZWNDeEFvZ2dMeWowVzhmQWJSdl8zN1YwaFI5Q0ZFelotRzBBeTdBenA0?oc=5",
+      "fuente": "شبكة تواصل الإخبارية",
+      "fecha": "2026-11-06T01:07:50.000Z",
+      "tema": "Suministro"
+    },
+    {
+      "titulo": "Mochila de emergencia en San Juan, qué llevar ante un sismo o evacuación",
+      "enlace": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxONFVyRlNPR3N6S192M2Vhb2hQWk1qS2VBNjNFV2xsR1NteXZfcUd3Z0cwcWNxOXRkQ19WaXFKbU5LZkptS1NHVTRhQU16VWYxNTc0WkFmQlFvd05scHRiYkRqM3R4X2VPT053dS1zWTVJejQzTEthZHR5bFliQVV6S1JDOGgzRV9LS1I5RVFaZzFJQkFKeWVodm9MVzhORE81ay1WejRQWGFpZ1FUT19QeUh5eFA2YldCX0hCbjdVd0c?oc=5",
+      "fuente": "Diario Huarpe",
+      "fecha": "2026-11-06T00:46:38.000Z",
+      "tema": "Protección civil"
+    },
+    {
+      "titulo": "¿Qué hay detrás de la mochila de emergencia? 🆘🎒 #mochiladeemergencia #mochiladepanico #desastresnaturales #mexico #alerta",
+      "enlace": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxQd1ZOLTRNLVFPNWVvbXUyWkFEdHhaM3dwSDV0QUtJVUUtdVROMTUxemhyRm4zdklmZ0ZJclNBRFQ3bTlZWFVBTWZHN3AyZGRBbF9raC00cjVaMTk0QXRpNWpCTkNhenBMWFY1YlpGLTFJLWY4dDM5ZEhneEROM1N2NE9NUUxQLV9IUkZuXzZmZ1MwM3BtTEd1WHlhQ3pqLTAxTDg0VVVnUFJ0MFBKLWlsdDRPUlJpR2RrTkZWLUNfTm1SSktiMHh5V2VaRWZOM1h3NE1DUE1sLTA2Rk9sX2plNDFqUHJheWVf?oc=5",
+      "fuente": "Facebook",
+      "fecha": "2026-11-05T20:00:07.000Z",
+      "tema": "Protección civil"
+    },
+    {
+      "titulo": "Ciberataque infraestructura crítica: Francia denuncia neveras de sangre a 110 ºC",
+      "enlace": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQRE1CWFcwc3VZTlpWYktVU3k5bWNfc2l2VlVrMWkzOXlELXlLMlVOOGlxSkR3RktueG5HSW1IaW1lczJTby1GS0o5VW9GSG9neERyc3ZVYU9SSEU4WGhQclZtS1J3N2RpNWFaMFlTMHZqbFZ6VmNzLTNtNWJoNllYTENZMjhfV1FFNEpXSWVNNmk?oc=5",
+      "fuente": "MONCLOA.COM",
+      "fecha": "2026-11-05T15:07:32.000Z",
+      "tema": "Ciberataques"
+    },
     {
       "titulo": "Interior y la Confederación Estatal de Asociaciones Vecinales refuerzan la participación ciudadana en protección civil y gestión de emergencias",
       "enlace": "https://news.google.com/rss/articles/CBMipwJBVV95cUxPN2QtUDFDcVYwdlN1cmwtOGtDSEtBQmRGVk5GSmd2dTQwTC11cTBTMS1ybHlqVXJMRm1Qb2xfb3p4R1VoOF9ibkpIMFRzVnN4cldHUDU5TzNSRVNULTBnZWxCTDJ1eUpmU3diWlpUSmt1cVRyalVjczV3c0J0dDd4S2N0T2NCX0JxSmFVOVIyUHJjMnJDdFNJNW4tc2o2bzdNN2tRSy1qWFlBMXEzQmJqQjd5NWF0Q2hLYmNaM1hrVS1OVXRNd2xqT0RHeVRTSTNYSDlJV2Vsc2RucDlIcmE4NXBzLUpSeUZoOFlRelUwMWFRbjVYZGNLYS1XQ0ZJVlcwMGRWTHpMUXdwUDdvZHRoa3NWZEZuRUhZbm95M3VrTVloOXNmOVY4?oc=5",
@@ -157,6 +234,13 @@ window.PREP_NEWS = {
       "tema": "Apagones"
     },
     {
+      "titulo": "Reino Unido enfrentará ciberataques con IA contra infraestructura crítica para 2028: funcionario",
+      "enlace": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQcndXZF9KUnNhOVM2emN1NmowVmVxaFZnZHNrSWVXZmNMSDFXaDlpakpWOUxROWpnRzFaWFRfb0hkVTBFeDN6b2ZQaF9NcGp3clZRZEhERV9QWjF6VmhkSnkwcTFFZ0hWaDlIVFVKOHhFaUh5aGZSNmNkZDRGcFZobnRFMENpNHlINlJGV3dzMkJXTHljNFRXeDNudFp6LTJQN1Mta3VFTG9wU1VWRXNLLVlfYVM2cE1LclJWUHFjQUhSaXg1VFpfVTJmTXdvYUlCRDB3NHdJWTFkOHdYcmdtODliWmhPaVBVME9NcVdmTHpzbEZDS3JtUnZ3?oc=5",
+      "fuente": "Independent en Español",
+      "fecha": "2026-11-03T14:29:00.000Z",
+      "tema": "Ciberataques"
+    },
+    {
       "titulo": "UK meat industry hit by cyber-attack which targeted European supermarket freezers",
       "enlace": "https://www.bbc.co.uk/news/articles/ckq6ndq8l6v0o?at_medium=RSS&at_campaign=rss",
       "fuente": "BBC News",
@@ -197,62 +281,6 @@ window.PREP_NEWS = {
       "fuente": "Mundo Deportivo",
       "fecha": "2026-11-02T18:44:00.000Z",
       "tema": "Protección civil"
-    },
-    {
-      "titulo": "Un apagón deja a La Palma sin suministro eléctrico en plena alerta máxima por lluvias: el 100% del servicio ya se ha recuperado",
-      "enlace": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNazV3Y1FubUpyV1g3MWJhWG1EcTJaOXhJUmVXWU95VHpyUHJxM01YTjI0a2t4TDB2UUZ6ZFpBLUFlVXV3R0Z5N1JVcnNLRjZMRldSZTBTR2puSlFxaXlsZnVhd05oQ0N1azRWbzFnNjJ4QlZJTW4zRzljVGppR2VpUzh6RWc4a0JWbE9COGdsZ0EtLUt5a0Y0NzVManc5bXhhRk9tYTcyNGlBLWJSMzFYOEdJZFdYR3picEHSAb8BQVVfeXFMTktIR0p5Q3NHdDVIZU9CbVB0WlFNa0x1V090cGVaYktVdUc0aFJTTnUxR1FMSXd2Wmt6Y3NSemlXaV9PWHQ0M1NhbG9kRWZERXdpeGphLU82UXlCN3I5Y1FnNUc0bXJvc2otc3pHNFV6WXdaQUNJTHhCS01FeUVYUnBhYXlRdVhMV2steVgwc0ZxZTFhQWtTRmdfT1EtRFU5czIxWVZGRlhRT0xkb2IwTnZ0ZE9NTXJCSTB2N2k4OEk?oc=5",
-      "fuente": "Canarias7",
-      "fecha": "2026-11-02T18:09:42.000Z",
-      "tema": "Apagones"
-    },
-    {
-      "titulo": "Nueva ola de ciberataques contra supermercados en Europa",
-      "enlace": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPWnZmNnc4YzV2V0psNnUxdkMzdzhMbHJVRHpLelEtQ0o5VlZjNklJYzB3LXlKQ1loaEkxZjFIMDgtLW5SMFk4SDlxd1RTNTRRTzRYZzhNRjZmNnNRZVAtRTMwU21sakJIRkVkX0Q5aEZCNlc3aEtQNlllYWdDOHNHU2hUX3Btdk0wV3plZDJ6OTdmVFU1X2pXbEJZVQ?oc=5",
-      "fuente": "Connecta B2B",
-      "fecha": "2026-11-02T17:45:07.000Z",
-      "tema": "Ciberataques"
-    },
-    {
-      "titulo": "La Palma se ha despertado sin luz en toda la isla: un apagón total ha dejado a oscuras 50.500 suministros en plena tormenta",
-      "enlace": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPMmFMLVpJNkxYT1BlQ0h1QUVReGhweWdJS19lWG9vU2s3aTRUYWo0LUVWMll1czBmTGg4WTVCRFZQRlprV3pTNUtDaDJnNDQtekJTdHFxdGlWYWpFWFJPV2x6Y2NLakN6Q3VJbVJUZ21aYlQtdWNtejRmNDMyRWc4LW53UEFnM1JDdHpZMmZ6eFZYcWdGQkx3MVUwRFJvMUpsem1DMWRLWTV1ejdfSWk4dVlfckVLaFVfZFRTOVctQlNsbjBRckc1VzlrWC1GWjjSAdQBQVVfeXFMTXRfcnd6TFNSU05OQ2JjREZoaXpiTTQwTEw2eXlneTRXSjQ1dUdDaVN5M2dGeEYtUmRiaWJHLXloUmlYdTRqcUdWRTBKbWRoTXZESXl0VW9DaUNENnp1UWEzMkRXVXRyaml3RzFOZVNPOWJHQnhTdll4cFFadm1pbGpPU2NiWlVJcnR3VjNwNkV4TWpmMUpMVEpSbnBfTDhSeURMWldicV9nTE9CX1ZEUTM3TzlkWEI2MG04djZnUlUyZERjSElCR2c5R3F3cEtfeEdIaDc?oc=5",
-      "fuente": "Xataka",
-      "fecha": "2026-11-02T11:26:28.000Z",
-      "tema": "Apagones"
-    },
-    {
-      "titulo": "La Palma sufre un apagón general que deja a la isla sin suministro eléctrico durante casi cuatro horas",
-      "enlace": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5JQmpwaG1xSVh2Um9KUUdjR2FlRS11aDg1VzJyZk4zcVgtd2Z3QjltZjh6Rll0R3Y0VllvRUtWVDlKN3pGeDJXeXVLTFNwd3ZRbUJEdVZyZThFeDg1NnFpbzZjSkFlZTIwcDQ4ckVScnBySVdHaE1IaE930gF6QVVfeXFMTV9GcjZqNFd0UkZPVWRDbG03b0JlWjluSW1sWjlrMEFnekRhc3NBYzNzdzhSODNpZWxsU1lhMFBtc1N1S1hSUUlrRTdjcU1RNWFZMzZNN0syZW94cUo4OUJDQlJRS2FBYXRMcmxBbm1KZ2hBS2RzczNEMGc?oc=5",
-      "fuente": "El Mundo",
-      "fecha": "2026-11-02T11:10:15.000Z",
-      "tema": "Apagones"
-    },
-    {
-      "titulo": "Apagón general en La Palma: el Gobierno de Canarias declara la alerta tras un cero energético que deja sin luz a más de 50.000 suministros",
-      "enlace": "https://news.google.com/rss/articles/CBMiggJBVV95cUxNZU5uc29FUHRVWkpmSjlaRVFkUDlOM1lzZ05NdVVMTDd1VWsyYzdOVlhDaktDNlRLVXVvMnRZVTduYUZUVGlLS1cyU2JvYnZETUFWS1VYUlNodVdvTndOaG5ZOC1xb0psTTV0RWhVLUt4cnBhTUdEdzh2ZW0tS3B5b25XaU5RanVBV1pYcUhBNWt5RlpJWGFNT1ZGZ08xNmNobXFYc1MzdmV0Q2poXzFqNEd6ci12NVFOaE1hcXY2T3BXb0JUOEpaMGpCZFlMSHF2SGRkYlM2d0syZ3UwTEpCRmJqN0EwOURkVi1sMFFtX0kxV3UzLVhhM0U3SVZiVjlNYnfSAY8CQVVfeXFMTURzYTBOVURXdjlrRkRDR0JlNFN4cVBOTlZaS1ZjRkxoZER3UWxXRDl2OGJyOG1kOG95Yy1pV0VOQmZETkVValZQUm9ydHRYUTNxUFFVZ29BSm12LVJ2MGNJQ3ZMZk4wVzBLV0NzYWVDTUk5elg1UDZsZ25FMzdCSmlIQlZQU0pjMVY4RE8xY0pRZ0ZxMkFkb0pBRDNQV3lGT1FmeGQ4VGdSeTBwZmctRHdGREs3SkdqdGE4Zm93UVhhVWRWTzRxNzVuc042ZUVfaDRZcEptVnd3TWh4M2E1Tk1LTktQeWhiblVVa1pocDBERDFoczZWS1g0RFh3dFFrOXoyWW9qSDQxbElDNFJoUQ?oc=5",
-      "fuente": "Mundo Deportivo",
-      "fecha": "2026-11-02T10:27:01.000Z",
-      "tema": "Apagones"
-    },
-    {
-      "titulo": "La Palma recupera la luz tras más de cinco horas de apagón general en plena alerta por el temporal",
-      "enlace": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNRzNPQ0lKSGhya2ljVmZGdGhXbW82d3FrWE1MYTBWNVA2cXNXMDRBeWl2OFhHLTNPSjlRSjdHWEdISmdzNmhzQjUtcWRBbjBOOHJLVlBDTWNCMHFoaEl3dFAtbm45Y2l5b05TQXlad2dQOFA1NDZFRE5odEhnem11eG5FTkdaaG9iY1VFaGJybE9aZkVIdWUtcWxzcw?oc=5",
-      "fuente": "El Confidencial",
-      "fecha": "2026-11-02T07:41:00.000Z",
-      "tema": "Apagones"
-    },
-    {
-      "titulo": "Rusia y Ucrania intercambian ciberataques contra los sistemas de alerta: falsas alarmas por ataques nucleares",
-      "enlace": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxPc2d4emkwbHdhUkZweURINWZJb0lCdThpZHZ3dmlfaW9fNlFkWVdMU3gzWDlwNnlIczBnamlZY0JsdUVOUVAtN2VfN1hHNGhtaHh3YTR4S09TZ3gtOHluTXU0U1d0dF9WMG5oelV0Y1JvVlhJV2FOdlh5U1FUM1RIazk5aHIybS1GZ0RjZDdzVS1sTGVWc2ZqTGc2MmdjLTQ0RG5QWU13Y2toOXhSaUtUeDJDaXRIeXdCYkZZeXM1LTYyZ3lVTDA5VGRSS2xhUWhLMzdoUjE3eldUT2NsVTJXVU5iTHF6QVlnTkdUb0hqTmFiZm_SAfMBQVVfeXFMT3NneHppMGx3YVJGcHlESDVmSW9JQnU4aWR2d3ZpX2lvXzZRZFlXTFN4M1g5cDZ5SHMwZ2ppWWNCbHVFTlFQLTdlXzdYRzRobWh4d2E0eEtPU2d4LTh5bk11NFNXdHRfVjBuaHpVdGNSb1ZYSVdhTnZYeVNRVDNUSGs5OWhyMm0tRmdEY2Q3c1UtbExlVnNmakxnNjJnYy00NERuUFlNd2NraDl4UmlLVHgyQ2l0SHl3QmJGWXlzNS02Mmd5VUwwOVRkUktsYVFoSzM3aFIxN3pXVE9jbFUyV1VOYkxxekFZZ05HVG9Iak5hYmZv?oc=5",
-      "fuente": "El Español",
-      "fecha": "2026-11-02T07:04:22.000Z",
-      "tema": "Ciberataques"
-    },
-    {
-      "titulo": "Apagón en Tenerife: más de 160.000 viviendas se quedan sin suministro",
-      "enlace": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQdmZ3b1JiOTdBUTBKVWdjYnVydmNFOW1FdlNObFF4OEZ3enVKZE9xQVJzcV9zLWFVVTczV1ZlcHBkNU81MEdJWjdkMEVEZlc0aS0zZnVNYmdxYWdwYm94MWlpWDN5RWJKVFZPbF9LQUhRcEM1MGFKRzVVR1dnd0RTVExrYUdTb3JvOVVOZk9ZamhGV3QzYzhlc2lLelI1UXpaRWEwMG0xOGN0MXVM0gGyAUFVX3lxTE1PTXN4Z3V6YmdJUjBwZ2pNcFpVanNJbFBfVjNVTGdVa0dJUFhhcGEzbFBSUHJkV21Ja3ZnSG1pazR0VEx1SmVtWjRYQWtTeXBoT0lGN1FqNWtlYm5DdGpkQmNOSGVsSFJrUUZiU0E2TUdIaktmdmZNUi04SlJqNmtwMloyRlBDMHRnQzR3TjRxdW9PZHZQVklMSTIwbXdQTDlxcWZMcmU3SzdBVHY2b3B6SXc?oc=5",
-      "fuente": "ABC",
-      "fecha": "2026-11-01T11:22:02.000Z",
-      "tema": "Apagones"
     }
   ]
 };
