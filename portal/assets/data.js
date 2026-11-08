@@ -538,6 +538,96 @@ window.PREP_DATA = {
   },
 
   // De dónde salen los números de la calculadora y de las guías
+  // Despensa: productos concretos de supermercado que aguantan sin nevera con el envase cerrado.
+  // dura = orientativo con el envase cerrado (manda la fecha de la etiqueta). tipo = tipo del inventario.
+  // cocinar: false = se come tal cual o solo con agua o leche fría.
+  despensa: {
+    reglas: [
+      ["🏷️", "Sin nevera, de verdad", "Mira la etiqueta: tiene que poner «conservar en lugar fresco y seco». Si pone «conservar en refrigeración» (lonchas envasadas, quesos tiernos, embutidos cocidos), no sirve para una despensa sin luz."],
+      ["📅", "Consumo preferente no es caducidad", "Conservas, arroz, pasta, legumbres, aceite, galletas o miel llevan fecha de consumo preferente: pasada esa fecha pierden calidad, pero siguen siendo seguros si el envase está intacto y tienen buen aspecto, olor y sabor. La fecha de caducidad (productos muy perecederos) sí hay que respetarla."],
+      ["🥫", "Raciones pequeñas y abre fácil", "Sin nevera, lo que abres hay que comérselo en el día. Mejor packs de latas pequeñas que una grande, y con abre fácil (aun así, guarda un abrelatas manual)."],
+      ["🔁", "Come lo que guardas", "Compra lo que ya coméis, pon lo nuevo detrás y gasta lo de delante. Así nada se pasa de fecha y la reserva se renueva sola."],
+      ["⚠️", "Latas dañadas, a la basura", "Tira cualquier lata abombada, oxidada, con fugas o muy abollada en el cierre, y cualquier conserva que al abrirla salpique o huela mal."],
+    ],
+    categorias: [
+      ["proteina", "🐟", "Pescado y carne en conserva"],
+      ["embutido", "🥓", "Embutidos y quesos curados"],
+      ["legumbre", "🫘", "Legumbres y platos listos"],
+      ["hidratos", "🍞", "Pan, cereales y féculas"],
+      ["grasas", "🫒", "Aceite, frutos secos y cremas"],
+      ["lacteos", "🥛", "Leche y bebidas"],
+      ["fruta", "🍑", "Fruta y verdura"],
+      ["extras", "🍫", "Dulces, sal y extras"],
+    ],
+    productos: [
+      // Pescado y carne en conserva
+      { id: "atun-aceite", cat: "proteina", nombre: "Atún claro en aceite de oliva", formato: "Pack de 3 latas de 80 g, abre fácil", dura: "3–5 años", cocinar: false, tipo: "proteina", al: "pescado", nota: "El aceite de la lata también alimenta: aprovéchalo con pan o legumbres." },
+      { id: "atun-natural", cat: "proteina", nombre: "Atún al natural", formato: "Pack de 3 latas de 80 g", dura: "3–5 años", cocinar: false, tipo: "proteina", al: "pescado", nota: "Menos calorías que en aceite: combínalo con aceite o frutos secos." },
+      { id: "sardinas", cat: "proteina", nombre: "Sardinas en aceite de oliva", formato: "Lata de 120 g, abre fácil", dura: "3–5 años", cocinar: false, tipo: "proteina", al: "pescado", nota: "Con espina comestible: aportan calcio." },
+      { id: "caballa", cat: "proteina", nombre: "Caballa (o melva) en aceite de oliva", formato: "Lata de 120 g", dura: "3–5 años", cocinar: false, tipo: "proteina", al: "pescado" },
+      { id: "mejillones", cat: "proteina", nombre: "Mejillones en escabeche", formato: "Lata de 110 g", dura: "3–4 años", cocinar: false, tipo: "proteina", al: "moluscos" },
+      { id: "berberechos", cat: "proteina", nombre: "Berberechos o almejas al natural", formato: "Lata de 110 g", dura: "3–4 años", cocinar: false, tipo: "proteina", al: "moluscos" },
+      { id: "salmon-lata", cat: "proteina", nombre: "Salmón o bonito en conserva", formato: "Lata de 160 g", dura: "3–4 años", cocinar: false, tipo: "proteina", al: "pescado" },
+      { id: "pollo-lata", cat: "proteina", nombre: "Pollo o pavo en conserva", formato: "Lata de 200 g", dura: "2–3 años", cocinar: false, tipo: "proteina", nota: "Para quien no come pescado. Revisa que la etiqueta no pida nevera antes de abrir." },
+      { id: "pate", cat: "proteina", nombre: "Paté de hígado o de atún", formato: "Latas pequeñas de 80–100 g", dura: "2–3 años", cocinar: false, tipo: "proteina", nota: "Mucha energía en poco peso; con picos o tostadas es una comida." },
+      { id: "albondigas", cat: "proteina", nombre: "Albóndigas o carne guisada en lata", formato: "Lata de 400–450 g", dura: "2–3 años", cocinar: false, tipo: "proteina", nota: "Se puede comer fría; templada en la lata al sol o al baño maría si hay hornillo." },
+
+      // Embutidos y quesos curados
+      { id: "chorizo", cat: "embutido", nombre: "Chorizo curado en sarta o vela, entero", formato: "Pieza de 200–250 g sin lonchear", dura: "3–6 meses", cocinar: false, tipo: "proteina", nota: "Solo entero y con «conservar en lugar fresco y seco». Una vez cortado, cómelo en pocos días." },
+      { id: "salchichon", cat: "embutido", nombre: "Salchichón o fuet curado, entero", formato: "Pieza de 150–250 g", dura: "2–4 meses", cocinar: false, tipo: "proteina", nota: "El fuet es más fino y se seca antes: rota más a menudo." },
+      { id: "lomo", cat: "embutido", nombre: "Lomo embuchado o cecina, en pieza", formato: "Pieza de 200–400 g", dura: "3–6 meses", cocinar: false, tipo: "proteina", nota: "Mucha proteína y poco peso. En pieza, nunca loncheado envasado." },
+      { id: "jamon-taco", cat: "embutido", nombre: "Jamón serrano en taco o pieza pequeña", formato: "Taco de 250–500 g al vacío", dura: "6–12 meses", cocinar: false, tipo: "proteina", nota: "Comprueba que el envase no pida nevera; muchos tacos curados no la necesitan cerrados." },
+      { id: "queso-aceite", cat: "embutido", nombre: "Queso curado en aceite de oliva", formato: "Tarro de cristal de 250–400 g", dura: "12–24 meses", cocinar: false, tipo: "proteina", al: "leche", nota: "El queso fuera del aceite es perecedero: el tarro aguanta en la despensa." },
+      { id: "queso-curado", cat: "embutido", nombre: "Queso viejo o muy curado, cuña entera", formato: "Cuña de 250 g", dura: "Según etiqueta", cocinar: false, tipo: "proteina", al: "leche", nota: "Muchas cuñas envasadas piden nevera: cómpralo solo si la etiqueta no lo exige." },
+
+      // Legumbres y platos listos
+      { id: "garbanzos", cat: "legumbre", nombre: "Garbanzos cocidos", formato: "Bote de cristal de 400 g", dura: "2–3 años", cocinar: false, tipo: "legumbres", nota: "Ya cocidos: se comen fríos, aclarados con un poco de agua." },
+      { id: "lentejas", cat: "legumbre", nombre: "Lentejas cocidas", formato: "Bote de cristal de 400 g", dura: "2–3 años", cocinar: false, tipo: "legumbres" },
+      { id: "alubias", cat: "legumbre", nombre: "Alubias blancas o rojas cocidas", formato: "Bote de cristal de 400 g", dura: "2–3 años", cocinar: false, tipo: "legumbres", nota: "Nunca compres alubias secas para comer sin cocinar: crudas son tóxicas." },
+      { id: "fabada", cat: "legumbre", nombre: "Fabada, cocido o lentejas con chorizo en lata", formato: "Lata de 420–440 g (1–2 raciones)", dura: "2–3 años", cocinar: false, tipo: "legumbres", nota: "Comida completa en una lata. Mejor caliente, pero se puede comer templada." },
+      { id: "legumbre-seca", cat: "legumbre", nombre: "Lentejas o garbanzos secos", formato: "Paquete de 1 kg", dura: "1–2 años", cocinar: true, tipo: "legumbres", nota: "Muy baratos y ligeros, pero solo si tienes hornillo y agua de sobra para remojar y cocer." },
+
+      // Pan, cereales y féculas
+      { id: "picos", cat: "hidratos", nombre: "Picos, regañás o pan tostado", formato: "Bolsa de 250 g", dura: "6–12 meses", cocinar: false, tipo: "cereales", al: "gluten", nota: "El sustituto del pan cuando no hay panadería." },
+      { id: "tortitas", cat: "hidratos", nombre: "Tortitas de arroz o de maíz", formato: "Paquete de 130 g", dura: "9–12 meses", cocinar: false, tipo: "cereales", nota: "Sin gluten en muchas marcas: mira la etiqueta si hay celíacos." },
+      { id: "galletas", cat: "hidratos", nombre: "Galletas María o tipo digestive", formato: "Paquete de 800 g en raciones", dura: "9–12 meses", cocinar: false, tipo: "cereales", al: "gluten", nota: "Mejor en paquetitos individuales: no se ablandan al abrir." },
+      { id: "avena", cat: "hidratos", nombre: "Copos de avena", formato: "Paquete de 500 g", dura: "12 meses", cocinar: false, tipo: "cereales", al: "gluten", nota: "Se ablandan en agua o leche fría en 30–60 minutos." },
+      { id: "cuscus", cat: "hidratos", nombre: "Cuscús", formato: "Paquete de 500 g", dura: "1–2 años", cocinar: false, tipo: "cereales", al: "gluten", nota: "Se hidrata con agua: caliente en 5 minutos o fría en 30–60." },
+      { id: "arroz", cat: "hidratos", nombre: "Arroz blanco", formato: "Paquete de 1 kg", dura: "1–2 años", cocinar: true, tipo: "cereales", nota: "El de vasitos precocinados se puede comer sin cocinar; el normal, no." },
+      { id: "pasta", cat: "hidratos", nombre: "Pasta seca", formato: "Paquete de 500 g", dura: "2–3 años", cocinar: true, tipo: "cereales", al: "gluten" },
+      { id: "pure", cat: "hidratos", nombre: "Puré de patata en copos", formato: "Paquete de 4 raciones", dura: "12 meses", cocinar: true, tipo: "cereales", nota: "Solo necesita agua caliente; ligero para la mochila." },
+
+      // Aceite, frutos secos y cremas
+      { id: "aceite", cat: "grasas", nombre: "Aceite de oliva", formato: "Botella de 1 L (mejor en lata o botella opaca)", dura: "12–18 meses", cocinar: false, tipo: "grasas", nota: "La forma más fácil de sumar calorías: una cucharada sopera (10 ml) son unas 90 kcal." },
+      { id: "frutos-secos", cat: "grasas", nombre: "Frutos secos naturales o tostados", formato: "Bolsa de 200 g (almendras, nueces, cacahuetes)", dura: "6–12 meses", cocinar: false, tipo: "grasas", al: "frutos de cáscara o cacahuete", nota: "Mucha energía en poco espacio. Se enrancian con calor: rota a menudo." },
+      { id: "crema-cacahuete", cat: "grasas", nombre: "Crema de cacahuete o de almendra", formato: "Tarro de 350 g", dura: "12 meses", cocinar: false, tipo: "grasas", al: "cacahuete o frutos de cáscara" },
+      { id: "semillas", cat: "grasas", nombre: "Pipas peladas o semillas", formato: "Bolsa de 200 g", dura: "6–12 meses", cocinar: false, tipo: "grasas" },
+
+      // Leche y bebidas
+      { id: "leche-uht", cat: "lacteos", nombre: "Leche UHT (o bebida vegetal UHT)", formato: "Brik de 1 L", dura: "6–9 meses", cocinar: false, tipo: "lacteos", al: "leche", nota: "Una vez abierta necesita nevera: sin luz, mejor briks pequeños de 200 ml." },
+      { id: "leche-polvo", cat: "lacteos", nombre: "Leche en polvo", formato: "Bote de 400–800 g", dura: "12–24 meses", cocinar: false, tipo: "lacteos", al: "leche", nota: "Ocupa poco y no necesita nevera aunque esté abierta; se prepara con agua potable." },
+      { id: "leche-condensada", cat: "lacteos", nombre: "Leche condensada en tubo o lata", formato: "Tubo de 170 g o lata de 370 g", dura: "12–18 meses", cocinar: false, tipo: "lacteos", al: "leche", nota: "Energía rápida para niños y para el ánimo." },
+      { id: "cacao", cat: "lacteos", nombre: "Cacao soluble y café soluble", formato: "Bote de 400 g / 200 g", dura: "1–2 años", cocinar: false, tipo: "otros", nota: "Se disuelven en frío. El café también es moral." },
+
+      // Fruta y verdura
+      { id: "tomate", cat: "fruta", nombre: "Tomate triturado o frito", formato: "Brik o lata de 400 g", dura: "1–2 años", cocinar: false, tipo: "frutaVerdura" },
+      { id: "pimientos", cat: "fruta", nombre: "Pimientos asados o del piquillo", formato: "Lata o bote de 250–400 g", dura: "2–3 años", cocinar: false, tipo: "frutaVerdura" },
+      { id: "verduras-bote", cat: "fruta", nombre: "Menestra, judías verdes o espárragos en bote", formato: "Bote de cristal de 400 g", dura: "2–3 años", cocinar: false, tipo: "frutaVerdura" },
+      { id: "maiz", cat: "fruta", nombre: "Maíz dulce", formato: "Pack de 3 latas pequeñas", dura: "2–3 años", cocinar: false, tipo: "frutaVerdura" },
+      { id: "fruta-almibar", cat: "fruta", nombre: "Melocotón o piña en su jugo o en almíbar", formato: "Lata de 400–800 g", dura: "2–3 años", cocinar: false, tipo: "frutaVerdura", nota: "El líquido también hidrata." },
+      { id: "fruta-seca", cat: "fruta", nombre: "Fruta deshidratada: pasas, orejones, dátiles, ciruelas", formato: "Bolsa de 200–250 g", dura: "6–12 meses", cocinar: false, tipo: "frutaVerdura" },
+      { id: "compota", cat: "fruta", nombre: "Compota o fruta triturada en bolsita", formato: "Bolsitas de 90–100 g", dura: "9–12 meses", cocinar: false, tipo: "frutaVerdura", nota: "Pensado para niños, pero útil para todos." },
+
+      // Dulces, sal y extras
+      { id: "chocolate", cat: "extras", nombre: "Chocolate negro", formato: "Tableta de 100–150 g", dura: "12–24 meses", cocinar: false, tipo: "otros", al: "puede contener leche y frutos secos", nota: "Mucha energía y mejora el ánimo." },
+      { id: "miel", cat: "extras", nombre: "Miel", formato: "Tarro de 500 g", dura: "Prácticamente indefinida", cocinar: false, tipo: "otros", nota: "No se la des a bebés menores de 1 año." },
+      { id: "azucar", cat: "extras", nombre: "Azúcar y sal", formato: "Paquete de 1 kg", dura: "Indefinida si está seca", cocinar: false, tipo: "otros" },
+      { id: "barritas", cat: "extras", nombre: "Barritas de cereales o energéticas", formato: "Caja de 6 a 12", dura: "6–12 meses", cocinar: false, tipo: "cereales", al: "gluten, frutos secos (según marca)" },
+      { id: "sopas", cat: "extras", nombre: "Sopas o cremas deshidratadas en sobre", formato: "Sobre de 4 raciones", dura: "1–2 años", cocinar: true, tipo: "otros", nota: "Calientan y reconfortan, pero necesitan agua caliente." },
+      { id: "especias", cat: "extras", nombre: "Especias, pimentón, orégano y vinagre", formato: "Botes pequeños", dura: "1–3 años", cocinar: false, tipo: "otros", nota: "Comer lo mismo varios días desanima: el sabor también cuenta." },
+    ],
+  },
+
   cifras: {
     agua: { dato: "Agua por persona y día", valor: "3 L por adulto: 1,5 L para beber, 0,5 L para cocinar y 1 L de higiene mínima. 3,5 L para mayores de 65 y 2,5 L para niños", fuente: "BLE (Alemania), tabla de reservas de 10 días, 2024; Ready.gov (EE. UU.) recomienda 3,8 L para beber e higiene; Suecia, 3–5 L", url: "https://www.ernaehrungsvorsorge.de/" },
     higiene: { dato: "Higiene básica", valor: "2–6 L por persona y día (la calculadora usa 1 L, el mínimo; si puedes, guarda más)", fuente: "Manual Esfera, normas mínimas de agua y saneamiento", url: "https://interactive.spherestandards.org/" },
@@ -552,6 +642,7 @@ window.PREP_DATA = {
     lejia: { dato: "Lejía", valor: "2 gotas por litro de lejía al 5–8 % (4 si está turbia) y 30 minutos de espera", fuente: "CDC y EPA. En España, solo lejía «apta para la desinfección del agua de bebida»", url: "https://espanol.epa.gov/" },
     aguaRotar: { dato: "Rotar el agua guardada", valor: "Cada 6 meses si es del grifo; la embotellada, según su fecha", fuente: "Ready.gov (FEMA) y CDC", url: "https://www.ready.gov/water" },
     inundacion: { dato: "Agua en movimiento", valor: "15 cm derriban a un adulto; 30 cm arrastran un coche pequeño; 45–60 cm, un todoterreno", fuente: "National Weather Service (EE. UU.)", url: "https://www.weather.gov/safety/flood-turn-around-dont-drown" },
+    fechas: { dato: "Fechas de los alimentos", valor: "«Consumo preferente»: calidad (conservas, arroz, pasta, legumbres, aceite, galletas, miel); seguro después si el envase está intacto. «Caducidad»: seguridad; no consumir después", fuente: "AESAN (Agencia Española de Seguridad Alimentaria y Nutrición)", url: "https://www.aesan.gob.es/AECOSAN/web/para_el_consumidor/ampliacion/fechas_caducidad.htm" },
     criterio: { dato: "Criterios propios", valor: "Medicación para el horizonte más 7 días; 7 pañales al día; 110 g de fórmula al día; 1 rollo de papel cada 3 días por persona; pilas y linternas", fuente: "Estimaciones de Preparados72h: ajústalas a tu caso", url: "" },
   },
 

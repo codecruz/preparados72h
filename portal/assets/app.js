@@ -750,6 +750,71 @@
   addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("#morse-stop").hidden) pararMorse(); });
   addEventListener("hashchange", () => { if (location.hash !== "#morse") pararMorse(); });
 
+  /* ---------- Despensa: productos concretos ---------- */
+  const DS = D.despensa;
+  let despCat = "todo";
+  let despLista = store.get("despensaLista", []);
+  if (!Array.isArray(despLista)) despLista = [];
+  despLista = despLista.filter((id) => DS.productos.some((x) => x.id === id));
+  $("#desp-reglas").innerHTML = DS.reglas.map(([ic, t, txt]) => `<article class="desp-regla"><span aria-hidden="true">${ic}</span><div><h3>${esc(t)}</h3><p>${esc(txt)}</p></div></article>`).join("");
+  $("#desp-cats").innerHTML = [["todo", "🛒", "Todo"], ...DS.categorias].map(([id, ic, n]) => `<button type="button" class="chip" data-dcat="${id}" aria-pressed="${id === despCat}"><span aria-hidden="true">${ic}</span> ${esc(n)}</button>`).join("");
+  const catNombre = (id) => (DS.categorias.find((c) => c[0] === id) || [, , ""])[2];
+  function renderDespensa() {
+    const sinFuego = $("#desp-sinfuego").checked;
+    const lista = DS.productos.filter((x) => (despCat === "todo" || x.cat === despCat) && (!sinFuego || !x.cocinar));
+    $("#desp-count").textContent = `${plural(lista.length, "producto", "productos")}${sinFuego ? " que se comen sin cocinar" : ""}.`;
+    $("#desp-grid").innerHTML = lista.map((x) => {
+      const en = despLista.includes(x.id);
+      return `<article class="card desp-item">
+        <p class="desp-cat small muted">${esc(catNombre(x.cat))}</p>
+        <h3>${esc(x.nombre)}</h3>
+        <p class="desp-formato">${esc(x.formato)}</p>
+        <p class="desp-tags"><span class="pill d7">⏳ ${esc(x.dura)}</span> <span class="pill ${x.cocinar ? "d3" : "d0"}">${x.cocinar ? "Hay que cocinar" : "Sin cocinar"}</span></p>
+        ${x.al ? `<p class="small muted">Contiene: ${esc(x.al)}</p>` : ""}
+        ${x.nota ? `<p class="small">${esc(x.nota)}</p>` : ""}
+        <div class="desp-acc">
+          <button type="button" class="btn btn-sm ${en ? "btn-primary" : "btn-ghost"}" data-dlista="${x.id}" aria-pressed="${en}">${en ? "✓ En la lista" : "＋ A la lista"}</button>
+          <button type="button" class="btn btn-ghost btn-sm" data-dinv="${x.id}">Al inventario</button>
+        </div>
+      </article>`;
+    }).join("") || `<p class="muted">No hay productos con ese filtro.</p>`;
+    $("#desp-lista").innerHTML = despLista.map((id) => { const x = DS.productos.find((p) => p.id === id); return `<li><span><strong>${esc(x.nombre)}</strong> · ${esc(x.formato)}</span> <button type="button" class="btn-xs btn btn-ghost" data-dlista="${x.id}" aria-label="Quitar ${esc(x.nombre)} de la lista">Quitar</button></li>`; }).join("");
+    $("#desp-lista-vacia").hidden = despLista.length > 0;
+    $("#desp-vaciar").hidden = !despLista.length;
+  }
+  $("#desp-cats").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-dcat]");
+    if (!b) return;
+    despCat = b.dataset.dcat;
+    $$("#desp-cats [data-dcat]").forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.dcat === despCat)));
+    renderDespensa();
+  });
+  $("#desp-sinfuego").addEventListener("change", renderDespensa);
+  $("#despensa").addEventListener("click", (e) => {
+    const l = e.target.closest("[data-dlista]");
+    if (l) {
+      const id = l.dataset.dlista;
+      despLista = despLista.includes(id) ? despLista.filter((x) => x !== id) : [...despLista, id];
+      store.set("despensaLista", despLista);
+      const enGrid = l.closest("#desp-grid");
+      renderDespensa();
+      if (enGrid) { const nb = $(`#desp-grid [data-dlista="${id}"]`); if (nb) nb.focus(); }
+      return;
+    }
+    const v = e.target.closest("[data-dinv]");
+    if (v) {
+      // Rellena el formulario del inventario: solo falta la cantidad y la fecha de la etiqueta
+      const x = DS.productos.find((p) => p.id === v.dataset.dinv);
+      invForm.elements.nombre.value = `${x.nombre} (${x.formato})`.slice(0, 80);
+      invForm.elements.tipo.value = TIPOS.some((t) => t.id === x.tipo) ? x.tipo : "otros";
+      syncUnit();
+      location.hash = "inventario";
+      setTimeout(() => { invForm.elements.cantidad.focus(); invForm.elements.cantidad.select(); }, 50);
+    }
+  });
+  $("#desp-vaciar").addEventListener("click", () => { despLista = []; store.set("despensaLista", despLista); renderDespensa(); });
+  renderDespensa();
+
   /* ---------- Material por niveles ---------- */
   const M = D.material;
   let matHave = store.get("material", {});
@@ -792,6 +857,7 @@
   /* ---------- Panel de inicio ---------- */
   const TILES = [
     ["calculadora", "🧮", "Calculadora", "Agua, comida y suministros para tu hogar, con cifras oficiales."],
+    ["despensa", "🥫", "Despensa: qué comprar", "Latas, embutidos curados y otros productos que aguantan sin nevera."],
     ["menu", "🍽️", "Menú de ejemplo", "Cómo comerse la reserva, con o sin hornillo."],
     ["inventario", "📦", "Inventario", "Lo que tienes, lo que falta y lo que caduca."],
     ["mochila", "🎒", "Mochilas", "La de 72 horas y la bolsa para volver a casa."],
@@ -832,7 +898,7 @@
 
   /* ---------- Navegación por secciones (una vista cada vez) ---------- */
   const VISTAS = new Set($$("[data-view]").map((el) => el.dataset.view));
-  const TITULOS = { inicio: "Inicio", calculadora: "Calculadora", menu: "Menú de ejemplo", inventario: "Inventario", mochila: "Mochilas", material: "Material por niveles", habilidades: "Habilidades", guias: "Guías", agua: "Agua potable", mapas: "Mapas sin conexión", plan: "Plan familiar", aprende: "Consejos y comunidad", paises: "Recomendaciones por país", morse: "Código Morse", noticias: "Noticias", fuentes: "Fuentes" };
+  const TITULOS = { inicio: "Inicio", calculadora: "Calculadora", despensa: "Despensa: qué comprar", menu: "Menú de ejemplo", inventario: "Inventario", mochila: "Mochilas", material: "Material por niveles", habilidades: "Habilidades", guias: "Guías", agua: "Agua potable", mapas: "Mapas sin conexión", plan: "Plan familiar", aprende: "Consejos y comunidad", paises: "Recomendaciones por país", morse: "Código Morse", noticias: "Noticias", fuentes: "Fuentes" };
   const tituloBase = document.title;
   const vistaH1 = $("#vista-h1");
   let vistaActual = null;
@@ -931,14 +997,20 @@
     return `<h1>Mis puntos</h1><table class="print-table"><tr><th>Punto</th><th>Coordenadas</th><th>Notas</th></tr>${rows || '<tr><td colspan="3">Sin puntos</td></tr>'}</table>
       <p>Las coordenadas se pueden escribir en cualquier app de mapas o GPS. Impreso el ${new Date().toLocaleDateString("es-ES")}.</p>`;
   }
-  const BUILDERS = { plan: buildPlanPrint, mochila: buildChecklistPrint, calculadora: buildCalcPrint, menu: buildMenuPrint, inventario: buildInventoryPrint, guia: buildGuidePrint, puntos: buildPuntosPrint, material: buildMaterialPrint };
+  function buildDespensaPrint() {
+    const items = despLista.map((id) => DS.productos.find((p) => p.id === id));
+    return `<h1>Lista de la compra para la despensa</h1>` + (items.length
+      ? DS.categorias.map(([cid, , nombre]) => { const l = items.filter((x) => x.cat === cid); return l.length ? `<h2>${esc(nombre)}</h2><ul class="print-check">${l.map((x) => `<li>☐ ${esc(x.nombre)}: ${esc(x.formato)} (dura ${esc(x.dura)})</li>`).join("")}</ul>` : ""; }).join("")
+      : "<p>La lista está vacía.</p>") + `<p>Compra solo lo que coméis y rótalo. Las cantidades, en la calculadora. Impreso el ${new Date().toLocaleDateString("es-ES")}.</p>`;
+  }
+  const BUILDERS = { despensa: buildDespensaPrint, plan: buildPlanPrint, mochila: buildChecklistPrint, calculadora: buildCalcPrint, menu: buildMenuPrint, inventario: buildInventoryPrint, guia: buildGuidePrint, puntos: buildPuntosPrint, material: buildMaterialPrint };
 
   // Dentro de un iframe aislado (p. ej. un artifact) no se puede imprimir: se copia el texto.
   let embedded = false;
   try { embedded = window.top !== window.self; } catch { embedded = true; }
   if (NATIVE) $$("[data-print]").forEach((b) => (b.textContent = "Compartir"));
   else if (embedded) $$("[data-print]").forEach((b) => (b.textContent = "Copiar texto"));
-  const SHARE_TITLES = { plan: "Plan familiar de emergencia", mochila: "Checklist de la mochila de 72 h", calculadora: "Reservas del hogar", menu: "Menú de ejemplo", inventario: "Inventario de la reserva", guia: "Guía de emergencia", puntos: "Mis puntos", material: "Material por niveles" };
+  const SHARE_TITLES = { despensa: "Lista de la compra para la despensa", plan: "Plan familiar de emergencia", mochila: "Checklist de la mochila de 72 h", calculadora: "Reservas del hogar", menu: "Menú de ejemplo", inventario: "Inventario de la reserva", guia: "Guía de emergencia", puntos: "Mis puntos", material: "Material por niveles" };
   // Los botones de imprimir que se pintan después (guías) también deben cambiar de texto
   const printLabel = NATIVE ? "Compartir" : embedded ? "Copiar texto" : null;
   if (printLabel) new MutationObserver(() => $$("[data-print]").forEach((b) => { if (!b.dataset.labeled) { b.dataset.labeled = "1"; b.textContent = printLabel; } })).observe(document.body, { childList: true, subtree: true });

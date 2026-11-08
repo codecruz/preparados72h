@@ -28,6 +28,7 @@
       <nav id="nav" class="nav" aria-label="Todas las secciones">
         <div class="nav-group"><span class="nav-gh">Reservas</span>
           <a href="#calculadora" data-nav="calculadora">Calculadora</a>
+          <a href="#despensa" data-nav="despensa">Despensa: qué comprar</a>
           <a href="#menu" data-nav="menu">Menú de ejemplo</a>
           <a href="#inventario" data-nav="inventario">Inventario y caducidades</a>
         </div>
@@ -223,6 +224,33 @@
         <div class="menu-days" id="menu-days"></div>
         <ul class="calc-avisos" id="menu-notas"></ul>
         <button type="button" class="btn btn-ghost btn-sm" data-print="menu">Imprimir menú</button>
+      </div>
+    </section>
+
+    <!-- DESPENSA: QUÉ COMPRAR -->
+    <section id="despensa" class="section" data-view="despensa">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Despensa: qué comprar</h2>
+          <p>Productos concretos de cualquier supermercado que aguantan meses o años sin nevera con el envase cerrado. No hace falta comida especial de supervivencia: compra lo que ya coméis, en estos formatos, y rótalo. Las cantidades te las da la <a href="#calculadora">calculadora</a>.</p>
+        </header>
+        <div class="desp-reglas" id="desp-reglas"></div>
+        <div class="desp-filtros">
+          <div class="chips" id="desp-cats" role="group" aria-label="Filtrar por tipo de producto"></div>
+          <label class="check desp-sinfuego"><input type="checkbox" id="desp-sinfuego"> <span>Solo lo que se come sin cocinar</span></label>
+        </div>
+        <p class="muted small" id="desp-count" aria-live="polite"></p>
+        <div class="desp-grid" id="desp-grid"></div>
+        <div class="card desp-lista" id="desp-lista-card">
+          <h3>Mi lista de la compra</h3>
+          <p class="small muted" id="desp-lista-vacia">Pulsa «A la lista» en los productos que quieras comprar.</p>
+          <ul class="desp-lista-ul" id="desp-lista"></ul>
+          <div class="inv-actions">
+            <button type="button" class="btn btn-ghost btn-sm" data-print="despensa">Imprimir lista</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="desp-vaciar">Vaciar lista</button>
+          </div>
+        </div>
+        <p class="muted small">La duración es orientativa con el envase cerrado y en un sitio fresco, seco y oscuro: manda siempre la fecha y las instrucciones de la etiqueta. Fuente sobre fechas: <a href="#cifras">AESAN</a>.</p>
       </div>
     </section>
 
