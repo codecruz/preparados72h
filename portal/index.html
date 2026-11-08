@@ -58,7 +58,8 @@
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
+    <h1 id="vista-h1" class="sr-only" tabindex="-1" hidden></h1>
     <!-- Atajos del modo apagón (solo visibles en ese modo) -->
     <section class="apagon-bar" data-view="inicio" aria-label="Accesos rápidos en modo apagón">
       <div class="wrap">
@@ -154,19 +155,19 @@
             </fieldset>
             <fieldset class="steppers">
               <legend>Personas en el hogar</legend>
-              <div class="stepper"><span>Adultos (14–64 años)</span><div><button type="button" data-step="-1" data-for="adultos" aria-label="Quitar: un adulto">−</button><input type="number" id="adultos" name="adultos" min="0" max="20" value="2" inputmode="numeric"><button type="button" data-step="1" data-for="adultos" aria-label="Añadir: un adulto">+</button></div></div>
-              <div class="stepper"><span>Mayores de 65</span><div><button type="button" data-step="-1" data-for="mayores" aria-label="Quitar: una persona mayor">−</button><input type="number" id="mayores" name="mayores" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="mayores" aria-label="Añadir: una persona mayor">+</button></div></div>
-              <div class="stepper"><span>Niños de 7 a 13 años</span><div><button type="button" data-step="-1" data-for="ninos" aria-label="Quitar: un niño de 7 a 13 años">−</button><input type="number" id="ninos" name="ninos" min="0" max="20" value="1" inputmode="numeric"><button type="button" data-step="1" data-for="ninos" aria-label="Añadir: un niño de 7 a 13 años">+</button></div></div>
-              <div class="stepper"><span>Niños de 3 a 6 años</span><div><button type="button" data-step="-1" data-for="peques" aria-label="Quitar: un niño de 3 a 6 años">−</button><input type="number" id="peques" name="peques" min="0" max="20" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="peques" aria-label="Añadir: un niño de 3 a 6 años">+</button></div></div>
-              <div class="stepper"><span>Bebés (0–2 años)</span><div><button type="button" data-step="-1" data-for="bebes" aria-label="Quitar: un bebé">−</button><input type="number" id="bebes" name="bebes" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="bebes" aria-label="Añadir: un bebé">+</button></div></div>
+              <div class="stepper"><label for="adultos">Adultos (14–64 años)</label><div><button type="button" data-step="-1" data-for="adultos" aria-label="Quitar: un adulto">−</button><input type="number" id="adultos" name="adultos" min="0" max="20" value="2" inputmode="numeric"><button type="button" data-step="1" data-for="adultos" aria-label="Añadir: un adulto">+</button></div></div>
+              <div class="stepper"><label for="mayores">Mayores de 65</label><div><button type="button" data-step="-1" data-for="mayores" aria-label="Quitar: una persona mayor">−</button><input type="number" id="mayores" name="mayores" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="mayores" aria-label="Añadir: una persona mayor">+</button></div></div>
+              <div class="stepper"><label for="ninos">Niños de 7 a 13 años</label><div><button type="button" data-step="-1" data-for="ninos" aria-label="Quitar: un niño de 7 a 13 años">−</button><input type="number" id="ninos" name="ninos" min="0" max="20" value="1" inputmode="numeric"><button type="button" data-step="1" data-for="ninos" aria-label="Añadir: un niño de 7 a 13 años">+</button></div></div>
+              <div class="stepper"><label for="peques">Niños de 3 a 6 años</label><div><button type="button" data-step="-1" data-for="peques" aria-label="Quitar: un niño de 3 a 6 años">−</button><input type="number" id="peques" name="peques" min="0" max="20" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="peques" aria-label="Añadir: un niño de 3 a 6 años">+</button></div></div>
+              <div class="stepper"><label for="bebes">Bebés (0–2 años)</label><div><button type="button" data-step="-1" data-for="bebes" aria-label="Quitar: un bebé">−</button><input type="number" id="bebes" name="bebes" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="bebes" aria-label="Añadir: un bebé">+</button></div></div>
               <label class="check sub-check" id="lactancia-row" hidden><input type="checkbox" name="lactancia" id="lactancia"> <span>Hay una madre que da el pecho</span></label>
             </fieldset>
             <fieldset class="steppers">
               <legend>Mascotas</legend>
-              <div class="stepper"><span>Perros pequeños (menos de 10 kg)</span><div><button type="button" data-step="-1" data-for="perrosPeq" aria-label="Quitar: un perro pequeño">−</button><input type="number" id="perrosPeq" name="perrosPeq" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="perrosPeq" aria-label="Añadir: un perro pequeño">+</button></div></div>
-              <div class="stepper"><span>Perros medianos (10–25 kg)</span><div><button type="button" data-step="-1" data-for="perrosMed" aria-label="Quitar: un perro mediano">−</button><input type="number" id="perrosMed" name="perrosMed" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="perrosMed" aria-label="Añadir: un perro mediano">+</button></div></div>
-              <div class="stepper"><span>Perros grandes (más de 25 kg)</span><div><button type="button" data-step="-1" data-for="perrosGra" aria-label="Quitar: un perro grande">−</button><input type="number" id="perrosGra" name="perrosGra" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="perrosGra" aria-label="Añadir: un perro grande">+</button></div></div>
-              <div class="stepper"><span>Gatos u otras mascotas pequeñas</span><div><button type="button" data-step="-1" data-for="gatos" aria-label="Quitar: un gato">−</button><input type="number" id="gatos" name="gatos" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="gatos" aria-label="Añadir: un gato">+</button></div></div>
+              <div class="stepper"><label for="perrosPeq">Perros pequeños (menos de 10 kg)</label><div><button type="button" data-step="-1" data-for="perrosPeq" aria-label="Quitar: un perro pequeño">−</button><input type="number" id="perrosPeq" name="perrosPeq" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="perrosPeq" aria-label="Añadir: un perro pequeño">+</button></div></div>
+              <div class="stepper"><label for="perrosMed">Perros medianos (10–25 kg)</label><div><button type="button" data-step="-1" data-for="perrosMed" aria-label="Quitar: un perro mediano">−</button><input type="number" id="perrosMed" name="perrosMed" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="perrosMed" aria-label="Añadir: un perro mediano">+</button></div></div>
+              <div class="stepper"><label for="perrosGra">Perros grandes (más de 25 kg)</label><div><button type="button" data-step="-1" data-for="perrosGra" aria-label="Quitar: un perro grande">−</button><input type="number" id="perrosGra" name="perrosGra" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="perrosGra" aria-label="Añadir: un perro grande">+</button></div></div>
+              <div class="stepper"><label for="gatos">Gatos u otras mascotas pequeñas</label><div><button type="button" data-step="-1" data-for="gatos" aria-label="Quitar: un gato">−</button><input type="number" id="gatos" name="gatos" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="gatos" aria-label="Añadir: un gato">+</button></div></div>
             </fieldset>
             <fieldset>
               <legend>Clima y cocina</legend>
@@ -269,7 +270,7 @@
           <p>Marca lo que ya tienes. Tu progreso se guarda en este dispositivo, sin cuentas ni servidores.</p>
         </header>
         <div class="progress-row">
-          <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Progreso de la mochila"><div id="progress-bar"></div></div>
+          <div class="progress" id="mochila-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Progreso de la mochila"><div id="progress-bar"></div></div>
           <strong id="progress-txt">0%</strong>
         </div>
         <div class="toolbar">
@@ -302,7 +303,7 @@
           <p>El equipo de casa, por niveles: cada uno amplía el anterior. No hace falta comprarlo todo a la vez; marca lo que ya tienes y completa un nivel antes de pasar al siguiente. Se guarda en este dispositivo.</p>
         </header>
         <div class="levels" role="tablist" aria-label="Nivel de preparación" id="mat-levels"></div>
-        <div id="mat-panel"></div>
+        <div id="mat-panel" role="tabpanel"></div>
         <div class="toolbar-actions mat-actions">
           <button type="button" class="btn btn-ghost btn-sm" data-print="material">Imprimir este nivel</button>
         </div>
@@ -332,14 +333,14 @@
           <div class="card morse-tool">
             <label for="morse-in"><strong>Texto a Morse</strong></label>
             <input id="morse-in" type="text" maxlength="60" autocomplete="off" placeholder="Escribe, p. ej.: NECESITO AGUA">
-            <output id="morse-out" class="morse-code" for="morse-in" aria-live="polite"></output>
+            <output id="morse-out" class="morse-code" for="morse-in" aria-live="off"></output>
             <p id="morse-warn" class="muted small" hidden></p>
             <div class="morse-ctrl">
               <label class="small">Velocidad
                 <select id="morse-vel">
                   <option value="400">Lenta (se ve de lejos)</option>
                   <option value="200" selected>Normal</option>
-                  <option value="100">Rápida</option>
+                  <option value="100">Rápida (solo sonido y vibración)</option>
                 </select>
               </label>
               <label class="small"><input type="checkbox" id="morse-rep"> Repetir</label>
@@ -351,13 +352,13 @@
               <button type="button" class="btn" data-emitir="vibrar" id="morse-vib">📳 Vibrar</button>
               <button type="button" class="btn" id="morse-stop" hidden>■ Parar</button>
             </div>
-            <p class="muted small">SOS se emite seguido, sin pausa entre letras, y se repite. Con «Luz», la pantalla parpadea a pantalla completa: tócala para parar. Gasta batería: úsala cuando alguien pueda verte.</p>
+            <p class="muted small">SOS se emite seguido, sin pausa entre letras, y se repite. Con «Luz», la pantalla parpadea a pantalla completa (como mucho 2,5 veces por segundo): tócala o pulsa Esc para parar. Si tú o alguien cerca tiene epilepsia fotosensible, usa sonido o vibración. Gasta batería: úsala cuando alguien pueda verte.</p>
           </div>
 
           <div class="card morse-tool">
             <label for="morse-dec"><strong>Morse a texto</strong></label>
             <input id="morse-dec" type="text" maxlength="200" autocomplete="off" inputmode="text" placeholder="... --- ...">
-            <output id="morse-dec-out" class="morse-txt" for="morse-dec" aria-live="polite"></output>
+            <output id="morse-dec-out" class="morse-txt" for="morse-dec" aria-live="off"></output>
             <p class="muted small">Puntos y rayas; un espacio entre letras y «/» entre palabras.</p>
             <h3 class="sub-h">Tiempos</h3>
             <ul class="morse-tiempos small">
@@ -385,7 +386,7 @@
           <p>Pasos concretos para antes, durante y después, con las cifras de las autoridades sanitarias y de protección civil. Funcionan sin conexión: léelas ahora, que en la emergencia habrá prisa.</p>
         </header>
         <div class="guide-tabs" role="tablist" aria-label="Tipo de emergencia" id="guide-tabs"></div>
-        <div id="guide-panel"></div>
+        <div id="guide-panel" role="tabpanel"></div>
       </div>
     </section>
 
@@ -524,13 +525,13 @@
             <button type="button" data-zona="mundo" aria-pressed="true">Mundo</button>
             <button type="button" data-zona="europa" aria-pressed="false">Europa</button>
           </div>
-          <svg id="world-map" class="world-map" role="img" aria-label="Mapa del mundo con los países que tienen una recomendación oficial de reservas"></svg>
+          <svg id="world-map" class="world-map" role="group" aria-label="Mapa del mundo con los países que tienen una recomendación oficial de reservas"></svg>
           <div id="world-tip" class="world-tip" hidden></div>
         </figure>
         <p class="muted small" id="paises-ue"></p>
         <div class="table-wrap">
           <table class="table">
-            <thead><tr><th>País</th><th>Recomendación oficial</th><th>Fuente</th><th></th></tr></thead>
+            <thead><tr><th>País</th><th>Recomendación oficial</th><th>Fuente</th><th><span class="sr-only">Calculadora</span></th></tr></thead>
             <tbody id="paises-body"></tbody>
           </table>
         </div>

@@ -335,10 +335,11 @@
   if (!D.guias.some((g) => g.id === guiaSel)) guiaSel = D.guias[0].id;
   const cifraTxt = (k) => { const c = D.cifras[k]; return c ? `<li><strong>${esc(c.dato)}:</strong> ${esc(c.valor)} <span class="muted">(${esc(c.fuente)})</span></li>` : ""; };
   function renderGuias() {
-    $("#guide-tabs").innerHTML = D.guias.map((g) => `<button type="button" role="tab" class="chip" id="tab-${g.id}" aria-selected="${g.id === guiaSel}" aria-controls="guide-panel" data-guia="${g.id}"><span aria-hidden="true">${g.icono}</span> ${esc(g.titulo)}</button>`).join("");
+    $("#guide-tabs").innerHTML = D.guias.map((g) => `<button type="button" role="tab" class="chip" id="tab-${g.id}" aria-selected="${g.id === guiaSel}" tabindex="${g.id === guiaSel ? 0 : -1}" aria-controls="guide-panel" data-guia="${g.id}"><span aria-hidden="true">${g.icono}</span> ${esc(g.titulo)}</button>`).join("");
     const g = D.guias.find((x) => x.id === guiaSel);
     const lista = (t, items) => items.length ? `<div class="guide-col"><h4>${t}</h4><ol>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ol></div>` : "";
-    $("#guide-panel").innerHTML = `<article class="card guide" id="guia-${g.id}" role="tabpanel" aria-labelledby="tab-${g.id}">
+    $("#guide-panel").setAttribute("aria-labelledby", `tab-${g.id}`);
+    $("#guide-panel").innerHTML = `<article class="card guide" id="guia-${g.id}">
       <h3><span aria-hidden="true">${g.icono}</span> ${esc(g.titulo)}</h3>
       <p class="muted">${esc(g.resumen)}</p>
       <div class="guide-cols">${lista("Antes", g.antes)}${lista("Durante", g.durante)}${lista("Después", g.despues)}</div>
@@ -348,9 +349,11 @@
   }
   $("#guide-tabs").addEventListener("click", (e) => { const b = e.target.closest("[data-guia]"); if (b) { guiaSel = b.dataset.guia; store.set("guia", guiaSel); renderGuias(); } });
   $("#guide-tabs").addEventListener("keydown", (e) => {
-    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
     const k = D.guias.findIndex((g) => g.id === guiaSel), n = D.guias.length;
-    guiaSel = D.guias[(k + (e.key === "ArrowRight" ? 1 : n - 1)) % n].id;
+    const sig = { ArrowRight: (k + 1) % n, ArrowLeft: (k + n - 1) % n, Home: 0, End: n - 1 }[e.key];
+    if (sig == null) return;
+    e.preventDefault();
+    guiaSel = D.guias[sig].id; store.set("guia", guiaSel);
     renderGuias(); $(`#tab-${guiaSel}`).focus();
   });
   renderGuias();
@@ -477,7 +480,7 @@
     const done = ids.filter((id) => checked[id]).length;
     const pct = ids.length ? Math.round((done / ids.length) * 100) : 0;
     $("#progress-bar").style.width = pct + "%";
-    $(".progress").setAttribute("aria-valuenow", pct);
+    $("#mochila-progress").setAttribute("aria-valuenow", pct);
     $("#progress-txt").textContent = `${pct}% · ${done}/${ids.length}`;
     $("#progress-bar").classList.toggle("complete", pct === 100);
   }
@@ -701,7 +704,8 @@
     pararMorse();
     const sec = C.secuenciaMorse(codigo);
     if (!sec.length) { mIn.focus(); return; }
-    const u = Number($("#morse-vel").value) || 200;
+    // Con luz, mínimo 200 ms por unidad: como mucho 2,5 destellos por segundo (WCAG 2.3.1 pide menos de 3).
+    const u = Math.max(Number($("#morse-vel").value) || 200, modo === "luz" ? 200 : 0);
     const total = sec.reduce((t, [, n]) => t + n, 0) + 7; // + pausa de palabra antes de repetir
     $("#morse-stop").hidden = false;
     let set = () => {};
@@ -753,12 +757,13 @@
   if (!M.niveles.some((n) => n.n === matNivel)) matNivel = 1;
   const matPct = (n) => { const it = M.items.filter((x) => x.nivel === n); return it.length ? Math.round(it.filter((x) => matHave[x.id]).length / it.length * 100) : 0; };
   function renderMaterial() {
-    $("#mat-levels").innerHTML = M.niveles.map((l) => `<button type="button" role="tab" class="level" id="lvl-${l.n}" aria-selected="${l.n === matNivel}" aria-controls="mat-panel" data-nivel="${l.n}">
+    $("#mat-levels").innerHTML = M.niveles.map((l) => `<button type="button" role="tab" class="level" id="lvl-${l.n}" aria-selected="${l.n === matNivel}" tabindex="${l.n === matNivel ? 0 : -1}" aria-controls="mat-panel" data-nivel="${l.n}">
       <strong>${esc(l.nombre)}</strong><span>${esc(l.horizonte)}</span>
       <span class="progress" aria-hidden="true"><span style="width:${matPct(l.n)}%"></span></span><span class="small">${matPct(l.n)} %</span></button>`).join("");
     const nivel = M.niveles.find((l) => l.n === matNivel);
     const items = M.items.filter((x) => x.nivel === matNivel);
-    $("#mat-panel").innerHTML = `<p class="mat-intro" role="tabpanel" aria-labelledby="lvl-${matNivel}">${esc(nivel.texto)}</p>
+    $("#mat-panel").setAttribute("aria-labelledby", `lvl-${matNivel}`);
+    $("#mat-panel").innerHTML = `<p class="mat-intro">${esc(nivel.texto)}</p>
       <div class="grid-cards">${M.categorias.map(([cid, ic, nombre]) => {
         const lista = items.filter((x) => x.cat === cid);
         return lista.length ? `<article class="card check-card"><h3><span aria-hidden="true">${ic}</span> ${esc(nombre)}</h3><ul>${lista.map((x) => `
@@ -767,9 +772,11 @@
   }
   $("#mat-levels").addEventListener("click", (e) => { const b = e.target.closest("[data-nivel]"); if (b) { matNivel = Number(b.dataset.nivel); store.set("materialNivel", matNivel); renderMaterial(); } });
   $("#mat-levels").addEventListener("keydown", (e) => {
-    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-    const n = M.niveles.length;
-    matNivel = ((matNivel - 1 + (e.key === "ArrowRight" ? 1 : n - 1)) % n) + 1;
+    const n = M.niveles.length, k = matNivel - 1;
+    const sig = { ArrowRight: (k + 1) % n, ArrowLeft: (k + n - 1) % n, Home: 0, End: n - 1 }[e.key];
+    if (sig == null) return;
+    e.preventDefault();
+    matNivel = sig + 1;
     store.set("materialNivel", matNivel); renderMaterial(); $(`#lvl-${matNivel}`).focus();
   });
   $("#mat-panel").addEventListener("change", (e) => {
@@ -826,6 +833,7 @@
   const VISTAS = new Set($$("[data-view]").map((el) => el.dataset.view));
   const TITULOS = { inicio: "Inicio", calculadora: "Calculadora", menu: "Menú de ejemplo", inventario: "Inventario", mochila: "Mochilas", material: "Material por niveles", habilidades: "Habilidades", guias: "Guías", agua: "Agua potable", mapas: "Mapas sin conexión", plan: "Plan familiar", aprende: "Consejos y comunidad", paises: "Recomendaciones por país", morse: "Código Morse", noticias: "Noticias", fuentes: "Fuentes" };
   const tituloBase = document.title;
+  const vistaH1 = $("#vista-h1");
   let vistaActual = null;
   function vistaDe(hash) {
     if (!hash) return { vista: "inicio", el: null };
@@ -845,11 +853,14 @@
     $$("[data-view]").forEach((el) => (el.hidden = el.dataset.view !== v.vista));
     $$("[data-nav]").forEach((a) => { if (a.dataset.nav === v.vista) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
     document.title = v.vista === "inicio" ? tituloBase : `${TITULOS[v.vista] || ""} · Preparados72h`;
+    // Encabezado principal de la vista (oculto a la vista; las secciones usan h2)
+    vistaH1.hidden = v.vista === "inicio";
+    vistaH1.textContent = TITULOS[v.vista] || "";
     if (v.vista === "inicio") renderPanel();
     nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); $("#tab-more").setAttribute("aria-expanded", "false");
     // Primer elemento de la vista para el foco (lectores de pantalla) y posición de la página
     if (v.el && !(v.el.matches("section"))) v.el.scrollIntoView();
-    else if (cambio) { scrollTo(0, 0); const h = $(`[data-view="${v.vista}"]:not([hidden]) h1, [data-view="${v.vista}"]:not([hidden]) h2`); if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); } }
+    else if (cambio) { scrollTo(0, 0); const h = v.vista === "inicio" ? $(".hero h1") : vistaH1; if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); } }
   }
   document.documentElement.classList.add("router");
   addEventListener("hashchange", route);
