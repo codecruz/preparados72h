@@ -1,0 +1,50 @@
+name: Publicar web (GitHub Pages)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "portal/**"
+      - ".github/workflows/pages.yml"
+  # El commit diario de noticias se hace con GITHUB_TOKEN y no dispara "push" en otros
+  # workflows, así que se vuelve a publicar cuando termina "Actualizar noticias".
+  workflow_run:
+    workflows: ["Actualizar noticias"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main   # en workflow_run, la última versión de main (con las noticias nuevas)
+
+      - name: Preparar la web
+        run: |
+          cp -r portal _site
+          rm -f _site/README.md   # documentación interna, no forma parte de la web
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
