@@ -650,7 +650,8 @@
   $("#myths").innerHTML = D.mitos.map((m) => `
     <article class="myth"><p class="myth-m"><span class="badge badge-myth">Mito</span> ${esc(m.mito)}</p><p class="myth-r"><span class="badge badge-real">Realidad</span> ${esc(m.realidad)}</p></article>`).join("");
 
-  $("#fuentes-list").innerHTML = D.fuentes.map((f) => `<li>${esc(f)}</li>`).join("");
+  $("#fuentes-list").innerHTML = D.fuentes.map((f) => typeof f === "string" ? `<li>${esc(f)}</li>`
+    : `<li><a href="${esc(f.url)}"${f.url.startsWith("#") ? "" : ' target="_blank" rel="noopener"'}>${esc(f.texto)}</a></li>`).join("");
 
   /* ---------- Habilidades ---------- */
   // Ilustraciones (assets/figuras.js): SVG propias o imágenes con licencia libre, incluidas en la web.

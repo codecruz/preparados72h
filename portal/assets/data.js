@@ -1,18 +1,17 @@
-// Contenido del portal, basado en hackeos_supermercados_preparacion_72h.pdf (5 nov 2026).
+// Contenido del portal. Alerta y fuentes revisadas el 8 nov 2026; cada cifra lleva su fuente.
 window.PREP_DATA = {
   alerta: {
-    fecha: "5 de noviembre de 2026",
+    fecha: "Revisado el 8 de noviembre de 2026",
     titulo: "Ciberataques a la refrigeración de supermercados en Europa",
     resumen:
-      "Una segunda oleada de ciberataques contra controladores de refrigeración conectados a internet ha roto la cadena de frío en supermercados de al menos diez países europeos. Varios gobiernos recuerdan a las familias que conviene tener preparada una mochila de emergencia para 72 horas.",
+      "El 2 de noviembre, una segunda oleada de ciberataques contra la refrigeración de supermercados rompió la cadena de frío en tiendas de al menos siete países europeos, un mes después del ataque en Francia. Es un buen recordatorio de por qué conviene tener en casa una reserva para al menos 72 horas.",
     datos: [
-      ["Alcance", "Al menos diez países europeos; segunda oleada tras el ataque en Francia (octubre)."],
-      ["Vector de ataque", "Sistemas remotos de control y supervisión de refrigeración conectados a internet."],
-      ["Efecto principal", "Pérdida de la cadena de frío y desperdicio de alimentos frescos y congelados."],
-      ["Países", "Bélgica, Luxemburgo, Suecia, Países Bajos, Irlanda, Estonia, Finlandia, Portugal y Rumanía."],
-      ["Cadenas afectadas", "Delhaize, Carrefour, Spar, ICA, Coop, Intermarché, SuperValu y otros comercios."],
-      ["Impacto", "Temperaturas de hasta 50 °C; una tienda en Hoeilaart desechó unos 100.000 € en alimentos."],
-      ["Investigación", "Nadie ha reivindicado la autoría; las autoridades y las empresas investigan los incidentes."],
+      ["Alcance", "Al menos siete países el 2 de noviembre; en octubre ya se atacó a cientos de supermercados en Francia."],
+      ["Países", "Bélgica, Luxemburgo, Países Bajos, Irlanda, Finlandia, Suecia y Estonia."],
+      ["Cadenas afectadas", "Delhaize (unas 40 tiendas), Carrefour (15 en Bélgica), Colruyt, Spar, ICA y Coop, SuperValu (13 en Irlanda) y Selver (Estonia), entre otras."],
+      ["Cómo", "Controladores de refrigeración gestionados a distancia: los evaporadores pasaron a modo descongelación y las cámaras se calentaron."],
+      ["Impacto", "Hasta 50 °C en una cámara de Estonia; un Delhaize de Hoeilaart (Bélgica) calcula 100.000 € en alimentos perdidos."],
+      ["Autoría", "Sin atribución oficial. Hay reivindicaciones de grupos prorrusos que las autoridades no han confirmado."],
     ],
   },
 
@@ -21,7 +20,7 @@ window.PREP_DATA = {
   // nivel: 3 = 72 horas, 7 = una semana, 10 = diez días o más, 0 = pide prepararse sin cifra recogida. Revisado en noviembre de 2026.
   paises: [
     { iso: "276", pais: "Alemania", lat: 52.52, lon: 13.40, nivel: 10, dias: 10, horizonte: "Hasta 10 días", nota: "Lo ideal son 10 días; 3 días ya ayudan mucho y se puede ir ampliando.", fuente: "BBK (Oficina Federal de Protección Civil)", url: "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Ratgeber-Checkliste/ratgeber-checkliste_node.html" },
-    { iso: "040", pais: "Austria", lat: 48.21, lon: 16.37, nivel: 10, dias: 10, horizonte: "10 a 14 días", nota: "El Zivilschutzverband calcula la despensa para 14 días por persona.", fuente: "Österreichischer Zivilschutzverband", url: "https://zivilschutz.at/" },
+    { iso: "040", pais: "Austria", lat: 48.21, lon: 16.37, nivel: 10, dias: 10, horizonte: "10 a 14 días", nota: "El Tirol pide reservas para al menos 14 días; el portal del Gobierno austriaco habla de 10 a 14.", fuente: "Land Tirol · Protección civil", url: "https://www.tirol.gv.at/leicht-lesen/sicherheit-zivilschutz-und-hilfe-bei-gewalt/zivilschutz-selbstschutz-bevorratung" },
     { iso: "752", pais: "Suecia", lat: 59.33, lon: 18.07, nivel: 7, dias: 7, horizonte: "Al menos una semana", nota: "Folleto «Si llega la crisis o la guerra», enviado a todos los hogares.", fuente: "MCF (antes MSB)", url: "https://www.mcf.se/sv/rad-till-privatpersoner/" },
     { iso: "578", pais: "Noruega", lat: 59.91, lon: 10.75, nivel: 7, dias: 7, horizonte: "Una semana", nota: "Amplió la recomendación de 3 días a una semana.", fuente: "DSB · Sikker hverdag", url: "https://www.sikkerhverdag.no/" },
     { iso: "756", pais: "Suiza", lat: 46.95, lon: 7.45, nivel: 7, dias: 7, horizonte: "Una semana", nota: "Comida para una semana y 9 L de agua por persona (un pack de seis botellas).", fuente: "BWL (Abastecimiento Económico del País)", url: "https://www.bwl.admin.ch/de/notvorrat" },
@@ -38,7 +37,7 @@ window.PREP_DATA = {
     { iso: "250", pais: "Francia", lat: 48.86, lon: 2.35, nivel: 3, dias: 3, horizonte: "72 horas", nota: "Guía «Tous responsables»: kit para 72 horas en casa.", fuente: "SGDSN", url: "https://www.sgdsn.gouv.fr/" },
     { iso: "826", pais: "Reino Unido", lat: 51.51, lon: -0.13, nivel: 3, dias: 3, horizonte: "3 días", nota: "Campaña «Prepare»: 3 L de agua por persona y día.", fuente: "Gobierno del Reino Unido", url: "https://prepare.campaign.gov.uk/" },
     { iso: "724", pais: "España", lat: 40.42, lon: -3.70, nivel: 3, dias: 3, horizonte: "72 horas", nota: "Plan familiar de emergencias con kit básico para 72 horas (2025).", fuente: "Dirección General de Protección Civil", url: "https://www.proteccioncivil.es/" },
-    { iso: "124", pais: "Canadá", lat: 45.42, lon: -75.70, nivel: 3, dias: 3, horizonte: "Al menos 72 horas", nota: "«Get Prepared»: kit para las primeras 72 horas.", fuente: "Gobierno de Canadá", url: "https://www.getprepared.gc.ca/" },
+    { iso: "124", pais: "Canadá", lat: 45.42, lon: -75.70, nivel: 3, dias: 3, horizonte: "Al menos 72 horas", nota: "Kit para valerse por sí mismo al menos 72 horas, con unos 4 L de agua por persona y día (2 para beber).", fuente: "Gobierno de Canadá · Get Prepared", url: "https://www.canada.ca/en/services/policing/emergencies/preparedness/get-prepared/emergency-kits.html" },
     { iso: "840", pais: "Estados Unidos", lat: 38.90, lon: -77.04, nivel: 3, dias: 3, horizonte: "Varios días", nota: "Ready.gov pide suministros para varios días; 1 galón (3,8 L) de agua por persona y día.", fuente: "Ready.gov (FEMA)", url: "https://www.ready.gov/kit" },
     { iso: "484", pais: "México", lat: 19.43, lon: -99.13, nivel: 3, dias: 3, horizonte: "72 horas", nota: "Mochila de emergencia para las primeras 72 horas, también en Ciudad de México.", fuente: "CENAPRED · Protección Civil", url: "https://www.gob.mx/cenapred" },
     { iso: "554", pais: "Nueva Zelanda", lat: -41.29, lon: 174.78, nivel: 3, dias: 3, horizonte: "Al menos 3 días", nota: "Al menos 3 días; para la comida, plantéate hasta 2 semanas.", fuente: "Gobierno de Nueva Zelanda", url: "https://www.govt.nz/browse/housing-and-property/home-emergency-checklist/" },
@@ -158,7 +157,7 @@ window.PREP_DATA = {
     { icono: "🤝", titulo: "Tus vecinos son tu mejor reserva", texto: "Conoce a tus vecinos, compartid teléfonos y sabed quién necesitará ayuda (personas mayores o dependientes). Quienes han vivido guerras y crisis largas coinciden: salen adelante mejor los que se apoyan." },
     { icono: "🛒", titulo: "Poco a poco, en cada compra", texto: "No hace falta gastar mucho de golpe. Añade un par de latas y una botella de agua de más en cada compra: en unas semanas tendrás tu reserva sin notarlo y sin acaparar." },
     { icono: "🧰", titulo: "Ordenado y listo para mover", texto: "Guarda los suministros en cajas estancas, por categorías y con etiqueta. Si un día tienes que salir con prisa, sabrás qué coger en minutos." },
-    { icono: "🔥", titulo: "El calor también es supervivencia", texto: "En invierno, un apagón largo es sobre todo un problema de frío. Ten mantas, sacos y ropa de abrigo para vestirse por capas. Nunca uses braseros, estufas de combustión ni barbacoas en interiores sin ventilación." },
+    { icono: "🔥", titulo: "El calor también es supervivencia", texto: "En invierno, un apagón largo es sobre todo un problema de frío. Ten mantas, sacos y ropa de abrigo para vestirse por capas. Nunca uses braseros ni barbacoas dentro de casa, y las estufas de combustión solo si están hechas para interior, con ventilación y un detector de monóxido de carbono." },
   ],
 
   mitos: [
@@ -270,7 +269,7 @@ window.PREP_DATA = {
         "Reuníos en una sola habitación, la más pequeña y soleada, y cerrad las demás. Tapa las rendijas de puertas y ventanas.",
         "Vestíos por capas, con gorro y calcetines; comer y beber caliente ayuda a mantener el calor.",
         "Nunca uses el horno, la cocina de gas, braseros ni barbacoas para calentar la casa: el monóxido de carbono no huele y mata.",
-        "Hipotermia: temblores intensos, torpeza, habla confusa y somnolencia. Abriga a la persona poco a poco, dale bebidas calientes sin alcohol y llama al 112.",
+        "Hipotermia: temblores intensos, torpeza, habla confusa y somnolencia. Llama al 112, abriga a la persona poco a poco (primero el tronco) y, solo si está consciente y puede tragar, dale bebidas templadas y dulces, sin alcohol.",
       ],
       despues: ["Revisa si hay tuberías congeladas o reventadas antes de volver a abrir la llave de paso."],
       cifras: ["co"],
@@ -541,13 +540,13 @@ window.PREP_DATA = {
   // De dónde salen los números de la calculadora y de las guías
   cifras: {
     agua: { dato: "Agua por persona y día", valor: "3 L por adulto: 1,5 L para beber, 0,5 L para cocinar y 1 L de higiene mínima. 3,5 L para mayores de 65 y 2,5 L para niños", fuente: "BLE (Alemania), tabla de reservas de 10 días, 2024; Ready.gov (EE. UU.) recomienda 3,8 L para beber e higiene; Suecia, 3–5 L", url: "https://www.ernaehrungsvorsorge.de/" },
-    higiene: { dato: "Higiene básica", valor: "2–6 L por persona y día (la calculadora usa 1 L, el mínimo; si puedes, guarda más)", fuente: "Manual Esfera, normas mínimas de agua y saneamiento", url: "https://spherestandards.org/" },
+    higiene: { dato: "Higiene básica", valor: "2–6 L por persona y día (la calculadora usa 1 L, el mínimo; si puedes, guarda más)", fuente: "Manual Esfera, normas mínimas de agua y saneamiento", url: "https://interactive.spherestandards.org/" },
     calor: { dato: "Calor intenso", valor: "Puede duplicar el agua necesaria para beber", fuente: "Ready.gov (FEMA)", url: "https://www.ready.gov/water" },
     lactancia: { dato: "Lactancia", valor: "+700 ml de agua y unas +500 kcal al día", fuente: "EFSA, valores de referencia de agua (2010) y energía (2013)", url: "https://www.efsa.europa.eu/" },
     kcal: { dato: "Energía", valor: "2.200 kcal por adulto; 1.900 para mayores de 65; 1.800 para niños de 7 a 13 años y 1.300 de 3 a 6", fuente: "BLE (planificación de la reserva) y valores de referencia D-A-CH (actividad moderada, media de chicos y chicas)", url: "https://www.ernaehrungsvorsorge.de/" },
     kg: { dato: "Kilos de comida", valor: "Peso neto real de lo que sale en la lista; la referencia oficial alemana ronda los 14 kg por persona para 10 días", fuente: "BLE, «Vorratstabelle Mischkost», 2024", url: "https://www.ernaehrungsvorsorge.de/" },
-    mascotas: { dato: "Agua para mascotas", valor: "Unos 50–60 ml por kg y día: perro pequeño 0,4 L, mediano 1 L, grande 2 L; gato 0,3 L", fuente: "Referencia veterinaria habitual (puede variar con el calor, la actividad y la comida húmeda)", url: "" },
-    nevera: { dato: "Comida en un apagón", valor: "Nevera: 4 horas. Congelador lleno: 48 horas; medio lleno: 24 horas (con la puerta cerrada)", fuente: "USDA / FoodSafety.gov", url: "https://www.foodsafety.gov/keep-food-safe/food-safety-in-disaster-or-emergency" },
+    mascotas: { dato: "Agua para mascotas", valor: "Unos 50–60 ml por kg y día: perro pequeño 0,4 L, mediano 1 L, grande 2 L; gato 0,3 L", fuente: "Referencia veterinaria habitual (varía con el calor, la actividad y la comida húmeda). Canadá pide más margen: 4 L al día por perro medio y 1 L por gato", url: "https://www.canada.ca/en/services/policing/emergencies/preparedness/get-prepared/emergency-planning-resources/animals.html" },
+    nevera: { dato: "Comida en un apagón", valor: "Nevera: 4 horas. Congelador lleno: 48 horas; medio lleno: 24 horas (con la puerta cerrada)", fuente: "USDA (Servicio de Inocuidad Alimentaria, FSIS)", url: "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/keeping-food-safe-during" },
     co: { dato: "Generadores", valor: "Siempre al aire libre y a más de 6 m (20 pies) de puertas, ventanas y rejillas", fuente: "CDC", url: "https://www.cdc.gov/carbon-monoxide/" },
     hervir: { dato: "Hervir el agua", valor: "1 minuto; 3 minutos a más de 2.000 m (6.500 pies)", fuente: "CDC", url: "https://www.cdc.gov/water-emergency/" },
     lejia: { dato: "Lejía", valor: "2 gotas por litro de lejía al 5–8 % (4 si está turbia) y 30 minutos de espera", fuente: "CDC y EPA. En España, solo lejía «apta para la desinfección del agua de bebida»", url: "https://espanol.epa.gov/" },
@@ -556,14 +555,16 @@ window.PREP_DATA = {
     criterio: { dato: "Criterios propios", valor: "Medicación para el horizonte más 7 días; 7 pañales al día; 110 g de fórmula al día; 1 rollo de papel cada 3 días por persona; pilas y linternas", fuente: "Estimaciones de Preparados72h: ajústalas a tu caso", url: "" },
   },
 
+  // Fuentes generales: texto o { texto, url }.
   fuentes: [
-    "Ilustraciones de nudos (Wikimedia Commons): as de guía, Phil'enCorse (CC BY-SA 4.0); ballestrinque, Sawims (dominio público); nudo tensor, Chris 73 (CC BY-SA 3.0); pescador doble, LadyofHats (dominio público). Resto de ilustraciones y mapa: propios (contornos de Natural Earth, dominio público).",
-    "BBC News: “Europe on alert after supermarket freezers hit by cyber-attacks in 10 countries” (3 nov 2026).",
-    "Reuters: “Un nuevo ciberataque afecta a los sistemas de refrigeración de supermercados europeos” (2 nov 2026).",
-    "El País: “Por qué la segunda oleada de ‘hackeos’ a las neveras en supermercados avisa de lo que viene” (3 nov 2026).",
-    "EFE: “Los supermercados españoles dedican los máximos esfuerzos a la seguridad de sus equipos…” (3 nov 2026).",
+    { texto: "CNBC: «New cyberattack on supermarket fridges sweeps across Europe» (2 nov 2026).", url: "https://www.cnbc.com/2026/11/02/cyberattack-on-fridges-hits-supermarkets-across-europe.html" },
+    { texto: "ABC News (AP): «Freezers at supermarkets in several European countries hit by apparent cyberattacks» (nov 2026).", url: "https://abcnews.com/International/wireStory/freezers-supermarkets-european-countries-hit-apparent-cyberattacks-137765494" },
+    { texto: "Al Jazeera: «Very cold war: Who’s attacking Europe’s supermarket freezers?» (3 nov 2026).", url: "https://www.aljazeera.com/news/2026/11/3/very-cold-war-whos-attacking-europes-supermarket-freezers" },
+    { texto: "La Nación: «Un ciberataque golpea a las heladeras de los supermercados en varios países de Europa por segunda vez en un mes» (2 nov 2026).", url: "https://www.lanacion.com.ar/el-mundo/un-ciberataque-golpea-a-las-heladeras-de-los-supermercados-en-varios-paises-europa-por-segunda-vez-nid02112026/" },
+    { texto: "Infobae (agencias): «Ciberataques alteran la refrigeración de alimentos en comercios de cinco países europeos» (2 nov 2026).", url: "https://www.infobae.com/america/agencias/2026/11/02/ciberataques-alteran-la-refrigeracion-de-alimentos-en-comercios-de-cinco-paises-europeos/" },
+    { texto: "Recomendaciones oficiales de cada país, con su enlace: sección «Recomendaciones por país».", url: "#paises" },
     "Comunidad r/prepping (Reddit): lecciones recurrentes de los posts más votados de 2026, resumidas y contrastadas con las recomendaciones oficiales.",
-    "El Financiero y Heraldo de México: recomendaciones de mochilas de emergencia y reservas de 72 horas a diez días (3–4 nov 2026).",
+    "Ilustraciones de nudos (Wikimedia Commons): as de guía, Phil'enCorse (CC BY-SA 4.0); ballestrinque, Sawims (dominio público); nudo tensor, Chris 73 (CC BY-SA 3.0); pescador doble, LadyofHats (dominio público). Resto de ilustraciones y mapa: propios (contornos de Natural Earth, dominio público).",
     "Las cifras de la calculadora, del agua potable y de las guías tienen su fuente en la tabla «De dónde salen los números».",
   ],
 };
