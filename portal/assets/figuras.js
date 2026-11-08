@@ -1,27 +1,31 @@
 // Ilustraciones de las habilidades. Van dentro de la web para que funcionen sin conexión.
-// Cada figura: { svg | img, alt, pie, credito? }. Las SVG propias usan las clases .f-* de styles.css
+// Cada figura: { paso, svg | img, alt, pie, credito? }; paso = índice (desde 0) del paso que ilustra. Las SVG propias usan las clases .f-* de styles.css
 // para adaptarse al modo claro, oscuro y apagón.
 window.PREP_FIGURAS = {
   nudos: [
     {
+      paso: 0,
       img: "assets/img/nudo-as-de-guia.svg",
       alt: "As de guía terminado, con las partes numeradas del 1 al 5",
       pie: "As de guía: 1 parte fija (la que soporta la carga), 2 chicote (el extremo libre), 3 ojo que se hace primero en la parte fija, 4 vuelta del chicote por detrás de la parte fija, 5 gaza que queda fija. El chicote sale por el ojo y queda dentro de la gaza.",
       credito: "Phil'enCorse · Wikimedia Commons · CC BY-SA 4.0",
     },
     {
+      paso: 1,
       img: "assets/img/nudo-ballestrinque.svg",
       alt: "Ballestrinque alrededor de un poste: dos vueltas cruzadas en forma de X",
       pie: "Ballestrinque: dos vueltas alrededor del poste; la segunda cruza por encima de la primera formando una X y el chicote sale por debajo de ese cruce, en sentido contrario a la parte fija.",
       credito: "Sawims · Wikimedia Commons · dominio público",
     },
     {
+      paso: 2,
       img: "assets/img/nudo-tensor.jpg",
       alt: "Fotos de un nudo tensor alrededor de una vara, antes y después de apretarlo",
       pie: "Nudo tensor: rodea el poste o la estaca, da dos vueltas con el chicote alrededor de la parte fija hacia dentro de la gaza y una tercera por fuera. Desliza el nudo para tensar: bajo carga no se mueve.",
       credito: "Chris 73 · Wikimedia Commons · CC BY-SA 3.0",
     },
     {
+      paso: 3,
       img: "assets/img/nudo-pescador-doble.svg",
       alt: "Cuatro pasos del nudo de pescador doble uniendo dos cuerdas",
       pie: "Pescador doble, de arriba abajo: cada chicote da dos vueltas alrededor de la otra cuerda y pasa por dentro de ellas; al tirar de las dos partes fijas, los dos nudos se juntan.",
@@ -31,6 +35,7 @@ window.PREP_FIGURAS = {
 
   senales: [
     {
+      paso: 4,
       alt: "Señales en el suelo: una V significa necesito ayuda y una X necesito asistencia médica",
       pie: "Señales tierra-aire: hazlas grandes (varios metros) y que contrasten con el suelo.",
       svg: `<svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg">
@@ -41,6 +46,7 @@ window.PREP_FIGURAS = {
         <text class="f-txt" x="240" y="130" text-anchor="middle">Asistencia médica</text></svg>`,
     },
     {
+      paso: 1,
       alt: "Ritmo de la señal de socorro en montaña: seis señales en un minuto, un minuto de pausa y repetir",
       pie: "Socorro en montaña: 6 señales por minuto (una cada 10 s), un minuto de pausa y otra vez. Quien te ha visto responde con 3 por minuto.",
       svg: `<svg viewBox="0 0 320 110" xmlns="http://www.w3.org/2000/svg">
@@ -54,6 +60,7 @@ window.PREP_FIGURAS = {
         <text class="f-txt f-sm" x="225" y="85" text-anchor="middle">y repetir</text></svg>`,
     },
     {
+      paso: 3,
       alt: "SOS en código morse: tres puntos, tres rayas y tres puntos",
       pie: "SOS en morse: tres cortos, tres largos y tres cortos, sin separar las letras. Sirve con linterna, silbato o golpes.",
       svg: `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
@@ -66,6 +73,7 @@ window.PREP_FIGURAS = {
 
   orientacion: [
     {
+      paso: 3,
       alt: "Reloj de agujas con la aguja de las horas apuntando al sol; la bisectriz entre esa aguja y las 12 marca el sur",
       pie: "Con un reloj (hemisferio norte): apunta la aguja de las horas al sol. El sur está a medio camino entre esa aguja y las 12 (las 13 en horario de verano). En el ejemplo son las 4: el sur queda hacia las 2.",
       svg: `<svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
@@ -83,6 +91,7 @@ window.PREP_FIGURAS = {
         <text class="f-txt f-sm" x="166" y="210" text-anchor="middle">aguja de las horas → sol</text></svg>`,
     },
     {
+      paso: 4,
       alt: "Constelación de la Osa Mayor; prolongando cinco veces la distancia entre las dos estrellas del extremo se llega a la estrella Polar",
       pie: "De noche: prolonga unas cinco veces la distancia entre las dos estrellas del extremo del Carro (Osa Mayor). Llegas a la Polar, que está casi exactamente sobre el norte.",
       svg: `<svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg">
@@ -101,6 +110,7 @@ window.PREP_FIGURAS = {
 
   fuego: [
     {
+      paso: 0,
       alt: "Tres montones preparados antes de encender: yesca, astillas finas y leña, y una estructura en tipi",
       pie: "Prepáralo todo antes de encender: yesca (prende con una chispa), astillas finas como un lápiz y leña. En tipi, la yesca va en el centro y las astillas apoyadas alrededor dejando pasar el aire.",
       svg: `<svg viewBox="0 0 400 170" xmlns="http://www.w3.org/2000/svg">
@@ -120,6 +130,7 @@ window.PREP_FIGURAS = {
 
   refugio: [
     {
+      paso: 1,
       alt: "Refugio de lona inclinado: la cuerda atada entre árboles, la lona baja hacia el viento y una capa aislante en el suelo",
       pie: "Lona en pendiente: el lado bajo hacia el viento y, debajo, una capa gruesa de ramas, hojas secas o esterilla. El suelo roba más calor que el aire.",
       svg: `<svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg">

@@ -544,3 +544,5 @@ legend { font-weight: 700; margin-bottom: .6rem; }
 :root[data-theme="apagon"] .fig { background: #000; }
 :root[data-theme="apagon"] .fig img { filter: brightness(.85); }
 .fig:only-child { max-width: 680px; }
+.skill li .figs { display: block; margin: .6rem 0 .5rem; }
+.skill li .fig { max-width: 460px; }
