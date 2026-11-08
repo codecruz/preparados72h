@@ -63,6 +63,14 @@
 
   <main id="main" tabindex="-1">
     <h1 id="vista-h1" class="sr-only" tabindex="-1" hidden></h1>
+    <!-- Barra fija de reservas: lista de la compra e inventario (en Despensa, Inventario, Calculadora y Menú) -->
+    <nav class="reservas-bar" id="reservas-bar" aria-label="Mi lista y mi despensa" hidden>
+      <div class="wrap">
+        <a href="#desp-lista-card" id="rb-lista"><span aria-hidden="true">🛒</span> Mi lista <span class="rb-n" id="rb-lista-n">0</span></a>
+        <a href="#inventario" id="rb-desp"><span aria-hidden="true">📦</span> Mi despensa <span class="rb-n" id="rb-desp-n">0</span></a>
+      </div>
+    </nav>
+
     <!-- Atajos del modo apagón (solo visibles en ese modo) -->
     <section class="apagon-bar" data-view="inicio" aria-label="Accesos rápidos en modo apagón">
       <div class="wrap">

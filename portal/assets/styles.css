@@ -613,3 +613,15 @@ main:focus { outline: none; }
 /* Barra superior en móviles estrechos: menos separación y el modo apagón solo con icono (el texto sigue para lectores de pantalla) */
 @media (max-width: 420px) { .topbar-inner { gap: .5rem; } .pais-chip { font-size: .74rem; padding: .3rem .4rem; } }
 @media (max-width: 380px) { .mode-btn { font-size: 0; padding: .3rem .55rem; } .mode-btn::before { content: "🌙"; font-size: 1rem; } .brand img { width: 24px; height: 24px; } }
+
+/* ---------- Barra fija: Mi lista y Mi despensa ---------- */
+.reservas-bar { position: sticky; top: 60px; z-index: 40; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+.reservas-bar .wrap { display: flex; gap: .5rem; padding-top: .45rem; padding-bottom: .45rem; }
+.reservas-bar a { flex: 1; display: flex; align-items: center; justify-content: center; gap: .45rem; padding: .5rem .8rem; border-radius: 10px; background: var(--card); border: 1px solid var(--line); color: var(--ink); font-weight: 700; text-decoration: none; }
+.reservas-bar a:hover { border-color: var(--moss); }
+.reservas-bar a[aria-current="page"] { border-color: var(--moss); box-shadow: inset 0 -3px 0 var(--moss); }
+.rb-n { min-width: 1.6em; padding: .05rem .45rem; border-radius: 99px; background: var(--moss); color: var(--on-accent); font-size: .85rem; text-align: center; }
+@media (min-width: 861px) { .reservas-bar a { flex: 0 0 auto; } }
+:root[data-theme="apagon"] .reservas-bar { background: #000; backdrop-filter: none; }
+#desp-lista-card, #inventario { scroll-margin-top: 120px; }
+.reservas-bar a { white-space: nowrap; } @media (max-width: 420px) { .reservas-bar a { padding: .45rem .4rem; font-size: .92rem; gap: .35rem; } }

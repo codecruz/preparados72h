@@ -263,6 +263,16 @@
     calc();
   });
 
+  /* ---------- Barra fija: Mi lista y Mi despensa ---------- */
+  function contarReservas() {
+    const nl = (store.get("despensaLista", []) || []).length;
+    let nd = 0;
+    try { nd = inv.length; } catch { /* el inventario aún no se ha cargado */ }
+    $("#rb-lista-n").textContent = nl; $("#rb-desp-n").textContent = nd;
+    $("#rb-lista").setAttribute("aria-label", `Mi lista de la compra: ${plural(nl, "producto", "productos")}`);
+    $("#rb-desp").setAttribute("aria-label", `Mi despensa (inventario): ${plural(nd, "producto", "productos")}`);
+  }
+
   /* ---------- Inventario y caducidades ---------- */
   const TIPOS = [
     { id: "agua", nombre: "Agua", unidad: "litros" },
@@ -299,6 +309,7 @@
     return g ? (g.base?.cantidad || 0) + (g.segura?.cantidad || 0) : 0;
   }
   function renderInventory() {
+    contarReservas();
     const r = lastResult;
     const vigente = (it) => { const d = diasHasta(it.caduca); return d == null || d >= 0; };
     // Cobertura frente a la calculadora (solo lo que no ha caducado)
@@ -830,6 +841,7 @@
     }).join("") || `<p class="muted">No hay productos con ese filtro.</p>`;
     $("#desp-lista").innerHTML = despLista.map((id) => { const x = DS.productos.find((p) => p.id === id); return `<li><span><strong>${esc(x.nombre)}</strong> · ${esc(x.formato)}</span> <button type="button" class="btn-xs btn btn-ghost" data-dlista="${x.id}" aria-label="Quitar ${esc(x.nombre)} de la lista">Quitar</button></li>`; }).join("");
     $("#desp-lista-vacia").hidden = despLista.length > 0;
+    contarReservas();
     $("#desp-vaciar").hidden = !despLista.length;
   }
   $("#desp-cats").addEventListener("click", (e) => {
@@ -861,6 +873,14 @@
       location.hash = "inventario";
       setTimeout(() => { invForm.elements.cantidad.focus(); invForm.elements.cantidad.select(); }, 50);
     }
+  });
+  // «Mi lista»: va siempre a la lista, también si ya estás en la Despensa (sin depender del cambio de #)
+  $("#rb-lista").addEventListener("click", (e) => {
+    const c = $("#desp-lista-card");
+    if (c.offsetParent === null) return; // fuera de la Despensa: el router abre la vista y baja hasta la lista
+    e.preventDefault();
+    c.scrollIntoView({ block: "start" });
+    const h = $("h3", c); h.tabIndex = -1; h.focus({ preventScroll: true });
   });
   $("#desp-vaciar").addEventListener("click", () => { despLista = []; store.set("despensaLista", despLista); renderDespensa(); });
   renderDespensa();
@@ -974,6 +994,8 @@
     vistaH1.hidden = v.vista === "inicio";
     vistaH1.textContent = TITULOS[v.vista] || "";
     if (v.vista === "inicio") renderPanel();
+    $("#reservas-bar").hidden = !["despensa", "inventario", "calculadora", "menu"].includes(v.vista);
+    if (v.vista === "inventario") $("#rb-desp").setAttribute("aria-current", "page"); else $("#rb-desp").removeAttribute("aria-current");
     nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); $("#tab-more").setAttribute("aria-expanded", "false");
     // Primer elemento de la vista para el foco (lectores de pantalla) y posición de la página
     if (v.el && !(v.el.matches("section"))) v.el.scrollIntoView();
