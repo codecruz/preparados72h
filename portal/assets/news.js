@@ -1,7 +1,14 @@
 // Generado automáticamente por scripts/update-news.mjs. No editar a mano.
 window.PREP_NEWS = {
-  "actualizado": "2026-11-08T12:51:05.061Z",
+  "actualizado": "2026-11-08T17:29:27.018Z",
   "items": [
+    {
+      "titulo": "La Agencia de Ciberseguridad advierte contra la información especulativa sobre el \"almacenamiento de suministros esenciales para 72 horas\".",
+      "enlace": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOclFQVF9zaW51QXRrajFReHAxZzFPb21ZVFViaWJKMEVESHJkQ01BYkhBQ2dWSm9Ic0drQVhLd3QyUWpXYW9OdkxIVXFramRuX085WkpYcDQ1X3hWQVp5XzJibUFyUUd0OFlVUDY5TzNnY2RRQkNLNmVCWlNtZDZKMFFLaURXTjlsTlRpWnk4cUpRRjBnc0l1dzVhQmVfMHlNbmRvb2tTZXlNZw?oc=5",
+      "fuente": "Vietnam.vn",
+      "fecha": "2026-11-08T13:11:35.000Z",
+      "tema": "Suministro"
+    },
     {
       "titulo": "¿En Durango es necesario contar con una mochila de emergencia ?",
       "enlace": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPTThnNkJ3WVlaUmxIdGJ0dl9QM2N0cjJTWEpPV1p1MXk4VG9BQXFTOWRHSHZDM1dwYjdmdnpRS3liMktSeWRxdzJZWmpQOHd1OWdUb3o0Sk9CWWxsUEh6Vy1WZEJOMVdZVDc2THBIaEdwYnNPYWV5RG5lVmg3aDEwMUUzMV9aREFvSUV6V29JU3lER1d6aVlXa1VocmNsMnFkdmNlM0h0VHdaODAtOEE?oc=5",
@@ -10,11 +17,39 @@ window.PREP_NEWS = {
       "tema": "Protección civil"
     },
     {
+      "titulo": "Protección Civil capacita a 36 nuevos voluntarios en Parral para atender situaciones de emergencia",
+      "enlace": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOei1Xdk5yZEs2el9EanlFdks2Qk1TRlU1VUhsNGJQVHNwVmpIMDhUMWUxdWt0WEpodWZ5LXNkTnR2dlRQeUdvcElNaGZ5OExaYnVheDhYRVNSR0k1YXVkU3lBQTBNSk9JNHpJcUNmdDdDTVJIY1V4NmJLM2lOVXZBTVRNamxCMURVbWh6b1RyYkhxLUFsOFBxWkpJZTlVamVFTk9WNHY2WGRSU0VYVVdmSVlKRHpKWlFwbjdJamt2NTJkX2R5bE5LU3ZfLUlVdGw5dlhjSS1JS0dodmJ0MHdB?oc=5",
+      "fuente": "El Sol de México",
+      "fecha": "2026-11-08T02:55:35.000Z",
+      "tema": "Protección civil"
+    },
+    {
+      "titulo": "El Cabildo de Tenerife y Cruz Roja impulsan la formación de los voluntarios de Protección Civil para mejorar la respuesta ante emergencias",
+      "enlace": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxPMm9FOXREMHI2a2J3eG5XWm80a21Wb2RMZmU3eDhacDBMZDRieVY4a2wzRjNiRHQ1dGY3RktBYmtyMGhsWGhCQWpaMV9qWFFmR3NUMktjeGhESzliU3ZkMEhKR2ZKVnc2ekRYODVyNXRTNnY2MmpXeFU5eFZ6Z2U4b25qUzNDQm5sOFlweTFFN2k1ZnFkeGtnbkFTWmZCT2tUUG9qWFM5a01NUTVydVQxbmZGelNJUDVuVW1jdUJHcWpSa2hJYWZUdHduVXVEalc1VU9kR3hhajdoUzQzbnZxRkR0RXZHcUF5RlVBTC1hYTRZSXFEc2p0RVpONG9vZw?oc=5",
+      "fuente": "Canal 4 Tenerife",
+      "fecha": "2026-11-07T23:43:18.000Z",
+      "tema": "Protección civil"
+    },
+    {
       "titulo": "Cuando la guerra entra por la puerta del supermercado: cómo un ciberataque puede (des)congelar la vida cotidiana",
       "enlace": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxPbUR6LVJfOVZwSGY1Z0NtZWMyd3FIMExtX2NiNUk2Zm1ZY3A1bFlsVDJqOEFEbEdoLUlQMFZzZFYtckxlWEItaVFnNXo5MVYxYUdCWWkzYUluWk5uMVo5MFZMRHhIYkZWYXoxOTBqTlFRRnVCdERjTWNoMTN5TVg4ZTlxWTBWdXh2X3NRbjRTeDdIT0NaN3Zadk44RXZaMGtGZEZBU3NNWE5raTlYZWxYQ0hSNkIwWi01YkotMTFqM21mYzZMTDZMREh1OXk1LXZfcGNqblFIamtUNUEwckIwNUM1OTVfbDd5?oc=5",
       "fuente": "La Tribuna del País Vasco",
       "fecha": "2026-11-07T17:27:57.000Z",
       "tema": "Ciberataques"
+    },
+    {
+      "titulo": "Apagón total en el Reino Unido, la BBC revela su plan de radio de emergencia",
+      "enlace": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQa29wWUNDVlYxZjNsMUlXbzZ1dDYzSE5VRWVqX0pXWER5SDVNYWdMemJSNklKVUs2dTVNMUlzNzdHM2FqcnJodFpLMlc4NXpVN09YSUlIM0xOZ2x4aTRkaHp5eDR5djJwenBJX1FCR1ZmOWFhNURkY2JfQklIRFN1a005MGJfcGpPaF9mZjVvY0NWOFNXWDlRdDhKSnpoTDcyV2g4?oc=5",
+      "fuente": "Pasquale Pillitteri",
+      "fecha": "2026-11-07T16:40:01.000Z",
+      "tema": "Apagones"
+    },
+    {
+      "titulo": "Fenómeno El Niño: ¿qué debe contener una mochila de emergencia y cómo preparar el combo de supervivencia?",
+      "enlace": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxPMlVCbWJfTzVlbkpNa1VlQkhZeEdmT3dEaVV6WFkxN2ZIMkE3UUdSSFYta0JMckpOaVpQNkRCU2VMQnlBZ3lfRGVPNXZaRGxESUNrcEdxbTBMd0tEa3FHNWZ0N2pvai1aeHo1UFE3Z0VUdG1ZWXlWemFianh0bURBbV9wYVFYMExkT0lJc1BCbE9vYWxQMFhRRnM2TVBWWTNxT24zSjBrMjA4YU0tMG1PMEIxNG12YW1LNjVUUXA1eEtwOHJNVjdyTndOajU1aU1YSFl3UUxMeE9HRElUWjd1SV8xbElDdHPSAewBQVVfeXFMT0d3aUN5RUx6cWoxS0NPQ3dtaTBtaUZQQ2tPczZ2Q1RVLU1tZk54QjVpVTlzd3BkZU5CQm42NVFDRmJReFk1SHhQZUdib0d0dTI0dE5WUUt5ZzdUdHloYjRVQjVwZVZxTmhtRHk3aHlmY1dDZ3JGN1EtWG5hbDJtUDNLekpPeVNDcHZ2TzZmV3ZudGk1VlJrakN0aWxUMllwc3FBcFZfdkRuUnVIMnI4NW5BdEtlYUtmT2lIYXM1NlFGWkZUUHVER0NJbmNEeXdweGY2d2VSLXNXb2F2RENxckdlWWZZTFJNYkd6b2s?oc=5",
+      "fuente": "La República",
+      "fecha": "2026-11-07T15:21:19.000Z",
+      "tema": "Protección civil"
     },
     {
       "titulo": "¿Puede haber un ataque nuclear próximamente?: Experto habló sobre países que piden prepararse con kit de emergencia",
@@ -246,41 +281,6 @@ window.PREP_NEWS = {
       "fuente": "La Gaceta de la Iberosfera",
       "fecha": "2026-11-04T11:37:31.000Z",
       "tema": "Apagones"
-    },
-    {
-      "titulo": "Nuevo apagón en La Palma: un corte parcial afecta a 13.740 suministros durante 22 minutos",
-      "enlace": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNRWtYMnJyOFlycTE2Q0J3eXRpd0FEWUphenJ2WWJTdXloa0pPUHk5djMwRTVOU095NzRJeVBxNWcwS3FmaEhWUXNNZlhyTXR0TW1SS0RLLVZLU0lfYmRpMUZOU21tbnRRTU1NMDJwdG55Nm1VQTBNUWpjcE5UWWxkWHp4RENWYmwzY0puRDlZbmFQSDFyU3AzN1VhenJJM1pvdFU3X2NTR1huck02eWdjR0hTZjRzZ9IBuwFBVV95cUxPcF9UUVZMRGc1WW1DS2xLNW0zOE9peEFYRHpHejQ3cEdiU2NhaU5OM3VNRnc2TDNvYTFYb0ZDd1BYb3dHaTVNbnFGMDlMbUxnQlF4cFdvd0xHMlR5T3c5WVlxSy15cEp0MExEbXMwZ3puYldSQWtnSkg2cW9Ld3Q5N25fMHdTUk9JQ0hDQjc4SXFWMnRyb01pS0kwNDkyRS1Ta2VQcy1Hem9KY1lhV2o3c2hoMXBwNVNaMGxJ?oc=5",
-      "fuente": "El Boletín",
-      "fecha": "2026-11-04T11:28:47.000Z",
-      "tema": "Apagones"
-    },
-    {
-      "titulo": "La Palma sufre un segundo apagón en tres días: más de 13.000 suministros afectados",
-      "enlace": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPYk14OVN5S001NER3WGdXZFRmNnpiMHZBTEVGdl95VlNuRUVSWXZJdTVGei1xRmZGYjg2WmpJU1otZEFTSmJSV2prOWtQZlJ2VWdhMU1ac253LWdqRUxWTlJzOFZyTHNYMW44Nl9LMmhBYzEwOXlRT2xGWEM3aDB1SFRZNEZNRUM2UzFZVzlEQW4?oc=5",
-      "fuente": "Eldía",
-      "fecha": "2026-11-04T11:27:53.000Z",
-      "tema": "Apagones"
-    },
-    {
-      "titulo": "La sombra de la guerra híbrida se extiende sobre Europa: 48 horas de ciberataques a supermercados y caos aéreo",
-      "enlace": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxNanMtUFFNVTZHd3dmRG9tYUY4QkRpS0tFZG5YaDdSRTk5TTFZdzQwSmxBamFnY0FxZjRTZVFubFVmU1JnMExnV19qcmVUVXd2QUlNdnpqQzhiTWxfTXVseXdRTHNQLWE5RnZxcmQtSmV5bFlxUDBsQXlJa1FTRjNadW9zczFhZy0zYzk2UzZjT1N3N25IYzZNWW5Na3dJWFhRRlphbENvVG5BSklSbHNub3NkVDFjaWtSclpFa0pGTUxzSExITXNsbG9PZ2pjM3ItTGViaFlwVkRtS2RPcXRvOFk4MGVCSVMwTmVwTDZFQdIB9AFBVV95cUxOdnMwSjg4Zk9oajJVMWQzU0kwYVFDUl9vZTJDaXlFUDVFRDBESWRKYWlaOVFlSDVfRUVBampvQUd2SDdtZDdJamUzdi1PZ0JhdFJKU05wbVVBZmxrMXZVT2ZTVi1wRmZMNWFhbUI4OHl4YlUtMndtTEMzR3Ftcno4MkkxMHJLWjU0UTdObXExbWdadW5JUzVpZTk0alNDRTJtQVc4cTFJZEFmdl8zZU5SZm5neEpyRWFTZHkxUkIxUmVudHVVMGUyTFJQNnJhQ0lad3p1XzJYYTZiM2p4WG5VNjRESjhDWVhyeF82ZVNGdUUyVWFa?oc=5",
-      "fuente": "El Observador",
-      "fecha": "2026-11-04T11:10:00.000Z",
-      "tema": "Ciberataques"
-    },
-    {
-      "titulo": "Oliva acumula más de 120 litros en 72 horas: la vaguada retrógrada vuelve a dejar lluvias en la zona de la dana Adam",
-      "enlace": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOd0NLSVB3dW42c0l4QkR3TTJhZEhMc0Q5U3hCWXNma19lNXBWQldQSUJrUEpwdVdyZ1ZtTV92UXpnTE1ma1ZfRW9pSWNVRHVNSDZYN3ppMEVzeGpqNU9xUmdaUlJFVUdGU1FYcXlqSmJNZTlQaGdtWDJKdW4ybXlrVFZKeENiOG5JM3BqNEF4aHNwLUZmZFVGcGpjVjF4SjlmRXd6RGY1eU5yYlJGbDE2bEpWYTZrS3d2OUw5ekxic0JMeGpn?oc=5",
-      "fuente": "elperiodic.com",
-      "fecha": "2026-11-04T10:06:48.000Z",
-      "tema": "Desastres naturales"
-    },
-    {
-      "titulo": "La mancomunidad Hoya de Buñol Chiva licita por 2 millones de euros el refuerzo de su equipamiento de protección civil frente a futuras Danas",
-      "enlace": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxNT1VRU3psS3gzVENhYmYteUVxaEVVbXBWUmtFUWFHRnJMYllxMjZ6dFBuSjlFWFEzTjkweTFRQ09ubnlSOFZTS1B2bVRmTVFlUC1DYmZBWmY4QVdvNkNsdHdHYlNteW9fSEdNeHlyYm5MNXg3N1ROZUl1OWc0TkxseTFWSlZOal96aGJEQmJvWmJFOWhKWTVaQkkxOENFTkhhN3ZLVERrT0NwcE5Mc1lLY0pNQkpISl9USS12YUI4encwN2xMMER5dS1IcXVhaGVuUGVNR0ZaR3BDREdKTENaNFJnYjVNS0dXOGpzU1BhWGR4dEF3?oc=5",
-      "fuente": "- hoyunclick",
-      "fecha": "2026-11-04T09:05:17.000Z",
-      "tema": "Desastres naturales"
     }
   ]
 };
