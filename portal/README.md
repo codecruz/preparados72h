@@ -14,7 +14,7 @@ Pensado para preparacionistas y survivalistas. Cada sección es una vista propia
 - **Agua potable**: cómo guardarla y potabilizarla, con calculadora de gotas de lejía.
 - **Mapas sin conexión**: cómo descargar mapas y «Mis puntos», que guarda tus puntos de encuentro y calcula distancia y dirección con el GPS, sin datos.
 - **Checklist de la mochila de 72 h**, bolsa para volver a casa y **recordatorio de revisión** cada 6 meses.
-- **Plan familiar** imprimible, **consejos**, lecciones de la comunidad y **recomendaciones por país**.
+- **Plan familiar** imprimible, **consejos**, lecciones de la comunidad y **mapa del mundo con las recomendaciones oficiales por país** (cifra, fuente y botón para llevarla a la calculadora; vista ampliada de Europa).
 - **De dónde salen los números**: la fuente de cada cifra.
 - **Modo apagón**: negro puro y sin animaciones para ahorrar batería (pantallas OLED), con accesos rápidos.
 - **Últimas noticias**, actualizadas a diario con GitHub Actions (ver abajo).
@@ -39,6 +39,7 @@ portal/
     ├── data.js         # contenido (alerta, checklist, guías, agua, mapas, fuentes de las cifras…)
     ├── calc.js         # cálculos puros con tests: reservas, menú, lejía, distancias
     ├── news.js         # noticias (generado a diario)
+    ├── world.js        # contornos del mapa del mundo (generado con scripts/build-world.mjs, Natural Earth 1:110m)
     ├── app.js          # interfaz
     ├── styles.css
     └── icon.svg

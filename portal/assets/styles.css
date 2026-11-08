@@ -476,3 +476,45 @@ legend { font-weight: 700; margin-bottom: .6rem; }
 .panel-stats { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
 .skill summary { color: var(--ink); font-weight: 400; }
 .skill summary strong { font-size: 1.05rem; }
+
+/* ---------- Mapa del mundo (recomendaciones por país) ---------- */
+.world { --m-sea: var(--bg-alt); --m-land: #d6cfbd; --m-edge: var(--card); --m3: #d0671f; --m7: #86a74f; --m10: #2f5f2a; --m0: #8f99a6;
+  position: relative; margin: 0 0 1rem; padding: 0; overflow: hidden; }
+@media (prefers-color-scheme: dark) { .world { --m-land: #3a4235; --m3: #e8803f; --m7: #a6cc78; --m10: #4f9a48; --m0: #77818e; } }
+.world-map { display: block; width: 100%; height: auto; }
+.world-map .sea { fill: var(--m-sea); }
+.world-map { --pr: 4.5; }
+.world-map .c { fill: var(--m-land); stroke: var(--m-edge); stroke-width: .6; vector-effect: non-scaling-stroke; }
+.world-map .c[data-i] { cursor: pointer; }
+.world-map .c.lv3, .world-map .pin.lv3 circle { fill: var(--m3); }
+.world-map .c.lv7, .world-map .pin.lv7 circle { fill: var(--m7); }
+.world-map .c.lv10, .world-map .pin.lv10 circle { fill: var(--m10); }
+.world-map .c.lv0, .world-map .pin.lv0 circle { fill: var(--m0); }
+.world-map .c.on { stroke: var(--ink); stroke-width: 1.5; }
+.world-map .pin { cursor: pointer; outline: none; }
+.world-map .pin circle { r: calc(var(--pr) * 1px); stroke: var(--card); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.world-map .pin.on circle, .world-map .pin:focus-visible circle { stroke: var(--ink); stroke-width: 2.5; r: calc(var(--pr) * 1.45px); }
+.world-legend { display: flex; flex-wrap: wrap; gap: .4rem 1rem; margin: 0 0 .6rem; font-size: .875rem; color: var(--muted); }
+.world-legend i { display: inline-block; width: .85rem; height: .85rem; border-radius: 3px; vertical-align: -2px; margin-right: .25rem; }
+.world-legend { --m-land: #d6cfbd; --m3: #d0671f; --m7: #86a74f; --m10: #2f5f2a; --m0: #8f99a6; }
+@media (prefers-color-scheme: dark) { .world-legend { --m-land: #3a4235; --m3: #e8803f; --m7: #a6cc78; --m10: #4f9a48; --m0: #77818e; } }
+.world-legend .lv3 { background: var(--m3); } .world-legend .lv7 { background: var(--m7); }
+.world-legend .lv10 { background: var(--m10); } .world-legend .lv0 { background: var(--m0); }
+.world-legend .lvn { background: var(--m-land); border: 1px solid var(--line); }
+.world-tip { position: absolute; left: .75rem; bottom: .75rem; max-width: 20rem; background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: .8rem 2.2rem .8rem .9rem; font-size: .9rem; }
+.world-tip strong { display: block; font-size: 1.05rem; margin-bottom: .25rem; }
+.world-tip p { margin: .45rem 0; }
+.world-x { position: absolute; top: .3rem; right: .4rem; border: 0; background: none; color: var(--muted); font-size: 1.4rem; line-height: 1; cursor: pointer; padding: .2rem .4rem; }
+.pill.d0 { background: color-mix(in srgb, var(--muted) 18%, transparent); color: var(--muted); }
+@media (max-width: 640px) {
+  .world-tip { position: relative; left: auto; bottom: auto; max-width: none; border-width: 1px 0 0; border-radius: 0; box-shadow: none; }
+}
+:root[data-theme="apagon"] .world, :root[data-theme="apagon"] .world-legend { --m-sea: #000; --m-land: #1c1c1c; --m-edge: #000; }
+.world-zoom { position: absolute; top: .6rem; right: .6rem; display: flex; background: var(--card); border: 1px solid var(--line); border-radius: 99px; padding: 2px; z-index: 1; }
+.world-zoom button { border: 0; background: none; color: var(--ink); font: inherit; font-size: .85rem; padding: .3rem .8rem; border-radius: 99px; cursor: pointer; }
+.world-zoom button[aria-pressed="true"] { background: var(--forest); color: #fff; }
+:root[data-theme="apagon"] .world-zoom button[aria-pressed="true"] { background: var(--ember); color: #000; }
+@media (max-width: 640px) {
+  .world-zoom { position: static; width: max-content; margin: .5rem .5rem .4rem auto; }
+}

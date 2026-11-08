@@ -1,6 +1,6 @@
 // Service worker: cachea el portal completo para que funcione sin conexión.
-const CACHE = "prep72-v6";
-const ASSETS = ["./", "index.html", "manifest.webmanifest", "assets/styles.css", "assets/app.js", "assets/data.js", "assets/calc.js", "assets/news.js", "assets/icon.svg"];
+const CACHE = "prep72-v7";
+const ASSETS = ["./", "index.html", "manifest.webmanifest", "assets/styles.css", "assets/app.js", "assets/data.js", "assets/calc.js", "assets/news.js", "assets/world.js", "assets/icon.svg"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));

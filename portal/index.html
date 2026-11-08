@@ -39,6 +39,7 @@
           <a href="#habilidades" data-nav="habilidades">Habilidades</a>
           <a href="#agua" data-nav="agua">Agua potable</a>
           <a href="#aprende" data-nav="aprende">Consejos y comunidad</a>
+          <a href="#paises" data-nav="paises">Recomendaciones por país</a>
         </div>
         <div class="nav-group"><span class="nav-gh">Emergencias</span>
           <a href="#guias" data-nav="guias">Qué hacer en cada emergencia</a>
@@ -446,18 +447,35 @@
     </section>
 
     <!-- PAÍSES -->
-    <section id="paises" class="section" data-view="aprende">
+    <section id="paises" class="section" data-view="paises">
       <div class="wrap">
         <header class="section-head">
           <h2>¿Cuánto recomienda cada país?</h2>
-          <p>Los horizontes oficiales van de 72 horas a 10 días. Pulsa una fila para llevar ese horizonte a la calculadora.</p>
+          <p>Gobiernos que han pedido a sus hogares tener reservas para emergencias, con la cifra oficial y su fuente. Pulsa un país para ver el detalle y llevar ese horizonte a la calculadora.</p>
         </header>
+        <div class="world-legend" aria-hidden="true">
+          <span><i class="lv3"></i> 72 horas</span>
+          <span><i class="lv7"></i> Una semana</span>
+          <span><i class="lv10"></i> 10 días o más</span>
+          <span><i class="lv0"></i> Pide prepararse, sin cifra</span>
+          <span><i class="lvn"></i> Sin recomendación recogida</span>
+        </div>
+        <figure class="world card">
+          <div class="world-zoom seg-mini" role="group" aria-label="Zona del mapa">
+            <button type="button" data-zona="mundo" aria-pressed="true">Mundo</button>
+            <button type="button" data-zona="europa" aria-pressed="false">Europa</button>
+          </div>
+          <svg id="world-map" class="world-map" role="img" aria-label="Mapa del mundo con los países que tienen una recomendación oficial de reservas"></svg>
+          <div id="world-tip" class="world-tip" hidden></div>
+        </figure>
+        <p class="muted small" id="paises-ue"></p>
         <div class="table-wrap">
           <table class="table">
-            <thead><tr><th>País o región</th><th>Horizonte recomendado</th><th></th></tr></thead>
+            <thead><tr><th>País</th><th>Recomendación oficial</th><th>Fuente</th><th></th></tr></thead>
             <tbody id="paises-body"></tbody>
           </table>
         </div>
+        <p class="muted small">Recopilación de partida: <a href="https://www.newsweek.com/map-shows-countries-urging-residents-to-stockpile-food-12629524" target="_blank" rel="noopener">Newsweek, «Map shows countries urging residents to stockpile food»</a>; cada cifra se ha comprobado en la web oficial del país cuando existe. Contornos: Natural Earth (dominio público). El mapa va incluido en la web y funciona sin conexión.</p>
       </div>
     </section>
 
@@ -510,6 +528,7 @@
   <script src="assets/data.js"></script>
   <script src="assets/calc.js"></script>
   <script src="assets/news.js"></script>
+  <script src="assets/world.js"></script>
   <script src="assets/app.js"></script>
 </body>
 </html>

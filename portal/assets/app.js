@@ -561,15 +561,86 @@
   $("#tips").innerHTML = D.consejos.map((c, i) => `
     <article class="tip"><span class="tip-n">${String(i + 1).padStart(2, "0")}</span><h3>${esc(c.titulo)}</h3><p>${esc(c.texto)}</p></article>`).join("");
 
-  $("#paises-body").innerHTML = D.paises.map((p) => `
-    <tr data-dias="${p.dias}" tabindex="0"><td>${esc(p.region)}</td><td><span class="pill d${p.dias}">${esc(p.horizonte)}</span></td><td class="go">Calcular →</td></tr>`).join("");
-  const useCountry = (tr) => {
-    $$('input[name="dias"]', form).forEach((r) => (r.checked = r.value === tr.dataset.dias));
+  /* ---------- Recomendaciones por país: mapa del mundo sin conexión ---------- */
+  const useDias = (dias) => {
+    $$('input[name="dias"]', form).forEach((r) => (r.checked = r.value === String(dias)));
     calc();
     location.hash = "calculadora";
   };
-  $("#paises-body").addEventListener("click", (e) => { const tr = e.target.closest("tr"); if (tr) useCountry(tr); });
-  $("#paises-body").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); const tr = e.target.closest("tr"); if (tr) useCountry(tr); } });
+  const calcTxt = (d) => (d === 3 ? "72 horas" : d + " días");
+  $("#paises-ue").innerHTML = `🇪🇺 ${esc(D.paisesUE.texto)} <a href="${esc(D.paisesUE.url)}" target="_blank" rel="noopener">Comisión Europea</a>`;
+  $("#paises-body").innerHTML = D.paises.map((p, i) => `
+    <tr data-i="${i}" tabindex="0"><td>${esc(p.pais)}</td><td><span class="pill d${p.nivel}">${esc(p.horizonte)}</span><br><span class="muted small">${esc(p.nota)}</span></td><td class="small"><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.fuente)}</a></td><td class="go">Calcular →</td></tr>`).join("");
+  const usarFila = (e) => {
+    const tr = e.target.closest("tr[data-i]");
+    if (!tr || e.target.closest("a")) return;
+    useDias(D.paises[tr.dataset.i].dias);
+  };
+  $("#paises-body").addEventListener("click", usarFila);
+  $("#paises-body").addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && !e.target.closest("a")) { e.preventDefault(); usarFila(e); } });
+
+  const W = window.PREP_WORLD;
+  const mapa = $("#world-map"), tip = $("#world-tip");
+  if (W && mapa) {
+    // Misma proyección (Natural Earth I) que scripts/build-world.mjs
+    const proj = (lon, lat) => {
+      const l = (lon * Math.PI) / 180, ph = (lat * Math.PI) / 180, p2 = ph * ph, p4 = p2 * p2;
+      const x = l * (0.8707 - 0.131979 * p2 + p4 * (-0.013791 + p4 * (0.003971 * p2 - 0.001529 * p4)));
+      const y = ph * (1.007226 + p2 * (0.015085 + p4 * (-0.044475 + 0.028874 * p2 - 0.005916 * p4)));
+      return [W.w / 2 + x * W.s, -y * W.s];
+    };
+    const porIso = Object.fromEntries(D.paises.map((p, i) => [p.iso, i]));
+    const tierras = Object.entries(W.paises).map(([iso, d]) => {
+      const i = porIso[iso];
+      return i == null ? `<path class="c" d="${d}"/>` : `<path class="c lv${D.paises[i].nivel}" data-i="${i}" d="${d}"/>`;
+    }).join("");
+    const pins = D.paises.map((p, i) => {
+      const [x, y] = proj(p.lon, p.lat);
+      return `<g class="pin lv${p.nivel}" data-i="${i}" tabindex="0" role="button" aria-label="${esc(p.pais)}: ${esc(p.horizonte)}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}"/></g>`;
+    }).join("");
+    mapa.innerHTML = `<rect class="sea" x="-50" y="${W.y0 - 50}" width="${W.w + 100}" height="${W.h + 100}"/>${tierras}${pins}`;
+
+    // Vistas: mundo entero o Europa ampliada (allí se concentran casi todas las recomendaciones).
+    const [ex0, ey0] = proj(-25, 72), [ex1, ey1] = proj(45, 34);
+    const ZOOM = { mundo: [0, W.y0, W.w, W.h], europa: [ex0, ey0, ex1 - ex0, ey1 - ey0] };
+    const verZona = (z) => {
+      const vb = ZOOM[z];
+      mapa.setAttribute("viewBox", vb.map((n) => n.toFixed(1)).join(" "));
+      mapa.style.setProperty("--pr", (4.5 * vb[2] / W.w).toFixed(2)); // marcadores del mismo tamaño en pantalla
+      $$("[data-zona]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.zona === z)));
+    };
+    $$("[data-zona]").forEach((b) => b.addEventListener("click", () => verZona(b.dataset.zona)));
+    verZona("mundo");
+
+    const marcar = (i) => $$("[data-i]", mapa).forEach((el) => el.classList.toggle("on", el.dataset.i === String(i)));
+    const mostrar = (i) => {
+      const p = D.paises[i];
+      marcar(i);
+      tip.innerHTML = `
+        <button type="button" class="world-x" aria-label="Cerrar">×</button>
+        <strong>${esc(p.pais)}</strong>
+        <span class="pill d${p.nivel}">${esc(p.horizonte)}</span>
+        <p>${esc(p.nota)}</p>
+        <p class="small">Fuente: <a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.fuente)}</a></p>
+        <button type="button" class="btn btn-primary btn-xs" data-calc="${p.dias}">Calcular para ${calcTxt(p.dias)} →</button>`;
+      tip.hidden = false;
+    };
+    const cerrar = () => { tip.hidden = true; marcar(-1); };
+    mapa.addEventListener("click", (e) => {
+      const t = e.target.closest("[data-i]");
+      if (t) mostrar(Number(t.dataset.i)); else cerrar();
+    });
+    mapa.addEventListener("keydown", (e) => {
+      const t = e.target.closest(".pin");
+      if (t && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); mostrar(Number(t.dataset.i)); }
+      if (e.key === "Escape") cerrar();
+    });
+    tip.addEventListener("click", (e) => {
+      if (e.target.closest(".world-x")) cerrar();
+      const b = e.target.closest("[data-calc]");
+      if (b) useDias(Number(b.dataset.calc));
+    });
+  }
 
   $("#lessons").innerHTML = D.comunidad.map((l) => `
     <article class="lesson"><span class="lesson-i" aria-hidden="true">${l.icono}</span><div><h3>${esc(l.titulo)}</h3><p>${esc(l.texto)}</p></div></article>`).join("");
@@ -635,7 +706,8 @@
     ["agua", "💧", "Agua potable", "Guardarla y potabilizarla sin equivocarse."],
     ["mapas", "🧭", "Mapas sin conexión", "Tus puntos de encuentro con el GPS, sin datos."],
     ["plan", "👪", "Plan familiar", "Puntos de encuentro, contactos y qué hacer sin teléfono."],
-    ["aprende", "🧠", "Consejos y comunidad", "Lecciones de preparacionistas, mitos y recomendaciones por país."],
+    ["aprende", "🧠", "Consejos y comunidad", "Lecciones de preparacionistas y mitos."],
+    ["paises", "🌍", "Recomendaciones por país", "Mapa del mundo: cuántos días pide cada gobierno, con su fuente."],
     ["noticias", "📰", "Noticias", "Actualidad sobre emergencias, recopilada cada día."],
   ];
   $("#tiles").innerHTML = TILES.map(([id, ic, t, d]) => `<a class="tile" href="#${id}"><span class="tile-i" aria-hidden="true">${ic}</span><strong>${esc(t)}</strong><span>${esc(d)}</span></a>`).join("");
@@ -664,7 +736,7 @@
 
   /* ---------- Navegación por secciones (una vista cada vez) ---------- */
   const VISTAS = new Set($$("[data-view]").map((el) => el.dataset.view));
-  const TITULOS = { inicio: "Inicio", calculadora: "Calculadora", menu: "Menú de ejemplo", inventario: "Inventario", mochila: "Mochilas", material: "Material por niveles", habilidades: "Habilidades", guias: "Guías", agua: "Agua potable", mapas: "Mapas sin conexión", plan: "Plan familiar", aprende: "Consejos y comunidad", noticias: "Noticias", fuentes: "Fuentes" };
+  const TITULOS = { inicio: "Inicio", calculadora: "Calculadora", menu: "Menú de ejemplo", inventario: "Inventario", mochila: "Mochilas", material: "Material por niveles", habilidades: "Habilidades", guias: "Guías", agua: "Agua potable", mapas: "Mapas sin conexión", plan: "Plan familiar", aprende: "Consejos y comunidad", paises: "Recomendaciones por país", noticias: "Noticias", fuentes: "Fuentes" };
   const tituloBase = document.title;
   let vistaActual = null;
   function vistaDe(hash) {
