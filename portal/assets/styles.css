@@ -518,3 +518,29 @@ legend { font-weight: 700; margin-bottom: .6rem; }
 @media (max-width: 640px) {
   .world-zoom { position: static; width: max-content; margin: .5rem .5rem .4rem auto; }
 }
+
+/* ---------- Ilustraciones de habilidades ---------- */
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: .9rem; margin: 1rem 0; }
+.fig { margin: 0; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: .75rem; display: flex; flex-direction: column; gap: .6rem; }
+.fig svg, .fig img { display: block; width: 100%; height: auto; max-height: 260px; object-fit: contain; }
+.fig img { background: #fff; border-radius: 8px; }
+.fig figcaption { font-size: .9rem; color: var(--ink); }
+.fig-cred { display: block; margin-top: .3rem; font-size: .75rem; color: var(--muted); }
+.fig { --f-acc: var(--ember); --f-soft: var(--bg-alt); --f-sun: #e9b322; --f-wood: #8a5a32; --f-tinder: #d9b25c; --f-tree: #5d7f43; --f-tarp: #4f7aa0; --f-ins: #9c7a4a; --f-night: #1d2a3d; --f-star: #f4efd9; }
+.fig .f-txt { fill: var(--ink); font: 600 13px var(--font); }
+.fig .f-ntxt { fill: var(--f-star); font: 600 13px var(--font); }
+.fig .f-sm { font-size: 11.5px; font-weight: 500; }
+.fig .f-b { font-weight: 800; font-size: 14px; }
+.fig .f-line { stroke: var(--muted); fill: none; }
+.fig .f-soft { fill: var(--f-soft); }
+.fig .f-soft.f-line { fill: var(--f-soft); stroke: var(--ink); }
+.fig .f-ink { fill: var(--ink); } .fig .f-ink-s { stroke: var(--ink); }
+.fig .f-acc { fill: var(--f-acc); } .fig .f-acc-s { stroke: var(--f-acc); }
+.fig .f-sun { fill: var(--f-sun); } .fig .f-sun-s { stroke: var(--f-sun); }
+.fig .f-wood { fill: var(--f-wood); } .fig .f-wood-s { stroke: var(--f-wood); }
+.fig .f-tinder { fill: var(--f-tinder); } .fig .f-tree { fill: var(--f-tree); }
+.fig .f-tarp { fill: var(--f-tarp); } .fig .f-ins { fill: var(--f-ins); }
+.fig .f-night { fill: var(--f-night); } .fig .f-star { fill: var(--f-star); } .fig .f-star-s { stroke: var(--f-star); }
+:root[data-theme="apagon"] .fig { background: #000; }
+:root[data-theme="apagon"] .fig img { filter: brightness(.85); }
+.fig:only-child { max-width: 680px; }

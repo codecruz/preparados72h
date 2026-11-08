@@ -650,10 +650,17 @@
   $("#fuentes-list").innerHTML = D.fuentes.map((f) => `<li>${esc(f)}</li>`).join("");
 
   /* ---------- Habilidades ---------- */
+  // Ilustraciones (assets/figuras.js): SVG propias o imágenes con licencia libre, incluidas en la web.
+  const FIG = window.PREP_FIGURAS || {};
+  const figurasDe = (id) => (FIG[id] || []).length ? `<div class="figs">${FIG[id].map((f) => `
+        <figure class="fig">${f.svg ? f.svg.replace("<svg ", `<svg role="img" aria-label="${esc(f.alt)}" `) : `<img src="${esc(f.img)}" alt="${esc(f.alt)}" loading="lazy">`}
+          <figcaption>${esc(f.pie)}${f.credito ? `<span class="fig-cred">${esc(f.credito)}</span>` : ""}</figcaption>
+        </figure>`).join("")}</div>` : "";
   $("#skills").innerHTML = D.habilidades.map((h) => `
     <details class="card skill" id="hab-${h.id}">
       <summary><span class="skill-i" aria-hidden="true">${h.icono}</span><span><strong>${esc(h.titulo)}</strong> <span class="pill d7">${esc(h.nivel)}</span><br><span class="muted small">${esc(h.resumen)}</span></span></summary>
       <ol>${h.pasos.map((p) => `<li>${esc(p)}</li>`).join("")}</ol>
+      ${figurasDe(h.id)}
       ${h.seguridad.length ? `<ul class="calc-avisos">${h.seguridad.map((t) => `<li class="consejo">${esc(t)}</li>`).join("")}</ul>` : ""}
       <p class="small muted">Fuente: ${esc(h.fuente)}</p>
     </details>`).join("");

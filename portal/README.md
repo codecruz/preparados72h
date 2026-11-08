@@ -6,7 +6,7 @@ Basado en el informe `hackeos_supermercados_preparacion_72h.pdf` (5 nov 2026): c
 Pensado para preparacionistas y survivalistas. Cada sección es una vista propia (`#calculadora`, `#material`, `#habilidades`…) con navegación agrupada (Reservas, Equipo, Saber, Emergencias) y barra inferior en el móvil; el inicio es un panel con tu estado de preparación.
 
 - **Material por niveles**: equipo para ir guardando, de lo básico (72 h–1 semana) a la autonomía prolongada (más de 1 mes), con vida útil y uso seguro de cada cosa.
-- **Habilidades**: regla de los 3, primeros auxilios y RCP (ERC 2021), fuego, refugio, nudos, orientación sin GPS, señales de socorro y agua en el campo.
+- **Habilidades**: regla de los 3, primeros auxilios y RCP (ERC 2021), fuego, refugio, nudos, orientación sin GPS, señales de socorro y agua en el campo, con ilustraciones que funcionan sin conexión (nudos de Wikimedia Commons con licencia libre; el resto, SVG propias en `assets/figuras.js`).
 - **Calculadora de reservas** con cifras de fuentes oficiales: agua desglosada (bebida, cocina, higiene mínima), cinco tramos de edad, perros por tamaño, clima caluroso, opción «sin hornillo ni fuego», alergias, intolerancias y dietas, y los kilos reales de lo que hay que comprar.
 - **Menú de ejemplo** de 3, 7 o 10 días generado con la reserva: sin cocinar las primeras 72 h (o todo el periodo) y adaptado a todas las necesidades marcadas.
 - **Inventario y caducidades**: lo que ya tienes, cuánto te falta respecto a la calculadora y qué caduca pronto. Exportar e importar copia.
@@ -39,6 +39,8 @@ portal/
     ├── data.js         # contenido (alerta, checklist, guías, agua, mapas, fuentes de las cifras…)
     ├── calc.js         # cálculos puros con tests: reservas, menú, lejía, distancias
     ├── news.js         # noticias (generado a diario)
+    ├── figuras.js      # ilustraciones de las habilidades (SVG)
+    ├── img/            # imágenes de nudos (Wikimedia Commons, créditos en Fuentes)
     ├── world.js        # contornos del mapa del mundo (generado con scripts/build-world.mjs, Natural Earth 1:110m)
     ├── app.js          # interfaz
     ├── styles.css

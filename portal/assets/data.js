@@ -557,6 +557,7 @@ window.PREP_DATA = {
   },
 
   fuentes: [
+    "Ilustraciones de nudos (Wikimedia Commons): as de guía, Phil'enCorse (CC BY-SA 4.0); ballestrinque, Sawims (dominio público); nudo tensor, Chris 73 (CC BY-SA 3.0); pescador doble, LadyofHats (dominio público). Resto de ilustraciones y mapa: propios (contornos de Natural Earth, dominio público).",
     "BBC News: “Europe on alert after supermarket freezers hit by cyber-attacks in 10 countries” (3 nov 2026).",
     "Reuters: “Un nuevo ciberataque afecta a los sistemas de refrigeración de supermercados europeos” (2 nov 2026).",
     "El País: “Por qué la segunda oleada de ‘hackeos’ a las neveras en supermercados avisa de lo que viene” (3 nov 2026).",
