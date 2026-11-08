@@ -27,10 +27,10 @@ jobs:
     env:
       HAS_KEY: ${{ secrets.ANDROID_KEYSTORE_B64 != '' }}
     steps:
-      # El repo se recreó el 2026-11-08 y run_number volvió a 1: se suma el desfase
-      # para no repetir tags (android-v0.1.1…0.1.4) y que versionCode siga subiendo.
+      # El repo se ha recreado (la última vez el 2026-11-08, con la 0.1.7 publicada) y
+      # run_number vuelve a 1: se suma el desfase para no repetir tags y que versionCode suba.
       - name: Número de versión
-        run: echo "APP_VERSION_CODE=$(( ${{ github.run_number }} + 4 ))" >> "$GITHUB_ENV"
+        run: echo "APP_VERSION_CODE=$(( ${{ github.run_number }} + 7 ))" >> "$GITHUB_ENV"
 
       - uses: actions/checkout@v5
 
