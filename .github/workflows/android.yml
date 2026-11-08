@@ -25,9 +25,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      APP_VERSION_CODE: ${{ github.run_number }}
       HAS_KEY: ${{ secrets.ANDROID_KEYSTORE_B64 != '' }}
     steps:
+      # El repo se recreó el 2026-11-08 y run_number volvió a 1: se suma el desfase
+      # para no repetir tags (android-v0.1.1…0.1.4) y que versionCode siga subiendo.
+      - name: Número de versión
+        run: echo "APP_VERSION_CODE=$(( ${{ github.run_number }} + 4 ))" >> "$GITHUB_ENV"
+
       - uses: actions/checkout@v5
 
       - uses: actions/setup-node@v5
