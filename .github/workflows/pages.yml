@@ -6,7 +6,7 @@ on:
     paths:
       - "portal/**"
       - ".github/workflows/pages.yml"
-  # El commit diario de noticias se hace con GITHUB_TOKEN y no dispara "push" en otros
+  # El commit automático de noticias se hace con GITHUB_TOKEN y no dispara "push" en otros
   # workflows, así que se vuelve a publicar cuando termina "Actualizar noticias".
   workflow_run:
     workflows: ["Actualizar noticias"]

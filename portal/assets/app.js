@@ -804,7 +804,7 @@
     ["aprende", "🧠", "Consejos y comunidad", "Lecciones de preparacionistas y mitos."],
     ["morse", "📡", "Código Morse", "Tabla, traductor y SOS con luz, sonido o vibración."],
     ["paises", "🌍", "Recomendaciones por país", "Mapa del mundo: cuántos días pide cada gobierno, con su fuente."],
-    ["noticias", "📰", "Noticias", "Actualidad sobre emergencias, recopilada cada día."],
+    ["noticias", "📰", "Noticias", "Actualidad sobre emergencias, recopilada cada 6 horas."],
   ];
   $("#tiles").innerHTML = TILES.map(([id, ic, t, d]) => `<a class="tile" href="#${id}"><span class="tile-i" aria-hidden="true">${ic}</span><strong>${esc(t)}</strong><span>${esc(d)}</span></a>`).join("");
   function renderPanel() {

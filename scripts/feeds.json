@@ -1,5 +1,5 @@
 {
-  "_comentario": "Feeds RSS que se revisan a diario. 'busqueda: true' = feed de búsqueda ya filtrado por tema (umbral de relevancia más bajo).",
+  "_comentario": "Feeds RSS que se revisan cada 6 horas. 'busqueda: true' = feed de búsqueda ya filtrado por tema (umbral de relevancia más bajo).",
   "maxDiasNoticia": 14,
   "maxDiasHistorico": 30,
   "maxNoticias": 40,

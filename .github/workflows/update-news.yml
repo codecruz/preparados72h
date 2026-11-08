@@ -2,7 +2,7 @@ name: Actualizar noticias
 
 on:
   schedule:
-    - cron: "0 6 * * *"   # cada día a las 06:00 UTC (07:00 en Madrid en invierno, 00:00 en CDMX)
+    - cron: "0 */6 * * *"   # cada 6 horas: 00, 06, 12 y 18 UTC (01, 07, 13 y 19 en Madrid en invierno)
   workflow_dispatch:       # ejecución manual desde la pestaña Actions
 
 permissions:
@@ -35,5 +35,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add portal/assets/news.js
-          git commit -m "Noticias: actualización automática $(date -u +%Y-%m-%d)"
+          git commit -m "Noticias: actualización automática $(date -u '+%Y-%m-%d %H:%M') UTC"
           git push
