@@ -79,7 +79,7 @@
   /* ---------- Calculadora (lógica en assets/calc.js, con tests) ---------- */
   const C = window.PrepCalc;
   const form = $("#calc-form");
-  const PERSONAS = ["adultos", "ninos", "bebes", "mayores", "perros", "gatos"];
+  const PERSONAS = ["adultos", "mayores", "ninos", "peques", "bebes", "perrosPeq", "perrosMed", "perrosGra", "gatos"];
   const plural = (n, s, p) => `${n} ${n === 1 ? s : p}`;
 
   $("#necesidades").innerHTML = C.NECESIDADES.map((n) => `
@@ -93,6 +93,8 @@
     for (const k of PERSONAS) v[k] = form.elements[k].value;
     v.lactancia = form.elements.lactancia.checked;
     v.medicacion = form.elements.medicacion.checked;
+    v.calor = form.elements.calor.checked;
+    v.sinFuego = form.elements.sinFuego.checked;
     v.todaLaFamilia = form.elements.todaLaFamilia.checked;
     v.necesidades = {};
     for (const n of C.NECESIDADES) {
@@ -103,11 +105,14 @@
 
   function writeForm(v) {
     const dias = C.HORIZONTES.includes(Number(v.dias)) ? String(v.dias) : "3";
+    if (v.perros != null && v.perrosMed == null) v = { ...v, perrosMed: v.perros }; // datos guardados de la versión anterior
     $$('input[name="dias"]', form).forEach((r) => (r.checked = r.value === dias));
     // Solo se escriben los campos presentes: lo que falte conserva el valor por defecto del formulario
     for (const k of PERSONAS) if (v[k] != null && v[k] !== "") form.elements[k].value = C.sanear({ [k]: v[k] })[k];
     form.elements.lactancia.checked = !!v.lactancia;
     form.elements.medicacion.checked = !!v.medicacion;
+    form.elements.calor.checked = !!v.calor;
+    form.elements.sinFuego.checked = !!v.sinFuego;
     form.elements.todaLaFamilia.checked = !!v.todaLaFamilia;
     for (const n of C.NECESIDADES) {
       const on = !!(v.necesidades && v.necesidades[n.id] != null);
@@ -120,7 +125,7 @@
   function normalizar() {
     const s = C.sanear(readForm());
     for (const k of PERSONAS) if (String(form.elements[k].value) !== String(s[k])) form.elements[k].value = s[k];
-    const max = Math.max(1, s.adultos + s.ninos + s.mayores);
+    const max = Math.max(1, s.adultos + s.ninos + s.peques + s.mayores);
     for (const n of C.NECESIDADES) {
       const inp = $(`[data-need-n="${n.id}"]`, form);
       inp.max = max;
@@ -133,9 +138,11 @@
   if (saved && typeof saved === "object") { try { writeForm(saved); } catch { /* estado guardado no válido */ } }
   normalizar();
 
+  let lastRaw = null, lastResult = null;
   function calc() {
     const raw = readForm();
     const r = C.compute(raw);
+    lastRaw = raw; lastResult = r;
     const i = r.entrada;
     // Guardamos lo que el usuario marcó (incluidas necesidades aunque ahora no haya comensales)
     store.set("calc", { ...raw, ...Object.fromEntries(PERSONAS.map((k) => [k, i[k]])), dias: i.dias });
@@ -150,13 +157,19 @@
       $("#calc-title").textContent = "¿Quién vive en casa?";
       $("#calc-big").innerHTML = "";
       for (const id of ["#calc-compra-wrap", "#calc-sum-wrap", "#calc-avisos-wrap"]) $(id).hidden = true;
+      $("#calc-agua-split").textContent = "";
+      renderMenu(); renderInventory();
       return;
     }
     const mascotas = [i.perros && plural(i.perros, "perro", "perros"), i.gatos && plural(i.gatos, "gato", "gatos")].filter(Boolean).join(" y ");
+    const a = r.agua;
+    const partes = [[a.bebida, "para beber"], [a.cocina, "para cocinar"], [a.higiene, "de higiene"], [a.bebes, "para los bebés"], [a.lactancia, "por la lactancia"], [a.perros + a.gatos, "para las mascotas"]]
+      .filter(([n]) => n > 0).map(([n, t]) => `${fmt(n, 1)} L ${t}`);
+    $("#calc-agua-split").textContent = `Agua: ${partes.join(" + ")}.`;
     $("#calc-title").textContent = `Para ${r.dias === 3 ? "72 horas" : r.dias + " días"} · ${plural(r.personas, "persona", "personas")}${mascotas ? " y " + mascotas : ""}`;
     $("#calc-big").innerHTML = `
       <div><strong>${fmt(r.agua.total, 1)} L</strong><span>de agua (${plural(r.agua.garrafas5L, "garrafa", "garrafas")} de 5 L)</span></div>
-      ${r.kcal.total ? `<div><strong>${fmt(r.kcal.total)}</strong><span>kcal en total (unos ${fmt(r.kgComida, 1)} kg de comida)</span></div>`
+      ${r.kcal.total ? `<div><strong>${fmt(r.kgComida, 1)} kg</strong><span>de comida (peso neto de la lista, ${fmt(r.kcal.total)} kcal)</span></div>`
                      : `<div><strong>Bebés</strong><span>su alimentación va aparte (más abajo)</span></div>`}`;
 
     $("#calc-compra-wrap").hidden = r.grupos.length === 0;
@@ -178,9 +191,32 @@
       const t = esc(a.texto), k = t.indexOf(":");
       return `<li class="${a.tipo}">${a.necesidad && k > 0 ? `<strong>${t.slice(0, k)}:</strong>${t.slice(k + 1)}` : t}</li>`;
     }).join("");
+    renderMenu();
+    renderInventory();
+  }
+
+  /* ---------- Menú de ejemplo (usa los datos de la calculadora) ---------- */
+  function renderMenu() {
+    if (!lastRaw) return;
+    const r = lastResult;
+    if (r.vacio || r.comensales === 0) {
+      $("#menu-meta").textContent = r.vacio ? "Indica en la calculadora quién vive en casa." : "Solo hay bebés: su alimentación va aparte (leche y potitos).";
+      $("#menu-days").innerHTML = ""; $("#menu-notas").innerHTML = "";
+      return;
+    }
+    const m = C.menu(lastRaw);
+    const nombres = m.apto.map((id) => C.NECESIDADES.find((n) => n.id === id).etiqueta.toLowerCase());
+    $("#menu-meta").textContent = `${m.dias.length} días para ${plural(r.comensales, "persona", "personas")}` + (nombres.length ? `, apto para: ${nombres.join(", ")}.` : ".");
+    $("#menu-days").innerHTML = m.dias.map((d) => `
+      <article class="card menu-day">
+        <h3>Día ${d.dia} <span class="pill ${d.cocina ? "d7" : "d3"}">${d.cocina ? "Con hornillo" : "Sin cocinar"}</span></h3>
+        <dl>${d.comidas.map((c) => `<dt>${esc(c.nombre)}</dt><dd>${esc(c.texto)}</dd>`).join("")}</dl>
+      </article>`).join("");
+    $("#menu-notas").innerHTML = m.notas.map((t) => `<li class="consejo">${esc(t)}</li>`).join("");
   }
 
   form.addEventListener("input", calc);
+  // (el primer cálculo se hace al final de la sección de inventario, cuando ya existen el menú y el inventario)
   form.addEventListener("change", (e) => { if (e.target.type === "number") normalizar(); calc(); });
   form.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-step]");
@@ -191,7 +227,231 @@
     normalizar();
     calc();
   });
-  calc();
+
+  /* ---------- Inventario y caducidades ---------- */
+  const TIPOS = [
+    { id: "agua", nombre: "Agua", unidad: "litros" },
+    ...C.GRUPOS.map((g) => ({ id: g.id, nombre: g.nombre, unidad: g.unidad.p })),
+    { id: "medicacion", nombre: "Medicación", unidad: "envases" },
+    { id: "otros", nombre: "Otros (pilas, higiene, bebés…)", unidad: "unidades" },
+  ];
+  const tipo = (id) => TIPOS.find((t) => t.id === id) || TIPOS[TIPOS.length - 1];
+  const invForm = $("#inv-form");
+  $("#inv-tipo").innerHTML = TIPOS.map((t) => `<option value="${t.id}">${esc(t.nombre)}</option>`).join("");
+  const syncUnit = () => ($("#inv-unit").textContent = tipo(invForm.elements.tipo.value).unidad);
+  invForm.elements.tipo.addEventListener("change", syncUnit); syncUnit();
+
+  const validItem = (x) => x && typeof x.nombre === "string" && x.nombre.trim() && TIPOS.some((t) => t.id === x.tipo) && Number.isFinite(Number(x.cantidad)) && Number(x.cantidad) >= 0 && (!x.caduca || /^\d{4}-\d{2}-\d{2}$/.test(x.caduca));
+  let inv = store.get("inventario", []);
+  if (!Array.isArray(inv)) inv = [];
+  inv = inv.filter(validItem);
+  const saveInv = () => store.set("inventario", inv);
+  const hoy0 = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
+  const diasHasta = (iso) => (iso ? Math.round((new Date(iso + "T00:00:00") - hoy0()) / 86400000) : null);
+  function estado(it) {
+    const d = diasHasta(it.caduca);
+    if (d == null) return { cls: "none", txt: "Sin fecha" };
+    if (d < 0) return { cls: "bad", txt: `Caducado hace ${plural(-d, "día", "días")}` };
+    if (d <= 30) return { cls: "soon", txt: d === 0 ? "Caduca hoy" : `Caduca en ${plural(d, "día", "días")}: consúmelo y repón` };
+    if (d <= 90) return { cls: "warn", txt: `Caduca en ${plural(d, "día", "días")}` };
+    return { cls: "ok", txt: `Hasta el ${new Date(it.caduca + "T00:00:00").toLocaleDateString("es-ES", { day: "numeric", month: "short", year: "numeric" })}` };
+  }
+
+  function necesario(r, id) {
+    if (!r || r.vacio) return 0;
+    if (id === "agua") return r.agua.total;
+    const g = r.grupos.find((x) => x.id === id);
+    return g ? (g.base?.cantidad || 0) + (g.segura?.cantidad || 0) : 0;
+  }
+  function renderInventory() {
+    const r = lastResult;
+    const vigente = (it) => { const d = diasHasta(it.caduca); return d == null || d >= 0; };
+    // Cobertura frente a la calculadora (solo lo que no ha caducado)
+    const filas = TIPOS.filter((t) => t.id !== "medicacion" && t.id !== "otros").map((t) => {
+      const need = necesario(r, t.id);
+      const have = inv.filter((it) => it.tipo === t.id && vigente(it)).reduce((s, it) => s + Number(it.cantidad), 0);
+      return { t, need, have };
+    }).filter((f) => f.need > 0);
+    const horizonte = r && !r.vacio ? (r.dias === 3 ? "72 horas" : `${r.dias} días`) : "";
+    $("#inv-cob-head").textContent = filas.length ? `Comparado con la calculadora (${horizonte}, ${plural(r.personas, "persona", "personas")}). No cuenta lo caducado.` : "Rellena la calculadora para ver cuánto te falta.";
+    $("#inv-cob").innerHTML = filas.map(({ t, need, have }) => {
+      const pct = Math.min(100, Math.round((have / need) * 100));
+      const falta = Math.max(0, need - have);
+      return `<li><div class="cob-h"><span>${esc(t.nombre)}</span><span class="${pct >= 100 ? "ok" : ""}">${fmt(have, 1)} / ${fmt(need, 1)} ${esc(t.unidad)}</span></div>
+        <div class="progress"><div style="width:${pct}%"${pct >= 100 ? ' class="complete"' : ""}></div></div>
+        ${falta > 0 ? `<span class="small muted">Faltan ${fmt(falta, 1)} ${esc(t.unidad)}</span>` : `<span class="small ok">Cubierto ✓</span>`}</li>`;
+    }).join("");
+    // Lista ordenada por caducidad (sin fecha, al final)
+    const orden = inv.map((it, idx) => ({ it, idx })).sort((a, b) => (a.it.caduca || "9999") .localeCompare(b.it.caduca || "9999"));
+    const caducados = inv.filter((it) => (diasHasta(it.caduca) ?? 1) < 0).length;
+    const pronto = inv.filter((it) => { const d = diasHasta(it.caduca); return d != null && d >= 0 && d <= 30; }).length;
+    $("#inv-alert").textContent = !inv.length ? "Todavía no has apuntado nada." :
+      [caducados && `${plural(caducados, "producto caducado", "productos caducados")}`, pronto && `${plural(pronto, "producto caduca", "productos caducan")} en menos de 30 días`].filter(Boolean).join(" · ") || "Nada caduca en los próximos 30 días.";
+    $("#inv-list").innerHTML = orden.map(({ it, idx }) => {
+      const e = estado(it);
+      return `<li class="inv-item ${e.cls}"><div><strong>${esc(it.nombre)}</strong> <span class="muted small">· ${fmt(Number(it.cantidad), 1)} ${esc(tipo(it.tipo).unidad)} · ${esc(tipo(it.tipo).nombre)}</span><br><span class="small inv-st">${esc(e.txt)}</span></div>
+        <div class="inv-btns"><button type="button" class="btn btn-ghost btn-xs" data-inv-dec="${idx}" aria-label="Gastar una unidad de ${esc(it.nombre)}">−1</button><button type="button" class="btn btn-ghost btn-xs" data-inv-del="${idx}" aria-label="Quitar ${esc(it.nombre)}">Quitar</button></div></li>`;
+    }).join("");
+  }
+  invForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const it = { nombre: invForm.elements.nombre.value.trim(), tipo: invForm.elements.tipo.value, cantidad: Number(invForm.elements.cantidad.value), caduca: invForm.elements.caduca.value || "" };
+    if (!validItem(it)) { invForm.reportValidity(); return; }
+    inv.push(it); saveInv(); renderInventory();
+    invForm.elements.nombre.value = ""; invForm.elements.cantidad.value = 1; invForm.elements.caduca.value = "";
+    invForm.elements.nombre.focus();
+  });
+  $("#inv-list").addEventListener("click", (e) => {
+    const dec = e.target.closest("[data-inv-dec]"), del = e.target.closest("[data-inv-del]");
+    if (dec) { const it = inv[+dec.dataset.invDec]; if (!it) return; it.cantidad = Math.max(0, Number(it.cantidad) - 1); if (it.cantidad === 0) inv.splice(+dec.dataset.invDec, 1); }
+    else if (del) inv.splice(+del.dataset.invDel, 1);
+    else return;
+    saveInv(); renderInventory();
+  });
+  $("#inv-export").addEventListener("click", async () => {
+    const json = JSON.stringify({ app: "preparados72h", version: 1, fecha: new Date().toISOString(), inventario: inv }, null, 2);
+    const Share = plugin("Share");
+    if (Share) { try { await Share.share({ title: "Inventario Preparados72h", text: json }); } catch { /* cancelado */ } return; }
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([json], { type: "application/json" }));
+    a.download = `preparados72h-inventario-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+  $("#inv-import").addEventListener("change", async (e) => {
+    const f = e.target.files[0]; e.target.value = "";
+    if (!f) return;
+    try {
+      const data = JSON.parse(await f.text());
+      const items = (Array.isArray(data) ? data : data.inventario || []).filter(validItem).map((x) => ({ nombre: x.nombre.trim().slice(0, 80), tipo: x.tipo, cantidad: Number(x.cantidad), caduca: x.caduca || "" }));
+      if (!items.length) throw new Error("vacío");
+      inv = items; saveInv(); renderInventory();
+      $("#inv-alert").textContent = `Importados ${plural(items.length, "producto", "productos")}.`;
+    } catch { $("#inv-alert").textContent = "No se pudo importar: el archivo no es una copia válida del inventario."; }
+  });
+
+  /* ---------- Guías por emergencia ---------- */
+  let guiaSel = store.get("guia", D.guias[0].id);
+  if (!D.guias.some((g) => g.id === guiaSel)) guiaSel = D.guias[0].id;
+  const cifraTxt = (k) => { const c = D.cifras[k]; return c ? `<li><strong>${esc(c.dato)}:</strong> ${esc(c.valor)} <span class="muted">(${esc(c.fuente)})</span></li>` : ""; };
+  function renderGuias() {
+    $("#guide-tabs").innerHTML = D.guias.map((g) => `<button type="button" role="tab" class="chip" id="tab-${g.id}" aria-selected="${g.id === guiaSel}" aria-controls="guide-panel" data-guia="${g.id}"><span aria-hidden="true">${g.icono}</span> ${esc(g.titulo)}</button>`).join("");
+    const g = D.guias.find((x) => x.id === guiaSel);
+    const lista = (t, items) => items.length ? `<div class="guide-col"><h4>${t}</h4><ol>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ol></div>` : "";
+    $("#guide-panel").innerHTML = `<article class="card guide" id="guia-${g.id}" role="tabpanel" aria-labelledby="tab-${g.id}">
+      <h3><span aria-hidden="true">${g.icono}</span> ${esc(g.titulo)}</h3>
+      <p class="muted">${esc(g.resumen)}</p>
+      <div class="guide-cols">${lista("Antes", g.antes)}${lista("Durante", g.durante)}${lista("Después", g.despues)}</div>
+      ${g.cifras.length ? `<ul class="guide-src small">${g.cifras.map(cifraTxt).join("")}</ul>` : ""}
+      <button type="button" class="btn btn-ghost btn-sm" data-print="guia">Imprimir esta guía</button>
+    </article>`;
+  }
+  $("#guide-tabs").addEventListener("click", (e) => { const b = e.target.closest("[data-guia]"); if (b) { guiaSel = b.dataset.guia; store.set("guia", guiaSel); renderGuias(); } });
+  $("#guide-tabs").addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const k = D.guias.findIndex((g) => g.id === guiaSel), n = D.guias.length;
+    guiaSel = D.guias[(k + (e.key === "ArrowRight" ? 1 : n - 1)) % n].id;
+    renderGuias(); $(`#tab-${guiaSel}`).focus();
+  });
+  renderGuias();
+  // Los enlaces #guia-<id> (p. ej. desde el modo apagón) abren esa guía
+  function openGuideFromHash() {
+    const m = /^#guia-(.+)$/.exec(location.hash);
+    if (m && D.guias.some((g) => g.id === m[1])) { guiaSel = m[1]; renderGuias(); $("#guias").scrollIntoView(); }
+  }
+  addEventListener("hashchange", openGuideFromHash); openGuideFromHash();
+
+  /* ---------- Agua potable ---------- */
+  $("#agua-guardar").innerHTML = D.agua.guardar.map((t) => `<li>${esc(t)}</li>`).join("");
+  $("#agua-pasos").innerHTML = D.agua.pasos.map((p) => `<div class="water-step"><strong>${esc(p.titulo)}</strong><p>${esc(p.texto)}</p></div>`).join("");
+  $("#agua-avisos").innerHTML = D.agua.avisos.map((t) => `<li class="consejo">${esc(t)}</li>`).join("");
+  const bleachForm = $("#bleach-form");
+  function renderBleach() {
+    const g = C.gotasLejia(bleachForm.elements.litros.value, bleachForm.elements.turbia.checked);
+    $("#bleach-out").innerHTML = g.litros > 0
+      ? `<strong class="bleach-n">${g.gotas}</strong> <span>gotas de lejía (unos ${fmt(g.ml, 1)} ml) para ${fmt(g.litros, 1)} L.</span>
+         <p class="small">Remueve y espera <strong>${g.esperaMin} minutos</strong> antes de beber. Debe oler un poco a cloro; si no, repite la dosis y espera 15 minutos más.</p>`
+      : `<span class="muted">Indica cuántos litros quieres potabilizar.</span>`;
+  }
+  bleachForm.addEventListener("input", renderBleach);
+  bleachForm.addEventListener("submit", (e) => e.preventDefault());
+  renderBleach();
+
+  /* ---------- Mapas sin conexión y «Mis puntos» ---------- */
+  $("#mapas-descargar").innerHTML = D.mapas.descargar.map((p) => `<div class="water-step"><strong>${esc(p.titulo)}</strong><p>${esc(p.texto)}</p></div>`).join("");
+  $("#mapas-consejos").innerHTML = D.mapas.consejos.map((t) => `<li>${esc(t)}</li>`).join("");
+  const ptForm = $("#pt-form"), ptMsg = $("#pt-msg");
+  const validPt = (p) => p && typeof p.nombre === "string" && p.nombre.trim() && Number.isFinite(p.lat) && Number.isFinite(p.lon) && Math.abs(p.lat) <= 90 && Math.abs(p.lon) <= 180;
+  let puntos = store.get("puntos", []);
+  if (!Array.isArray(puntos)) puntos = [];
+  puntos = puntos.filter(validPt);
+  let aqui = null; // última posición leída (solo en memoria)
+  const fmtDist = (m) => (m < 1000 ? `${fmt(Math.round(m / 10) * 10)} m` : `${fmt(m / 1000, m < 10000 ? 1 : 0)} km`);
+  // Una sola lectura del GPS (sin seguimiento continuo) para gastar poca batería
+  function leerPosicion() {
+    return new Promise((ok, ko) => {
+      if (!("geolocation" in navigator)) return ko(new Error("Este dispositivo no permite leer la posición."));
+      navigator.geolocation.getCurrentPosition(
+        (p) => ok({ lat: p.coords.latitude, lon: p.coords.longitude, prec: Math.round(p.coords.accuracy) }),
+        (e) => ko(new Error(e.code === 1 ? "No has dado permiso para usar la ubicación." : "No se pudo leer la posición. Sal al exterior y vuelve a intentarlo.")),
+        { enableHighAccuracy: true, timeout: 120000, maximumAge: 60000 });
+    });
+  }
+  const mapLink = (p) => NATIVE || /Android/i.test(navigator.userAgent)
+    ? `geo:${p.lat},${p.lon}?q=${p.lat},${p.lon}(${encodeURIComponent(p.nombre)})`
+    : `https://www.openstreetmap.org/?mlat=${p.lat}&mlon=${p.lon}#map=17/${p.lat}/${p.lon}`;
+  function renderPuntos() {
+    $("#pt-list").innerHTML = puntos.length ? puntos.map((p, idx) => {
+      const d = aqui ? C.distanciaRumbo(aqui.lat, aqui.lon, p.lat, p.lon) : null;
+      return `<li class="inv-item"><div><strong>${esc(p.nombre)}</strong>${p.nota ? ` <span class="muted small">· ${esc(p.nota)}</span>` : ""}<br>
+        <span class="small muted">${p.lat.toFixed(5)}, ${p.lon.toFixed(5)}</span>
+        ${d ? `<br><span class="pt-dist">${fmtDist(d.metros)} hacia el ${d.rumbo} <span class="muted small">(${d.grados}°)</span></span>` : ""}</div>
+        <div class="inv-btns"><a class="btn btn-ghost btn-xs" href="${esc(mapLink(p))}" target="_blank" rel="noopener noreferrer">Abrir en mapa</a><button type="button" class="btn btn-ghost btn-xs" data-pt-del="${idx}" aria-label="Quitar ${esc(p.nombre)}">Quitar</button></div></li>`;
+    }).join("") : `<li class="muted small">Todavía no has guardado ningún punto.</li>`;
+  }
+  $("#pt-here").addEventListener("click", async () => {
+    ptMsg.textContent = "Buscando la señal GPS… (al aire libre tarda menos)";
+    try { const p = await leerPosicion(); aqui = p; ptForm.elements.coords.value = `${p.lat.toFixed(5)}, ${p.lon.toFixed(5)}`; ptMsg.textContent = `Posición leída con una precisión de unos ${fmt(p.prec)} m.`; renderPuntos(); }
+    catch (e) { ptMsg.textContent = e.message; }
+  });
+  ptForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const c = C.parseCoords(ptForm.elements.coords.value);
+    if (!c) { ptMsg.textContent = "Escribe las coordenadas como «40.4168, -3.7038» o pulsa «Usar mi posición»."; return; }
+    const p = { nombre: ptForm.elements.nombre.value.trim().slice(0, 60), nota: ptForm.elements.nota.value.trim().slice(0, 120), ...c };
+    if (!validPt(p)) { ptForm.reportValidity(); return; }
+    puntos.push(p); store.set("puntos", puntos); renderPuntos();
+    ptForm.reset(); ptMsg.textContent = "Punto guardado ✓";
+  });
+  $("#pt-locate").addEventListener("click", async () => {
+    $("#pt-pos").textContent = "Buscando la señal GPS…";
+    try { aqui = await leerPosicion(); $("#pt-pos").textContent = `Estás en ${aqui.lat.toFixed(5)}, ${aqui.lon.toFixed(5)} (±${fmt(aqui.prec)} m).`; renderPuntos(); }
+    catch (e) { $("#pt-pos").textContent = e.message; }
+  });
+  $("#pt-list").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-pt-del]");
+    if (!b) return;
+    puntos.splice(+b.dataset.ptDel, 1); store.set("puntos", puntos); renderPuntos();
+  });
+  renderPuntos();
+
+  /* ---------- De dónde salen los números ---------- */
+  $("#cifras-body").innerHTML = Object.values(D.cifras).map((c) => `<tr><td><strong>${esc(c.dato)}</strong></td><td>${esc(c.valor)}</td><td>${c.url ? `<a href="${esc(c.url)}" target="_blank" rel="noopener noreferrer">${esc(c.fuente)}</a>` : esc(c.fuente)}</td></tr>`).join("");
+
+  /* ---------- Modo apagón: pantalla oscura, sin animaciones (ahorra batería en pantallas OLED) ---------- */
+  const modeBtn = $("#mode-btn");
+  function setMode(on) {
+    if (on) document.documentElement.dataset.theme = "apagon";
+    if (!on) delete document.documentElement.dataset.theme; // sin atributo: vuelve el tema claro u oscuro del sistema
+    modeBtn.setAttribute("aria-pressed", String(on));
+    modeBtn.textContent = on ? "Modo normal" : "Modo apagón";
+    const meta = $('meta[name="theme-color"]'); if (meta) meta.content = on ? "#000000" : "#2f3d2c";
+    store.set("apagon", on);
+  }
+  modeBtn.addEventListener("click", () => setMode(document.documentElement.dataset.theme !== "apagon"));
+  setMode(!!store.get("apagon", false));
+
+  calc(); // primer cálculo: también pinta el menú y la cobertura del inventario
 
   /* ---------- Checklist ---------- */
   let checked = store.get("checklist", {});
@@ -348,12 +608,39 @@
     const h = r.querySelector("#calc-title"); if (h) h.outerHTML = `<h2>${esc(h.textContent)}</h2>`;
     return `<h1>Reservas del hogar</h1>${r.innerHTML}<p>Estimación orientativa de Preparados72h · ${new Date().toLocaleDateString("es-ES")}</p>`;
   }
+  function buildMenuPrint() {
+    const m = C.menu(lastRaw || {});
+    return `<h1>Menú de ejemplo · ${m.dias.length} días</h1>` + m.dias.map((d) => `<h2>Día ${d.dia} (${d.cocina ? "con hornillo" : "sin cocinar"})</h2><ul>${
+      d.comidas.map((c) => `<li><strong>${esc(c.nombre)}:</strong> ${esc(c.texto)}</li>`).join("")}</ul>`).join("") +
+      m.notas.map((t) => `<p>${esc(t)}</p>`).join("") + `<p>Preparados72h · ${new Date().toLocaleDateString("es-ES")}</p>`;
+  }
+  function buildInventoryPrint() {
+    const rows = [...inv].sort((a, b) => (a.caduca || "9999").localeCompare(b.caduca || "9999"))
+      .map((it) => `<tr><td>${esc(it.nombre)}</td><td>${fmt(Number(it.cantidad), 1)} ${esc(tipo(it.tipo).unidad)}</td><td>${esc(estado(it).txt)}</td></tr>`).join("");
+    return `<h1>Inventario de la reserva</h1><table class="print-table"><tr><th>Producto</th><th>Cantidad</th><th>Caducidad</th></tr>${rows || '<tr><td colspan="3">Sin productos</td></tr>'}</table>
+      <p>Impreso el ${new Date().toLocaleDateString("es-ES")}. Revisa las caducidades cada 6 meses.</p>`;
+  }
+  function buildGuidePrint() {
+    const g = D.guias.find((x) => x.id === guiaSel);
+    const l = (t, items) => items.length ? `<h2>${t}</h2><ol>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ol>` : "";
+    return `<h1>${esc(g.titulo)}</h1><p>${esc(g.resumen)}</p>${l("Antes", g.antes)}${l("Durante", g.durante)}${l("Después", g.despues)}<p>Emergencias: 112 (UE) · 911 (México).</p>`;
+  }
+  function buildPuntosPrint() {
+    const rows = puntos.map((p) => `<tr><td>${esc(p.nombre)}</td><td>${p.lat.toFixed(5)}, ${p.lon.toFixed(5)}</td><td>${esc(p.nota || "")}</td></tr>`).join("");
+    return `<h1>Mis puntos</h1><table class="print-table"><tr><th>Punto</th><th>Coordenadas</th><th>Notas</th></tr>${rows || '<tr><td colspan="3">Sin puntos</td></tr>'}</table>
+      <p>Las coordenadas se pueden escribir en cualquier app de mapas o GPS. Impreso el ${new Date().toLocaleDateString("es-ES")}.</p>`;
+  }
+  const BUILDERS = { plan: buildPlanPrint, mochila: buildChecklistPrint, calculadora: buildCalcPrint, menu: buildMenuPrint, inventario: buildInventoryPrint, guia: buildGuidePrint, puntos: buildPuntosPrint };
+
   // Dentro de un iframe aislado (p. ej. un artifact) no se puede imprimir: se copia el texto.
   let embedded = false;
   try { embedded = window.top !== window.self; } catch { embedded = true; }
   if (NATIVE) $$("[data-print]").forEach((b) => (b.textContent = "Compartir"));
   else if (embedded) $$("[data-print]").forEach((b) => (b.textContent = "Copiar texto"));
-  const SHARE_TITLES = { plan: "Plan familiar de emergencia", mochila: "Checklist de la mochila de 72 h", calculadora: "Reservas del hogar" };
+  const SHARE_TITLES = { plan: "Plan familiar de emergencia", mochila: "Checklist de la mochila de 72 h", calculadora: "Reservas del hogar", menu: "Menú de ejemplo", inventario: "Inventario de la reserva", guia: "Guía de emergencia", puntos: "Mis puntos" };
+  // Los botones de imprimir que se pintan después (guías) también deben cambiar de texto
+  const printLabel = NATIVE ? "Compartir" : embedded ? "Copiar texto" : null;
+  if (printLabel) new MutationObserver(() => $$("[data-print]").forEach((b) => { if (!b.dataset.labeled) { b.dataset.labeled = "1"; b.textContent = printLabel; } })).observe(document.body, { childList: true, subtree: true });
 
   function htmlToText(html) {
     const tmp = document.createElement("div");
@@ -368,7 +655,7 @@
     const btn = e.target.closest("[data-print]");
     if (!btn) return;
     const which = btn.dataset.print;
-    const html = which === "plan" ? buildPlanPrint() : which === "mochila" ? buildChecklistPrint() : buildCalcPrint();
+    const html = (BUILDERS[which] || buildCalcPrint)();
     const Share = plugin("Share");
     if (Share) {
       // En la app: menú de compartir de Android (WhatsApp, correo, Drive, notas…)

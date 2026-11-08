@@ -5,16 +5,30 @@
 
   const HORIZONTES = [3, 7, 10];
 
-  // kcal por persona y día (referencias generales de la EFSA, redondeadas)
-  const KCAL = { adulto: 2000, nino: 1400, mayor: 1800, extraLactancia: 500 };
+  // ---------- Cifras de referencia (fuentes en FUENTES_CIFRAS, más abajo) ----------
+  // kcal por persona y día. Adultos: 2.200, la cifra con la que planifica la BLE (Alemania) su reserva de 10 días.
+  // Niños y mayores: media de chicos y chicas de los valores de referencia D-A-CH (actividad moderada), redondeada.
+  const KCAL = { adulto: 2200, ninos: 1800, peques: 1300, mayor: 1900, extraLactancia: 500 };
 
-  // Litros por día. Personas: 3 L (beber + higiene básica, según protección civil).
-  const AGUA = { persona: 3, perro: 1.5, gato: 0.3, extraLactancia: 0.7 };
+  // Agua en litros por persona y día = bebida + cocina + higiene mínima.
+  // Bebida: 1,5 L adultos, 2 L mayores de 65 y 1 L niños (BLE/DGE). Cocina: 0,5 L (BLE). Higiene: 1 L, el mínimo
+  // para manos, dientes y utensilios (el Manual Esfera considera 2–6 L la higiene básica: si puedes, guarda más).
+  const BEBIDA = { adulto: 1.5, mayor: 2, ninos: 1, peques: 1 };
+  const COCINA = 0.5, HIGIENE = 1;
+  const AGUA_BEBE = 1.5;         // ~1 L para preparar biberones y 0,5 L para lavarlos
+  const EXTRA_LACTANCIA = 0.7;   // EFSA: +700 ml/día durante la lactancia
+  const FACTOR_CALOR = 2;        // Ready.gov: con calor intenso se puede necesitar el doble de agua para beber
+  // Mascotas: unos 50–60 ml por kg y día (referencia veterinaria habitual), con un peso típico por tamaño.
+  const AGUA_MASCOTA = { perrosPeq: 0.4, perrosMed: 1, perrosGra: 2, gatos: 0.3 };
 
-  const LIMITES = { adultos: [0, 20], ninos: [0, 20], bebes: [0, 10], mayores: [0, 10], perros: [0, 10], gatos: [0, 10] };
+  const LIMITES = {
+    adultos: [0, 20], ninos: [0, 20], peques: [0, 20], bebes: [0, 10], mayores: [0, 10],
+    perrosPeq: [0, 10], perrosMed: [0, 10], perrosGra: [0, 10], gatos: [0, 10],
+  };
+  const PERROS = ["perrosPeq", "perrosMed", "perrosGra"];
 
-  const FORMULA_G_DIA = 110; // leche de fórmula en polvo por bebé que toma biberón (orientativo)
-  const PANALES_DIA = 7;
+  const FORMULA_G_DIA = 110; // leche de fórmula en polvo por bebé que toma biberón (orientativo: unos 800 ml preparados)
+  const PANALES_DIA = 7;     // de 8–10 en recién nacidos a 5–6 hacia los 2 años
 
   // Necesidades alimentarias. "grupos": grupos cuyo alimento POR DEFECTO deja de ser seguro para esa persona
   // (cuentan para la versión segura). El texto de la versión segura tiene en cuenta TODAS las necesidades
@@ -47,15 +61,27 @@
     hipertension: "Hipertensión: elige conservas «bajas en sal» o «sin sal añadida». Escurrir y enjuagar las legumbres de bote les quita bastante sal (si te sobra agua).",
   };
 
-  // Grupos de alimentos: reparto de las kcal y una unidad de compra con sus kcal aproximadas.
+  // Grupos de alimentos: reparto de las kcal y una unidad de compra con sus kcal y su peso neto (g).
+  // kcal por unidad, de etiquetas habituales y de la BEDCA: pasta o arroz secos ~350 kcal/100 g; legumbre cocida
+  // escurrida ~120 kcal/100 g (un bote de 400 g lleva unos 250 g escurridos); atún o sardinas en aceite escurridos
+  // ~200 kcal por lata; frutos secos ~600 kcal/100 g; leche semidesnatada ~46 kcal/100 ml; fruta y verdura en
+  // conserva, 100–250 kcal por lata.
   const sg = (s, p) => ({ s, p });
   const GRUPOS = [
     {
-      id: "cereales", nombre: "Cereales y féculas", parte: 0.35, unidad: sg("paquete de 500 g", "paquetes de 500 g"), kcalUnidad: 1750,
+      id: "cereales", nombre: "Cereales y féculas", parte: 0.35, unidad: sg("paquete de 500 g", "paquetes de 500 g"), kcalUnidad: 1750, gUnidad: 500,
       texto(R) {
-        let t = R.has("celiaco")
-          ? "Arroz, copos de puré de patata, tortitas de arroz o maíz, y pasta o pan sin gluten certificados"
-          : "Pasta, arroz, galletas o pan tostado";
+        let t;
+        if (R.has("_sinFuego")) {
+          // Sin hornillo: lo que se come tal cual o se ablanda en agua fría (copos y cuscús, en 30–60 minutos)
+          t = R.has("celiaco")
+            ? "Tortitas de arroz o maíz, copos de maíz y pan sin gluten certificados (se comen sin cocinar)"
+            : "Picos de pan, pan tostado, tortitas de arroz o maíz, galletas, copos de avena y cuscús (se ablandan en agua fría)";
+        } else {
+          t = R.has("celiaco")
+            ? "Arroz, copos de puré de patata, tortitas de arroz o maíz, y pasta o pan sin gluten certificados"
+            : "Pasta, arroz, galletas o pan tostado";
+        }
         const q = [];
         if (R.has("huevo")) q.push("pasta sin huevo");
         if (R.has("leche")) q.push("galletas y pan sin leche");
@@ -64,14 +90,14 @@
       },
     },
     {
-      id: "legumbres", nombre: "Legumbres", parte: 0.15, unidad: sg("bote de 400 g", "botes de 400 g"), kcalUnidad: 300,
+      id: "legumbres", nombre: "Legumbres", parte: 0.15, unidad: sg("bote de 400 g", "botes de 400 g"), kcalUnidad: 300, gUnidad: 400,
       texto(R) { return "Legumbres cocidas en bote (garbanzos, lentejas, alubias)" + (R.has("hipertension") ? ", bajas en sal" : ""); },
     },
     {
-      id: "proteina", nombre: "Proteína en conserva", parte: 0.15, unidad: sg("lata de unos 120 g", "latas de unos 120 g"), kcalUnidad: 250,
+      id: "proteina", nombre: "Proteína en conserva", parte: 0.15, unidad: sg("lata de unos 120 g", "latas de unos 120 g"), kcalUnidad: 200, gUnidad: 120,
       variante(R) {
         // Las dietas vegetariana y vegana cambian la unidad de compra
-        if (R.has("vegano") || R.has("vegetariano")) return { unidad: sg("bote o ración", "botes o raciones"), kcalUnidad: 300 };
+        if (R.has("vegano") || R.has("vegetariano")) return { unidad: sg("bote o ración de unos 200 g", "botes o raciones de unos 200 g"), kcalUnidad: 300, gUnidad: 200 };
         return null;
       },
       texto(R) {
@@ -88,7 +114,7 @@
       },
     },
     {
-      id: "grasas", nombre: "Grasas y frutos secos", parte: 0.15, unidad: sg("bolsa o botella de 200 g", "bolsas o botellas de 200 g"), kcalUnidad: 1200,
+      id: "grasas", nombre: "Grasas y frutos secos", parte: 0.15, unidad: sg("bolsa o botella de 200 g", "bolsas o botellas de 200 g"), kcalUnidad: 1200, gUnidad: 200,
       texto(R) {
         return R.has("frutosSecos")
           ? "Aceite de oliva y semillas de girasol o calabaza (revisa «puede contener trazas»)"
@@ -96,7 +122,7 @@
       },
     },
     {
-      id: "lacteos", nombre: "Leche o bebida vegetal", parte: 0.10, unidad: sg("brik de 1 L", "briks de 1 L"), kcalUnidad: 500,
+      id: "lacteos", nombre: "Leche o bebida vegetal", parte: 0.10, unidad: sg("brik de 1 L", "briks de 1 L"), kcalUnidad: 460, gUnidad: 1030,
       variante(R) {
         if (R.has("leche") || R.has("vegano")) return { kcalUnidad: 400 };
         return null;
@@ -113,7 +139,7 @@
       },
     },
     {
-      id: "frutaVerdura", nombre: "Fruta y verdura en conserva", parte: 0.10, unidad: sg("lata o bote", "latas o botes"), kcalUnidad: 150,
+      id: "frutaVerdura", nombre: "Fruta y verdura en conserva", parte: 0.10, unidad: sg("lata o bote de unos 400 g", "latas o botes de unos 400 g"), kcalUnidad: 150, gUnidad: 400,
       texto(R) {
         return (R.has("diabetes") ? "Fruta en su jugo (sin almíbar)" : "Fruta en almíbar o en su jugo") +
           " y " + (R.has("hipertension") ? "verduras y tomate sin sal añadida" : "verduras y tomate en conserva");
@@ -132,11 +158,17 @@
   function sanear(inp = {}) {
     const o = {};
     o.dias = HORIZONTES.includes(Number(inp.dias)) ? Number(inp.dias) : 3;
-    for (const k of Object.keys(LIMITES)) o[k] = entero(inp[k] ?? 0, LIMITES[k]);
+    // Compatibilidad: antes había un único campo «perros» (se toma como tamaño mediano)
+    const src = { ...inp };
+    if (src.perros != null && src.perrosMed == null) src.perrosMed = src.perros;
+    for (const k of Object.keys(LIMITES)) o[k] = entero(src[k] ?? 0, LIMITES[k]);
+    o.perros = PERROS.reduce((n, k) => n + o[k], 0);
     o.lactancia = !!inp.lactancia && o.bebes > 0;
     o.medicacion = !!inp.medicacion;
+    o.calor = !!inp.calor;
+    o.sinFuego = !!inp.sinFuego;
     o.todaLaFamilia = !!inp.todaLaFamilia;
-    const comensales = o.adultos + o.ninos + o.mayores;
+    const comensales = o.adultos + o.ninos + o.peques + o.mayores;
     o.necesidades = {};
     for (const nd of NECESIDADES) {
       const c = entero(inp.necesidades?.[nd.id] ?? 0, [0, comensales]);
@@ -145,10 +177,16 @@
     return o;
   }
 
+  // Litros por persona y día según el grupo de edad (y el calor, que duplica la bebida)
+  function aguaDia(grupo, calor) {
+    if (grupo === "bebes") return AGUA_BEBE;
+    return BEBIDA[grupo] * (calor ? FACTOR_CALOR : 1) + COCINA + HIGIENE;
+  }
+
   function compute(input) {
     const i = sanear(input);
     const { dias } = i;
-    const comensales = i.adultos + i.ninos + i.mayores; // comen de la reserva general (los bebés aparte)
+    const comensales = i.adultos + i.ninos + i.peques + i.mayores; // comen de la reserva general (los bebés aparte)
     const personas = comensales + i.bebes;
     const adultosCuidadores = i.adultos + i.mayores;
     const out = { entrada: i, dias, personas, comensales, mascotas: i.perros + i.gatos, avisos: [], grupos: [], suministros: [], vacio: false };
@@ -161,19 +199,31 @@
     if (adultosCuidadores === 0) out.avisos.push({ tipo: "error", texto: "No hay ningún adulto en el hogar. Revisa los datos: los niños y los bebés necesitan a alguien que los cuide." });
 
     // ---------- Agua ----------
-    const aguaPersonas = personas * AGUA.persona * dias;
-    const aguaLactancia = i.lactancia ? AGUA.extraLactancia * dias : 0;
-    const aguaPerros = i.perros * AGUA.perro * dias;
-    const aguaGatos = i.gatos * AGUA.gato * dias;
+    const porGrupo = { adultos: "adulto", mayores: "mayor", ninos: "ninos", peques: "peques", bebes: "bebes" };
+    let aguaPersonasDia = 0, bebidaDia = 0;
+    for (const [k, g] of Object.entries(porGrupo)) {
+      aguaPersonasDia += i[k] * aguaDia(g, i.calor);
+      if (g !== "bebes") bebidaDia += i[k] * BEBIDA[g] * (i.calor ? FACTOR_CALOR : 1);
+    }
+    const nPersonasNoBebe = comensales;
+    const aguaPersonas = aguaPersonasDia * dias;
+    const aguaLactancia = i.lactancia ? EXTRA_LACTANCIA * dias : 0;
+    const aguaPerros = PERROS.reduce((s, k) => s + i[k] * AGUA_MASCOTA[k], 0) * dias;
+    const aguaGatos = i.gatos * AGUA_MASCOTA.gatos * dias;
     const aguaTotal = redondeo1(aguaPersonas + aguaLactancia + aguaPerros + aguaGatos);
-    out.agua = { total: aguaTotal, personas: aguaPersonas, lactancia: redondeo1(aguaLactancia), perros: redondeo1(aguaPerros), gatos: redondeo1(aguaGatos), garrafas5L: Math.ceil(aguaTotal / 5) };
+    out.agua = {
+      total: aguaTotal, personas: redondeo1(aguaPersonas), lactancia: redondeo1(aguaLactancia),
+      perros: redondeo1(aguaPerros), gatos: redondeo1(aguaGatos), garrafas5L: Math.ceil(aguaTotal / 5),
+      // desglose de lo que beben, cocinan y usan para higiene las personas (sin bebés), para todo el periodo
+      bebida: redondeo1(bebidaDia * dias), cocina: redondeo1(nPersonasNoBebe * COCINA * dias), higiene: redondeo1(nPersonasNoBebe * HIGIENE * dias),
+      bebes: redondeo1(i.bebes * AGUA_BEBE * dias),
+    };
 
     // ---------- Energía ----------
-    const kcalDia = i.adultos * KCAL.adulto + i.ninos * KCAL.nino + i.mayores * KCAL.mayor + (i.lactancia ? KCAL.extraLactancia : 0);
+    const kcalDia = i.adultos * KCAL.adulto + i.ninos * KCAL.ninos + i.peques * KCAL.peques + i.mayores * KCAL.mayor + (i.lactancia ? KCAL.extraLactancia : 0);
     out.kcal = { dia: kcalDia, total: kcalDia * dias };
-    out.kgComida = redondeo1(out.kcal.total / 2500); // mezcla de conservas y secos ≈ 2,5 kcal/g
 
-    // ---------- Lista de compra por grupos ----------
+  // ---------- Lista de compra por grupos ----------
     const activas = new Set(Object.keys(i.necesidades));
     const kcalMedia = comensales ? out.kcal.total / comensales : 0; // por persona en todo el periodo
     for (const g of GRUPOS) {
@@ -188,24 +238,29 @@
       const linea = { id: g.id, nombre: g.nombre, base: null, segura: null };
       if (nBase > 0 && kcalGrupo > 0) {
         const kc = kcalGrupo * (nBase / comensales);
-        linea.base = { personas: nBase, cantidad: Math.ceil(kc / g.kcalUnidad), unidad: g.unidad, texto: g.texto(new Set()) };
+        const cantidad = Math.ceil(kc / g.kcalUnidad);
+        linea.base = { personas: nBase, cantidad, unidad: g.unidad, gramos: cantidad * g.gUnidad, texto: g.texto(new Set(i.sinFuego ? ["_sinFuego"] : [])) };
       }
       if (nSegura > 0 && kcalGrupo > 0) {
         const v = (g.variante && g.variante(activas)) || {};
-        const unidad = v.unidad || g.unidad, kcalUnidad = v.kcalUnidad || g.kcalUnidad;
+        const unidad = v.unidad || g.unidad, kcalUnidad = v.kcalUnidad || g.kcalUnidad, gUnidad = v.gUnidad || g.gUnidad;
         const kc = kcalGrupo * (nSegura / comensales);
-        linea.segura = { personas: nSegura, cantidad: Math.ceil(kc / kcalUnidad), unidad, texto: g.texto(activas), por: afectan.map((n) => n.id) };
+        const cantidad = Math.ceil(kc / kcalUnidad);
+        const rTexto = new Set([...activas, ...(i.sinFuego ? ["_sinFuego"] : [])]);
+        linea.segura = { personas: nSegura, cantidad, unidad, gramos: cantidad * gUnidad, texto: g.texto(rTexto), por: afectan.map((n) => n.id) };
       }
       if (linea.base || linea.segura) out.grupos.push(linea);
     }
     out.kcalMediaPersona = Math.round(kcalMedia);
+    // Peso neto real de lo que sale en la lista (latas y botes con su líquido): sirve para saber cuánto espacio ocupa
+    out.kgComida = redondeo1(out.grupos.reduce((s, g) => s + (g.base?.gramos || 0) + (g.segura?.gramos || 0), 0) / 1000);
 
     // ---------- Otros suministros ----------
     const S = out.suministros;
     const linternas = Math.max(1, adultosCuidadores);
     const juegosPilas = 2 + Math.floor(dias / 3);
     const baterias = Math.max(1, Math.ceil(adultosCuidadores / 2));
-    const rollos = Math.max(1, Math.ceil((personas * dias) / 4));
+    const rollos = Math.max(1, Math.ceil((personas * dias) / 3)); // un rollo dura unos 3 días por persona
     S.push({ id: "luz", texto: `${plural(linternas, "linterna", "linternas")} y ${plural(juegosPilas, "juego", "juegos")} de pilas de repuesto` });
     S.push({ id: "energia", texto: `1 radio de pilas o de manivela y ${plural(baterias, "batería externa", "baterías externas")}` });
     S.push({ id: "abrigo", texto: `${plural(personas, "manta térmica", "mantas térmicas")} y ${plural(rollos, "rollo", "rollos")} de papel higiénico` });
@@ -214,10 +269,10 @@
       S.push({ id: "panales", texto: `${plural(i.bebes * PANALES_DIA * dias, "pañal", "pañales")} y toallitas` });
       S.push({ id: "formula", texto: `Si toma biberón: unos ${(i.bebes * FORMULA_G_DIA * dias / 1000).toLocaleString("es-ES", { maximumFractionDigits: 1 })} kg de leche de fórmula en polvo (comprueba la dosis de tu marca), preparada con agua embotellada. Si ya come, añade potitos o purés que no necesiten frío.` });
     }
-    if (i.lactancia) S.push({ id: "lactancia", texto: `Lactancia materna: ya están sumadas ${KCAL.extraLactancia} kcal y ${String(AGUA.extraLactancia).replace(".", ",")} L de agua más al día para la madre` });
+    if (i.lactancia) S.push({ id: "lactancia", texto: `Lactancia materna: ya están sumadas ${KCAL.extraLactancia} kcal y ${String(EXTRA_LACTANCIA).replace(".", ",")} L de agua más al día para la madre` });
     if (i.mayores) S.push({ id: "mayores", texto: "Personas mayores: gafas de repuesto, pilas para los audífonos y ayudas técnicas" });
     if (i.medicacion || i.mayores || activas.has("diabetes")) S.push({ id: "medicacion", texto: `Medicación para ${plural(dias + 7, "día", "días")} (el horizonte más una semana de margen) y copia de las recetas` });
-    if (i.perros) S.push({ id: "perros", texto: `Perros: comida para ${plural(dias, "día", "días")}, ${String(out.agua.perros).replace(".", ",")} L de agua (ya sumados arriba), correa y bolsas` });
+    if (i.perros) S.push({ id: "perros", texto: `${i.perros === 1 ? "Perro" : "Perros"}: comida para ${plural(dias, "día", "días")}, ${String(out.agua.perros).replace(".", ",")} L de agua (ya sumados arriba), correa y bolsas` });
     if (i.gatos) S.push({ id: "gatos", texto: `Gatos u otras mascotas pequeñas: comida para ${plural(dias, "día", "días")}, ${String(out.agua.gatos).replace(".", ",")} L de agua (ya sumados arriba), arena y transportín` });
 
     // ---------- Avisos ----------
@@ -226,11 +281,129 @@
     if (!i.todaLaFamilia && graves.some((id) => i.necesidades[id] < comensales)) {
       out.avisos.push({ tipo: "consejo", texto: "Con celiaquía o alergias graves, lo más seguro en una emergencia es que todo el hogar coma la versión segura: no habrá agua de sobra para lavar los utensilios. Puedes marcarlo arriba." });
     }
-    if (dias === 3) out.avisos.push({ tipo: "consejo", texto: "Para 72 horas, prioriza lo que se come sin cocinar: legumbres de bote, conservas, tortitas y frutos secos. El arroz y la pasta necesitan agua extra y un hornillo, que solo debe usarse con buena ventilación." });
+    if (i.calor) out.avisos.push({ tipo: "consejo", texto: `Con calor se ha duplicado el agua para beber. Guarda el agua a la sombra y bebe aunque no tengas sed: los mayores y los niños pequeños se deshidratan antes.` });
+    if (i.sinFuego) out.avisos.push({ tipo: "consejo", texto: "Sin hornillo ni fuego: todo lo de la lista se come tal cual o se ablanda en agua fría. Las legumbres secas, el arroz y la pasta crudos no sirven (las alubias crudas son tóxicas): compra legumbres cocidas en bote." });
+    else if (dias === 3) out.avisos.push({ tipo: "consejo", texto: "Para 72 horas, prioriza lo que se come sin cocinar: legumbres de bote, conservas, tortitas y frutos secos. El arroz y la pasta necesitan agua extra y un hornillo, que solo debe usarse con buena ventilación." });
     return out;
   }
 
-  const api = { compute, sanear, HORIZONTES, KCAL, AGUA, LIMITES, NECESIDADES, GRUPOS, AVISOS };
+  // ---------- Menú de ejemplo ----------
+  // Cada plato tiene alternativas en orden de preferencia y unas etiquetas con lo que contiene:
+  // G gluten · L proteína de la leche · LA lactosa · H huevo · FS frutos secos o cacahuete · P pescado o marisco
+  // S soja · C carne · AN otro producto animal (lácteos, huevo) · AZ azúcar añadido · SAL muy salado.
+  // Se elige la primera alternativa que no lleve nada prohibido para NINGUNA de las necesidades marcadas, así el
+  // menú sirve para todo el hogar. La última alternativa de cada plato no lleva ninguna etiqueta: siempre hay opción.
+  const PROHIBIDOS = {
+    celiaco: ["G"], lactosa: ["LA"], leche: ["L", "LA"], frutosSecos: ["FS"], huevo: ["H"], pescado: ["P"], soja: ["S"],
+    vegetariano: ["C", "P"], vegano: ["C", "P", "AN", "L", "LA", "H"], diabetes: ["AZ"], hipertension: ["SAL"],
+  };
+  const pl = (t, ...tags) => ({ t, tags });
+  const SEGURO = {
+    desayuno: pl("Bebida de arroz, tortitas de arroz o maíz con aceite de oliva y fruta en su jugo"),
+    comida: pl("Garbanzos de bote enjuagados con maíz, pimiento asado y aceite de oliva"),
+    merienda: pl("Semillas de girasol o de calabaza y fruta en su jugo"),
+    cena: pl("Lentejas de bote enjuagadas con verduras en conserva y tortitas de maíz"),
+  };
+  // cocina: false = se come sin cocinar (días 1–3); true = con hornillo y buena ventilación (días 4–7)
+  const MENU_DIAS = [
+    { cocina: false, desayuno: [pl("Leche UHT con galletas y un zumo pequeño", "L", "LA", "AN", "G", "H", "AZ"), pl("Bebida de avena sin gluten enriquecida con copos de maíz y fruta en su jugo")],
+      comida: [pl("Ensalada de garbanzos de bote con atún, maíz y aceite de oliva", "P")],
+      merienda: [pl("Un puñado de frutos secos y pasas", "FS"), pl("Semillas de girasol y pasas")],
+      cena: [pl("Sardinas en lata con picos de pan y tomate en conserva", "P", "G", "SAL"), pl("Hummus de bote con tortitas de arroz y pimientos asados")] },
+    { cocina: false, desayuno: [pl("Pan tostado con crema de cacahuete y leche UHT", "G", "FS", "L", "LA", "AN"), pl("Tortitas de arroz con crema de semillas de girasol y bebida de arroz")],
+      comida: [pl("Alubias blancas de bote con caballa en aceite y pimientos asados", "P"), pl("Alubias blancas de bote con pimientos asados, cebolla y aceite de oliva")],
+      merienda: [pl("Barrita de cereales y fruta en conserva", "G", "AZ", "L", "LA", "AN", "FS", "S"), pl("Fruta en su jugo y tortitas de maíz")],
+      cena: [pl("Pollo en conserva con maíz y pan de molde", "C", "G", "S"), pl("Garbanzos de bote con pimentón, aceite y verduras en conserva")] },
+    { cocina: false, desayuno: [pl("Queso curado con picos de pan y leche UHT", "L", "AN", "G", "LA"), pl("Queso curado con tortitas de arroz y fruta en su jugo", "L", "AN"), pl("Copos de maíz sin gluten con bebida de arroz y fruta en su jugo")],
+      comida: [pl("Ensalada de lentejas de bote con atún, tomate y aceite de oliva", "P"), pl("Ensalada de lentejas de bote con tomate, maíz y aceite de oliva")],
+      merienda: [pl("Chocolate negro y almendras", "FS", "AZ", "L"), pl("Pasas y semillas de calabaza")],
+      cena: [pl("Mejillones en escabeche con picos de pan", "P", "G", "SAL"), pl("Alubias de bote con verduras en conserva y tortitas de arroz")] },
+    { cocina: true, desayuno: [pl("Copos de avena cocidos con leche UHT y pasas", "G", "L", "LA", "AN"), pl("Copos de arroz cocidos con bebida de arroz y pasas")],
+      comida: [pl("Pasta con tomate frito y atún", "G", "P"), pl("Arroz con tomate frito y garbanzos de bote")],
+      merienda: [pl("Frutos secos y fruta en su jugo", "FS"), pl("Semillas de girasol y fruta en su jugo")],
+      cena: [pl("Sopa de sobre con fideos y pollo en conserva", "G", "C", "SAL"), pl("Arroz blanco con lentejas de bote y aceite de oliva")] },
+    { cocina: true, desayuno: [pl("Leche UHT con galletas y fruta en su jugo", "L", "LA", "AN", "G", "H", "AZ"), pl("Bebida de arroz caliente con tortitas de maíz y fruta en su jugo")],
+      comida: [pl("Arroz con lentejas de bote y verduras en conserva")],
+      merienda: [pl("Galletas y un zumo pequeño", "G", "H", "AZ", "L", "LA", "AN"), pl("Tortitas de arroz con crema de semillas de girasol")],
+      cena: [pl("Cuscús con garbanzos de bote y verduras en conserva", "G"), pl("Polenta (sémola de maíz) con tomate y garbanzos de bote")] },
+    { cocina: true, desayuno: [pl("Pan tostado con aceite de oliva y leche UHT", "G", "L", "LA", "AN"), pl("Tortitas de maíz con aceite de oliva, tomate en conserva y bebida de arroz")],
+      comida: [pl("Lentejas de bote calientes con salchichas en conserva", "C", "SAL", "G"), pl("Lentejas de bote calientes con arroz y verduras en conserva")],
+      merienda: [pl("Crema de cacahuete con tortitas de arroz", "FS"), pl("Pasas y semillas de calabaza")],
+      cena: [pl("Pasta con sardinas en aceite y ajo", "G", "P"), pl("Arroz salteado con maíz, pimiento y garbanzos de bote")] },
+    { cocina: true, desayuno: [pl("Copos de avena cocidos con leche UHT y pasas", "G", "L", "LA", "AN"), pl("Copos de arroz cocidos con bebida de arroz y fruta en su jugo")],
+      comida: [pl("Potaje rápido de garbanzos de bote con espinacas en conserva y pimentón")],
+      merienda: [pl("Chocolate negro y fruta en su jugo", "AZ", "L"), pl("Fruta en su jugo y tortitas de maíz")],
+      cena: [pl("Fideos con caldo de brik y atún", "G", "P", "SAL"), pl("Arroz caldoso con caldo de verduras sin gluten y alubias de bote")] },
+    // Días extra sin cocinar, para quien no tiene hornillo ni fuego
+    { cocina: false, desayuno: [pl("Copos de avena ablandados en leche UHT fría (desde la noche anterior) con pasas", "G", "L", "LA", "AN"), pl("Copos de maíz sin gluten con bebida de arroz y pasas")],
+      comida: [pl("Cuscús hidratado en agua fría (30–60 min) con garbanzos de bote, tomate y aceite", "G"), pl("Ensalada de alubias de bote con maíz, tomate en conserva y aceite de oliva")],
+      merienda: [pl("Frutos secos y orejones", "FS"), pl("Orejones y semillas de calabaza")],
+      cena: [pl("Paté o atún en lata con picos de pan y pimientos asados", "P", "G", "SAL"), pl("Hummus de bote con tortitas de maíz y verduras en conserva")] },
+    { cocina: false, desayuno: [pl("Galletas con crema de cacahuete y leche UHT", "G", "FS", "L", "LA", "AN", "H", "AZ"), pl("Tortitas de arroz con crema de semillas de girasol y fruta en su jugo")],
+      comida: [pl("Ensalada de lentejas de bote con sardinas, cebolla y aceite", "P"), pl("Ensalada de lentejas de bote con pimiento asado, cebolla y aceite de oliva")],
+      merienda: [pl("Barrita de cereales y un zumo pequeño", "G", "AZ", "L", "LA", "AN", "FS", "S"), pl("Fruta en su jugo y tortitas de arroz")],
+      cena: [pl("Pollo en conserva con maíz, tomate y tortitas de maíz", "C"), pl("Garbanzos de bote con espinacas en conserva, pimentón y aceite")] },
+  ];
+  const MOMENTOS = [["desayuno", "Desayuno"], ["comida", "Comida"], ["merienda", "Merienda"], ["cena", "Cena"]];
+
+  function menu(input) {
+    const i = sanear(input);
+    const activas = Object.keys(i.necesidades);
+    const prohibido = new Set(activas.flatMap((id) => PROHIBIDOS[id] || []));
+    const ok = (p) => !p.tags.some((t) => prohibido.has(t));
+    // Días 1–3 sin cocinar; 4–7 con hornillo; para 10 días se repiten los días 1–3 al final.
+    // Sin hornillo ni fuego: solo días sin cocinar, rotando 5 menús distintos.
+    const SIN = [0, 1, 2, 7, 8];
+    const orden = i.sinFuego
+      ? Array.from({ length: i.dias }, (_, n) => SIN[n % SIN.length])
+      : i.dias === 3 ? [0, 1, 2] : i.dias === 7 ? [0, 1, 2, 3, 4, 5, 6] : [0, 1, 2, 3, 4, 5, 6, 0, 1, 2];
+    const dias = orden.map((k, n) => {
+      const d = MENU_DIAS[k];
+      return {
+        dia: n + 1, cocina: d.cocina,
+        comidas: MOMENTOS.map(([id, nombre]) => ({ id, nombre, texto: ((d[id] || []).find(ok) || SEGURO[id]).t })),
+      };
+    });
+    const notas = [];
+    if (activas.length) notas.push("El menú respeta a la vez todas las necesidades marcadas, para que sirva a todo el hogar y no haga falta cocinar aparte.");
+    if (activas.includes("celiaco")) notas.push("Celiaquía: todos los productos deben llevar «sin gluten» (también la avena, las tortitas y las conservas con salsa).");
+    if (activas.includes("hipertension")) notas.push("Hipertensión: enjuaga las legumbres de bote y elige conservas «sin sal añadida».");
+    if (i.sinFuego) notas.push("Todo el menú se come sin cocinar. Los copos de avena y el cuscús se ablandan en agua o leche fría: déjalos en remojo 30–60 minutos (o la noche anterior).");
+    else if (i.dias > 3) notas.push("Los días con hornillo necesitan unos 0,5 L de agua por persona para cocinar (ya incluidos en la calculadora). Usa el hornillo solo con buena ventilación, nunca en un espacio cerrado.");
+    if (i.bebes) notas.push("Los bebés van aparte: leche materna o de fórmula y potitos que no necesiten frío.");
+    return { dias, notas, apto: activas };
+  }
+
+  // ---------- Distancia y rumbo entre dos coordenadas (para «Mis puntos», sin conexión) ----------
+  const RUMBOS = ["norte", "noreste", "este", "sureste", "sur", "suroeste", "oeste", "noroeste"];
+  function distanciaRumbo(lat1, lon1, lat2, lon2) {
+    const rad = Math.PI / 180, R0 = 6371000; // radio medio de la Tierra en metros
+    const φ1 = lat1 * rad, φ2 = lat2 * rad, dφ = (lat2 - lat1) * rad, dλ = (lon2 - lon1) * rad;
+    const h = Math.sin(dφ / 2) ** 2 + Math.cos(φ1) * Math.cos(φ2) * Math.sin(dλ / 2) ** 2;
+    const metros = 2 * R0 * Math.asin(Math.min(1, Math.sqrt(h)));
+    const y = Math.sin(dλ) * Math.cos(φ2), x = Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(dλ);
+    const grados = (Math.atan2(y, x) / rad + 360) % 360;
+    return { metros: Math.round(metros), grados: Math.round(grados), rumbo: RUMBOS[Math.round(grados / 45) % 8] };
+  }
+  // Acepta «40.4168, -3.7038», «40,4168 -3,7038» o «40.4168;-3.7038»
+  function parseCoords(txt) {
+    const m = String(txt || "").trim().match(/^(-?\d{1,2}(?:[.,]\d+)?)\s*[,; ]\s*(-?\d{1,3}(?:[.,]\d+)?)$/);
+    if (!m) return null;
+    const lat = Number(m[1].replace(",", ".")), lon = Number(m[2].replace(",", "."));
+    return Math.abs(lat) <= 90 && Math.abs(lon) <= 180 ? { lat, lon } : null;
+  }
+
+  // ---------- Potabilizar con lejía ----------
+  // CDC/EPA: lejía doméstica al 5–8 % sin perfume → 2 gotas por litro (4 si el agua está turbia o muy fría) y
+  // esperar al menos 30 minutos. En España, solo lejía con la indicación «apta para la desinfección del agua de bebida».
+  function gotasLejia(litros, turbia = false) {
+    const l = Math.max(0, Number(litros) || 0);
+    const gotas = Math.ceil(l * (turbia ? 4 : 2));
+    return { litros: l, gotas, ml: Math.round(gotas * 0.05 * 10) / 10, esperaMin: 30 };
+  }
+
+  const AGUA = { BEBIDA, COCINA, HIGIENE, AGUA_BEBE, EXTRA_LACTANCIA, FACTOR_CALOR, AGUA_MASCOTA };
+  const api = { compute, sanear, aguaDia, menu, gotasLejia, distanciaRumbo, parseCoords, HORIZONTES, KCAL, AGUA, LIMITES, PERROS, NECESIDADES, GRUPOS, AVISOS, MENU_DIAS, PROHIBIDOS };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.PrepCalc = api;
 })(typeof window !== "undefined" ? window : globalThis);

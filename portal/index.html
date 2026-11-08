@@ -18,20 +18,37 @@
       <a class="brand" href="#inicio"><img src="assets/icon.svg" alt="" width="28" height="28"> Preparados<span>72h</span></a>
       <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menú</button>
       <nav id="nav" class="nav">
-        <a href="#alerta">Alerta</a>
-        <a href="#noticias">Noticias</a>
         <a href="#calculadora">Calculadora</a>
-        <a href="#mochila">Mochila 72h</a>
-        <a href="#plan">Plan familiar</a>
-        <a href="#consejos">Consejos</a>
-        <a href="#comunidad">Comunidad</a>
-        <a href="#paises">Por país</a>
+        <a href="#menu">Menú</a>
+        <a href="#inventario">Inventario</a>
+        <a href="#mochila">Mochila</a>
+        <a href="#guias">Guías</a>
+        <a href="#agua">Agua</a>
+        <a href="#mapas">Mapas</a>
+        <a href="#plan">Plan</a>
+        <a href="#noticias">Noticias</a>
       </nav>
+      <button type="button" class="mode-btn" id="mode-btn" aria-pressed="false" title="Pantalla oscura y sin animaciones para ahorrar batería">Modo apagón</button>
       <span id="net" class="net" title="Estado de conexión"></span>
     </div>
   </header>
 
   <main id="main">
+    <!-- Atajos del modo apagón (solo visibles en ese modo) -->
+    <section class="apagon-bar" aria-label="Accesos rápidos en modo apagón">
+      <div class="wrap">
+        <p><strong>Modo apagón activo:</strong> pantalla oscura y sin animaciones para que dure la batería. Funciona sin conexión.</p>
+        <div class="apagon-links">
+          <a href="#guia-apagon">⚡ Qué hacer en un apagón</a>
+          <a href="#agua">💧 Potabilizar agua</a>
+          <a href="#plan">👪 Plan familiar</a>
+          <a href="#guia-sinluz">🕯️ Sin luz ni fuego</a>
+          <a href="#mapas">🧭 Mis puntos</a>
+          <a href="#inventario">📦 Mi inventario</a>
+        </div>
+      </div>
+    </section>
+
     <!-- HERO -->
     <section id="inicio" class="hero">
       <div class="wrap hero-inner">
@@ -83,7 +100,7 @@
       <div class="wrap">
         <header class="section-head">
           <h2>Calculadora de reservas</h2>
-          <p>Indica quién vive en casa, cuántos días quieres cubrir y si hay alergias, intolerancias o dietas especiales. Calculamos el agua (unos 3 L por persona y día, según las recomendaciones oficiales), una lista de compra orientativa y el resto de suministros.</p>
+          <p>Indica quién vive en casa, cuántos días quieres cubrir y si hay alergias, intolerancias o dietas especiales. Calculamos el agua (bebida, cocina e higiene mínima), una lista de compra con su peso real y el resto de suministros. Cada cifra tiene su fuente: <a href="#cifras">de dónde salen los números</a>.</p>
         </header>
         <div class="calc">
           <form id="calc-form" class="card calc-form" autocomplete="off" novalidate>
@@ -97,16 +114,24 @@
             </fieldset>
             <fieldset class="steppers">
               <legend>Personas en el hogar</legend>
-              <div class="stepper"><span>Adultos y adolescentes</span><div><button type="button" data-step="-1" data-for="adultos" aria-label="Quitar: un adulto">−</button><input type="number" id="adultos" name="adultos" min="0" max="20" value="2" inputmode="numeric"><button type="button" data-step="1" data-for="adultos" aria-label="Añadir: un adulto">+</button></div></div>
-              <div class="stepper"><span>Niños (2–12 años)</span><div><button type="button" data-step="-1" data-for="ninos" aria-label="Quitar: un niño">−</button><input type="number" id="ninos" name="ninos" min="0" max="20" value="1" inputmode="numeric"><button type="button" data-step="1" data-for="ninos" aria-label="Añadir: un niño">+</button></div></div>
+              <div class="stepper"><span>Adultos (14–64 años)</span><div><button type="button" data-step="-1" data-for="adultos" aria-label="Quitar: un adulto">−</button><input type="number" id="adultos" name="adultos" min="0" max="20" value="2" inputmode="numeric"><button type="button" data-step="1" data-for="adultos" aria-label="Añadir: un adulto">+</button></div></div>
+              <div class="stepper"><span>Mayores de 65</span><div><button type="button" data-step="-1" data-for="mayores" aria-label="Quitar: una persona mayor">−</button><input type="number" id="mayores" name="mayores" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="mayores" aria-label="Añadir: una persona mayor">+</button></div></div>
+              <div class="stepper"><span>Niños de 7 a 13 años</span><div><button type="button" data-step="-1" data-for="ninos" aria-label="Quitar: un niño de 7 a 13 años">−</button><input type="number" id="ninos" name="ninos" min="0" max="20" value="1" inputmode="numeric"><button type="button" data-step="1" data-for="ninos" aria-label="Añadir: un niño de 7 a 13 años">+</button></div></div>
+              <div class="stepper"><span>Niños de 3 a 6 años</span><div><button type="button" data-step="-1" data-for="peques" aria-label="Quitar: un niño de 3 a 6 años">−</button><input type="number" id="peques" name="peques" min="0" max="20" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="peques" aria-label="Añadir: un niño de 3 a 6 años">+</button></div></div>
               <div class="stepper"><span>Bebés (0–2 años)</span><div><button type="button" data-step="-1" data-for="bebes" aria-label="Quitar: un bebé">−</button><input type="number" id="bebes" name="bebes" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="bebes" aria-label="Añadir: un bebé">+</button></div></div>
-              <div class="stepper"><span>Mayores de 70</span><div><button type="button" data-step="-1" data-for="mayores" aria-label="Quitar: una persona mayor">−</button><input type="number" id="mayores" name="mayores" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="mayores" aria-label="Añadir: una persona mayor">+</button></div></div>
               <label class="check sub-check" id="lactancia-row" hidden><input type="checkbox" name="lactancia" id="lactancia"> <span>Hay una madre que da el pecho</span></label>
             </fieldset>
             <fieldset class="steppers">
               <legend>Mascotas</legend>
-              <div class="stepper"><span>Perros</span><div><button type="button" data-step="-1" data-for="perros" aria-label="Quitar: un perro">−</button><input type="number" id="perros" name="perros" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="perros" aria-label="Añadir: un perro">+</button></div></div>
-              <div class="stepper"><span>Gatos u otras pequeñas</span><div><button type="button" data-step="-1" data-for="gatos" aria-label="Quitar: un gato">−</button><input type="number" id="gatos" name="gatos" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="gatos" aria-label="Añadir: un gato">+</button></div></div>
+              <div class="stepper"><span>Perros pequeños (menos de 10 kg)</span><div><button type="button" data-step="-1" data-for="perrosPeq" aria-label="Quitar: un perro pequeño">−</button><input type="number" id="perrosPeq" name="perrosPeq" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="perrosPeq" aria-label="Añadir: un perro pequeño">+</button></div></div>
+              <div class="stepper"><span>Perros medianos (10–25 kg)</span><div><button type="button" data-step="-1" data-for="perrosMed" aria-label="Quitar: un perro mediano">−</button><input type="number" id="perrosMed" name="perrosMed" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="perrosMed" aria-label="Añadir: un perro mediano">+</button></div></div>
+              <div class="stepper"><span>Perros grandes (más de 25 kg)</span><div><button type="button" data-step="-1" data-for="perrosGra" aria-label="Quitar: un perro grande">−</button><input type="number" id="perrosGra" name="perrosGra" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="perrosGra" aria-label="Añadir: un perro grande">+</button></div></div>
+              <div class="stepper"><span>Gatos u otras mascotas pequeñas</span><div><button type="button" data-step="-1" data-for="gatos" aria-label="Quitar: un gato">−</button><input type="number" id="gatos" name="gatos" min="0" max="10" value="0" inputmode="numeric"><button type="button" data-step="1" data-for="gatos" aria-label="Añadir: un gato">+</button></div></div>
+            </fieldset>
+            <fieldset>
+              <legend>Clima y cocina</legend>
+              <label class="check"><input type="checkbox" name="calor" id="calor"> <span>Clima caluroso o verano <span class="muted small">(duplica el agua para beber)</span></span></label>
+              <label class="check"><input type="checkbox" name="sinFuego" id="sinFuego"> <span>Sin hornillo ni fuego <span class="muted small">(todo se come sin cocinar)</span></span></label>
             </fieldset>
             <fieldset>
               <legend>Salud y alimentación</legend>
@@ -121,6 +146,7 @@
               <h3 id="calc-title">Para 72 horas</h3>
               <div id="calc-errores"></div>
               <div class="big-nums" id="calc-big"></div>
+              <p class="small muted water-split" id="calc-agua-split"></p>
               <div id="calc-compra-wrap">
                 <h4 class="calc-h">Lista de compra orientativa</h4>
                 <ul class="grupos" id="calc-grupos"></ul>
@@ -134,8 +160,62 @@
                 <ul class="calc-avisos" id="calc-avisos"></ul>
               </div>
             </div>
-            <p class="small muted">Son estimaciones orientativas por persona y día: unas 2.000 kcal por adulto, 1.800 por mayor de 70 y 1.400 por niño; los bebés, aparte. Ajústalas según vuestra salud, la actividad y el clima, y consulta con tu médico si hay una dieta prescrita. Compra poco a poco, no de golpe.</p>
-            <button type="button" class="btn btn-ghost btn-sm" data-print="calculadora">Imprimir resultado</button>
+            <p class="small muted">Estimaciones por persona y día: 2.200 kcal por adulto, 1.900 por mayor de 65, 1.800 por niño de 7 a 13 años y 1.300 de 3 a 6; los bebés, aparte. Son las cifras de planificación de la BLE alemana y de los valores de referencia D-A-CH (<a href="#cifras">fuentes</a>). Ajústalas a vuestra salud y actividad, y consulta con tu médico si hay una dieta prescrita. Compra poco a poco, no de golpe.</p>
+            <div class="calc-actions">
+              <button type="button" class="btn btn-ghost btn-sm" data-print="calculadora">Imprimir resultado</button>
+              <a class="btn btn-ghost btn-sm" href="#menu">Ver el menú de ejemplo</a>
+              <a class="btn btn-ghost btn-sm" href="#inventario">Comparar con lo que tengo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENÚ DE EJEMPLO (se genera con los datos de la calculadora) -->
+    <section id="menu" class="section">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Menú de ejemplo</h2>
+          <p>Una forma de comerse la reserva de la calculadora: las primeras 72 horas sin cocinar y, a partir del cuarto día, con hornillo (o sin cocinar ningún día, si marcas «sin hornillo ni fuego»). Se adapta a las alergias, intolerancias y dietas que hayas marcado.</p>
+        </header>
+        <p class="menu-meta" id="menu-meta"></p>
+        <div class="menu-days" id="menu-days"></div>
+        <ul class="calc-avisos" id="menu-notas"></ul>
+        <button type="button" class="btn btn-ghost btn-sm" data-print="menu">Imprimir menú</button>
+      </div>
+    </section>
+
+    <!-- INVENTARIO -->
+    <section id="inventario" class="section section-alt">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Inventario y caducidades</h2>
+          <p>Apunta lo que ya tienes guardado. Te decimos cuánto te falta respecto a la calculadora y qué caduca pronto para que lo consumas y lo repongas. Se guarda solo en este dispositivo.</p>
+        </header>
+        <div class="inv">
+          <form id="inv-form" class="card inv-form" autocomplete="off">
+            <h3>Añadir</h3>
+            <label>Qué es<input name="nombre" required maxlength="80" placeholder="Ej.: garbanzos de bote"></label>
+            <label>Tipo<select name="tipo" id="inv-tipo"></select></label>
+            <div class="inv-row">
+              <label>Cantidad<input name="cantidad" type="number" min="0" step="any" value="1" inputmode="decimal" required></label>
+              <span class="inv-unit muted small" id="inv-unit"></span>
+            </div>
+            <label>Caduca o consumir antes de<input name="caduca" type="date"></label>
+            <button type="submit" class="btn btn-primary btn-sm">Añadir al inventario</button>
+          </form>
+          <div class="card inv-out">
+            <h3>Cobertura de la reserva</h3>
+            <p class="small muted" id="inv-cob-head"></p>
+            <ul class="cob" id="inv-cob"></ul>
+            <h3 class="inv-list-h">Lo que tengo</h3>
+            <p class="small muted" id="inv-alert"></p>
+            <ul class="inv-list" id="inv-list"></ul>
+            <div class="inv-actions">
+              <button type="button" class="btn btn-ghost btn-sm" data-print="inventario">Imprimir inventario</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="inv-export">Exportar copia</button>
+              <label class="btn btn-ghost btn-sm inv-import">Importar copia<input type="file" id="inv-import" accept="application/json,.json" hidden></label>
+            </div>
           </div>
         </div>
       </div>
@@ -170,6 +250,81 @@
             <p id="review-status" class="muted">Todavía no has registrado ninguna revisión.</p>
           </div>
           <button type="button" class="btn btn-primary btn-sm" id="review-btn">He revisado la mochila hoy</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUÍAS POR EMERGENCIA -->
+    <section id="guias" class="section section-alt">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Qué hacer en cada emergencia</h2>
+          <p>Pasos concretos para antes, durante y después, con las cifras de las autoridades sanitarias y de protección civil. Funcionan sin conexión: léelas ahora, que en la emergencia habrá prisa.</p>
+        </header>
+        <div class="guide-tabs" role="tablist" aria-label="Tipo de emergencia" id="guide-tabs"></div>
+        <div id="guide-panel"></div>
+      </div>
+    </section>
+
+    <!-- AGUA POTABLE -->
+    <section id="agua" class="section">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Agua potable</h2>
+          <p>Sin agua segura, en pocos días aparecen la deshidratación y las diarreas. Así se guarda y así se potabiliza.</p>
+        </header>
+        <div class="water">
+          <div class="card">
+            <h3>Cómo guardarla</h3>
+            <ul class="calc-list" id="agua-guardar"></ul>
+            <h3>Cómo potabilizarla</h3>
+            <div class="water-steps" id="agua-pasos"></div>
+            <ul class="calc-avisos" id="agua-avisos"></ul>
+          </div>
+          <form class="card bleach" id="bleach-form" autocomplete="off">
+            <h3>Calculadora de lejía</h3>
+            <p class="small muted">Solo lejía «apta para la desinfección del agua de bebida», sin perfume ni detergente.</p>
+            <label>Litros de agua<input type="number" name="litros" min="0" max="1000" step="0.5" value="5" inputmode="decimal"></label>
+            <label class="check"><input type="checkbox" name="turbia"> <span>El agua está turbia o muy fría</span></label>
+            <div class="bleach-out" id="bleach-out" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAPAS SIN CONEXIÓN -->
+    <section id="mapas" class="section section-alt">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Mapas y orientación sin conexión</h2>
+          <p>Sin datos ni cobertura puedes seguir sabiendo dónde estás y adónde ir, si te preparas antes.</p>
+        </header>
+        <div class="maps">
+          <div>
+            <h3>Descarga los mapas ahora</h3>
+            <div class="water-steps" id="mapas-descargar"></div>
+            <ul class="calc-list" id="mapas-consejos"></ul>
+          </div>
+          <div class="card puntos">
+            <h3>Mis puntos</h3>
+            <p class="small muted">Guarda la casa, los puntos de encuentro, el centro de salud o una fuente. El GPS funciona sin internet: te decimos a qué distancia y hacia dónde está cada punto. Se guarda solo en este dispositivo.</p>
+            <form id="pt-form" autocomplete="off">
+              <label>Nombre<input name="nombre" required maxlength="60" placeholder="Ej.: punto de encuentro 1"></label>
+              <label>Coordenadas<input name="coords" inputmode="decimal" placeholder="Ej.: 40.4168, -3.7038"></label>
+              <label>Notas<input name="nota" maxlength="120" placeholder="Ej.: puerta del colegio"></label>
+              <div class="pt-actions">
+                <button type="button" class="btn btn-ghost btn-sm" id="pt-here">Usar mi posición</button>
+                <button type="submit" class="btn btn-primary btn-sm">Guardar punto</button>
+              </div>
+              <p class="small" id="pt-msg" aria-live="polite"></p>
+            </form>
+            <div class="pt-head">
+              <button type="button" class="btn btn-ghost btn-sm" id="pt-locate">¿Dónde estoy? Calcular distancias</button>
+              <span class="small muted" id="pt-pos"></span>
+            </div>
+            <ul class="inv-list" id="pt-list"></ul>
+            <button type="button" class="btn btn-ghost btn-sm" data-print="puntos">Imprimir mis puntos</button>
+          </div>
         </div>
       </div>
     </section>
@@ -210,17 +365,6 @@
         </header>
         <div class="tips" id="tips"></div>
 
-        <div class="card blackout">
-          <h3>⚡ Si se va la luz</h3>
-          <ol>
-            <li><strong>Mantén cerrados la nevera y el congelador.</strong> Un congelador lleno conserva el frío unas 48 h y uno a medias, unas 24 h.</li>
-            <li><strong>Consume primero lo más perecedero:</strong> lácteos, carne y pescado frescos, y las sobras.</li>
-            <li><strong>Pon la radio</strong> y sigue solo las fuentes oficiales. No difundas rumores.</li>
-            <li><strong>Ahorra batería:</strong> activa el modo avión cuando no necesites el móvil y guarda la batería externa para las llamadas.</li>
-            <li><strong>Desenchufa los aparatos sensibles</strong> para protegerlos del pico de tensión cuando vuelva la luz.</li>
-            <li><strong>Nunca uses generadores, barbacoas ni hornillos de gas en interiores:</strong> hay riesgo de intoxicación por monóxido de carbono.</li>
-          </ol>
-        </div>
       </div>
     </section>
 
@@ -257,7 +401,15 @@
     <!-- FUENTES -->
     <section id="fuentes" class="section">
       <div class="wrap">
-        <h2>Fuentes</h2>
+        <h2 id="cifras">De dónde salen los números</h2>
+        <p class="muted">Cada cifra de la calculadora y de las guías, con su fuente. Si una referencia oficial cambia, se cambia aquí.</p>
+        <div class="table-wrap">
+          <table class="table cifras-table">
+            <thead><tr><th>Dato</th><th>Cifra</th><th>Fuente</th></tr></thead>
+            <tbody id="cifras-body"></tbody>
+          </table>
+        </div>
+        <h2 class="sources-h">Fuentes de la actualidad</h2>
         <ul class="sources" id="fuentes-list"></ul>
         <p class="small muted">Este portal es informativo y no sustituye a las indicaciones de las autoridades de protección civil. En una emergencia, llama al <strong>112</strong> (UE) o al <strong>911</strong> (México).</p>
       </div>
@@ -266,7 +418,7 @@
 
   <footer class="footer">
     <div class="wrap">
-      <p><strong>Preparados72h</strong> · MVP · Funciona sin conexión una vez cargado. Tus datos no salen de este dispositivo.</p>
+      <p><strong>Preparados72h</strong> · Funciona sin conexión una vez cargado. Tus datos no salen de este dispositivo. Información orientativa: en una emergencia, sigue siempre las indicaciones de las autoridades.</p>
     </div>
   </footer>
 
