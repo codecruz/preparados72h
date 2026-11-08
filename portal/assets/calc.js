@@ -91,7 +91,7 @@
     },
     {
       id: "legumbres", nombre: "Legumbres", parte: 0.15, unidad: sg("bote de 400 g", "botes de 400 g"), kcalUnidad: 300, gUnidad: 400,
-      texto(R) { return "Legumbres cocidas en bote (garbanzos, lentejas, alubias)" + (R.has("hipertension") ? ", bajas en sal" : ""); },
+      texto(R) { return "Legumbres cocidas en bote (garbanzos, lentejas, alubias o frijoles)" + (R.has("hipertension") ? ", bajas en sal" : ""); },
     },
     {
       id: "proteina", nombre: "Proteína en conserva", parte: 0.15, unidad: sg("lata de unos 120 g", "latas de unos 120 g"), kcalUnidad: 200, gUnidad: 120,

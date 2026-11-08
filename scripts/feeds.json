@@ -1,21 +1,69 @@
 {
-  "_comentario": "Feeds RSS que se revisan cada 6 horas. 'busqueda: true' = feed de búsqueda ya filtrado por tema (umbral de relevancia más bajo).",
+  "_comentario": "Feeds RSS que se revisan cada 6 horas. 'busqueda: true' = feed de búsqueda ya filtrado por tema (umbral de relevancia más bajo). 'zona': europa, latam o global (sale en todas); los límites de noticias nuevas y publicadas se aplican por zona.",
   "maxDiasNoticia": 14,
   "maxDiasHistorico": 30,
-  "maxNoticias": 40,
+  "maxNoticias": 30,
   "feeds": [
-    { "nombre": "Google Noticias · ciberataques a infraestructuras", "busqueda": true,
-      "url": "https://news.google.com/rss/search?q=ciberataque+(supermercados+OR+infraestructuras+OR+refrigeraci%C3%B3n+OR+red+el%C3%A9ctrica)+when:7d&hl=es&gl=ES&ceid=ES:es" },
-    { "nombre": "Google Noticias · protección civil y kit de emergencia", "busqueda": true,
-      "url": "https://news.google.com/rss/search?q=(%22kit+de+emergencia%22+OR+%22mochila+de+emergencia%22+OR+%22protecci%C3%B3n+civil%22+OR+%2272+horas%22)+when:7d&hl=es&gl=ES&ceid=ES:es" },
-    { "nombre": "Google Noticias · apagones y desabastecimiento", "busqueda": true,
-      "url": "https://news.google.com/rss/search?q=(apag%C3%B3n+OR+desabastecimiento+OR+%22cadena+de+fr%C3%ADo%22)+when:7d&hl=es&gl=ES&ceid=ES:es" },
-    { "nombre": "Google Noticias · México protección civil", "busqueda": true,
-      "url": "https://news.google.com/rss/search?q=(%22protecci%C3%B3n+civil%22+OR+%22mochila+de+emergencia%22)+when:7d&hl=es-419&gl=MX&ceid=MX:es-419" },
-    { "nombre": "El País", "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada" },
-    { "nombre": "20minutos", "url": "https://www.20minutos.es/rss/" },
-    { "nombre": "El Financiero", "url": "https://www.elfinanciero.com.mx/arc/outboundfeeds/rss/?outputType=xml" },
-    { "nombre": "BBC News", "url": "https://feeds.bbci.co.uk/news/world/rss.xml" },
-    { "nombre": "BBC News", "url": "https://feeds.bbci.co.uk/news/technology/rss.xml" }
+    {
+      "nombre": "Google Noticias · ciberataques a infraestructuras",
+      "busqueda": true,
+      "url": "https://news.google.com/rss/search?q=ciberataque+(supermercados+OR+infraestructuras+OR+refrigeraci%C3%B3n+OR+red+el%C3%A9ctrica)+when:7d&hl=es&gl=ES&ceid=ES:es",
+      "zona": "europa"
+    },
+    {
+      "nombre": "Google Noticias · protección civil y kit de emergencia",
+      "busqueda": true,
+      "url": "https://news.google.com/rss/search?q=(%22kit+de+emergencia%22+OR+%22mochila+de+emergencia%22+OR+%22protecci%C3%B3n+civil%22+OR+%2272+horas%22)+when:7d&hl=es&gl=ES&ceid=ES:es",
+      "zona": "europa"
+    },
+    {
+      "nombre": "Google Noticias · apagones y desabastecimiento",
+      "busqueda": true,
+      "url": "https://news.google.com/rss/search?q=(apag%C3%B3n+OR+desabastecimiento+OR+%22cadena+de+fr%C3%ADo%22)+when:7d&hl=es&gl=ES&ceid=ES:es",
+      "zona": "europa"
+    },
+    {
+      "nombre": "Google Noticias · México protección civil",
+      "busqueda": true,
+      "url": "https://news.google.com/rss/search?q=(%22protecci%C3%B3n+civil%22+OR+%22mochila+de+emergencia%22)+when:7d&hl=es-419&gl=MX&ceid=MX:es-419",
+      "zona": "latam"
+    },
+    {
+      "nombre": "Google Noticias · Latinoamérica apagones y ciberataques",
+      "busqueda": true,
+      "zona": "latam",
+      "url": "https://news.google.com/rss/search?q=(apag%C3%B3n+OR+ciberataque+OR+desabasto)+when:7d&hl=es-419&gl=MX&ceid=MX:es-419"
+    },
+    {
+      "nombre": "Google Noticias · Latinoamérica gestión del riesgo",
+      "busqueda": true,
+      "zona": "latam",
+      "url": "https://news.google.com/rss/search?q=(%22gesti%C3%B3n+del+riesgo%22+OR+%22kit+de+emergencia%22+OR+%22mochila+de+emergencia%22)+when:7d&hl=es-419&gl=CO&ceid=CO:es-419"
+    },
+    {
+      "nombre": "El País",
+      "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",
+      "zona": "europa"
+    },
+    {
+      "nombre": "20minutos",
+      "url": "https://www.20minutos.es/rss/",
+      "zona": "europa"
+    },
+    {
+      "nombre": "El Financiero",
+      "url": "https://www.elfinanciero.com.mx/arc/outboundfeeds/rss/?outputType=xml",
+      "zona": "latam"
+    },
+    {
+      "nombre": "BBC News",
+      "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+      "zona": "global"
+    },
+    {
+      "nombre": "BBC News",
+      "url": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "zona": "global"
+    }
   ]
 }

@@ -1,5 +1,29 @@
 // Contenido del portal. Alerta y fuentes revisadas el 8 nov 2026; cada cifra lleva su fuente.
 window.PREP_DATA = {
+  // Mi país: define la zona (noticias, recomendaciones, productos) y los teléfonos de emergencias.
+  // Números comprobados en noviembre de 2026; donde las fuentes no coinciden no se da número.
+  zonas: {
+    nombres: { europa: "España y Europa", latam: "México y Latinoamérica", todas: "Todas las zonas" },
+    paises: [
+      { id: "es", nombre: "España", zona: "europa", tel: "112", sos: [["112", "Emergencias"]] },
+      { id: "ue", nombre: "Otro país de la Unión Europea", zona: "europa", tel: "112", sos: [["112", "Emergencias (toda la UE)"]] },
+      { id: "uk", nombre: "Reino Unido", zona: "europa", tel: "999", sos: [["999", "Emergencias"], ["112", "También funciona"]] },
+      { id: "mx", nombre: "México", zona: "latam", tel: "911", sos: [["911", "Emergencias"]] },
+      { id: "ar", nombre: "Argentina", zona: "latam", tel: "911", sos: [["911", "Emergencias y policía"], ["107", "Ambulancia (SAME)"], ["100", "Bomberos"]] },
+      { id: "co", nombre: "Colombia", zona: "latam", tel: "123", sos: [["123", "Emergencias"]] },
+      { id: "cl", nombre: "Chile", zona: "latam", tel: "131", sos: [["131", "Ambulancia (SAMU)"], ["132", "Bomberos"], ["133", "Carabineros"]] },
+      { id: "pe", nombre: "Perú", zona: "latam", tel: "106", sos: [["106", "Ambulancia (SAMU)"], ["116", "Bomberos"], ["105", "Policía"]] },
+      { id: "ec", nombre: "Ecuador", zona: "latam", tel: "911", sos: [["911", "ECU 911"]] },
+      { id: "uy", nombre: "Uruguay", zona: "latam", tel: "911", sos: [["911", "Emergencias"]] },
+      { id: "latam", nombre: "Otro país de Latinoamérica", zona: "latam", tel: null, sos: [] },
+      { id: "otro", nombre: "Otro país", zona: "todas", tel: null, sos: [] },
+    ],
+    sinNumero: "número de emergencias de tu país",
+    // Zona horaria → país, para la primera visita (luego manda lo que elija la persona)
+    husos: { "Europe/Madrid": "es", "Atlantic/Canary": "es", "Africa/Ceuta": "es", "Europe/London": "uk", "America/Mexico_City": "mx", "America/Monterrey": "mx", "America/Merida": "mx", "America/Cancun": "mx", "America/Chihuahua": "mx", "America/Mazatlan": "mx", "America/Tijuana": "mx", "America/Hermosillo": "mx", "America/Bogota": "co", "America/Santiago": "cl", "America/Lima": "pe", "America/Guayaquil": "ec", "America/Montevideo": "uy" },
+    aguaLatam: "En Latinoamérica la lejía se llama cloro o blanqueador. Usa uno sin aroma ni detergente; si la etiqueta indica que sirve para desinfectar agua, sigue su dosis.",
+  },
+
   alerta: {
     fecha: "Revisado el 8 de noviembre de 2026",
     titulo: "Ciberataques a la refrigeración de supermercados en Europa",
@@ -192,7 +216,7 @@ window.PREP_DATA = {
         "Desenchufa los aparatos sensibles (ordenador, televisor) para protegerlos del pico de tensión cuando vuelva la luz. Deja una lámpara encendida para saber cuándo vuelve.",
         "Nunca uses generadores, barbacoas, hornillos ni estufas de combustión dentro de casa, en el garaje ni en el balcón cerrado. El generador, fuera y a más de 6 metros de puertas y ventanas.",
         "Ahorra batería: brillo al mínimo, modo avión cuando no lo necesites y mensajes en vez de llamadas, que saturan menos la red.",
-        "Informa solo por fuentes oficiales (radio, 112, ayuntamiento) y no difundas rumores.",
+        "Informa solo por fuentes oficiales (radio, {EMERG}, ayuntamiento) y no difundas rumores.",
       ],
       despues: [
         "Tira los alimentos perecederos (carne, pescado, leche, sobras, quesos frescos) que hayan pasado más de 4 horas sin frío. No los pruebes para saber si están bien.",
@@ -253,7 +277,7 @@ window.PREP_DATA = {
         "Evita salir y hacer esfuerzos en las horas centrales del día. Cierra persianas y ventanas de día y ventila por la noche.",
         "Nunca dejes a nadie (ni a una mascota) dentro de un coche cerrado, ni siquiera un momento.",
         "Llama a los mayores que viven solos al menos una vez al día.",
-        "Golpe de calor: temperatura muy alta, piel caliente y seca, confusión o desmayo. Llama al 112, lleva a la persona a la sombra y refréscala con agua.",
+        "Golpe de calor: temperatura muy alta, piel caliente y seca, confusión o desmayo. Llama al {EMERG}, lleva a la persona a la sombra y refréscala con agua.",
       ],
       despues: ["Sigue bebiendo y descansando: el cansancio y la deshidratación se acumulan durante varios días."],
       cifras: ["calor"],
@@ -269,7 +293,7 @@ window.PREP_DATA = {
         "Reuníos en una sola habitación, la más pequeña y soleada, y cerrad las demás. Tapa las rendijas de puertas y ventanas.",
         "Vestíos por capas, con gorro y calcetines; comer y beber caliente ayuda a mantener el calor.",
         "Nunca uses el horno, la cocina de gas, braseros ni barbacoas para calentar la casa: el monóxido de carbono no huele y mata.",
-        "Hipotermia: temblores intensos, torpeza, habla confusa y somnolencia. Llama al 112, abriga a la persona poco a poco (primero el tronco) y, solo si está consciente y puede tragar, dale bebidas templadas y dulces, sin alcohol.",
+        "Hipotermia: temblores intensos, torpeza, habla confusa y somnolencia. Llama al {EMERG}, abriga a la persona poco a poco (primero el tronco) y, solo si está consciente y puede tragar, dale bebidas templadas y dulces, sin alcohol.",
       ],
       despues: ["Revisa si hay tuberías congeladas o reventadas antes de volver a abrir la llave de paso."],
       cifras: ["co"],
@@ -285,7 +309,7 @@ window.PREP_DATA = {
         "Sube a pisos altos. Nunca bajes a sótanos ni a garajes para salvar el coche.",
         "No cruces corrientes de agua: 15 cm de agua en movimiento pueden derribar a un adulto; 30 cm arrastran un coche pequeño, y 60 cm, un todoterreno.",
         "Si el agua entra en casa y es seguro hacerlo, corta la luz desde el cuadro general.",
-        "Sigue las indicaciones del 112 y de protección civil. Si te piden evacuar, hazlo enseguida.",
+        "Sigue las indicaciones del {EMERG} y de protección civil. Si te piden evacuar, hazlo enseguida.",
       ],
       despues: [
         "No vuelvas a casa hasta que lo permitan las autoridades.",
@@ -410,9 +434,9 @@ window.PREP_DATA = {
       id: "auxilios", icono: "❤️", titulo: "Primeros auxilios y RCP", nivel: "Imprescindible",
       resumen: "La habilidad que más vidas salva. Nada sustituye a un curso práctico: Cruz Roja y protección civil los organizan.",
       pasos: [
-        "PAS: Protege (que no haya más víctimas, empezando por ti), Avisa (112) y Socorre.",
+        "PAS: Protege (que no haya más víctimas, empezando por ti), Avisa ({EMERG}) y Socorre.",
         "Hemorragia: presión directa, fuerte y continua sobre la herida con un paño limpio. No retires el primer paño: pon otro encima.",
-        "Si no responde y no respira con normalidad: llama al 112 (con el altavoz) y empieza la RCP.",
+        "Si no responde y no respira con normalidad: llama al {EMERG} (con el altavoz) y empieza la RCP.",
         "RCP en adultos: manos en el centro del pecho, brazos rectos, 100–120 compresiones por minuto y 5–6 cm de profundidad, dejando que el pecho vuelva arriba.",
         "Si sabes, 30 compresiones y 2 insuflaciones; si no, solo compresiones sin parar hasta que llegue ayuda o un desfibrilador (DEA).",
         "Si respira pero no responde: posición lateral de seguridad y vigila que siga respirando.",
@@ -479,7 +503,7 @@ window.PREP_DATA = {
       id: "senales", icono: "🆘", titulo: "Señales de socorro", nivel: "Básico",
       resumen: "Tres de cualquier cosa es una señal de auxilio reconocida en todo el mundo.",
       pasos: [
-        "Llama al 112: funciona con cualquier operador con cobertura, aunque no sea el tuyo.",
+        "Llama al {EMERG}: funciona con cualquier operador con cobertura, aunque no sea el tuyo.",
         "Señal de socorro en montaña: 6 señales por minuto (silbato, luz, espejo), una cada 10 segundos, un minuto de pausa y repetir. La respuesta es 3 señales por minuto.",
         "Tres pitidos, tres destellos o tres fuegos en triángulo también se entienden como petición de ayuda.",
         "En morse, SOS: tres cortos, tres largos y tres cortos (··· — — — ···).",
@@ -563,7 +587,7 @@ window.PREP_DATA = {
       // Pescado y carne en conserva
       { id: "atun-aceite", cat: "proteina", nombre: "Atún claro en aceite de oliva", formato: "Pack de 3 latas de 80 g, abre fácil", dura: "3–5 años", cocinar: false, tipo: "proteina", al: "pescado", nota: "El aceite de la lata también alimenta: aprovéchalo con pan o legumbres." },
       { id: "atun-natural", cat: "proteina", nombre: "Atún al natural", formato: "Pack de 3 latas de 80 g", dura: "3–5 años", cocinar: false, tipo: "proteina", al: "pescado", nota: "Menos calorías que en aceite: combínalo con aceite o frutos secos." },
-      { id: "sardinas", cat: "proteina", nombre: "Sardinas en aceite de oliva", formato: "Lata de 120 g, abre fácil", dura: "3–5 años", cocinar: false, tipo: "proteina", al: "pescado", nota: "Con espina comestible: aportan calcio." },
+      { id: "sardinas", latam: { nombre: "Sardinas en aceite o en salsa de tomate", formato: "Lata de 155–425 g" }, cat: "proteina", nombre: "Sardinas en aceite de oliva", formato: "Lata de 120 g, abre fácil", dura: "3–5 años", cocinar: false, tipo: "proteina", al: "pescado", nota: "Con espina comestible: aportan calcio." },
       { id: "caballa", cat: "proteina", nombre: "Caballa (o melva) en aceite de oliva", formato: "Lata de 120 g", dura: "3–5 años", cocinar: false, tipo: "proteina", al: "pescado" },
       { id: "mejillones", cat: "proteina", nombre: "Mejillones en escabeche", formato: "Lata de 110 g", dura: "3–4 años", cocinar: false, tipo: "proteina", al: "moluscos" },
       { id: "berberechos", cat: "proteina", nombre: "Berberechos o almejas al natural", formato: "Lata de 110 g", dura: "3–4 años", cocinar: false, tipo: "proteina", al: "moluscos" },
@@ -573,49 +597,50 @@ window.PREP_DATA = {
       { id: "albondigas", cat: "proteina", nombre: "Albóndigas o carne guisada en lata", formato: "Lata de 400–450 g", dura: "2–3 años", cocinar: false, tipo: "proteina", nota: "Se puede comer fría; templada en la lata al sol o al baño maría si hay hornillo." },
 
       // Embutidos y quesos curados
-      { id: "chorizo", cat: "embutido", nombre: "Chorizo curado en sarta o vela, entero", formato: "Pieza de 200–250 g sin lonchear", dura: "3–6 meses", cocinar: false, tipo: "proteina", nota: "Solo entero y con «conservar en lugar fresco y seco». Una vez cortado, cómelo en pocos días." },
-      { id: "salchichon", cat: "embutido", nombre: "Salchichón o fuet curado, entero", formato: "Pieza de 150–250 g", dura: "2–4 meses", cocinar: false, tipo: "proteina", nota: "El fuet es más fino y se seca antes: rota más a menudo." },
-      { id: "lomo", cat: "embutido", nombre: "Lomo embuchado o cecina, en pieza", formato: "Pieza de 200–400 g", dura: "3–6 meses", cocinar: false, tipo: "proteina", nota: "Mucha proteína y poco peso. En pieza, nunca loncheado envasado." },
-      { id: "jamon-taco", cat: "embutido", nombre: "Jamón serrano en taco o pieza pequeña", formato: "Taco de 250–500 g al vacío", dura: "6–12 meses", cocinar: false, tipo: "proteina", nota: "Comprueba que el envase no pida nevera; muchos tacos curados no la necesitan cerrados." },
+      { id: "chorizo", latam: { nombre: "Salami o chorizo seco curado, entero", formato: "Pieza de 200–300 g sin rebanar", nota: "Ojo: el chorizo fresco (como el mexicano o el argentino para asar) es carne cruda: necesita nevera y cocinarse. Busca embutido seco curado que se conserve sin refrigerar." }, cat: "embutido", nombre: "Chorizo curado en sarta o vela, entero", formato: "Pieza de 200–250 g sin lonchear", dura: "3–6 meses", cocinar: false, tipo: "proteina", nota: "Solo entero y con «conservar en lugar fresco y seco». Una vez cortado, cómelo en pocos días." },
+      { id: "salchichon", zona: "europa", cat: "embutido", nombre: "Salchichón o fuet curado, entero", formato: "Pieza de 150–250 g", dura: "2–4 meses", cocinar: false, tipo: "proteina", nota: "El fuet es más fino y se seca antes: rota más a menudo." },
+      { id: "lomo", latam: { nombre: "Machaca o carne seca envasada", formato: "Bolsa de 100–250 g", dura: "Según etiqueta (varios meses)", nota: "Carne deshidratada: mucha proteína en poco peso. Solo la seca y envasada que no pida refrigeración." }, cat: "embutido", nombre: "Lomo embuchado o cecina, en pieza", formato: "Pieza de 200–400 g", dura: "3–6 meses", cocinar: false, tipo: "proteina", nota: "Mucha proteína y poco peso. En pieza, nunca loncheado envasado." },
+      { id: "jamon-taco", zona: "europa", cat: "embutido", nombre: "Jamón serrano en taco o pieza pequeña", formato: "Taco de 250–500 g al vacío", dura: "6–12 meses", cocinar: false, tipo: "proteina", nota: "Comprueba que el envase no pida nevera; muchos tacos curados no la necesitan cerrados." },
       { id: "queso-aceite", cat: "embutido", nombre: "Queso curado en aceite de oliva", formato: "Tarro de cristal de 250–400 g", dura: "12–24 meses", cocinar: false, tipo: "proteina", al: "leche", nota: "El queso fuera del aceite es perecedero: el tarro aguanta en la despensa." },
       { id: "queso-curado", cat: "embutido", nombre: "Queso viejo o muy curado, cuña entera", formato: "Cuña de 250 g", dura: "Según etiqueta", cocinar: false, tipo: "proteina", al: "leche", nota: "Muchas cuñas envasadas piden nevera: cómpralo solo si la etiqueta no lo exige." },
 
       // Legumbres y platos listos
       { id: "garbanzos", cat: "legumbre", nombre: "Garbanzos cocidos", formato: "Bote de cristal de 400 g", dura: "2–3 años", cocinar: false, tipo: "legumbres", nota: "Ya cocidos: se comen fríos, aclarados con un poco de agua." },
       { id: "lentejas", cat: "legumbre", nombre: "Lentejas cocidas", formato: "Bote de cristal de 400 g", dura: "2–3 años", cocinar: false, tipo: "legumbres" },
-      { id: "alubias", cat: "legumbre", nombre: "Alubias blancas o rojas cocidas", formato: "Bote de cristal de 400 g", dura: "2–3 años", cocinar: false, tipo: "legumbres", nota: "Nunca compres alubias secas para comer sin cocinar: crudas son tóxicas." },
-      { id: "fabada", cat: "legumbre", nombre: "Fabada, cocido o lentejas con chorizo en lata", formato: "Lata de 420–440 g (1–2 raciones)", dura: "2–3 años", cocinar: false, tipo: "legumbres", nota: "Comida completa en una lata. Mejor caliente, pero se puede comer templada." },
+      { id: "alubias", latam: { nombre: "Frijoles cocidos o refritos", formato: "Lata o bolsa de 400–560 g", nota: "Ya cocidos: se comen tal cual. Nunca comas frijoles secos sin cocer: crudos son tóxicos." }, cat: "legumbre", nombre: "Alubias blancas o rojas cocidas", formato: "Bote de cristal de 400 g", dura: "2–3 años", cocinar: false, tipo: "legumbres", nota: "Nunca compres alubias secas para comer sin cocinar: crudas son tóxicas." },
+      { id: "fabada", latam: { nombre: "Frijoles charros, chili con carne o sopa de lentejas en lata", formato: "Lata de 400–560 g (1–2 raciones)" }, cat: "legumbre", nombre: "Fabada, cocido o lentejas con chorizo en lata", formato: "Lata de 420–440 g (1–2 raciones)", dura: "2–3 años", cocinar: false, tipo: "legumbres", nota: "Comida completa en una lata. Mejor caliente, pero se puede comer templada." },
       { id: "legumbre-seca", cat: "legumbre", nombre: "Lentejas o garbanzos secos", formato: "Paquete de 1 kg", dura: "1–2 años", cocinar: true, tipo: "legumbres", nota: "Muy baratos y ligeros, pero solo si tienes hornillo y agua de sobra para remojar y cocer." },
 
       // Pan, cereales y féculas
-      { id: "picos", cat: "hidratos", nombre: "Picos, regañás o pan tostado", formato: "Bolsa de 250 g", dura: "6–12 meses", cocinar: false, tipo: "cereales", al: "gluten", nota: "El sustituto del pan cuando no hay panadería." },
+      { id: "picos", latam: { nombre: "Tostadas de maíz o galletas saladas", formato: "Paquete de 300 g o caja de galletas en paquetitos", al: "gluten (galletas)" }, cat: "hidratos", nombre: "Picos, regañás o pan tostado", formato: "Bolsa de 250 g", dura: "6–12 meses", cocinar: false, tipo: "cereales", al: "gluten", nota: "El sustituto del pan cuando no hay panadería." },
       { id: "tortitas", cat: "hidratos", nombre: "Tortitas de arroz o de maíz", formato: "Paquete de 130 g", dura: "9–12 meses", cocinar: false, tipo: "cereales", nota: "Sin gluten en muchas marcas: mira la etiqueta si hay celíacos." },
       { id: "galletas", cat: "hidratos", nombre: "Galletas María o tipo digestive", formato: "Paquete de 800 g en raciones", dura: "9–12 meses", cocinar: false, tipo: "cereales", al: "gluten", nota: "Mejor en paquetitos individuales: no se ablandan al abrir." },
-      { id: "avena", cat: "hidratos", nombre: "Copos de avena", formato: "Paquete de 500 g", dura: "12 meses", cocinar: false, tipo: "cereales", al: "gluten", nota: "Se ablandan en agua o leche fría en 30–60 minutos." },
+      { id: "avena", latam: { nombre: "Avena en hojuelas" }, cat: "hidratos", nombre: "Copos de avena", formato: "Paquete de 500 g", dura: "12 meses", cocinar: false, tipo: "cereales", al: "gluten", nota: "Se ablandan en agua o leche fría en 30–60 minutos." },
       { id: "cuscus", cat: "hidratos", nombre: "Cuscús", formato: "Paquete de 500 g", dura: "1–2 años", cocinar: false, tipo: "cereales", al: "gluten", nota: "Se hidrata con agua: caliente en 5 minutos o fría en 30–60." },
       { id: "arroz", cat: "hidratos", nombre: "Arroz blanco", formato: "Paquete de 1 kg", dura: "1–2 años", cocinar: true, tipo: "cereales", nota: "El de vasitos precocinados se puede comer sin cocinar; el normal, no." },
       { id: "pasta", cat: "hidratos", nombre: "Pasta seca", formato: "Paquete de 500 g", dura: "2–3 años", cocinar: true, tipo: "cereales", al: "gluten" },
       { id: "pure", cat: "hidratos", nombre: "Puré de patata en copos", formato: "Paquete de 4 raciones", dura: "12 meses", cocinar: true, tipo: "cereales", nota: "Solo necesita agua caliente; ligero para la mochila." },
 
       // Aceite, frutos secos y cremas
-      { id: "aceite", cat: "grasas", nombre: "Aceite de oliva", formato: "Botella de 1 L (mejor en lata o botella opaca)", dura: "12–18 meses", cocinar: false, tipo: "grasas", nota: "La forma más fácil de sumar calorías: una cucharada sopera (10 ml) son unas 90 kcal." },
-      { id: "frutos-secos", cat: "grasas", nombre: "Frutos secos naturales o tostados", formato: "Bolsa de 200 g (almendras, nueces, cacahuetes)", dura: "6–12 meses", cocinar: false, tipo: "grasas", al: "frutos de cáscara o cacahuete", nota: "Mucha energía en poco espacio. Se enrancian con calor: rota a menudo." },
-      { id: "crema-cacahuete", cat: "grasas", nombre: "Crema de cacahuete o de almendra", formato: "Tarro de 350 g", dura: "12 meses", cocinar: false, tipo: "grasas", al: "cacahuete o frutos de cáscara" },
+      { id: "aceite", latam: { nombre: "Aceite (de oliva, maíz o girasol)" }, cat: "grasas", nombre: "Aceite de oliva", formato: "Botella de 1 L (mejor en lata o botella opaca)", dura: "12–18 meses", cocinar: false, tipo: "grasas", nota: "La forma más fácil de sumar calorías: una cucharada sopera (10 ml) son unas 90 kcal." },
+      { id: "frutos-secos", latam: { formato: "Bolsa de 200 g (almendras, nueces, cacahuates o maní)", al: "frutos de cáscara o cacahuate" }, cat: "grasas", nombre: "Frutos secos naturales o tostados", formato: "Bolsa de 200 g (almendras, nueces, cacahuetes)", dura: "6–12 meses", cocinar: false, tipo: "grasas", al: "frutos de cáscara o cacahuete", nota: "Mucha energía en poco espacio. Se enrancian con calor: rota a menudo." },
+      { id: "crema-cacahuete", latam: { nombre: "Crema de cacahuate (maní) o de almendra", al: "cacahuate o frutos de cáscara" }, cat: "grasas", nombre: "Crema de cacahuete o de almendra", formato: "Tarro de 350 g", dura: "12 meses", cocinar: false, tipo: "grasas", al: "cacahuete o frutos de cáscara" },
       { id: "semillas", cat: "grasas", nombre: "Pipas peladas o semillas", formato: "Bolsa de 200 g", dura: "6–12 meses", cocinar: false, tipo: "grasas" },
 
       // Leche y bebidas
       { id: "leche-uht", cat: "lacteos", nombre: "Leche UHT (o bebida vegetal UHT)", formato: "Brik de 1 L", dura: "6–9 meses", cocinar: false, tipo: "lacteos", al: "leche", nota: "Una vez abierta necesita nevera: sin luz, mejor briks pequeños de 200 ml." },
       { id: "leche-polvo", cat: "lacteos", nombre: "Leche en polvo", formato: "Bote de 400–800 g", dura: "12–24 meses", cocinar: false, tipo: "lacteos", al: "leche", nota: "Ocupa poco y no necesita nevera aunque esté abierta; se prepara con agua potable." },
+      { id: "leche-evaporada", cat: "lacteos", zona: "latam", nombre: "Leche evaporada", formato: "Lata de 360–410 g", dura: "12–18 meses", cocinar: false, tipo: "lacteos", al: "leche", nota: "Se mezcla con agua potable a partes iguales para usarla como leche. Abierta, necesita nevera." },
       { id: "leche-condensada", cat: "lacteos", nombre: "Leche condensada en tubo o lata", formato: "Tubo de 170 g o lata de 370 g", dura: "12–18 meses", cocinar: false, tipo: "lacteos", al: "leche", nota: "Energía rápida para niños y para el ánimo." },
       { id: "cacao", cat: "lacteos", nombre: "Cacao soluble y café soluble", formato: "Bote de 400 g / 200 g", dura: "1–2 años", cocinar: false, tipo: "otros", nota: "Se disuelven en frío. El café también es moral." },
 
       // Fruta y verdura
       { id: "tomate", cat: "fruta", nombre: "Tomate triturado o frito", formato: "Brik o lata de 400 g", dura: "1–2 años", cocinar: false, tipo: "frutaVerdura" },
-      { id: "pimientos", cat: "fruta", nombre: "Pimientos asados o del piquillo", formato: "Lata o bote de 250–400 g", dura: "2–3 años", cocinar: false, tipo: "frutaVerdura" },
-      { id: "verduras-bote", cat: "fruta", nombre: "Menestra, judías verdes o espárragos en bote", formato: "Bote de cristal de 400 g", dura: "2–3 años", cocinar: false, tipo: "frutaVerdura" },
-      { id: "maiz", cat: "fruta", nombre: "Maíz dulce", formato: "Pack de 3 latas pequeñas", dura: "2–3 años", cocinar: false, tipo: "frutaVerdura" },
-      { id: "fruta-almibar", cat: "fruta", nombre: "Melocotón o piña en su jugo o en almíbar", formato: "Lata de 400–800 g", dura: "2–3 años", cocinar: false, tipo: "frutaVerdura", nota: "El líquido también hidrata." },
-      { id: "fruta-seca", cat: "fruta", nombre: "Fruta deshidratada: pasas, orejones, dátiles, ciruelas", formato: "Bolsa de 200–250 g", dura: "6–12 meses", cocinar: false, tipo: "frutaVerdura" },
+      { id: "pimientos", latam: { nombre: "Chiles en vinagre, chipotles en adobo o rajas en lata", formato: "Lata de 200–400 g" }, cat: "fruta", nombre: "Pimientos asados o del piquillo", formato: "Lata o bote de 250–400 g", dura: "2–3 años", cocinar: false, tipo: "frutaVerdura" },
+      { id: "verduras-bote", latam: { nombre: "Verduras en lata: chícharos, zanahoria, ejotes o champiñones", formato: "Lata de 400 g" }, cat: "fruta", nombre: "Menestra, judías verdes o espárragos en bote", formato: "Bote de cristal de 400 g", dura: "2–3 años", cocinar: false, tipo: "frutaVerdura" },
+      { id: "maiz", latam: { nombre: "Elote (maíz dulce) en lata" }, cat: "fruta", nombre: "Maíz dulce", formato: "Pack de 3 latas pequeñas", dura: "2–3 años", cocinar: false, tipo: "frutaVerdura" },
+      { id: "fruta-almibar", latam: { nombre: "Duraznos o piña en almíbar o en su jugo" }, cat: "fruta", nombre: "Melocotón o piña en su jugo o en almíbar", formato: "Lata de 400–800 g", dura: "2–3 años", cocinar: false, tipo: "frutaVerdura", nota: "El líquido también hidrata." },
+      { id: "fruta-seca", latam: { nombre: "Fruta deshidratada: pasas, orejones, dátiles o ciruelas pasas" }, cat: "fruta", nombre: "Fruta deshidratada: pasas, orejones, dátiles, ciruelas", formato: "Bolsa de 200–250 g", dura: "6–12 meses", cocinar: false, tipo: "frutaVerdura" },
       { id: "compota", cat: "fruta", nombre: "Compota o fruta triturada en bolsita", formato: "Bolsitas de 90–100 g", dura: "9–12 meses", cocinar: false, tipo: "frutaVerdura", nota: "Pensado para niños, pero útil para todos." },
 
       // Dulces, sal y extras

@@ -7,6 +7,7 @@ Pensado para preparacionistas y survivalistas. Cada sección es una vista propia
 
 - **Material por niveles**: equipo para ir guardando, de lo básico (72 h–1 semana) a la autonomía prolongada (más de 1 mes), con vida útil y uso seguro de cada cosa.
 - **Código Morse**: tabla, traductor de texto a Morse y de Morse a texto, y emisión (SOS incluido) con la pantalla, el sonido o la vibración del móvil; sin conexión.
+- **Mi país**: selector (se detecta por la zona horaria la primera vez) que adapta el número de emergencias y el botón SOS (112, 911, 123, 131…), las noticias por zona (España y Europa o México y Latinoamérica), la tabla y el mapa de recomendaciones por país y los nombres de los productos de la despensa.
 - **Despensa: qué comprar**: 50 productos concretos de supermercado que aguantan sin nevera (formato, duración orientativa, si hay que cocinar, alérgenos), lista de la compra imprimible y botón para pasarlos al inventario.
 - **Habilidades**: regla de los 3, primeros auxilios y RCP (ERC 2021), fuego, refugio, nudos, orientación sin GPS, señales de socorro y agua en el campo, con ilustraciones que funcionan sin conexión (nudos de Wikimedia Commons con licencia libre; el resto, SVG propias en `assets/figuras.js`).
 - **Calculadora de reservas** con cifras de fuentes oficiales: agua desglosada (bebida, cocina, higiene mínima), cinco tramos de edad, perros por tamaño, clima caluroso, opción «sin hornillo ni fuego», alergias, intolerancias y dietas, y los kilos reales de lo que hay que comprar.

@@ -52,8 +52,10 @@
           <a href="#inicio" data-nav="inicio">Inicio</a>
           <a href="#noticias" data-nav="noticias">Noticias</a>
           <a href="#fuentes" data-nav="fuentes">Fuentes de las cifras</a>
+          <a href="#mi-pais" id="nav-pais">📍 Mi país</a>
         </div>
       </nav>
+      <a href="#mi-pais" class="pais-chip" id="pais-chip">📍</a>
       <button type="button" class="mode-btn" id="mode-btn" aria-pressed="false" title="Pantalla oscura y sin animaciones para ahorrar batería">Modo apagón</button>
       <span id="net" class="net" title="Estado de conexión"></span>
     </div>
@@ -99,6 +101,11 @@
           <h2>Tu preparación</h2>
           <p>Lo que llevas hecho, guardado solo en este dispositivo. Pulsa una tarjeta para seguir.</p>
         </header>
+        <div class="mi-pais card" id="mi-pais">
+          <label for="pais-sel"><span aria-hidden="true">📍</span> <strong>Mi país</strong></label>
+          <select id="pais-sel"></select>
+          <p class="small muted" id="pais-info"></p>
+        </div>
         <div class="panel-stats" id="panel-stats"></div>
         <h2 class="sub-h">Secciones</h2>
         <div class="tiles" id="tiles"></div>
@@ -131,6 +138,7 @@
           <h2>Últimas noticias</h2>
           <p>Se recopilan cada 6 horas de forma automática a partir de medios en español e inglés. <span id="news-updated" class="muted"></span></p>
         </header>
+        <div class="chips news-zona" id="news-zona" role="group" aria-label="Zona de las noticias"></div>
         <div class="chips" id="news-chips" role="group" aria-label="Filtrar noticias por tema"></div>
         <ul class="news" id="news-list"></ul>
         <p class="small muted">Enlaces a medios externos. La selección es automática: contrasta siempre con las fuentes oficiales.</p>
@@ -552,6 +560,7 @@
           <div class="world-zoom seg-mini" role="group" aria-label="Zona del mapa">
             <button type="button" data-zona="mundo" aria-pressed="true">Mundo</button>
             <button type="button" data-zona="europa" aria-pressed="false">Europa</button>
+            <button type="button" data-zona="america" aria-pressed="false">América</button>
           </div>
           <svg id="world-map" class="world-map" role="group" aria-label="Mapa del mundo con los países que tienen una recomendación oficial de reservas"></svg>
           <div id="world-tip" class="world-tip" hidden></div>
@@ -563,6 +572,7 @@
             <tbody id="paises-body"></tbody>
           </table>
         </div>
+        <p><button type="button" class="btn btn-ghost btn-sm" id="paises-todos" hidden></button></p>
         <p class="muted small">Recopilación de partida: <a href="https://www.newsweek.com/map-shows-countries-urging-residents-to-stockpile-food-12629524" target="_blank" rel="noopener">Newsweek, «Map shows countries urging residents to stockpile food»</a>; cada cifra se ha comprobado en la web oficial del país cuando existe. Contornos: Natural Earth (dominio público). El mapa va incluido en la web y funciona sin conexión.</p>
       </div>
     </section>
@@ -580,7 +590,7 @@
         </div>
         <h2 class="sources-h">Fuentes de la actualidad</h2>
         <ul class="sources" id="fuentes-list"></ul>
-        <p class="small muted">Este portal es informativo y no sustituye a las indicaciones de las autoridades de protección civil. En una emergencia, llama al <strong>112</strong> (UE) o al <strong>911</strong> (México).</p>
+        <p class="small muted">Este portal es informativo y no sustituye a las indicaciones de las autoridades de protección civil. En una emergencia, llama al <strong data-emerg>112</strong>.</p>
       </div>
     </section>
   </main>
@@ -604,8 +614,6 @@
   <!-- Botón SOS -->
   <div class="sos" id="sos">
     <div class="sos-menu" id="sos-menu" hidden>
-      <a href="tel:112"><strong>112</strong> Emergencias (UE y la mayoría de móviles)</a>
-      <a href="tel:911"><strong>911</strong> Emergencias (México y EE. UU.)</a>
     </div>
     <button type="button" class="sos-btn" id="sos-btn" aria-expanded="false" aria-controls="sos-menu" aria-label="Llamar a emergencias">SOS</button>
   </div>

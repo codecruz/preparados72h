@@ -12,6 +12,25 @@
     set(k, v) { try { localStorage.setItem("prep72." + k, JSON.stringify(v)); } catch { /* sin persistencia */ } },
   };
 
+  /* ---------- Mi país y zona ---------- */
+  // El país elegido define la zona (noticias, países, productos) y los teléfonos de emergencias.
+  const Z = D.zonas;
+  const paisDe = (id) => Z.paises.find((p) => p.id === id);
+  let pais = paisDe(store.get("pais", ""));
+  if (!pais) {
+    let tz = "";
+    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch { /* sin zona horaria */ }
+    pais = paisDe(Z.husos[tz]) || paisDe(tz.startsWith("Europe/") ? "ue" : tz.startsWith("America/") ? "latam" : "otro");
+  }
+  const ZONA = pais.zona; // "europa" | "latam" | "todas"
+  const EMERG = pais.tel || Z.sinNumero;
+  const SOS_LISTA = pais.sos.length ? pais.sos : [["112", "Emergencias (UE y muchos países)"], ["911", "Emergencias (México, EE. UU. y muchos países)"]];
+  const telTexto = SOS_LISTA.map(([n, t]) => `${n} (${t})`).join(" · ");
+  // Textos con el número de emergencias del país y nombres locales de los productos
+  (function adaptar(o) { for (const k in o) { const v = o[k]; if (typeof v === "string") o[k] = v.replace(/\{EMERG\}/g, EMERG); else if (v && typeof v === "object") adaptar(v); } })(D);
+  if (ZONA === "latam") { D.despensa.productos.forEach((x) => x.latam && Object.assign(x, x.latam)); D.agua.avisos.unshift(Z.aguaLatam); }
+  D.despensa.productos = D.despensa.productos.filter((x) => !x.zona || ZONA === "todas" || x.zona === ZONA);
+
   // App Android (Capacitor): los plugins nativos se exponen en window.Capacitor.Plugins
   const Cap = window.Capacitor;
   const NATIVE = !!(Cap && typeof Cap.isNativePlatform === "function" && Cap.isNativePlatform());
@@ -20,6 +39,15 @@
 
   /* ---------- SOS ---------- */
   const sosBtn = $("#sos-btn"), sosMenu = $("#sos-menu");
+  sosMenu.innerHTML = SOS_LISTA.map(([n, t]) => `<a href="tel:${n}"><strong>${n}</strong> ${esc(t)}</a>`).join("")
+    + `<a href="#mi-pais" class="sos-pais">${pais.tel ? "" : "Comprueba el número de tu país · "}${esc(pais.nombre)}: cambiar</a>`;
+  $$("[data-emerg]").forEach((el) => (el.textContent = EMERG));
+  { const t = $('textarea[name="contactos"]'); if (t) t.placeholder = t.placeholder.replace("112", pais.tel || "…"); }
+  $("#nav-pais").textContent = `📍 Mi país: ${pais.nombre}`;
+  { const c = $("#pais-chip"); c.textContent = `📍 ${({ latam: "LATAM", otro: "🌐" })[pais.id] || pais.id.toUpperCase()}`; c.setAttribute("aria-label", `Mi país: ${pais.nombre}. Cambiar`); c.title = `Mi país: ${pais.nombre}`; }
+  $("#pais-sel").innerHTML = ["europa", "latam", "todas"].map((z) => `<optgroup label="${esc(Z.nombres[z])}">${Z.paises.filter((p) => p.zona === z).map((p) => `<option value="${p.id}"${p.id === pais.id ? " selected" : ""}>${esc(p.nombre)}</option>`).join("")}</optgroup>`).join("");
+  $("#pais-info").textContent = `Zona: ${Z.nombres[ZONA]} · Emergencias: ${pais.tel ? SOS_LISTA.map(([n]) => n).join(", ") : "comprueba el número de tu país"}. Adapta las noticias, los teléfonos, las recomendaciones por país y los nombres de los productos.`;
+  $("#pais-sel").addEventListener("change", (e) => { store.set("pais", e.target.value); location.reload(); });
   sosBtn.addEventListener("click", () => {
     const open = sosMenu.hidden;
     sosMenu.hidden = !open;
@@ -62,11 +90,17 @@
     return d <= 0 ? "hoy" : d === 1 ? "ayer" : `hace ${d} días`;
   };
   if (NEWS.actualizado) $("#news-updated").textContent = `Última actualización: ${new Date(NEWS.actualizado).toLocaleString("es-ES", { day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" })}.`;
-  const temas = ["Todas", ...new Set(newsItems.map((n) => n.tema))];
+  // Zona: cada noticia lleva la de su canal; las internacionales («global») salen en todas.
+  let zonaNews = ZONA;
+  const enZona = (n) => zonaNews === "todas" || !n.zona || n.zona === "global" || n.zona === zonaNews;
   let temaSel = "Todas";
   function renderNews() {
+    $("#news-zona").innerHTML = ZONA === "todas" ? "" : [[ZONA, Z.nombres[ZONA]], ["todas", "Todas las zonas"]].map(([z, t]) => `<button type="button" class="chip" aria-pressed="${z === zonaNews}" data-nzona="${z}">${esc(t)}</button>`).join("");
+    const deZona = newsItems.filter(enZona);
+    const temas = ["Todas", ...new Set(deZona.map((n) => n.tema))];
+    if (!temas.includes(temaSel)) temaSel = "Todas";
     $("#news-chips").innerHTML = temas.length > 2 ? temas.map((t) => `<button type="button" class="chip" aria-pressed="${t === temaSel}" data-tema="${esc(t)}">${esc(t)}</button>`).join("") : "";
-    const list = newsItems.filter((n) => temaSel === "Todas" || n.tema === temaSel);
+    const list = deZona.filter((n) => temaSel === "Todas" || n.tema === temaSel);
     $("#news-list").innerHTML = list.length ? list.map((n) => `
       <li><a href="${esc(n.enlace)}" target="_blank" rel="noopener noreferrer">
         <span class="meta"><span class="tag">${esc(n.tema)}</span><span>${esc(n.fuente)}</span><span>· ${rel(n.fecha)}</span></span>
@@ -74,6 +108,7 @@
       </a></li>`).join("") : `<li class="news-empty">Aún no hay noticias recopiladas.</li>`;
   }
   $("#news-chips").addEventListener("click", (e) => { const b = e.target.closest("[data-tema]"); if (b) { temaSel = b.dataset.tema; renderNews(); } });
+  $("#news-zona").addEventListener("click", (e) => { const b = e.target.closest("[data-nzona]"); if (b) { zonaNews = b.dataset.nzona; renderNews(); } });
   renderNews();
 
   /* ---------- Calculadora (lógica en assets/calc.js, con tests) ---------- */
@@ -572,8 +607,22 @@
   };
   const calcTxt = (d) => (d === 3 ? "72 horas" : d + " días");
   $("#paises-ue").innerHTML = `🇪🇺 ${esc(D.paisesUE.texto)} <a href="${esc(D.paisesUE.url)}" target="_blank" rel="noopener">Comisión Europea</a>`;
-  $("#paises-body").innerHTML = D.paises.map((p, i) => `
+  // Zona de cada país del mapa (por código ISO numérico)
+  const ISO_LATAM = new Set(["484", "032", "076", "152", "170", "218", "858", "604", "068", "600", "862", "320", "340", "222", "558", "188", "591", "214", "192"]);
+  const ISO_EUROPA = new Set(["276", "040", "752", "578", "756", "233", "246", "208", "428", "616", "528", "056", "372", "250", "826", "724", "440", "203", "191", "620", "380", "300", "642", "348", "703", "705", "100", "442", "470", "196", "352"]);
+  const zonaPais = (p) => (ISO_LATAM.has(p.iso) ? "latam" : ISO_EUROPA.has(p.iso) ? "europa" : "otras");
+  let paisesTodos = ZONA === "todas";
+  function renderPaisesTabla() {
+    const filas = D.paises.map((p, i) => [p, i]).filter(([p]) => paisesTodos || zonaPais(p) === ZONA);
+    $("#paises-body").innerHTML = filas.map(([p, i]) => `
     <tr data-i="${i}" tabindex="0"><td>${esc(p.pais)}</td><td><span class="pill d${p.nivel}">${esc(p.horizonte)}</span><br><span class="muted small">${esc(p.nota)}</span></td><td class="small"><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.fuente)}</a></td><td class="go">Calcular →</td></tr>`).join("");
+    const resto = D.paises.length - filas.length;
+    const b = $("#paises-todos");
+    b.hidden = ZONA === "todas";
+    b.textContent = paisesTodos ? `Ver solo ${Z.nombres[ZONA]}` : `Ver también el resto del mundo (${resto} países más)`;
+  }
+  renderPaisesTabla();
+  $("#paises-todos").addEventListener("click", () => { paisesTodos = !paisesTodos; renderPaisesTabla(); });
   const usarFila = (e) => {
     const tr = e.target.closest("tr[data-i]");
     if (!tr || e.target.closest("a")) return;
@@ -605,7 +654,8 @@
 
     // Vistas: mundo entero o Europa ampliada (allí se concentran casi todas las recomendaciones).
     const [ex0, ey0] = proj(-25, 72), [ex1, ey1] = proj(45, 34);
-    const ZOOM = { mundo: [0, W.y0, W.w, W.h], europa: [ex0, ey0, ex1 - ex0, ey1 - ey0] };
+    const [ax0, ay0] = proj(-125, 34), [ax1, ay1] = proj(-30, -57);
+    const ZOOM = { mundo: [0, W.y0, W.w, W.h], europa: [ex0, ey0, ex1 - ex0, ey1 - ey0], america: [ax0, ay0, ax1 - ax0, ay1 - ay0] };
     const verZona = (z) => {
       const vb = ZOOM[z];
       mapa.setAttribute("viewBox", vb.map((n) => n.toFixed(1)).join(" "));
@@ -613,7 +663,7 @@
       $$("[data-zona]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.zona === z)));
     };
     $$("[data-zona]").forEach((b) => b.addEventListener("click", () => verZona(b.dataset.zona)));
-    verZona("mundo");
+    verZona(ZONA === "europa" ? "europa" : ZONA === "latam" ? "america" : "mundo");
 
     const marcar = (i) => $$("[data-i]", mapa).forEach((el) => el.classList.toggle("on", el.dataset.i === String(i)));
     const mostrar = (i) => {
@@ -954,7 +1004,7 @@
         <tr><th>Si no hay teléfono</th><td>${v("sinTelefono")}</td></tr>
         <tr><th>Necesidades médicas y alergias</th><td>${v("medico")}</td></tr>
       </table>
-      <p>Emergencias: 112 (UE) · 911 (México). Impreso el ${new Date().toLocaleDateString("es-ES")}.</p>`;
+      <p>Emergencias: ${esc(telTexto)}. Impreso el ${new Date().toLocaleDateString("es-ES")}.</p>`;
   }
   function buildChecklistPrint() {
     const cats = visibleCats();
@@ -983,7 +1033,7 @@
   function buildGuidePrint() {
     const g = D.guias.find((x) => x.id === guiaSel);
     const l = (t, items) => items.length ? `<h2>${t}</h2><ol>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ol>` : "";
-    return `<h1>${esc(g.titulo)}</h1><p>${esc(g.resumen)}</p>${l("Antes", g.antes)}${l("Durante", g.durante)}${l("Después", g.despues)}<p>Emergencias: 112 (UE) · 911 (México).</p>`;
+    return `<h1>${esc(g.titulo)}</h1><p>${esc(g.resumen)}</p>${l("Antes", g.antes)}${l("Durante", g.durante)}${l("Después", g.despues)}<p>Emergencias: ${esc(telTexto)}.</p>`;
   }
   function buildMaterialPrint() {
     const l = M.niveles.find((x) => x.n === matNivel);

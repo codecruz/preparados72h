@@ -601,3 +601,15 @@ main:focus { outline: none; }
 .desp-lista h3 { margin-top: 0; }
 .desp-lista-ul { list-style: none; padding: 0; margin: 0 0 .8rem; display: grid; gap: .35rem; }
 .desp-lista-ul li { display: flex; justify-content: space-between; align-items: center; gap: .6rem; padding: .35rem 0; border-bottom: 1px solid var(--line); }
+
+/* ---------- Mi país ---------- */
+.mi-pais { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .9rem; margin-bottom: 1.2rem; }
+.mi-pais select { font: inherit; padding: .45rem .6rem; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); max-width: 100%; }
+.mi-pais p { flex-basis: 100%; margin: 0; }
+.sos-pais { font-size: .8rem; color: var(--muted) !important; }
+.news-zona { margin-bottom: .4rem; }
+.pais-chip { color: #f1ede2; text-decoration: none; font-size: .82rem; font-weight: 700; padding: .35rem .5rem; border-radius: 8px; border: 1px solid rgba(255,255,255,.35); white-space: nowrap; }
+.pais-chip:hover { background: rgba(255,255,255,.1); }
+/* Barra superior en móviles estrechos: menos separación y el modo apagón solo con icono (el texto sigue para lectores de pantalla) */
+@media (max-width: 420px) { .topbar-inner { gap: .5rem; } .pais-chip { font-size: .74rem; padding: .3rem .4rem; } }
+@media (max-width: 380px) { .mode-btn { font-size: 0; padding: .3rem .55rem; } .mode-btn::before { content: "🌙"; font-size: 1rem; } .brand img { width: 24px; height: 24px; } }

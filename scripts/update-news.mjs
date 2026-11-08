@@ -70,7 +70,7 @@ function parse(xml, feed) {
     // Google Noticias añade " - Medio" al final del titular
     if (feed.busqueda && fuente && titulo.endsWith(" - " + fuente)) titulo = titulo.slice(0, -(fuente.length + 3));
     if (!titulo || !/^https?:\/\//.test(enlace) || !Number.isFinite(fecha)) continue;
-    items.push({ titulo, enlace, fuente, fecha: new Date(fecha).toISOString(), _texto: titulo + " " + desc, _busqueda: !!feed.busqueda });
+    items.push({ titulo, enlace, fuente, fecha: new Date(fecha).toISOString(), zona: feed.zona || "global", _texto: titulo + " " + desc, _busqueda: !!feed.busqueda });
   }
   return items;
 }
@@ -104,44 +104,54 @@ results.forEach((r, i) => {
 });
 if (ok === 0) { console.error("Ningún feed respondió; no se modifica nada."); process.exit(1); }
 
+// Redes sociales: no son medios, se descartan aunque Google Noticias las enlace
+const SOCIAL = /\b(instagram|facebook|tiktok|youtube|twitter|threads|linkedin)\b|^x$/i;
 const relevant = fresh
+  .filter((it) => !SOCIAL.test(it.fuente))
   .filter((it) => now - Date.parse(it.fecha) <= CONFIG.maxDiasNoticia * DAY && Date.parse(it.fecha) <= now + DAY)
   .map((it) => ({ ...it, _score: score(it._texto) }))
   // Feeds generales: palabra clave fuerte en el titular. Feeds de búsqueda: en titular o entradilla.
   .filter((it) => it._score >= 3 && hasStrong(it._busqueda ? it._texto : it.titulo));
 
 const byKey = new Map();
-for (const it of loadExisting()) byKey.set(key(it.titulo), it);
+// Las noticias ya publicadas conservan su zona; si no la tenían, se recupera por su enlace en los canales de hoy.
+const zonaPorEnlace = new Map(fresh.map((it) => [it.enlace, it.zona]));
+for (const it of loadExisting()) { if (SOCIAL.test(it.fuente)) continue; if (!it.zona && zonaPorEnlace.has(it.enlace)) it.zona = zonaPorEnlace.get(it.enlace); byKey.set(key(it.titulo), it); }
 // Variedad: descarta titulares casi iguales (misma historia en distintos medios) y limita por medio y por tema.
 const STOP = new Set("para como sobre tras ante desde entre sobre hasta pero porque cuando donde este esta estos estas that with from this have will their about after over into".split(" "));
 const tokens = (t) => new Set(norm(t).replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter((w) => w.length > 3 && !STOP.has(w)));
 const similar = (a, b) => { let n = 0; for (const w of a) if (b.has(w)) n++; return n / Math.min(a.size, b.size || 1) >= 0.5; };
 const seen = [...byKey.values()].map((it) => tokens(it.titulo));
 
+// Límites por zona: así una zona con muchas noticias no deja sin hueco a la otra.
 let nuevas = 0;
-const porFuente = {}, porTema = {};
+const porFuente = {}, porTema = {}, nuevasZona = {};
 const MAX_NUEVAS = 12, MAX_POR_FUENTE = 2, MAX_POR_TEMA = 4;
 relevant.sort((a, b) => b._score - a._score || Date.parse(b.fecha) - Date.parse(a.fecha));
 for (const it of relevant) {
-  if (nuevas >= MAX_NUEVAS) break;
+  if ((nuevasZona[it.zona] || 0) >= MAX_NUEVAS) continue;
   const k = key(it.titulo);
   if (byKey.has(k)) continue;
   const tk = tokens(it.titulo);
   if (tk.size < 3 || seen.some((s) => similar(tk, s))) continue;
   const tm = tema(it._texto);
-  if ((porFuente[it.fuente] || 0) >= MAX_POR_FUENTE || (porTema[tm] || 0) >= MAX_POR_TEMA) continue;
+  const tz = it.zona + "|" + tm;
+  if ((porFuente[it.fuente] || 0) >= MAX_POR_FUENTE || (porTema[tz] || 0) >= MAX_POR_TEMA) continue;
   porFuente[it.fuente] = (porFuente[it.fuente] || 0) + 1;
-  porTema[tm] = (porTema[tm] || 0) + 1;
+  porTema[tz] = (porTema[tz] || 0) + 1;
+  nuevasZona[it.zona] = (nuevasZona[it.zona] || 0) + 1;
   seen.push(tk);
-  byKey.set(k, { titulo: it.titulo, enlace: it.enlace, fuente: it.fuente, fecha: it.fecha, tema: tm });
+  byKey.set(k, { titulo: it.titulo, enlace: it.enlace, fuente: it.fuente, fecha: it.fecha, tema: tm, zona: it.zona });
   nuevas++;
 }
+// Máximo de noticias publicadas por zona (las antiguas sin zona cuentan como «global»)
+const porZona = {};
 const items = [...byKey.values()]
   .filter((it) => now - Date.parse(it.fecha) <= CONFIG.maxDiasHistorico * DAY)
   .sort((a, b) => Date.parse(b.fecha) - Date.parse(a.fecha))
-  .slice(0, CONFIG.maxNoticias);
+  .filter((it) => { const z = it.zona || "global"; porZona[z] = (porZona[z] || 0) + 1; return porZona[z] <= CONFIG.maxNoticias; });
 
-console.log(`Relevantes hoy: ${relevant.length} · nuevas: ${nuevas} · total publicado: ${items.length}`);
+console.log(`Relevantes hoy: ${relevant.length} · nuevas: ${nuevas} · total publicado: ${items.length} (${Object.entries(porZona).map(([z, n]) => `${z}: ${Math.min(n, CONFIG.maxNoticias)}`).join(", ")})`);
 const payload = { actualizado: new Date(now).toISOString(), items };
 const js = "// Generado automáticamente por scripts/update-news.mjs. No editar a mano.\nwindow.PREP_NEWS = " + JSON.stringify(payload, null, 2) + ";\n";
 if (DRY) { items.slice(0, 15).forEach((i) => console.log(`- [${i.tema}] ${i.titulo} (${i.fuente}, ${i.fecha.slice(0, 10)})`)); }
