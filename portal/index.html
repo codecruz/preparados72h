@@ -40,6 +40,7 @@
           <a href="#agua" data-nav="agua">Agua potable</a>
           <a href="#aprende" data-nav="aprende">Consejos y comunidad</a>
           <a href="#paises" data-nav="paises">Recomendaciones por país</a>
+          <a href="#morse" data-nav="morse">Código Morse</a>
         </div>
         <div class="nav-group"><span class="nav-gh">Emergencias</span>
           <a href="#guias" data-nav="guias">Qué hacer en cada emergencia</a>
@@ -68,6 +69,7 @@
           <a href="#plan">👪 Plan familiar</a>
           <a href="#guia-sinluz">🕯️ Sin luz ni fuego</a>
           <a href="#mapas">🧭 Mis puntos</a>
+          <a href="#morse">📡 Morse y SOS</a>
           <a href="#inventario">📦 Mi inventario</a>
         </div>
       </div>
@@ -316,6 +318,63 @@
         </header>
         <div class="skills" id="skills"></div>
       </div>
+    </section>
+
+    <!-- CÓDIGO MORSE -->
+    <section id="morse" class="section" data-view="morse">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Código Morse</h2>
+          <p>Para pedir ayuda o comunicarte sin voz ni cobertura: con linterna, silbato, golpes o la pantalla del móvil. Funciona sin conexión.</p>
+        </header>
+
+        <div class="morse-grid">
+          <div class="card morse-tool">
+            <label for="morse-in"><strong>Texto a Morse</strong></label>
+            <input id="morse-in" type="text" maxlength="60" autocomplete="off" placeholder="Escribe, p. ej.: NECESITO AGUA">
+            <output id="morse-out" class="morse-code" for="morse-in" aria-live="polite"></output>
+            <p id="morse-warn" class="muted small" hidden></p>
+            <div class="morse-ctrl">
+              <label class="small">Velocidad
+                <select id="morse-vel">
+                  <option value="400">Lenta (se ve de lejos)</option>
+                  <option value="200" selected>Normal</option>
+                  <option value="100">Rápida</option>
+                </select>
+              </label>
+              <label class="small"><input type="checkbox" id="morse-rep"> Repetir</label>
+            </div>
+            <div class="morse-btns">
+              <button type="button" class="btn btn-primary" data-emitir="sos">SOS</button>
+              <button type="button" class="btn" data-emitir="luz">💡 Luz (pantalla)</button>
+              <button type="button" class="btn" data-emitir="sonido">🔊 Sonido</button>
+              <button type="button" class="btn" data-emitir="vibrar" id="morse-vib">📳 Vibrar</button>
+              <button type="button" class="btn" id="morse-stop" hidden>■ Parar</button>
+            </div>
+            <p class="muted small">SOS se emite seguido, sin pausa entre letras, y se repite. Con «Luz», la pantalla parpadea a pantalla completa: tócala para parar. Gasta batería: úsala cuando alguien pueda verte.</p>
+          </div>
+
+          <div class="card morse-tool">
+            <label for="morse-dec"><strong>Morse a texto</strong></label>
+            <input id="morse-dec" type="text" maxlength="200" autocomplete="off" inputmode="text" placeholder="... --- ...">
+            <output id="morse-dec-out" class="morse-txt" for="morse-dec" aria-live="polite"></output>
+            <p class="muted small">Puntos y rayas; un espacio entre letras y «/» entre palabras.</p>
+            <h3 class="sub-h">Tiempos</h3>
+            <ul class="morse-tiempos small">
+              <li><b>·</b> punto = 1 tiempo</li>
+              <li><b>—</b> raya = 3 tiempos</li>
+              <li>entre señales de una letra = 1</li>
+              <li>entre letras = 3</li>
+              <li>entre palabras = 7</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="sub-h">Tabla</h3>
+        <div class="morse-table" id="morse-table"></div>
+        <p class="muted small">Código Morse internacional (UIT-R M.1677-1), más la Ñ de uso en español. Toca una letra para oírla y verla.</p>
+      </div>
+      <div id="morse-flash" class="morse-flash" hidden><span id="morse-flash-txt"></span><small>Toca para parar</small></div>
     </section>
 
     <!-- GUÍAS POR EMERGENCIA -->

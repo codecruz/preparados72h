@@ -664,8 +664,86 @@
       <ol>${h.pasos.map((p, i) => `<li>${esc(p)}${figsPaso(h.id, i)}</li>`).join("")}</ol>
       ${figuras((FIG[h.id] || []).filter((f) => !(f.paso >= 0 && f.paso < h.pasos.length)))}
       ${h.seguridad.length ? `<ul class="calc-avisos">${h.seguridad.map((t) => `<li class="consejo">${esc(t)}</li>`).join("")}</ul>` : ""}
+      ${h.id === "senales" ? `<p><a class="btn btn-xs" href="#morse">📡 Abrir el código Morse: tabla y emisor de SOS →</a></p>` : ""}
       <p class="small muted">Fuente: ${esc(h.fuente)}</p>
     </details>`).join("");
+
+  /* ---------- Código Morse ---------- */
+  const mIn = $("#morse-in"), mOut = $("#morse-out"), mFlash = $("#morse-flash");
+  const verMorse = (c) => c.replace(/\./g, "·").replace(/-/g, "–");
+  // Puntos y rayas dibujados (más legibles que los caracteres · y –); el texto accesible va en aria-label.
+  // Cada letra va en un bloque que no se parte entre líneas; las palabras se separan con «/».
+  const dibMorse = (c) => c.trim().split(/\s+/).map((l) => l === "/" ? '<i class="mw">/</i>'
+    : `<span class="ml">${[...l].map((ch) => (ch === "." ? '<i class="md"></i>' : '<i class="mr"></i>')).join("")}</span>`).join("");
+  $("#morse-table").innerHTML = C.MORSE_ORDEN.map((k) => { const v = C.MORSE[k]; return `<button type="button" class="morse-cell" data-m="${v}" aria-label="${esc(k)}: ${esc(v.replace(/\./g, "punto ").replace(/-/g, "raya ").trim())}"><b>${esc(k)}</b><span class="msym" aria-hidden="true">${dibMorse(v)}</span></button>`; }).join("");
+  const traducir = () => {
+    const r = C.aMorse(mIn.value);
+    mOut.innerHTML = r.codigo ? `<span class="msym" aria-hidden="true">${dibMorse(r.codigo)}</span><span class="sr-only">${verMorse(r.codigo)}</span>` : " ";
+    const w = $("#morse-warn");
+    w.hidden = !r.desconocidos.length;
+    w.textContent = r.desconocidos.length ? `Sin equivalente en Morse (se omite): ${r.desconocidos.join(" ")}` : "";
+  };
+  mIn.addEventListener("input", traducir);
+  $("#morse-dec").addEventListener("input", (e) => ($("#morse-dec-out").textContent = C.deMorse(e.target.value) || " "));
+  traducir();
+
+  // Emisión: luz (pantalla completa), sonido (Web Audio) o vibración. Un solo emisor a la vez.
+  let mTimers = [], mAudio = null, mOsc = null, mVibra = false;
+  if (!("vibrate" in navigator)) $("#morse-vib").hidden = true;
+  function pararMorse() {
+    mTimers.forEach(clearTimeout); mTimers = [];
+    if (mVibra) { navigator.vibrate(0); mVibra = false; }
+    if (mOsc) { try { mOsc.stop(); } catch {} mOsc = null; }
+    mFlash.hidden = true; mFlash.classList.remove("on");
+    $("#morse-stop").hidden = true;
+  }
+  function emitir(modo, codigo, repetir) {
+    pararMorse();
+    const sec = C.secuenciaMorse(codigo);
+    if (!sec.length) { mIn.focus(); return; }
+    const u = Number($("#morse-vel").value) || 200;
+    const total = sec.reduce((t, [, n]) => t + n, 0) + 7; // + pausa de palabra antes de repetir
+    $("#morse-stop").hidden = false;
+    let set = () => {};
+    if (modo === "luz") {
+      $("#morse-flash-txt").textContent = verMorse(codigo);
+      mFlash.hidden = false;
+      set = (on) => mFlash.classList.toggle("on", on);
+    } else if (modo === "sonido") {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      mAudio = mAudio || new AC();
+      mAudio.resume();
+      const g = mAudio.createGain(); g.gain.value = 0; g.connect(mAudio.destination);
+      mOsc = mAudio.createOscillator(); mOsc.frequency.value = 650; mOsc.connect(g); mOsc.start();
+      set = (on) => g.gain.setTargetAtTime(on ? 0.35 : 0, mAudio.currentTime, 0.004);
+    } else if (modo === "vibrar") {
+      const patron = sec.map(([, n]) => n * u);
+      mVibra = true;
+      const ciclo = () => { navigator.vibrate(patron); if (repetir) mTimers.push(setTimeout(ciclo, total * u)); else mTimers.push(setTimeout(pararMorse, (total - 7) * u)); };
+      ciclo();
+      return;
+    }
+    const ciclo = () => {
+      let t = 0;
+      for (const [on, n] of sec) { mTimers.push(setTimeout(() => set(on), t * u)); t += n; }
+      mTimers.push(setTimeout(() => set(false), t * u));
+      mTimers.push(setTimeout(repetir ? ciclo : pararMorse, (repetir ? total : t) * u));
+    };
+    ciclo();
+  }
+  $$("[data-emitir]").forEach((b) => b.addEventListener("click", () => {
+    const sos = b.dataset.emitir === "sos";
+    emitir(sos ? "luz" : b.dataset.emitir, sos ? C.SOS : C.aMorse(mIn.value).codigo, sos || $("#morse-rep").checked);
+  }));
+  $("#morse-table").addEventListener("click", (e) => {
+    const c = e.target.closest("[data-m]");
+    if (c) { mOut.innerHTML = `<span class="msym" aria-hidden="true">${dibMorse(c.dataset.m)}</span><span class="sr-only">${verMorse(c.dataset.m)}</span>`; emitir("sonido", c.dataset.m, false); }
+  });
+  $("#morse-stop").addEventListener("click", pararMorse);
+  mFlash.addEventListener("click", pararMorse);
+  addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("#morse-stop").hidden) pararMorse(); });
+  addEventListener("hashchange", () => { if (location.hash !== "#morse") pararMorse(); });
 
   /* ---------- Material por niveles ---------- */
   const M = D.material;
@@ -716,6 +794,7 @@
     ["mapas", "🧭", "Mapas sin conexión", "Tus puntos de encuentro con el GPS, sin datos."],
     ["plan", "👪", "Plan familiar", "Puntos de encuentro, contactos y qué hacer sin teléfono."],
     ["aprende", "🧠", "Consejos y comunidad", "Lecciones de preparacionistas y mitos."],
+    ["morse", "📡", "Código Morse", "Tabla, traductor y SOS con luz, sonido o vibración."],
     ["paises", "🌍", "Recomendaciones por país", "Mapa del mundo: cuántos días pide cada gobierno, con su fuente."],
     ["noticias", "📰", "Noticias", "Actualidad sobre emergencias, recopilada cada día."],
   ];
@@ -745,7 +824,7 @@
 
   /* ---------- Navegación por secciones (una vista cada vez) ---------- */
   const VISTAS = new Set($$("[data-view]").map((el) => el.dataset.view));
-  const TITULOS = { inicio: "Inicio", calculadora: "Calculadora", menu: "Menú de ejemplo", inventario: "Inventario", mochila: "Mochilas", material: "Material por niveles", habilidades: "Habilidades", guias: "Guías", agua: "Agua potable", mapas: "Mapas sin conexión", plan: "Plan familiar", aprende: "Consejos y comunidad", paises: "Recomendaciones por país", noticias: "Noticias", fuentes: "Fuentes" };
+  const TITULOS = { inicio: "Inicio", calculadora: "Calculadora", menu: "Menú de ejemplo", inventario: "Inventario", mochila: "Mochilas", material: "Material por niveles", habilidades: "Habilidades", guias: "Guías", agua: "Agua potable", mapas: "Mapas sin conexión", plan: "Plan familiar", aprende: "Consejos y comunidad", paises: "Recomendaciones por país", morse: "Código Morse", noticias: "Noticias", fuentes: "Fuentes" };
   const tituloBase = document.title;
   let vistaActual = null;
   function vistaDe(hash) {

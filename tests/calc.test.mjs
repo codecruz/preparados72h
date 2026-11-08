@@ -368,3 +368,31 @@ test("coordenadas: formatos aceptados y rechazados", () => {
   assert.equal(C.parseCoords("hola"), null);
   assert.equal(C.parseCoords(""), null);
 });
+
+test("morse: texto a código, con Ñ, tildes y palabras", () => {
+  assert.equal(C.aMorse("sos").codigo, "... --- ...");
+  assert.equal(C.aMorse("Año").codigo, ".- --.-- ---");
+  assert.equal(C.aMorse("acción").codigo, C.aMorse("ACCION").codigo);
+  assert.equal(C.aMorse("hola  mundo").codigo, ".... --- .-.. .- / -- ..- -. -.. ---");
+  assert.deepEqual(C.aMorse("hola!").desconocidos, ["!"]);
+  assert.equal(C.aMorse("").codigo, "");
+});
+
+test("morse: ida y vuelta para todos los símbolos", () => {
+  for (const k of Object.keys(C.MORSE)) assert.equal(C.deMorse(C.aMorse(k).codigo), k);
+  assert.equal(C.deMorse(C.aMorse("Necesito agua 2").codigo), "NECESITO AGUA 2");
+  assert.equal(C.deMorse("··· ——— ···"), "SOS");
+  assert.equal(C.deMorse("...---..."), "SOS");
+  assert.equal(C.deMorse(".... ..   .-"), "HI A");
+  assert.equal(C.deMorse("........"), "?");
+});
+
+test("morse: tiempos estándar (1, 3, 1, 3 y 7 unidades)", () => {
+  assert.deepEqual(C.secuenciaMorse(".-"), [[true, 1], [false, 1], [true, 3]]);
+  assert.deepEqual(C.secuenciaMorse(". -"), [[true, 1], [false, 3], [true, 3]]);
+  assert.deepEqual(C.secuenciaMorse(". / -"), [[true, 1], [false, 7], [true, 3]]);
+  // "PARIS " = 50 unidades: referencia para medir palabras por minuto
+  const u = C.secuenciaMorse(C.aMorse("PARIS").codigo).reduce((t, [, n]) => t + n, 0) + 7;
+  assert.equal(u, 50);
+  assert.deepEqual(C.secuenciaMorse(""), []);
+});

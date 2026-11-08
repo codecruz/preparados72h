@@ -403,7 +403,51 @@
   }
 
   const AGUA = { BEBIDA, COCINA, HIGIENE, AGUA_BEBE, EXTRA_LACTANCIA, FACTOR_CALOR, AGUA_MASCOTA };
-  const api = { compute, sanear, aguaDia, menu, gotasLejia, distanciaRumbo, parseCoords, HORIZONTES, KCAL, AGUA, LIMITES, PERROS, NECESIDADES, GRUPOS, AVISOS, MENU_DIAS, PROHIBIDOS };
+
+  /* ---------- Código Morse (internacional, UIT-R M.1677-1, más la Ñ de uso en español) ---------- */
+  const MORSE = {
+    A: ".-", B: "-...", C: "-.-.", D: "-..", E: ".", F: "..-.", G: "--.", H: "....", I: "..", J: ".---",
+    K: "-.-", L: ".-..", M: "--", N: "-.", "Ñ": "--.--", O: "---", P: ".--.", Q: "--.-", R: ".-.", S: "...",
+    T: "-", U: "..-", V: "...-", W: ".--", X: "-..-", Y: "-.--", Z: "--..",
+    0: "-----", 1: ".----", 2: "..---", 3: "...--", 4: "....-", 5: ".....", 6: "-....", 7: "--...", 8: "---..", 9: "----.",
+    ".": ".-.-.-", ",": "--..--", "?": "..--..", "/": "-..-.", "-": "-....-", "@": ".--.-.", "=": "-...-",
+  };
+  // Orden de la tabla (las claves numéricas de un objeto se recorren antes que las letras)
+  const MORSE_ORDEN = [..."ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789", ".", ",", "?", "/", "-", "@", "="];
+  const DEMORSE = Object.fromEntries(Object.entries(MORSE).map(([k, v]) => [v, k]));
+  const SOS = "...---..."; // señal de socorro: se transmite seguida, sin pausa entre letras
+
+  // Texto → Morse: letras separadas por espacio y palabras por " / ". Las tildes se quitan (salvo la Ñ).
+  function aMorse(texto) {
+    const desconocidos = new Set();
+    const palabras = String(texto || "").toUpperCase().replace(/Ñ/g, "\u0000").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\u0000/g, "Ñ")
+      .trim().split(/\s+/).filter(Boolean)
+      .map((w) => [...w].map((ch) => { if (MORSE[ch]) return MORSE[ch]; desconocidos.add(ch); return null; }).filter(Boolean).join(" "))
+      .filter(Boolean);
+    return { codigo: palabras.join(" / "), desconocidos: [...desconocidos] };
+  }
+
+  // Morse → texto. Acepta "." y "-" (también "·", "•", "_", "—", "–") y separa palabras con "/" o con 3+ espacios.
+  function deMorse(codigo) {
+    const limpio = String(codigo || "").replace(/[·•∙]/g, ".").replace(/[_—–−]/g, "-");
+    return limpio.trim().split(/\s*\/\s*|\s{3,}/).map((w) => w.trim().split(/\s+/).filter(Boolean)
+      .map((l) => DEMORSE[l] || (l === SOS ? "SOS" : "?")).join("")).filter(Boolean).join(" ");
+  }
+
+  // Código → secuencia de [encendido, unidades]: punto 1, raya 3, entre señales 1, entre letras 3, entre palabras 7.
+  function secuenciaMorse(codigo) {
+    const sec = [];
+    const pausa = (u) => { if (!sec.length) return; const ult = sec[sec.length - 1]; if (ult[0]) sec.push([false, u]); else ult[1] = Math.max(ult[1], u); };
+    for (const ch of String(codigo || "")) {
+      if (ch === "." || ch === "-") { pausa(1); sec.push([true, ch === "." ? 1 : 3]); }
+      else if (ch === " ") pausa(3);
+      else if (ch === "/") pausa(7);
+    }
+    if (sec.length && !sec[sec.length - 1][0]) sec.pop();
+    return sec;
+  }
+
+  const api = { compute, sanear, aguaDia, menu, gotasLejia, distanciaRumbo, parseCoords, aMorse, deMorse, secuenciaMorse, MORSE, MORSE_ORDEN, SOS, HORIZONTES, KCAL, AGUA, LIMITES, PERROS, NECESIDADES, GRUPOS, AVISOS, MENU_DIAS, PROHIBIDOS };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.PrepCalc = api;
 })(typeof window !== "undefined" ? window : globalThis);

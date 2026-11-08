@@ -26,6 +26,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 body { margin: 0; font-family: var(--font); color: var(--ink); background: var(--bg); line-height: 1.55; -webkit-font-smoothing: antialiased; }
 h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; letter-spacing: -.01em; }
@@ -546,3 +547,33 @@ legend { font-weight: 700; margin-bottom: .6rem; }
 .fig:only-child { max-width: 680px; }
 .skill li .figs { display: block; margin: .6rem 0 .5rem; }
 .skill li .fig { max-width: 460px; }
+
+/* ---------- Código Morse ---------- */
+.morse-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.morse-tool { display: flex; flex-direction: column; gap: .6rem; }
+.morse-tool input[type="text"] { font: inherit; font-size: 1.05rem; padding: .6rem .8rem; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); }
+.morse-code, .morse-txt { display: block; min-height: 2.6rem; padding: .6rem .8rem; background: var(--bg-alt); border-radius: 10px; font: 700 1.35rem/1.5 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; letter-spacing: .18em; word-break: break-word; }
+.morse-txt { font-family: var(--font); letter-spacing: .04em; }
+.morse-ctrl { display: flex; flex-wrap: wrap; gap: .6rem 1.2rem; align-items: center; }
+.morse-ctrl select { font: inherit; margin-left: .3rem; padding: .25rem .4rem; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+.morse-btns { display: flex; flex-wrap: wrap; gap: .5rem; }
+.morse-tiempos { margin: 0; padding-left: 1.1rem; display: grid; gap: .15rem; }
+.morse-table { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .4rem; }
+.morse-cell { display: flex; align-items: baseline; gap: .5rem; padding: .45rem .6rem; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--ink); font: inherit; cursor: pointer; text-align: left; }
+.morse-cell b { font-size: 1.1rem; min-width: 1.1em; }
+.morse-cell span { font: 700 1rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .14em; color: var(--ember); }
+.morse-cell:hover, .morse-cell:focus-visible { border-color: var(--ember); }
+.morse-flash { position: fixed; inset: 0; z-index: 1000; background: #000; color: #555; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: .3rem; padding: 2rem 1rem 3rem; cursor: pointer; }
+.morse-flash.on { background: #fff; }
+.morse-flash span { font: 700 1.1rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .1em; text-align: center; word-break: break-word; }
+.morse-flash[hidden] { display: none; }
+.msym { display: inline-flex; flex-wrap: wrap; align-items: center; column-gap: 1em; row-gap: .6em; }
+.msym .ml { display: inline-flex; flex-wrap: nowrap; align-items: center; gap: .25em; }
+.msym i { display: inline-block; height: .5em; background: var(--ember); border-radius: 99px; }
+.msym .md { width: .5em; }
+.msym .mr { width: 1.5em; }
+.msym .mw { width: auto; height: auto; background: none; font-style: normal; color: var(--muted); padding: 0 .3em; }
+.morse-code .msym { font-size: 1.5rem; }
+.morse-cell .msym { font-size: .72rem; }
+.morse-cell { align-items: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
