@@ -1,5 +1,5 @@
 // Ilustraciones de las habilidades. Van dentro de la web para que funcionen sin conexión.
-// Cada figura: { paso, svg | img, alt, pie, credito? }; paso = índice (desde 0) del paso que ilustra. Las SVG propias usan las clases .f-* de styles.css
+// Cada figura: { paso, svg | img, alt, pie?, credito? }. El pie solo añade lo que no dice ya el paso; paso = índice (desde 0) del paso que ilustra. Las SVG propias usan las clases .f-* de styles.css
 // para adaptarse al modo claro, oscuro y apagón.
 window.PREP_FIGURAS = {
   nudos: [
@@ -7,28 +7,28 @@ window.PREP_FIGURAS = {
       paso: 0,
       img: "assets/img/nudo-as-de-guia.svg",
       alt: "As de guía terminado, con las partes numeradas del 1 al 5",
-      pie: "As de guía: 1 parte fija (la que soporta la carga), 2 chicote (el extremo libre), 3 ojo que se hace primero en la parte fija, 4 vuelta del chicote por detrás de la parte fija, 5 gaza que queda fija. El chicote sale por el ojo y queda dentro de la gaza.",
+      pie: "1 parte fija · 2 chicote · 3 ojo · 4 vuelta por detrás de la parte fija · 5 gaza.",
       credito: "Phil'enCorse · Wikimedia Commons · CC BY-SA 4.0",
     },
     {
       paso: 1,
       img: "assets/img/nudo-ballestrinque.svg",
       alt: "Ballestrinque alrededor de un poste: dos vueltas cruzadas en forma de X",
-      pie: "Ballestrinque: dos vueltas alrededor del poste; la segunda cruza por encima de la primera formando una X y el chicote sale por debajo de ese cruce, en sentido contrario a la parte fija.",
+      pie: "La segunda vuelta cruza en X sobre la primera y el chicote sale por debajo del cruce.",
       credito: "Sawims · Wikimedia Commons · dominio público",
     },
     {
       paso: 2,
       img: "assets/img/nudo-tensor.jpg",
       alt: "Fotos de un nudo tensor alrededor de una vara, antes y después de apretarlo",
-      pie: "Nudo tensor: rodea el poste o la estaca, da dos vueltas con el chicote alrededor de la parte fija hacia dentro de la gaza y una tercera por fuera. Desliza el nudo para tensar: bajo carga no se mueve.",
+      pie: "Dos vueltas dentro de la gaza y una por fuera; a la derecha, ya apretado.",
       credito: "Chris 73 · Wikimedia Commons · CC BY-SA 3.0",
     },
     {
       paso: 3,
       img: "assets/img/nudo-pescador-doble.svg",
       alt: "Cuatro pasos del nudo de pescador doble uniendo dos cuerdas",
-      pie: "Pescador doble, de arriba abajo: cada chicote da dos vueltas alrededor de la otra cuerda y pasa por dentro de ellas; al tirar de las dos partes fijas, los dos nudos se juntan.",
+      pie: "Cada chicote da dos vueltas sobre la otra cuerda; al tirar, los nudos se juntan.",
       credito: "LadyofHats · Wikimedia Commons · dominio público",
     },
   ],
@@ -37,7 +37,6 @@ window.PREP_FIGURAS = {
     {
       paso: 4,
       alt: "Señales en el suelo: una V significa necesito ayuda y una X necesito asistencia médica",
-      pie: "Señales tierra-aire: hazlas grandes (varios metros) y que contrasten con el suelo.",
       svg: `<svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg">
         <rect class="f-soft" x="6" y="6" width="148" height="138" rx="10"/><rect class="f-soft" x="166" y="6" width="148" height="138" rx="10"/>
         <path class="f-acc-s" d="M45 28 L80 102 L115 28" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
@@ -48,7 +47,6 @@ window.PREP_FIGURAS = {
     {
       paso: 1,
       alt: "Ritmo de la señal de socorro en montaña: seis señales en un minuto, un minuto de pausa y repetir",
-      pie: "Socorro en montaña: 6 señales por minuto (una cada 10 s), un minuto de pausa y otra vez. Quien te ha visto responde con 3 por minuto.",
       svg: `<svg viewBox="0 0 320 110" xmlns="http://www.w3.org/2000/svg">
         <line class="f-line" x1="14" y1="55" x2="152" y2="55" stroke-width="2"/>
         <line class="f-line" x1="160" y1="55" x2="290" y2="55" stroke-width="2" stroke-dasharray="5 5"/>
@@ -62,7 +60,6 @@ window.PREP_FIGURAS = {
     {
       paso: 3,
       alt: "SOS en código morse: tres puntos, tres rayas y tres puntos",
-      pie: "SOS en morse: tres cortos, tres largos y tres cortos, sin separar las letras. Sirve con linterna, silbato o golpes.",
       svg: `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
         ${[0, 1, 2].map((i) => `<circle class="f-acc" cx="${22 + i * 22}" cy="32" r="8"/>`).join("")}
         ${[0, 1, 2].map((i) => `<rect class="f-acc" x="${102 + i * 40}" y="24" width="30" height="16" rx="8"/>`).join("")}
@@ -75,7 +72,7 @@ window.PREP_FIGURAS = {
     {
       paso: 3,
       alt: "Reloj de agujas con la aguja de las horas apuntando al sol; la bisectriz entre esa aguja y las 12 marca el sur",
-      pie: "Con un reloj (hemisferio norte): apunta la aguja de las horas al sol. El sur está a medio camino entre esa aguja y las 12 (las 13 en horario de verano). En el ejemplo son las 4: el sur queda hacia las 2.",
+      pie: "Ejemplo: son las 4, así que el sur queda hacia las 2.",
       svg: `<svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
         <circle class="f-soft f-line" cx="110" cy="110" r="82" stroke-width="3"/>
         ${Array.from({ length: 12 }, (_, i) => { const a = (i * Math.PI) / 6, s = Math.sin(a), c = Math.cos(a); return `<line class="f-line" x1="${(110 + 70 * s).toFixed(1)}" y1="${(110 - 70 * c).toFixed(1)}" x2="${(110 + 78 * s).toFixed(1)}" y2="${(110 - 78 * c).toFixed(1)}" stroke-width="${i % 3 ? 2 : 4}"/>`; }).join("")}
@@ -93,7 +90,6 @@ window.PREP_FIGURAS = {
     {
       paso: 4,
       alt: "Constelación de la Osa Mayor; prolongando cinco veces la distancia entre las dos estrellas del extremo se llega a la estrella Polar",
-      pie: "De noche: prolonga unas cinco veces la distancia entre las dos estrellas del extremo del Carro (Osa Mayor). Llegas a la Polar, que está casi exactamente sobre el norte.",
       svg: `<svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg">
         <rect class="f-night" x="0" y="0" width="320" height="210" rx="12"/>
         <polyline class="f-star-s" points="70,176 100,160 130,156 162,160 168,186 204,188 199,160 162,160" fill="none" stroke-width="1.5"/>
@@ -112,7 +108,7 @@ window.PREP_FIGURAS = {
     {
       paso: 0,
       alt: "Tres montones preparados antes de encender: yesca, astillas finas y leña, y una estructura en tipi",
-      pie: "Prepáralo todo antes de encender: yesca (prende con una chispa), astillas finas como un lápiz y leña. En tipi, la yesca va en el centro y las astillas apoyadas alrededor dejando pasar el aire.",
+      pie: "En tipi, la yesca va en el centro y las astillas, apoyadas alrededor.",
       svg: `<svg viewBox="0 0 400 170" xmlns="http://www.w3.org/2000/svg">
         <line class="f-line" x1="10" y1="132" x2="390" y2="132" stroke-width="2"/>
         <path class="f-tinder" d="M28 130 q-6-18 10-22 q2-14 18-10 q14-6 18 8 q14 4 8 24z"/>
@@ -132,7 +128,6 @@ window.PREP_FIGURAS = {
     {
       paso: 1,
       alt: "Refugio de lona inclinado: la cuerda atada entre árboles, la lona baja hacia el viento y una capa aislante en el suelo",
-      pie: "Lona en pendiente: el lado bajo hacia el viento y, debajo, una capa gruesa de ramas, hojas secas o esterilla. El suelo roba más calor que el aire.",
       svg: `<svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg">
         <line class="f-line" x1="8" y1="160" x2="312" y2="160" stroke-width="2"/>
         <rect class="f-wood" x="232" y="50" width="12" height="110"/>

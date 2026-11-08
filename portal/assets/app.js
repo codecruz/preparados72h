@@ -655,7 +655,7 @@
   // Cada figura va dentro del paso al que ilustra (f.paso = índice en h.pasos); sin paso, al final.
   const figuras = (lista) => lista.length ? `<div class="figs">${lista.map((f) => `
         <figure class="fig">${f.svg ? f.svg.replace("<svg ", `<svg role="img" aria-label="${esc(f.alt)}" `) : `<img src="${esc(f.img)}" alt="${esc(f.alt)}" loading="lazy">`}
-          <figcaption>${esc(f.pie)}${f.credito ? `<span class="fig-cred">${esc(f.credito)}</span>` : ""}</figcaption>
+          ${f.pie || f.credito ? `<figcaption>${f.pie ? esc(f.pie) : ""}${f.credito ? `<span class="fig-cred">${esc(f.credito)}</span>` : ""}</figcaption>` : ""}
         </figure>`).join("")}</div>` : "";
   const figsPaso = (id, i) => figuras((FIG[id] || []).filter((f) => f.paso === i));
   $("#skills").innerHTML = D.habilidades.map((h) => `
