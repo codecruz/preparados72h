@@ -41,10 +41,10 @@
 
   /* ---------- Hero ---------- */
   $("#hero-stats").innerHTML = [
-    ["3 L", "de agua por persona y día"],
-    ["72 h", "es el mínimo recomendado"],
-    ["10 días", "recomienda Alemania"],
-    ["6 meses", "entre revisiones"],
+    ["3 niveles", "de material, de 72 h a meses"],
+    [`${D.habilidades.length}`, "habilidades de supervivencia"],
+    [`${D.guias.length}`, "guías de emergencia"],
+    ["100 %", "funciona sin conexión"],
   ].map(([n, t]) => `<div class="stat"><strong>${n}</strong><span>${t}</span></div>`).join("");
 
   /* ---------- Alerta ---------- */
@@ -357,7 +357,7 @@
   // Los enlaces #guia-<id> (p. ej. desde el modo apagón) abren esa guía
   function openGuideFromHash() {
     const m = /^#guia-(.+)$/.exec(location.hash);
-    if (m && D.guias.some((g) => g.id === m[1])) { guiaSel = m[1]; renderGuias(); $("#guias").scrollIntoView(); }
+    if (m && D.guias.some((g) => g.id === m[1])) { guiaSel = m[1]; renderGuias(); }
   }
   addEventListener("hashchange", openGuideFromHash); openGuideFromHash();
 
@@ -566,7 +566,7 @@
   const useCountry = (tr) => {
     $$('input[name="dias"]', form).forEach((r) => (r.checked = r.value === tr.dataset.dias));
     calc();
-    $("#calculadora").scrollIntoView({ behavior: "smooth" });
+    location.hash = "calculadora";
   };
   $("#paises-body").addEventListener("click", (e) => { const tr = e.target.closest("tr"); if (tr) useCountry(tr); });
   $("#paises-body").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); const tr = e.target.closest("tr"); if (tr) useCountry(tr); } });
@@ -577,6 +577,128 @@
     <article class="myth"><p class="myth-m"><span class="badge badge-myth">Mito</span> ${esc(m.mito)}</p><p class="myth-r"><span class="badge badge-real">Realidad</span> ${esc(m.realidad)}</p></article>`).join("");
 
   $("#fuentes-list").innerHTML = D.fuentes.map((f) => `<li>${esc(f)}</li>`).join("");
+
+  /* ---------- Habilidades ---------- */
+  $("#skills").innerHTML = D.habilidades.map((h) => `
+    <details class="card skill" id="hab-${h.id}">
+      <summary><span class="skill-i" aria-hidden="true">${h.icono}</span><span><strong>${esc(h.titulo)}</strong> <span class="pill d7">${esc(h.nivel)}</span><br><span class="muted small">${esc(h.resumen)}</span></span></summary>
+      <ol>${h.pasos.map((p) => `<li>${esc(p)}</li>`).join("")}</ol>
+      ${h.seguridad.length ? `<ul class="calc-avisos">${h.seguridad.map((t) => `<li class="consejo">${esc(t)}</li>`).join("")}</ul>` : ""}
+      <p class="small muted">Fuente: ${esc(h.fuente)}</p>
+    </details>`).join("");
+
+  /* ---------- Material por niveles ---------- */
+  const M = D.material;
+  let matHave = store.get("material", {});
+  if (!matHave || typeof matHave !== "object") matHave = {};
+  let matNivel = Number(store.get("materialNivel", 1));
+  if (!M.niveles.some((n) => n.n === matNivel)) matNivel = 1;
+  const matPct = (n) => { const it = M.items.filter((x) => x.nivel === n); return it.length ? Math.round(it.filter((x) => matHave[x.id]).length / it.length * 100) : 0; };
+  function renderMaterial() {
+    $("#mat-levels").innerHTML = M.niveles.map((l) => `<button type="button" role="tab" class="level" id="lvl-${l.n}" aria-selected="${l.n === matNivel}" aria-controls="mat-panel" data-nivel="${l.n}">
+      <strong>${esc(l.nombre)}</strong><span>${esc(l.horizonte)}</span>
+      <span class="progress" aria-hidden="true"><span style="width:${matPct(l.n)}%"></span></span><span class="small">${matPct(l.n)} %</span></button>`).join("");
+    const nivel = M.niveles.find((l) => l.n === matNivel);
+    const items = M.items.filter((x) => x.nivel === matNivel);
+    $("#mat-panel").innerHTML = `<p class="mat-intro" role="tabpanel" aria-labelledby="lvl-${matNivel}">${esc(nivel.texto)}</p>
+      <div class="grid-cards">${M.categorias.map(([cid, ic, nombre]) => {
+        const lista = items.filter((x) => x.cat === cid);
+        return lista.length ? `<article class="card check-card"><h3><span aria-hidden="true">${ic}</span> ${esc(nombre)}</h3><ul>${lista.map((x) => `
+          <li><label class="check"><input type="checkbox" data-mat="${x.id}"${matHave[x.id] ? " checked" : ""}> <span>${esc(x.texto)}${x.vida ? `<span class="mat-vida">⏳ ${esc(x.vida)}</span>` : ""}${x.nota ? `<span class="mat-nota">${esc(x.nota)}</span>` : ""}</span></label></li>`).join("")}</ul></article>` : "";
+      }).join("")}</div>`;
+  }
+  $("#mat-levels").addEventListener("click", (e) => { const b = e.target.closest("[data-nivel]"); if (b) { matNivel = Number(b.dataset.nivel); store.set("materialNivel", matNivel); renderMaterial(); } });
+  $("#mat-levels").addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const n = M.niveles.length;
+    matNivel = ((matNivel - 1 + (e.key === "ArrowRight" ? 1 : n - 1)) % n) + 1;
+    store.set("materialNivel", matNivel); renderMaterial(); $(`#lvl-${matNivel}`).focus();
+  });
+  $("#mat-panel").addEventListener("change", (e) => {
+    const id = e.target.dataset.mat;
+    if (!id) return;
+    if (e.target.checked) matHave[id] = true; else delete matHave[id];
+    store.set("material", matHave);
+    $$("#mat-levels .level").forEach((b) => { const p = matPct(Number(b.dataset.nivel)); b.querySelector(".progress span").style.width = p + "%"; b.querySelector(".small").textContent = p + " %"; });
+  });
+  renderMaterial();
+
+  /* ---------- Panel de inicio ---------- */
+  const TILES = [
+    ["calculadora", "🧮", "Calculadora", "Agua, comida y suministros para tu hogar, con cifras oficiales."],
+    ["menu", "🍽️", "Menú de ejemplo", "Cómo comerse la reserva, con o sin hornillo."],
+    ["inventario", "📦", "Inventario", "Lo que tienes, lo que falta y lo que caduca."],
+    ["mochila", "🎒", "Mochilas", "La de 72 horas y la bolsa para volver a casa."],
+    ["material", "🧰", "Material por niveles", "Linternas, pilas, hornillo, filtros, comida deshidratada…"],
+    ["habilidades", "🔥", "Habilidades", "Fuego, refugio, nudos, orientación, primeros auxilios, señales."],
+    ["guias", "📘", "Guías", "Qué hacer en un apagón, inundación, ola de calor…"],
+    ["agua", "💧", "Agua potable", "Guardarla y potabilizarla sin equivocarse."],
+    ["mapas", "🧭", "Mapas sin conexión", "Tus puntos de encuentro con el GPS, sin datos."],
+    ["plan", "👪", "Plan familiar", "Puntos de encuentro, contactos y qué hacer sin teléfono."],
+    ["aprende", "🧠", "Consejos y comunidad", "Lecciones de preparacionistas, mitos y recomendaciones por país."],
+    ["noticias", "📰", "Noticias", "Actualidad sobre emergencias, recopilada cada día."],
+  ];
+  $("#tiles").innerHTML = TILES.map(([id, ic, t, d]) => `<a class="tile" href="#${id}"><span class="tile-i" aria-hidden="true">${ic}</span><strong>${esc(t)}</strong><span>${esc(d)}</span></a>`).join("");
+  function renderPanel() {
+    const baseIds = D.checklist.filter((c) => !c.extra && !c.gethome).flatMap((c) => c.items.map((i) => i.id));
+    const mochila = Math.round(baseIds.filter((id) => checked[id]).length / baseIds.length * 100);
+    const caducan = inv.filter((it) => { const d = diasHasta(it.caduca); return d != null && d <= 30; }).length;
+    const last = store.get("lastReview", null);
+    let revision = "Sin registrar", revCls = "warn";
+    if (last) { const n = new Date(last); n.setMonth(n.getMonth() + 6); const dl = Math.ceil((n - new Date()) / 86400000); revision = dl < 0 ? "¡Toca revisar!" : `En ${plural(dl, "día", "días")}`; revCls = dl < 0 ? "warn" : "ok"; }
+    const planData = store.get("plan", {});
+    const planHechos = Object.values(planData).filter((v) => String(v).trim()).length;
+    const planTotal = $$("input[name], textarea[name]", planForm).length;
+    const r = lastResult;
+    const stats = [
+      ["calculadora", "Reserva calculada", r && !r.vacio ? `${fmt(r.agua.total, 1)} L · ${fmt(r.kgComida, 1)} kg` : "Sin calcular", r && !r.vacio ? `${r.dias === 3 ? "72 horas" : r.dias + " días"}, ${plural(r.personas, "persona", "personas")}` : "Empieza por aquí", ""],
+      ["mochila", "Mochila de 72 h", `${mochila} %`, "de lo esencial", mochila === 100 ? "ok" : ""],
+      ["inventario", "Inventario", plural(inv.length, "producto", "productos"), caducan ? `${caducan} caducan o han caducado` : "Nada caduca en 30 días", caducan ? "warn" : ""],
+      ["material", "Material", `Nivel ${[1, 2, 3].find((n) => matPct(n) < 100) || 3}`, `${matPct(1)} % · ${matPct(2)} % · ${matPct(3)} % por nivel`, matPct(1) === 100 ? "ok" : ""],
+      ["mochila", "Próxima revisión", revision, "cada 6 meses", revCls],
+      ["plan", "Plan familiar", `${planHechos}/${planTotal}`, "apartados rellenados", planHechos === planTotal ? "ok" : ""],
+      ["mapas", "Mis puntos", String(puntos.length), puntos.length ? "guardados para orientarte" : "Guarda tus puntos de encuentro", ""],
+    ];
+    $("#panel-stats").innerHTML = stats.map(([id, t, v, sub, cls]) => `<a class="pstat ${cls}" href="#${id}"><span class="pstat-t">${esc(t)}</span><strong>${esc(v)}</strong><span class="pstat-s">${esc(sub)}</span></a>`).join("");
+  }
+
+  /* ---------- Navegación por secciones (una vista cada vez) ---------- */
+  const VISTAS = new Set($$("[data-view]").map((el) => el.dataset.view));
+  const TITULOS = { inicio: "Inicio", calculadora: "Calculadora", menu: "Menú de ejemplo", inventario: "Inventario", mochila: "Mochilas", material: "Material por niveles", habilidades: "Habilidades", guias: "Guías", agua: "Agua potable", mapas: "Mapas sin conexión", plan: "Plan familiar", aprende: "Consejos y comunidad", noticias: "Noticias", fuentes: "Fuentes" };
+  const tituloBase = document.title;
+  let vistaActual = null;
+  function vistaDe(hash) {
+    if (!hash) return { vista: "inicio", el: null };
+    if (/^guia-/.test(hash)) return { vista: "guias", el: null };
+    const el = document.getElementById(hash);
+    const sec = el && el.closest("[data-view]");
+    if (sec) return { vista: sec.dataset.view, el: sec === el && sec.dataset.view === hash ? null : el };
+    if (VISTAS.has(hash)) return { vista: hash, el: null };
+    return null; // enlaces internos sin vista (p. ej. #main): no cambian de pantalla
+  }
+  function route() {
+    const hash = decodeURIComponent(location.hash.slice(1));
+    const v = vistaDe(hash);
+    if (!v) return;
+    const cambio = v.vista !== vistaActual;
+    vistaActual = v.vista;
+    $$("[data-view]").forEach((el) => (el.hidden = el.dataset.view !== v.vista));
+    $$("[data-nav]").forEach((a) => { if (a.dataset.nav === v.vista) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+    document.title = v.vista === "inicio" ? tituloBase : `${TITULOS[v.vista] || ""} · Preparados72h`;
+    if (v.vista === "inicio") renderPanel();
+    nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); $("#tab-more").setAttribute("aria-expanded", "false");
+    // Primer elemento de la vista para el foco (lectores de pantalla) y posición de la página
+    if (v.el && !(v.el.matches("section"))) v.el.scrollIntoView();
+    else if (cambio) { scrollTo(0, 0); const h = $(`[data-view="${v.vista}"]:not([hidden]) h1, [data-view="${v.vista}"]:not([hidden]) h2`); if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); } }
+  }
+  document.documentElement.classList.add("router");
+  addEventListener("hashchange", route);
+  $("#tab-more").addEventListener("click", (e) => {
+    e.stopPropagation();
+    const open = nav.classList.toggle("open");
+    $("#tab-more").setAttribute("aria-expanded", String(open));
+  });
+  document.addEventListener("click", (e) => { if (nav.classList.contains("open") && !e.target.closest("#nav, .menu-btn, #tab-more")) { nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); $("#tab-more").setAttribute("aria-expanded", "false"); } });
 
   /* ---------- Impresión por sección ---------- */
   const printArea = $("#print-area");
@@ -625,19 +747,26 @@
     const l = (t, items) => items.length ? `<h2>${t}</h2><ol>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ol>` : "";
     return `<h1>${esc(g.titulo)}</h1><p>${esc(g.resumen)}</p>${l("Antes", g.antes)}${l("Durante", g.durante)}${l("Después", g.despues)}<p>Emergencias: 112 (UE) · 911 (México).</p>`;
   }
+  function buildMaterialPrint() {
+    const l = M.niveles.find((x) => x.n === matNivel);
+    return `<h1>Material · ${esc(l.nombre)}</h1><p>${esc(l.horizonte)}. ${esc(l.texto)}</p>` + M.categorias.map(([cid, , nombre]) => {
+      const lista = M.items.filter((x) => x.nivel === matNivel && x.cat === cid);
+      return lista.length ? `<h2>${esc(nombre)}</h2><ul class="print-check">${lista.map((x) => `<li>${matHave[x.id] ? "☑" : "☐"} ${esc(x.texto)}${x.vida ? ` (${esc(x.vida)})` : ""}</li>`).join("")}</ul>` : "";
+    }).join("") + `<p>Impreso el ${new Date().toLocaleDateString("es-ES")}.</p>`;
+  }
   function buildPuntosPrint() {
     const rows = puntos.map((p) => `<tr><td>${esc(p.nombre)}</td><td>${p.lat.toFixed(5)}, ${p.lon.toFixed(5)}</td><td>${esc(p.nota || "")}</td></tr>`).join("");
     return `<h1>Mis puntos</h1><table class="print-table"><tr><th>Punto</th><th>Coordenadas</th><th>Notas</th></tr>${rows || '<tr><td colspan="3">Sin puntos</td></tr>'}</table>
       <p>Las coordenadas se pueden escribir en cualquier app de mapas o GPS. Impreso el ${new Date().toLocaleDateString("es-ES")}.</p>`;
   }
-  const BUILDERS = { plan: buildPlanPrint, mochila: buildChecklistPrint, calculadora: buildCalcPrint, menu: buildMenuPrint, inventario: buildInventoryPrint, guia: buildGuidePrint, puntos: buildPuntosPrint };
+  const BUILDERS = { plan: buildPlanPrint, mochila: buildChecklistPrint, calculadora: buildCalcPrint, menu: buildMenuPrint, inventario: buildInventoryPrint, guia: buildGuidePrint, puntos: buildPuntosPrint, material: buildMaterialPrint };
 
   // Dentro de un iframe aislado (p. ej. un artifact) no se puede imprimir: se copia el texto.
   let embedded = false;
   try { embedded = window.top !== window.self; } catch { embedded = true; }
   if (NATIVE) $$("[data-print]").forEach((b) => (b.textContent = "Compartir"));
   else if (embedded) $$("[data-print]").forEach((b) => (b.textContent = "Copiar texto"));
-  const SHARE_TITLES = { plan: "Plan familiar de emergencia", mochila: "Checklist de la mochila de 72 h", calculadora: "Reservas del hogar", menu: "Menú de ejemplo", inventario: "Inventario de la reserva", guia: "Guía de emergencia", puntos: "Mis puntos" };
+  const SHARE_TITLES = { plan: "Plan familiar de emergencia", mochila: "Checklist de la mochila de 72 h", calculadora: "Reservas del hogar", menu: "Menú de ejemplo", inventario: "Inventario de la reserva", guia: "Guía de emergencia", puntos: "Mis puntos", material: "Material por niveles" };
   // Los botones de imprimir que se pintan después (guías) también deben cambiar de texto
   const printLabel = NATIVE ? "Compartir" : embedded ? "Copiar texto" : null;
   if (printLabel) new MutationObserver(() => $$("[data-print]").forEach((b) => { if (!b.dataset.labeled) { b.dataset.labeled = "1"; b.textContent = printLabel; } })).observe(document.body, { childList: true, subtree: true });
@@ -675,6 +804,8 @@
     window.print();
   });
   addEventListener("afterprint", () => { document.body.classList.remove("printing"); printArea.innerHTML = ""; });
+
+  route(); // primera vista según la dirección (#calculadora, #guias…)
 
   /* ---------- Offline (PWA) ---------- */
   try {
