@@ -422,6 +422,80 @@ window.PREP_DATA = {
     ],
   },
 
+  // Forma física para una emergencia. Objetivos: OMS 2020. Pruebas: CDC STEADI (silla y equilibrio).
+  forma: {
+    porque: [
+      ["🚶", "Evacuar a pie", "Si no hay transporte, puede tocar caminar horas con la mochila de 72 h a la espalda."],
+      ["🏢", "Escaleras sin ascensor", "En un apagón, subir agua y compra a un 5.º piso varias veces al día."],
+      ["💧", "Cargar agua", "Una garrafa de 5 L pesa 5 kg; el agua de 3 días para una persona, unos 9 kg."],
+      ["🤝", "Ayudar a otros", "Sostener a alguien, mover muebles o escombros, llevar a un niño en brazos."],
+    ],
+    niveles: [
+      { n: 1, nombre: "Empezar", para: "Si ahora haces poco o nada", semana: [
+        "3 paseos de 20 minutos a paso ligero (puedes hablar, pero no cantar)",
+        "2 sesiones de fuerza de 15 minutos: sentadilla a la silla, flexiones contra la pared, puente y paseo con garrafas",
+        "Equilibrio unos minutos cada día, junto a una pared",
+        "Cada semana, añade 5 minutos a los paseos hasta llegar al nivel 2",
+      ] },
+      { n: 2, nombre: "Lo que pide la OMS", para: "El mínimo recomendado para adultos y mayores", semana: [
+        "150 minutos de actividad moderada: por ejemplo, 5 paseos de 30 minutos a paso ligero",
+        "2 días de fuerza de 20–30 minutos, trabajando piernas, espalda, pecho, brazos y tronco",
+        "Mayores de 65: 3 días con ejercicios de equilibrio y fuerza (pueden ser los mismos días)",
+        "Niños: una hora al día de juego activo o deporte, con 3 días de actividad intensa o de fuerza",
+      ] },
+      { n: 3, nombre: "Preparado", para: "Para aguantar una evacuación o días de esfuerzo", semana: [
+        "150–300 minutos de actividad aeróbica a la semana",
+        "1 caminata larga de 60–90 minutos con tu mochila de 72 h: empieza con poco peso y ve añadiendo",
+        "1 día de escaleras: sube y baja varios pisos seguidos",
+        "2–3 días de fuerza, con el paseo del granjero llevando garrafas llenas",
+      ] },
+    ],
+    ejercicios: [
+      { id: "silla", icono: "🪑", titulo: "Sentadilla a la silla", para: "Levantarte del suelo, subir escaleras, cargar peso",
+        pasos: ["Siéntate en el borde de una silla firme, con los pies a la anchura de las caderas.", "Inclínate un poco hacia delante y levántate sin ayudarte de las manos.", "Baja despacio hasta rozar la silla y vuelve a subir.", "2–3 series de 8–12 repeticiones, descansando 1 minuto entre series."],
+        facil: "Ayúdate con las manos en los muslos o usa una silla más alta.", dificil: "Hazlo sin tocar la silla o con la mochila puesta." },
+      { id: "flexiones", icono: "💪", titulo: "Flexiones (pared, mesa o suelo)", para: "Empujar, levantarte tras una caída, apartar obstáculos",
+        pasos: ["Apoya las manos en la pared a la altura del pecho, algo más separadas que los hombros.", "Con el cuerpo recto, dobla los codos hasta acercar el pecho y empuja para volver.", "Cuando hagas 15 seguidas, pasa a apoyarte en una mesa firme y después en el suelo.", "2–3 series de 8–12 repeticiones."],
+        facil: "Ponte más cerca de la pared.", dificil: "En el suelo, con las rodillas y después con los pies." },
+      { id: "remo", icono: "🎒", titulo: "Remo con la mochila o una garrafa", para: "Espalda fuerte para cargar la mochila y levantar peso",
+        pasos: ["Apoya una mano y una rodilla en una silla, con la espalda recta.", "Con la otra mano, sube la mochila o una garrafa llevando el codo hacia atrás, pegado al cuerpo.", "Baja despacio. Haz 8–12 con cada brazo, 2–3 series."],
+        facil: "Una garrafa medio llena o una bolsa con botellas.", dificil: "La garrafa de 5 L llena (5 kg) o la mochila cargada." },
+      { id: "puente", icono: "🌉", titulo: "Puente de glúteos", para: "Proteger la espalda al cargar y caminar mucho",
+        pasos: ["Túmbate boca arriba con las rodillas dobladas y los pies apoyados.", "Aprieta los glúteos y sube la cadera hasta formar una línea de rodillas a hombros.", "Aguanta 2 segundos arriba y baja despacio. 2–3 series de 10–15."],
+        facil: "Sube menos.", dificil: "Con un solo pie apoyado." },
+      { id: "granjero", icono: "💧", titulo: "Paseo del granjero con garrafas", para: "Llevar agua y compra a casa, también por escaleras",
+        pasos: ["Coge una garrafa (o bolsas) en cada mano, doblando las rodillas y con la espalda recta.", "Camina erguido, con los hombros hacia atrás, 30–60 segundos.", "Déjalas en el suelo de la misma forma: doblando las rodillas, sin encorvarte.", "Repite 3–4 veces."],
+        facil: "Garrafas medio llenas o botellas de 1,5 L.", dificil: "Garrafas de 5 L llenas, más tiempo o subiendo un piso." },
+      { id: "plancha", icono: "🧱", titulo: "Plancha", para: "Tronco firme para cargar y no lesionarte",
+        pasos: ["Apoya los antebrazos y las puntas de los pies (o las rodillas).", "Mantén el cuerpo recto, sin hundir la cadera ni levantarla.", "Aguanta 15–30 segundos respirando con normalidad. 3 veces."],
+        facil: "Con las rodillas en el suelo o con las manos en una mesa.", dificil: "Más tiempo, o levantando un pie." },
+      { id: "escalon", icono: "🪜", titulo: "Escalón o escaleras", para: "Subir pisos sin ascensor y caminar por cuesta",
+        pasos: ["Sube a un escalón con un pie, sube el otro y baja en el mismo orden, agarrado a la barandilla si la hay.", "Alterna la pierna que empieza. 1–2 minutos seguidos, varias veces.", "En la escalera de casa: sube y baja varios pisos seguidos a ritmo constante."],
+        facil: "Un escalón bajo y despacio.", dificil: "Con la mochila puesta o más pisos." },
+      { id: "equilibrio", icono: "🦩", titulo: "Equilibrio", para: "No caerte a oscuras, en escombros o con barro",
+        pasos: ["Junto a una pared o una silla, por si acaso.", "Pon un pie justo delante del otro, el talón tocando la punta (como en una cuerda floja), y aguanta 10–30 segundos.", "Después prueba a la pata coja, 10–30 segundos con cada pie.", "Hazlo cada día, por ejemplo mientras te lavas los dientes."],
+        facil: "Con los pies un poco separados y una mano en la pared.", dificil: "Con los ojos cerrados (siempre junto a la pared)." },
+    ],
+    pruebas: [
+      { id: "silla30", nombre: "Levantarse de la silla en 30 segundos", unidad: "veces", mejor: "mas",
+        como: "Brazos cruzados sobre el pecho. Cuenta cuántas veces te levantas del todo y te vuelves a sentar en 30 segundos. Si necesitas las manos, apunta 0." },
+      { id: "tandem", nombre: "Equilibrio: un pie delante del otro", unidad: "segundos", mejor: "mas",
+        como: "Talón de un pie tocando la punta del otro, junto a una pared. Cuenta los segundos que aguantas sin mover los pies (máximo 30)." },
+      { id: "caminar2", nombre: "Caminar 2 km", unidad: "minutos", mejor: "menos",
+        como: "A paso ligero y en llano. Apunta los minutos que tardas." },
+      { id: "pisos", nombre: "Pisos seguidos subiendo escaleras", unidad: "pisos", mejor: "mas",
+        como: "A ritmo constante y sin parar. Apunta cuántos pisos subes antes de necesitar descansar." },
+      { id: "garrafas", nombre: "Paseo con 2 garrafas de 5 L", unidad: "segundos", mejor: "mas",
+        como: "Una en cada mano, caminando erguido. Apunta cuánto aguantas sin soltarlas (para a los 2 minutos)." },
+    ],
+    seguridad: [
+      "Si tienes una enfermedad del corazón, de los pulmones, diabetes, problemas de articulaciones, estás embarazada o hace mucho que no te mueves, consulta antes con tu médico qué te conviene.",
+      "Para si notas dolor en el pecho, mareo, falta de aire fuera de lo normal o dolor en una articulación.",
+      "Con calor, entrena a primera hora o al final del día y bebe agua.",
+      "Algo es mejor que nada: empieza con poco y ve subiendo poco a poco (OMS).",
+    ],
+  },
+
   // Habilidades: el conocimiento no pesa ni caduca. Pasos verificados con su fuente.
   habilidades: [
     {
@@ -681,6 +755,8 @@ window.PREP_DATA = {
     aguaRotar: { dato: "Rotar el agua guardada", valor: "Cada 6 meses si es del grifo; la embotellada, según su fecha", fuente: "Ready.gov (FEMA) y CDC", url: "https://www.ready.gov/water" },
     inundacion: { dato: "Agua en movimiento", valor: "15 cm derriban a un adulto; 30 cm arrastran un coche pequeño; 45–60 cm, un todoterreno", fuente: "National Weather Service (EE. UU.)", url: "https://www.weather.gov/safety/flood-turn-around-dont-drown" },
     fechas: { dato: "Fechas de los alimentos", valor: "«Consumo preferente»: calidad (conservas, arroz, pasta, legumbres, aceite, galletas, miel); seguro después si el envase está intacto. «Caducidad»: seguridad; no consumir después", fuente: "AESAN (Agencia Española de Seguridad Alimentaria y Nutrición)", url: "https://www.aesan.gob.es/AECOSAN/web/para_el_consumidor/ampliacion/fechas_caducidad.htm" },
+    actividad: { dato: "Actividad física", valor: "Adultos y mayores: 150–300 min a la semana de actividad moderada (o 75–150 de vigorosa) y fuerza 2 o más días. Mayores de 65: además, equilibrio y fuerza 3 o más días. Niños de 5 a 17 años: una media de 60 min al día, con actividad intensa y de fuerza 3 días", fuente: "OMS, «Guidelines on physical activity and sedentary behaviour», 2020", url: "https://www.who.int/publications/i/item/9789240015128" },
+    pruebasForma: { dato: "Pruebas de la silla y del equilibrio", valor: "A partir de 60 años, levantarse de la silla menos veces de lo esperado para la edad, o no aguantar 10 s con un pie delante del otro, indica más riesgo de caídas", fuente: "CDC (EE. UU.), programa STEADI de prevención de caídas", url: "https://www.cdc.gov/steadi/" },
     criterio: { dato: "Criterios propios", valor: "Medicación para el horizonte más 7 días; 7 pañales al día; 110 g de fórmula al día; 1 rollo de papel cada 3 días por persona; pilas y linternas", fuente: "Estimaciones de Preparados72h: ajústalas a tu caso", url: "" },
   },
 

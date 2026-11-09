@@ -38,6 +38,7 @@
         </div>
         <div class="nav-group"><span class="nav-gh">Saber</span>
           <a href="#habilidades" data-nav="habilidades">Habilidades</a>
+          <a href="#forma" data-nav="forma">Forma física</a>
           <a href="#agua" data-nav="agua">Agua potable</a>
           <a href="#aprende" data-nav="aprende">Consejos y comunidad</a>
           <a href="#paises" data-nav="paises">Recomendaciones por país</a>
@@ -368,6 +369,63 @@
           <p>El conocimiento no pesa, no caduca y no se puede robar. Léelas ahora y practícalas: en una emergencia no hay tiempo de aprender.</p>
         </header>
         <div class="skills" id="skills"></div>
+      </div>
+    </section>
+
+    <!-- FORMA FÍSICA -->
+    <section id="forma" class="section" data-view="forma">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Forma física para emergencias</h2>
+          <p>En una emergencia el cuerpo es tu primera herramienta. Sin gimnasio ni material: con una silla, unas garrafas y tu mochila. Tu registro se guarda solo en este dispositivo.</p>
+        </header>
+        <div class="desp-reglas" id="forma-porque"></div>
+
+        <div class="forma-grid">
+          <div class="card forma-semana">
+            <h3>Tu semana</h3>
+            <div class="forma-quien">
+              <label>Edad<input type="number" id="forma-edad" min="5" max="110" inputmode="numeric" placeholder="Ej.: 40"></label>
+              <label>Sexo<select id="forma-sexo"><option value="">Sin indicar</option><option value="mujer">Mujer</option><option value="hombre">Hombre</option></select></label>
+            </div>
+            <p class="small muted" id="forma-perfil"></p>
+            <ul class="cob" id="forma-progreso"></ul>
+            <p class="forma-racha" id="forma-racha" aria-live="polite"></p>
+          </div>
+          <form class="card inv-form" id="forma-form" autocomplete="off">
+            <h3>Apuntar una sesión</h3>
+            <label>Qué has hecho<select name="tipo" id="forma-tipo"></select></label>
+            <div class="inv-row">
+              <label>Minutos<input name="min" type="number" min="1" max="600" value="30" inputmode="numeric" required></label>
+              <label>Día<input name="f" type="date" required></label>
+            </div>
+            <fieldset class="forma-int"><legend class="small">Intensidad</legend>
+              <label class="check"><input type="radio" name="int" value="moderada" checked> <span>Moderada: puedes hablar, pero no cantar</span></label>
+              <label class="check"><input type="radio" name="int" value="vigorosa"> <span>Vigorosa: solo puedes decir unas pocas palabras</span></label>
+            </fieldset>
+            <button type="submit" class="btn btn-primary btn-sm">Apuntar</button>
+            <p class="small ok" id="forma-ok" aria-live="polite"></p>
+          </form>
+        </div>
+        <div class="card">
+          <h3>Últimas sesiones</h3>
+          <p class="small muted" id="forma-vacio">Todavía no has apuntado nada.</p>
+          <ul class="desp-lista-ul" id="forma-lista"></ul>
+        </div>
+
+        <h3 class="forma-h">Plan por niveles</h3>
+        <p class="muted small" id="forma-nivel-txt"></p>
+        <div class="grid-cards" id="forma-niveles"></div>
+
+        <h3 class="forma-h">Ejercicios con lo que hay en casa</h3>
+        <div class="skills" id="forma-ejercicios"></div>
+
+        <h3 class="forma-h">Pruebas para saber cómo estás</h3>
+        <p class="muted small">Hazlas una vez al mes y compárate contigo mismo.</p>
+        <div class="grid-cards" id="forma-pruebas"></div>
+
+        <ul class="calc-avisos" id="forma-seguridad"></ul>
+        <p class="small muted">Objetivos: OMS, directrices de actividad física (2020). Pruebas de la silla y del equilibrio: CDC, programa STEADI. Ver <a href="#cifras">fuentes</a>.</p>
       </div>
     </section>
 

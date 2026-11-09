@@ -512,7 +512,70 @@
     return sec;
   }
 
-  const api = { MASCOTAS, ejemplos, EJEMPLOS, compute, sanear, aguaDia, menu, gotasLejia, distanciaRumbo, parseCoords, aMorse, deMorse, secuenciaMorse, MORSE, MORSE_ORDEN, SOS, HORIZONTES, KCAL, AGUA, LIMITES, PERROS, NECESIDADES, GRUPOS, AVISOS, MENU_DIAS, PROHIBIDOS };
+  // ---------- Forma física: objetivos de la OMS y registro semanal ----------
+  // OMS, «Guidelines on physical activity and sedentary behaviour» (2020):
+  // · Adultos (18–64): 150–300 min/semana de actividad aeróbica moderada o 75–150 de vigorosa (o una combinación),
+  //   y fuerza de todos los grupos musculares 2 o más días.
+  // · Mayores (65+): lo mismo y, además, actividad variada que trabaje el equilibrio y la fuerza 3 o más días.
+  // · Niños y adolescentes (5–17): una media de 60 min al día (420/semana) de actividad moderada o vigorosa, y
+  //   actividad vigorosa y de fuerza (músculo y hueso) al menos 3 días.
+  // Un minuto vigoroso equivale a dos moderados (75 vigorosos ≈ 150 moderados).
+  const FORMA_OBJETIVOS = {
+    adulto: { nombre: "Adulto (18–64 años)", minutos: 150, fuerza: 2, equilibrio: 0, vigorosos: 0 },
+    mayor: { nombre: "Mayor de 65 años", minutos: 150, fuerza: 2, equilibrio: 3, vigorosos: 0 },
+    nino: { nombre: "Niño o adolescente (5–17 años)", minutos: 420, fuerza: 0, equilibrio: 0, vigorosos: 3 },
+  };
+  const FORMA_TIPOS = {
+    caminar: { nombre: "Caminar a paso ligero", aerobico: true },
+    mochila: { nombre: "Caminata con la mochila", aerobico: true },
+    escaleras: { nombre: "Escaleras", aerobico: true },
+    aerobico: { nombre: "Bici, nadar, correr, bailar…", aerobico: true },
+    fuerza: { nombre: "Fuerza", aerobico: false },
+    equilibrio: { nombre: "Equilibrio", aerobico: false },
+  };
+  const isoDia = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  const deIso = (iso) => { const [y, m, d] = iso.split("-").map(Number); return new Date(y, m - 1, d); };
+  // Lunes de la semana de una fecha (ISO, hora local)
+  function lunesDe(iso) { const d = deIso(iso); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return isoDia(d); }
+  function sumarDias(iso, n) { const d = deIso(iso); d.setDate(d.getDate() + n); return isoDia(d); }
+  // Resumen de una semana (lunes a domingo) frente a los objetivos del perfil
+  function resumenSemana(sesiones, perfil, lunes) {
+    const o = FORMA_OBJETIVOS[perfil] || FORMA_OBJETIVOS.adulto;
+    const fin = sumarDias(lunes, 6);
+    const S = (sesiones || []).filter((x) => x && x.f >= lunes && x.f <= fin && FORMA_TIPOS[x.tipo] && Number(x.min) > 0);
+    const minutos = S.filter((x) => FORMA_TIPOS[x.tipo].aerobico).reduce((t, x) => t + Number(x.min) * (x.int === "vigorosa" ? 2 : 1), 0);
+    const dias = (fn) => new Set(S.filter(fn).map((x) => x.f)).size;
+    const r = {
+      lunes, objetivo: o, minutos,
+      fuerza: dias((x) => x.tipo === "fuerza"),
+      equilibrio: dias((x) => x.tipo === "equilibrio"),
+      vigorosos: dias((x) => x.tipo === "fuerza" || (FORMA_TIPOS[x.tipo].aerobico && x.int === "vigorosa")),
+      sesiones: S.length,
+    };
+    r.cumple = r.minutos >= o.minutos && r.fuerza >= o.fuerza && r.equilibrio >= o.equilibrio && r.vigorosos >= o.vigorosos;
+    return r;
+  }
+  // Semanas seguidas cumpliendo el objetivo. La semana en curso suma si ya se ha cumplido; si no, no rompe la racha.
+  function rachaSemanas(sesiones, perfil, hoyIso) {
+    let lunes = lunesDe(hoyIso), n = 0;
+    if (resumenSemana(sesiones, perfil, lunes).cumple) n++;
+    for (let i = 0; i < 520; i++) {
+      lunes = sumarDias(lunes, -7);
+      if (!resumenSemana(sesiones, perfil, lunes).cumple) break;
+      n++;
+    }
+    return n;
+  }
+  // Prueba de la silla en 30 s (CDC STEADI, a partir de 60 años): por debajo de estas cifras, «por debajo de la media»
+  const SILLA_CDC = [[60, 14, 12], [65, 12, 11], [70, 12, 10], [75, 11, 10], [80, 10, 9], [85, 8, 8], [90, 7, 4]];
+  function sillaBajoMedia(edad, sexo, repeticiones) {
+    const fila = [...SILLA_CDC].reverse().find(([e]) => edad >= e);
+    if (!fila) return null; // menores de 60: sin referencia, compárate contigo mismo
+    return repeticiones < (sexo === "mujer" ? fila[2] : fila[1]);
+  }
+  const FORMA = { OBJETIVOS: FORMA_OBJETIVOS, TIPOS: FORMA_TIPOS, lunesDe, sumarDias, isoDia, resumenSemana, rachaSemanas, sillaBajoMedia };
+
+  const api = { FORMA, MASCOTAS, ejemplos, EJEMPLOS, compute, sanear, aguaDia, menu, gotasLejia, distanciaRumbo, parseCoords, aMorse, deMorse, secuenciaMorse, MORSE, MORSE_ORDEN, SOS, HORIZONTES, KCAL, AGUA, LIMITES, PERROS, NECESIDADES, GRUPOS, AVISOS, MENU_DIAS, PROHIBIDOS };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.PrepCalc = api;
 })(typeof window !== "undefined" ? window : globalThis);

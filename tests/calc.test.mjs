@@ -436,3 +436,34 @@ test("caso completo: 2 adultos y 3 gatos durante una semana", () => {
   assert.match(sum(r, "gatos"), /1,2 kg de su pienso.*6,3 L de agua.*un transportín por animal \(3\)/);
   assert.equal(C.ejemplos("mascotas", r.pienso.gatos), "1 saco de 1,5 kg de su pienso de siempre (o unas 12 latas de 400 g de comida húmeda)");
 });
+
+test("forma física: semana, objetivos de la OMS y racha", () => {
+  const F = C.FORMA;
+  assert.equal(F.lunesDe("2026-11-09"), "2026-11-09"); // lunes
+  assert.equal(F.lunesDe("2026-11-15"), "2026-11-09"); // domingo
+  assert.equal(F.lunesDe("2026-03-01"), "2026-02-23");
+  const s = [
+    { f: "2026-11-09", tipo: "caminar", min: 30 }, { f: "2026-11-10", tipo: "fuerza", min: 20 },
+    { f: "2026-11-11", tipo: "caminar", min: 40, int: "vigorosa" }, { f: "2026-11-12", tipo: "fuerza", min: 20 },
+    { f: "2026-11-14", tipo: "mochila", min: 45 },
+  ];
+  const r = F.resumenSemana(s, "adulto", "2026-11-09");
+  assert.equal(r.minutos, 30 + 80 + 45); // lo vigoroso cuenta doble; la fuerza no suma minutos aeróbicos
+  assert.equal(r.fuerza, 2);
+  assert.ok(r.cumple);
+  // Mayor de 65: le falta el equilibrio 3 días
+  assert.equal(F.resumenSemana(s, "mayor", "2026-11-09").cumple, false);
+  const eq = [...s, ...["2026-11-09", "2026-11-11", "2026-11-13"].map((f) => ({ f, tipo: "equilibrio", min: 10 }))];
+  assert.ok(F.resumenSemana(eq, "mayor", "2026-11-09").cumple);
+  // Niño: 420 min y 3 días vigorosos o de fuerza
+  assert.equal(F.resumenSemana(s, "nino", "2026-11-09").cumple, false);
+  // Racha: semana anterior cumplida + la actual sin cumplir todavía = 1
+  const ant = s.map((x) => ({ ...x, f: F.sumarDias(x.f, -7) }));
+  assert.equal(F.rachaSemanas([...ant, s[0]], "adulto", "2026-11-10"), 1);
+  assert.equal(F.rachaSemanas([...ant, ...s], "adulto", "2026-11-15"), 2);
+  assert.equal(F.rachaSemanas([], "adulto", "2026-11-15"), 0);
+  // Prueba de la silla (CDC STEADI)
+  assert.equal(F.sillaBajoMedia(67, "hombre", 11), true);
+  assert.equal(F.sillaBajoMedia(67, "mujer", 11), false);
+  assert.equal(F.sillaBajoMedia(45, "hombre", 5), null);
+});

@@ -328,7 +328,7 @@ legend { font-weight: 700; margin-bottom: .6rem; }
 .inv { display: grid; grid-template-columns: 1fr 1.6fr; gap: 1.25rem; align-items: start; }
 @media (max-width: 860px) { .inv { grid-template-columns: 1fr; } }
 .inv-form label, .puntos label, .bleach label:not(.check) { display: grid; gap: .3rem; font-weight: 600; font-size: .92rem; margin-bottom: .8rem; }
-.inv-form input, .inv-form select, .puntos input, .bleach input[type="number"] { font: inherit; padding: .6rem .7rem; border-radius: 9px; border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); width: 100%; min-width: 0; }
+.inv-form input, .inv-form select, .forma-quien input, .forma-quien select, .forma-pform input, .puntos input, .bleach input[type="number"] { font: inherit; padding: .6rem .7rem; border-radius: 9px; border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); width: 100%; min-width: 0; }
 .inv-row { display: flex; align-items: end; gap: .6rem; }
 .inv-row label { flex: 1; }
 .inv-unit { padding-bottom: 1.4rem; }
@@ -646,3 +646,18 @@ main:focus { outline: none; }
 @keyframes flash { from { box-shadow: 0 0 0 4px color-mix(in srgb, var(--ember) 55%, transparent); } to { box-shadow: 0 0 0 0 transparent; } }
 .flash { animation: flash 1.4s ease-out; }
 @media (prefers-reduced-motion: reduce) { .flash { animation: none; outline: 3px solid var(--ember); } }
+
+/* Forma física */
+.forma-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: .8rem; margin-bottom: .8rem; }
+.forma-quien { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin-bottom: .4rem; }
+.forma-quien label { display: flex; flex-direction: column; gap: .2rem; font-weight: 600; font-size: .9rem; }
+.forma-semana h3, .forma-prueba h3 { margin-top: 0; }
+.forma-racha { margin: .6rem 0 0; }
+.forma-int { border: 0; padding: 0; margin: .2rem 0 .6rem; display: grid; gap: .3rem; }
+.forma-int[hidden] { display: none; }
+.forma-h { margin: 1.6rem 0 .3rem; }
+.forma-actual { outline: 2px solid var(--moss); }
+.forma-pform { display: flex; gap: .4rem; margin-top: .5rem; }
+.forma-pform input { flex: 1; min-width: 0; }
+.forma-prueba { display: flex; flex-direction: column; }
+.forma-prueba .forma-pform { margin-top: auto; padding-top: .5rem; }

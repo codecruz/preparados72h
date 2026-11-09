@@ -1,5 +1,5 @@
 // Service worker: cachea el portal completo para que funcione sin conexión.
-const CACHE = "prep72-v25";
+const CACHE = "prep72-v26";
 const ASSETS = ["./", "index.html", "manifest.webmanifest", "assets/styles.css", "assets/app.js", "assets/data.js", "assets/calc.js", "assets/news.js", "assets/world.js", "assets/figuras.js", "assets/icon.svg",
   "assets/img/nudo-as-de-guia.svg", "assets/img/nudo-ballestrinque.svg", "assets/img/nudo-tensor.jpg", "assets/img/nudo-pescador-doble.svg"];
 

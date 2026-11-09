@@ -774,6 +774,111 @@
       <p class="small muted">Fuente: ${esc(h.fuente)}</p>
     </details>`).join("");
 
+  /* ---------- Forma física ---------- */
+  const FD = D.forma, FF = C.FORMA;
+  let forma = store.get("forma", {});
+  if (!forma || typeof forma !== "object") forma = {};
+  forma.sesiones = Array.isArray(forma.sesiones) ? forma.sesiones.filter((x) => x && /^\d{4}-\d{2}-\d{2}$/.test(x.f) && FF.TIPOS[x.tipo] && Number(x.min) > 0) : [];
+  forma.pruebas = forma.pruebas && typeof forma.pruebas === "object" ? forma.pruebas : {};
+  const saveForma = () => store.set("forma", forma);
+  const hoyIso = () => FF.isoDia(new Date());
+  const perfilForma = () => { const e = Number(forma.edad); return e && e < 18 ? "nino" : e >= 65 ? "mayor" : "adulto"; };
+  const fFecha = (iso) => new Date(iso + "T00:00:00").toLocaleDateString("es-ES", { weekday: "short", day: "numeric", month: "short" });
+
+  $("#forma-porque").innerHTML = FD.porque.map(([ic, t, txt]) => `<article class="desp-regla"><span aria-hidden="true">${ic}</span><div><h3>${esc(t)}</h3><p>${esc(txt)}</p></div></article>`).join("");
+  $("#forma-tipo").innerHTML = Object.entries(FF.TIPOS).map(([id, t]) => `<option value="${id}">${esc(t.nombre)}</option>`).join("");
+  $("#forma-ejercicios").innerHTML = FD.ejercicios.map((x) => `
+    <details class="card skill" id="ej-${x.id}">
+      <summary><span class="skill-i" aria-hidden="true">${x.icono}</span><span><strong>${esc(x.titulo)}</strong><br><span class="muted small">${esc(x.para)}</span></span></summary>
+      <ol>${x.pasos.map((p) => `<li>${esc(p)}</li>`).join("")}</ol>
+      <p class="small"><strong>Más fácil:</strong> ${esc(x.facil)}<br><strong>Más difícil:</strong> ${esc(x.dificil)}</p>
+    </details>`).join("");
+  $("#forma-seguridad").innerHTML = FD.seguridad.map((t) => `<li class="consejo">${esc(t)}</li>`).join("");
+  $("#forma-edad").value = forma.edad || ""; $("#forma-sexo").value = forma.sexo || "";
+  $("#forma-form").elements.f.value = hoyIso();
+
+  function renderForma() {
+    const perfil = perfilForma(), o = FF.OBJETIVOS[perfil], hoy = hoyIso();
+    const r = FF.resumenSemana(forma.sesiones, perfil, FF.lunesDe(hoy));
+    $("#forma-perfil").textContent = `Objetivos de la OMS para: ${o.nombre}${forma.edad ? "" : " (pon tu edad para ajustarlos)"}. Semana del ${fFecha(r.lunes)} al ${fFecha(FF.sumarDias(r.lunes, 6))}.`;
+    const barra = (nombre, have, need, u) => {
+      const ud = (n) => (u === "días" ? (n === 1 ? "día" : "días") : u);
+      const pct = Math.min(100, Math.round((have / need) * 100));
+      return `<li><div class="cob-h"><span>${esc(nombre)}</span><span class="${pct >= 100 ? "ok" : ""}">${have} / ${need} ${esc(ud(need))}</span></div>
+        <div class="progress"><div style="width:${pct}%"${pct >= 100 ? ' class="complete"' : ""}></div></div>
+        ${have >= need ? `<span class="small ok">Cumplido ✓</span>` : `<span class="small muted">${need - have === 1 ? "Te falta" : "Te faltan"} ${need - have} ${esc(ud(need - have))}</span>`}</li>`;
+    };
+    $("#forma-progreso").innerHTML = [
+      barra("Actividad aeróbica (lo vigoroso cuenta doble)", r.minutos, o.minutos, "min"),
+      o.fuerza && barra("Días de fuerza", r.fuerza, o.fuerza, "días"),
+      o.equilibrio && barra("Días de equilibrio", r.equilibrio, o.equilibrio, "días"),
+      o.vigorosos && barra("Días de actividad intensa o de fuerza", r.vigorosos, o.vigorosos, "días"),
+    ].filter(Boolean).join("");
+    const racha = FF.rachaSemanas(forma.sesiones, perfil, hoy);
+    $("#forma-racha").innerHTML = racha ? `🔥 <strong>${plural(racha, "semana seguida", "semanas seguidas")}</strong> cumpliendo el objetivo.` : r.cumple ? "" : "Cumple el objetivo esta semana para empezar tu racha.";
+    // Nivel orientativo según lo hecho la semana pasada
+    const pasada = FF.resumenSemana(forma.sesiones, perfil, FF.sumarDias(r.lunes, -7));
+    const nivel = pasada.cumple ? (pasada.minutos >= 2 * o.minutos ? 3 : 2) : 1;
+    $("#forma-nivel-txt").textContent = forma.sesiones.length ? `Según tu semana pasada, te toca el nivel ${nivel}. Sube de nivel cuando el anterior te resulte cómodo.` : "Si no sabes por dónde empezar, empieza por el nivel 1.";
+    $("#forma-niveles").innerHTML = FD.niveles.map((l) => `<article class="card check-card${l.n === nivel ? " forma-actual" : ""}">
+      <h3>Nivel ${l.n} · ${esc(l.nombre)} ${l.n === nivel ? '<span class="pill d7">Tu nivel</span>' : ""}</h3><p class="small muted">${esc(l.para)}</p>
+      <ul>${l.semana.map((t) => `<li>${esc(t)}</li>`).join("")}</ul></article>`).join("");
+    // Últimas sesiones
+    const orden = forma.sesiones.map((x, i) => ({ x, i })).sort((a, b) => b.x.f.localeCompare(a.x.f)).slice(0, 15);
+    $("#forma-vacio").hidden = forma.sesiones.length > 0;
+    $("#forma-lista").innerHTML = orden.map(({ x, i }) => `<li><span><strong>${esc(FF.TIPOS[x.tipo].nombre)}</strong> · ${x.min} min${FF.TIPOS[x.tipo].aerobico && x.int === "vigorosa" ? " · vigorosa" : ""} <span class="muted small">· ${esc(fFecha(x.f))}</span></span> <button type="button" class="btn btn-ghost btn-xs" data-fdel="${i}" aria-label="Borrar la sesión de ${esc(FF.TIPOS[x.tipo].nombre)} del ${esc(fFecha(x.f))}">Borrar</button></li>`).join("");
+    // Pruebas
+    $("#forma-pruebas").innerHTML = FD.pruebas.map((p) => {
+      const h = (forma.pruebas[p.id] || []).slice(-2);
+      const ult = h[h.length - 1], ant = h.length > 1 ? h[0] : null;
+      let cmp = "";
+      if (ult && ant) {
+        const mejor = p.mejor === "mas" ? ult.v > ant.v : ult.v < ant.v, igual = ult.v === ant.v;
+        cmp = igual ? " · igual que la vez anterior" : mejor ? ` · <span class="ok">mejor que antes (${fmt(ant.v, 1)}) ✓</span>` : ` · <span class="falta">peor que antes (${fmt(ant.v, 1)})</span>`;
+      }
+      let ref = "";
+      if (p.id === "silla30" && ult && forma.sexo && Number(forma.edad) >= 60) {
+        const bajo = FF.sillaBajoMedia(Number(forma.edad), forma.sexo, ult.v);
+        ref = bajo ? `<p class="small falta">Por debajo de la media para tu edad (CDC): trabaja la fuerza de piernas y coméntalo con tu médico.</p>` : `<p class="small ok">En la media o por encima para tu edad (CDC) ✓</p>`;
+      }
+      if (p.id === "tandem" && ult && Number(forma.edad) >= 65 && ult.v < 10) ref = `<p class="small falta">Menos de 10 segundos: más riesgo de caídas (CDC). Practica el equilibrio a diario junto a una pared.</p>`;
+      return `<article class="card forma-prueba"><h3>${esc(p.nombre)}</h3><p class="small">${esc(p.como)}</p>
+        ${ult ? `<p class="small"><strong>Última: ${fmt(ult.v, 1)} ${esc(p.unidad)}</strong> <span class="muted">(${esc(fFecha(ult.f))})</span>${cmp}</p>` : ""}${ref}
+        <form class="forma-pform" data-prueba="${p.id}"><label class="sr-only" for="pr-${p.id}">Resultado en ${esc(p.unidad)}</label><input id="pr-${p.id}" type="number" min="0" step="any" inputmode="decimal" placeholder="${esc(p.unidad)}" required><button type="submit" class="btn btn-ghost btn-sm">Guardar</button></form></article>`;
+    }).join("");
+  }
+  $("#forma-edad").addEventListener("input", (e) => { const v = Math.trunc(Number(e.target.value)); forma.edad = v >= 5 && v <= 110 ? v : ""; saveForma(); renderForma(); });
+  $("#forma-sexo").addEventListener("change", (e) => { forma.sexo = e.target.value; saveForma(); renderForma(); });
+  $("#forma-tipo").addEventListener("change", (e) => { $("#forma-form .forma-int").hidden = !FF.TIPOS[e.target.value].aerobico; });
+  $("#forma-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const f = e.target.elements, min = Math.trunc(Number(f.min.value));
+    if (!(min > 0) || !f.f.value) { e.target.reportValidity(); return; }
+    const x = { f: f.f.value, tipo: f.tipo.value, min };
+    if (FF.TIPOS[x.tipo].aerobico) x.int = f.int.value;
+    forma.sesiones.push(x); saveForma(); renderForma();
+    $("#forma-ok").textContent = `Apuntado: ${FF.TIPOS[x.tipo].nombre}, ${min} min ✓`;
+    setTimeout(() => ($("#forma-ok").textContent = ""), 4000);
+  });
+  $("#forma-lista").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-fdel]");
+    if (!b) return;
+    forma.sesiones.splice(+b.dataset.fdel, 1); saveForma(); renderForma();
+  });
+  $("#forma-pruebas").addEventListener("submit", (e) => {
+    const fm = e.target.closest("[data-prueba]");
+    if (!fm) return;
+    e.preventDefault();
+    const v = Number(fm.querySelector("input").value);
+    if (!(v >= 0)) return;
+    const id = fm.dataset.prueba;
+    (forma.pruebas[id] = forma.pruebas[id] || []).push({ f: hoyIso(), v });
+    forma.pruebas[id] = forma.pruebas[id].slice(-24);
+    saveForma(); renderForma();
+    const inp = $(`#pr-${id}`); if (inp) inp.focus();
+  });
+  renderForma();
+
   /* ---------- Código Morse ---------- */
   const mIn = $("#morse-in"), mOut = $("#morse-out"), mFlash = $("#morse-flash");
   const verMorse = (c) => c.replace(/\./g, "·").replace(/-/g, "–");
@@ -1020,6 +1125,7 @@
     ["mochila", "🎒", "Mochilas", "La de 72 horas y la bolsa para volver a casa."],
     ["material", "🧰", "Material por niveles", "Linternas, pilas, hornillo, filtros, comida deshidratada…"],
     ["habilidades", "🔥", "Habilidades", "Fuego, refugio, nudos, orientación, primeros auxilios, señales."],
+    ["forma", "💪", "Forma física", "Estar en forma para evacuar, cargar agua y subir escaleras, con tu registro."],
     ["guias", "📘", "Guías", "Qué hacer en un apagón, inundación, ola de calor…"],
     ["agua", "💧", "Agua potable", "Guardarla y potabilizarla sin equivocarse."],
     ["mapas", "🧭", "Mapas sin conexión", "Tus puntos de encuentro con el GPS, sin datos."],
@@ -1055,7 +1161,7 @@
 
   /* ---------- Navegación por secciones (una vista cada vez) ---------- */
   const VISTAS = new Set($$("[data-view]").map((el) => el.dataset.view));
-  const TITULOS = { inicio: "Inicio", calculadora: "Calculadora", despensa: "Despensa: qué comprar", menu: "Menú de ejemplo", inventario: "Inventario", mochila: "Mochilas", material: "Material por niveles", habilidades: "Habilidades", guias: "Guías", agua: "Agua potable", mapas: "Mapas sin conexión", plan: "Plan familiar", aprende: "Consejos y comunidad", paises: "Recomendaciones por país", morse: "Código Morse", noticias: "Noticias", fuentes: "Fuentes" };
+  const TITULOS = { inicio: "Inicio", calculadora: "Calculadora", despensa: "Despensa: qué comprar", menu: "Menú de ejemplo", inventario: "Inventario", mochila: "Mochilas", material: "Material por niveles", habilidades: "Habilidades", forma: "Forma física", guias: "Guías", agua: "Agua potable", mapas: "Mapas sin conexión", plan: "Plan familiar", aprende: "Consejos y comunidad", paises: "Recomendaciones por país", morse: "Código Morse", noticias: "Noticias", fuentes: "Fuentes" };
   const tituloBase = document.title;
   const vistaH1 = $("#vista-h1");
   let vistaActual = null;
