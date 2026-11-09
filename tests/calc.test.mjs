@@ -396,3 +396,14 @@ test("morse: tiempos estándar (1, 3, 1, 3 y 7 unidades)", () => {
   assert.equal(u, 50);
   assert.deepEqual(C.secuenciaMorse(""), []);
 });
+
+test("mascotas: la comida se calcula por tamaño y días", () => {
+  assert.deepEqual(C.MASCOTAS.PIENSO_G_DIA, { perrosPeq: 140, perrosMed: 265, perrosGra: 455, gatos: 55 });
+  const r = run({ dias: 7, adultos: 1, perrosPeq: 1, perrosGra: 1, gatos: 2 });
+  assert.equal(r.pienso.perros, 4.2); // (140 + 455) × 7 = 4.165 g → 4,2 kg
+  assert.equal(r.pienso.gatos, 0.8);  // 55 × 2 × 7 = 770 g → 0,8 kg
+  assert.match(sum(r, "perros"), /4,2 kg de su pienso/);
+  assert.match(sum(r, "gatos"), /0,8 kg de su pienso/);
+  assert.ok(sum(r, "mascotasConsejo"));
+  assert.equal(run({ adultos: 1 }).pienso.total, 0);
+});

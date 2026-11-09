@@ -205,7 +205,8 @@
     $("#calc-big").innerHTML = `
       <div><strong>${fmt(r.agua.total, 1)} L</strong><span>de agua (${plural(r.agua.garrafas5L, "garrafa", "garrafas")} de 5 L)</span></div>
       ${r.kcal.total ? `<div><strong>${fmt(r.kgComida, 1)} kg</strong><span>de comida (peso neto de la lista, ${fmt(r.kcal.total)} kcal)</span></div>`
-                     : `<div><strong>Bebés</strong><span>su alimentación va aparte (más abajo)</span></div>`}`;
+                     : `<div><strong>Bebés</strong><span>su alimentación va aparte (más abajo)</span></div>`}
+      ${r.pienso.total ? `<div><strong>${fmt(Math.max(0.1, r.pienso.total), 1)} kg</strong><span>de pienso para ${esc(mascotas)} (aparte)</span></div>` : ""}`;
 
     $("#calc-compra-wrap").hidden = r.grupos.length === 0;
     $("#calc-grupos").innerHTML = r.grupos.map((g) => {

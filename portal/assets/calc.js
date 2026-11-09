@@ -20,6 +20,14 @@
   const FACTOR_CALOR = 2;        // Ready.gov: con calor intenso se puede necesitar el doble de agua para beber
   // Mascotas: unos 50–60 ml por kg y día (referencia veterinaria habitual), con un peso típico por tamaño.
   const AGUA_MASCOTA = { perrosPeq: 0.4, perrosMed: 1, perrosGra: 2, gatos: 0.3 };
+  // Comida de mascotas: peso típico por tamaño (kg) y energía de mantenimiento de un adulto, según FEDIAF:
+  // perros 110 kcal × kg^0,75 (adulto medio; los muy sedentarios rondan 95) y gatos castrados o de interior
+  // 75 kcal × kg^0,67 (rango 52–75: se toma el alto para tener margen). Pienso seco: ~3.500 kcal/kg el de perro
+  // y ~3.700 el de gato (etiquetas habituales). La comida húmeda tiene unas 80–100 kcal/100 g: ~4 veces más peso.
+  const PESO_MASCOTA = { perrosPeq: 7, perrosMed: 17, perrosGra: 35, gatos: 4 };
+  const kcalMascota = (k) => k === "gatos" ? 75 * PESO_MASCOTA.gatos ** 0.67 : 110 * PESO_MASCOTA[k] ** 0.75;
+  const PIENSO_G_DIA = Object.fromEntries(Object.keys(PESO_MASCOTA).map((k) =>
+    [k, Math.ceil(kcalMascota(k) / (k === "gatos" ? 3.7 : 3.5) / 5) * 5])); // ≈ 140, 265, 455 y 55 g
 
   const LIMITES = {
     adultos: [0, 20], ninos: [0, 20], peques: [0, 20], bebes: [0, 10], mayores: [0, 10],
@@ -254,6 +262,11 @@
     out.kcalMediaPersona = Math.round(kcalMedia);
     // Peso neto real de lo que sale en la lista (latas y botes con su líquido): sirve para saber cuánto espacio ocupa
     out.kgComida = redondeo1(out.grupos.reduce((s, g) => s + (g.base?.gramos || 0) + (g.segura?.gramos || 0), 0) / 1000);
+    // Pienso seco de las mascotas para todo el periodo (aparte de la comida de las personas)
+    const piensoPerros = PERROS.reduce((s, k) => s + i[k] * PIENSO_G_DIA[k], 0) * dias / 1000;
+    const piensoGatos = i.gatos * PIENSO_G_DIA.gatos * dias / 1000;
+    const arriba = (n) => (n > 0 ? Math.ceil(n * 10 - 1e-9) / 10 : 0); // redondeo hacia arriba: mejor que sobre
+    out.pienso = { perros: arriba(piensoPerros), gatos: arriba(piensoGatos), total: arriba(piensoPerros) + arriba(piensoGatos) };
 
     // ---------- Otros suministros ----------
     const S = out.suministros;
@@ -272,8 +285,10 @@
     if (i.lactancia) S.push({ id: "lactancia", texto: `Lactancia materna: ya están sumadas ${KCAL.extraLactancia} kcal y ${String(EXTRA_LACTANCIA).replace(".", ",")} L de agua más al día para la madre` });
     if (i.mayores) S.push({ id: "mayores", texto: "Personas mayores: gafas de repuesto, pilas para los audífonos y ayudas técnicas" });
     if (i.medicacion || i.mayores || activas.has("diabetes")) S.push({ id: "medicacion", texto: `Medicación para ${plural(dias + 7, "día", "días")} (el horizonte más una semana de margen) y copia de las recetas` });
-    if (i.perros) S.push({ id: "perros", texto: `${i.perros === 1 ? "Perro" : "Perros"}: comida para ${plural(dias, "día", "días")}, ${String(out.agua.perros).replace(".", ",")} L de agua (ya sumados arriba), correa y bolsas` });
-    if (i.gatos) S.push({ id: "gatos", texto: `Gatos u otras mascotas pequeñas: comida para ${plural(dias, "día", "días")}, ${String(out.agua.gatos).replace(".", ",")} L de agua (ya sumados arriba), arena y transportín` });
+    const coma = (n) => String(n).replace(".", ",");
+    if (i.perros) S.push({ id: "perros", texto: `${i.perros === 1 ? "Perro" : "Perros"}: ${coma(Math.max(0.1, out.pienso.perros))} kg de su pienso seco habitual (o unas 4 veces ese peso en latas de comida húmeda) y ${coma(out.agua.perros)} L de agua (ya sumados arriba). Además: comedero y bebedero, correa, bozal, bolsas, su medicación y la cartilla con las vacunas` });
+    if (i.gatos) S.push({ id: "gatos", texto: `Gatos u otras mascotas pequeñas: ${coma(Math.max(0.1, out.pienso.gatos))} kg de su pienso seco habitual (o unas 4 veces ese peso en latas de comida húmeda) y ${coma(out.agua.gatos)} L de agua (ya sumados arriba). Además: arena y bandeja, transportín, comedero, su medicación y la cartilla. Si es otra especie (conejo, ave, roedor), guarda su comida propia` });
+    if (out.mascotas) S.push({ id: "mascotasConsejo", texto: "Mascotas: no cambies de comida de golpe (les sienta mal), guarda el pienso en un recipiente hermético y rótalo, y lleva una foto tuya con ellas por si os separáis" });
 
     // ---------- Avisos ----------
     for (const id of activas) out.avisos.push({ tipo: "info", necesidad: id, texto: AVISOS[id] });
@@ -403,6 +418,7 @@
   }
 
   const AGUA = { BEBIDA, COCINA, HIGIENE, AGUA_BEBE, EXTRA_LACTANCIA, FACTOR_CALOR, AGUA_MASCOTA };
+  const MASCOTAS = { PESO_MASCOTA, PIENSO_G_DIA };
 
   /* ---------- Código Morse (internacional, UIT-R M.1677-1, más la Ñ de uso en español) ---------- */
   const MORSE = {
@@ -447,7 +463,7 @@
     return sec;
   }
 
-  const api = { compute, sanear, aguaDia, menu, gotasLejia, distanciaRumbo, parseCoords, aMorse, deMorse, secuenciaMorse, MORSE, MORSE_ORDEN, SOS, HORIZONTES, KCAL, AGUA, LIMITES, PERROS, NECESIDADES, GRUPOS, AVISOS, MENU_DIAS, PROHIBIDOS };
+  const api = { MASCOTAS, compute, sanear, aguaDia, menu, gotasLejia, distanciaRumbo, parseCoords, aMorse, deMorse, secuenciaMorse, MORSE, MORSE_ORDEN, SOS, HORIZONTES, KCAL, AGUA, LIMITES, PERROS, NECESIDADES, GRUPOS, AVISOS, MENU_DIAS, PROHIBIDOS };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.PrepCalc = api;
 })(typeof window !== "undefined" ? window : globalThis);
