@@ -625,3 +625,15 @@ main:focus { outline: none; }
 :root[data-theme="apagon"] .reservas-bar { background: #000; backdrop-filter: none; }
 #desp-lista-card, #inventario { scroll-margin-top: 120px; }
 .reservas-bar a { white-space: nowrap; } @media (max-width: 420px) { .reservas-bar a { padding: .45rem .4rem; font-size: .92rem; gap: .35rem; } }
+
+/* Lo que falta según la calculadora y el inventario */
+.falta { color: var(--ember); }
+.pill.falta { background: color-mix(in srgb, var(--ember) 14%, transparent); color: var(--ember); }
+.desp-item.falta { border-left: 4px solid var(--ember); }
+.chip-falta { border-color: color-mix(in srgb, var(--ember) 45%, transparent); }
+.desp-faltan { margin-bottom: 1rem; }
+.desp-faltan p { margin: 0 0 .5rem; }
+.desp-faltan .chips, .inv-faltan { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; margin-bottom: 0; }
+.inv-faltan:empty, .desp-lista-faltan:empty { display: none; }
+#inv-falta { margin: 0; }
+.desp-lista-faltan .chip { margin: .2rem .2rem 0 0; }

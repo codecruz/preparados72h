@@ -251,9 +251,11 @@
           <p>Productos concretos de cualquier supermercado que aguantan meses o años sin nevera con el envase cerrado. No hace falta comida especial de supervivencia: compra lo que ya coméis, en estos formatos, y rótalo. Las cantidades te las da la <a href="#calculadora">calculadora</a>.</p>
         </header>
         <div class="desp-reglas" id="desp-reglas"></div>
+        <div class="card desp-faltan" id="desp-faltan" aria-live="polite"></div>
         <div class="desp-filtros">
           <div class="chips" id="desp-cats" role="group" aria-label="Filtrar por tipo de producto"></div>
           <label class="check desp-sinfuego"><input type="checkbox" id="desp-sinfuego"> <span>Solo lo que se come sin cocinar</span></label>
+          <label class="check desp-sinfuego"><input type="checkbox" id="desp-falta"> <span>Solo lo que me falta</span></label>
         </div>
         <p class="muted small" id="desp-count" aria-live="polite"></p>
         <div class="desp-grid" id="desp-grid"></div>
@@ -261,6 +263,7 @@
           <h3>Mi lista de la compra</h3>
           <p class="small muted" id="desp-lista-vacia">Pulsa «A la lista» en los productos que quieras comprar.</p>
           <ul class="desp-lista-ul" id="desp-lista"></ul>
+          <p class="small desp-lista-faltan" id="desp-lista-faltan"></p>
           <div class="inv-actions">
             <button type="button" class="btn btn-ghost btn-sm" data-print="despensa">Imprimir lista</button>
             <button type="button" class="btn btn-ghost btn-sm" id="desp-vaciar">Vaciar lista</button>
@@ -286,6 +289,8 @@
               <label>Cantidad<input name="cantidad" type="number" min="0" step="any" value="1" inputmode="decimal" required></label>
               <span class="inv-unit muted small" id="inv-unit"></span>
             </div>
+            <p class="small" id="inv-falta" aria-live="polite"></p>
+            <div class="chips inv-faltan" id="inv-faltan"></div>
             <label>Caduca o consumir antes de<input name="caduca" type="date"></label>
             <button type="submit" class="btn btn-primary btn-sm">Añadir al inventario</button>
           </form>

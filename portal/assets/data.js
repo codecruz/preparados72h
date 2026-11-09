@@ -649,6 +649,7 @@ window.PREP_DATA = {
       { id: "azucar", cat: "extras", nombre: "Azúcar y sal", formato: "Paquete de 1 kg", dura: "Indefinida si está seca", cocinar: false, tipo: "otros" },
       { id: "barritas", cat: "extras", nombre: "Barritas de cereales o energéticas", formato: "Caja de 6 a 12", dura: "6–12 meses", cocinar: false, tipo: "cereales", al: "gluten, frutos secos (según marca)" },
       { id: "sopas", cat: "extras", nombre: "Sopas o cremas deshidratadas en sobre", formato: "Sobre de 4 raciones", dura: "1–2 años", cocinar: true, tipo: "otros", nota: "Calientan y reconfortan, pero necesitan agua caliente." },
+      { id: "pienso", cat: "extras", nombre: "Pienso seco de tu mascota (el que ya come)", formato: "Saco de 1–3 kg cerrado, o latas de comida húmeda", dura: "La de la fecha del saco", cocinar: false, tipo: "mascotas", nota: "No le cambies la marca de golpe: les sienta mal. Una vez abierto, ciérralo bien o pásalo a un recipiente hermético." },
       { id: "especias", cat: "extras", nombre: "Especias, pimentón, orégano y vinagre", formato: "Botes pequeños", dura: "1–3 años", cocinar: false, tipo: "otros", nota: "Comer lo mismo varios días desanima: el sabor también cuenta." },
     ],
   },
