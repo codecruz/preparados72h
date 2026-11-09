@@ -637,3 +637,6 @@ main:focus { outline: none; }
 .inv-faltan:empty, .desp-lista-faltan:empty { display: none; }
 #inv-falta { margin: 0; }
 .desp-lista-faltan .chip { margin: .2rem .2rem 0 0; }
+.desp-faltan-ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
+.desp-faltan-ul li { display: flex; flex-direction: column; align-items: flex-start; gap: .2rem; padding-bottom: .5rem; border-bottom: 1px solid var(--line); }
+.desp-faltan-ul li:last-child { border-bottom: 0; padding-bottom: 0; }

@@ -329,6 +329,7 @@
   }
   const cuanto = (f) => `${fmt(f.falta, 1)} ${f.falta === 1 && f.t.uno ? f.t.uno : f.t.unidad}`;
   const pendientes = (F) => (F ? Object.values(F).filter((f) => f.falta > 0) : []);
+  const porEjemplo = (f) => C.ejemplos(f.t.id, f.falta, lastResult?.entrada); // «6 botes de garbanzos, 5 de lentejas…»
   let refrescarDespensa = () => {}; // la despensa se define más abajo
 
   // En el formulario: cuánto falta del tipo elegido y accesos a los tipos que faltan
@@ -336,7 +337,7 @@
     const F = faltas(), f = F?.[invForm.elements.tipo.value];
     const el = $("#inv-falta");
     el.className = "small " + (f ? (f.falta > 0 ? "falta" : "ok") : "muted");
-    el.textContent = !F ? "Rellena la calculadora para saber cuánto necesitas." : !f ? "La calculadora no pide nada de este tipo." : f.falta > 0 ? `Te faltan ${cuanto(f)}.` : "De este tipo ya tienes bastante ✓";
+    el.textContent = !F ? "Rellena la calculadora para saber cuánto necesitas." : !f ? "La calculadora no pide nada de este tipo." : f.falta > 0 ? `Te faltan ${cuanto(f)}.${porEjemplo(f) ? ` Por ejemplo: ${porEjemplo(f)}.` : ""}` : "De este tipo ya tienes bastante ✓";
     const P = pendientes(F);
     $("#inv-faltan").innerHTML = P.length ? `<span class="small muted">Te falta:</span> ` + P.map((x) => `<button type="button" class="chip chip-falta" data-inv-tipo="${x.t.id}" aria-pressed="${x.t.id === invForm.elements.tipo.value}">${esc(x.t.nombre)} · ${esc(cuanto(x))}</button>`).join("") : "";
   }
@@ -864,10 +865,14 @@
     // Resumen: lo que falta según la calculadora y el inventario
     $("#desp-faltan").innerHTML = !F ? `<p class="small muted">Rellena la <a href="#calculadora">calculadora</a> y te marcaremos aquí lo que necesitas y no tienes en el <a href="#inventario">inventario</a>.</p>`
       : !P.length ? `<p class="small ok"><strong>Lo tienes todo ✓</strong> Según la calculadora y tu inventario no te falta nada. Revisa las caducidades.</p>`
-      : `<p class="small"><strong>Te falta</strong> (según la calculadora y lo que tienes en el inventario). Pulsa uno para ver qué comprar:</p>
-         <div class="chips">${P.map((f) => DS.productos.some((x) => x.tipo === f.t.id)
-           ? `<button type="button" class="chip chip-falta" data-dtipo="${f.t.id}" aria-pressed="${f.t.id === despTipo}">${esc(f.t.nombre)} · ${esc(cuanto(f))}</button>`
-           : `<span class="chip chip-falta">${esc(f.t.nombre)} · ${esc(cuanto(f))}</span>`).join("")}</div>`;
+      : `<p class="small"><strong>Te falta</strong> (según la calculadora y lo que tienes en el inventario). Debajo de cada cosa, un ejemplo de qué comprar; pulsa el nombre para ver más productos:</p>
+         <ul class="desp-faltan-ul">${P.map((f) => {
+           const ejm = porEjemplo(f);
+           const cab = DS.productos.some((x) => x.tipo === f.t.id)
+             ? `<button type="button" class="chip chip-falta" data-dtipo="${f.t.id}" aria-pressed="${f.t.id === despTipo}">${esc(f.t.nombre)} · ${esc(cuanto(f))}</button>`
+             : `<span class="chip chip-falta">${esc(f.t.nombre)} · ${esc(cuanto(f))}</span>`;
+           return `<li>${cab}${ejm ? `<span class="small">Por ejemplo: ${esc(ejm)}.</span>` : ""}</li>`;
+         }).join("")}</ul>`;
     const lista = DS.productos.filter((x) => (despCat === "todo" || x.cat === despCat) && (!sinFuego || !x.cocinar) && (!soloFalta || falta(x)) && (!despTipo || x.tipo === despTipo));
     $("#desp-count").textContent = `${plural(lista.length, "producto", "productos")}${sinFuego ? " que se comen sin cocinar" : ""}${soloFalta || despTipo ? " de lo que te falta" : ""}.`;
     $("#desp-grid").innerHTML = lista.map((x) => {
@@ -1139,7 +1144,7 @@
     const items = despLista.map((id) => DS.productos.find((p) => p.id === id));
     return `<h1>Lista de la compra para la despensa</h1>` + (items.length
       ? DS.categorias.map(([cid, , nombre]) => { const l = items.filter((x) => x.cat === cid); return l.length ? `<h2>${esc(nombre)}</h2><ul class="print-check">${l.map((x) => `<li>☐ ${esc(x.nombre)}: ${esc(x.formato)} (dura ${esc(x.dura)})</li>`).join("")}</ul>` : ""; }).join("")
-      : "<p>La lista está vacía.</p>") + (() => { const P = pendientes(faltas()); return P.length ? `<p><strong>Según la calculadora y tu inventario te falta:</strong> ${P.map((f) => `${esc(f.t.nombre)} (${esc(cuanto(f))})`).join(", ")}.</p>` : ""; })() + `<p>Compra solo lo que coméis y rótalo. Las cantidades, en la calculadora. Impreso el ${new Date().toLocaleDateString("es-ES")}.</p>`;
+      : "<p>La lista está vacía.</p>") + (() => { const P = pendientes(faltas()); return P.length ? `<p><strong>Según la calculadora y tu inventario te falta:</strong></p><ul>${P.map((f) => `<li>☐ ${esc(f.t.nombre)}: ${esc(cuanto(f))}${porEjemplo(f) ? `. Por ejemplo: ${esc(porEjemplo(f))}` : ""}.</li>`).join("")}</ul>` : ""; })() + `<p>Compra solo lo que coméis y rótalo. Las cantidades, en la calculadora. Impreso el ${new Date().toLocaleDateString("es-ES")}.</p>`;
   }
   const BUILDERS = { despensa: buildDespensaPrint, plan: buildPlanPrint, mochila: buildChecklistPrint, calculadora: buildCalcPrint, menu: buildMenuPrint, inventario: buildInventoryPrint, guia: buildGuidePrint, puntos: buildPuntosPrint, material: buildMaterialPrint };
 

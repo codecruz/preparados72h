@@ -313,6 +313,55 @@
     vegetariano: ["C", "P"], vegano: ["C", "P", "AN", "L", "LA", "H"], diabetes: ["AZ"], hipertension: ["SAL"],
   };
   const pl = (t, ...tags) => ({ t, tags });
+
+  // ---------- Ejemplos concretos de compra ----------
+  // Para lo que falta de cada grupo: qué productos comprar y cuántos de cada, en la MISMA unidad del grupo
+  // (p. ej. «16 botes de 400 g» → 6 de garbanzos, 5 de lentejas y 5 de alubias). Etiquetas como en el menú:
+  // se descarta lo que no sirve para alguna necesidad marcada, y lo que hay que cocinar si no hay hornillo.
+  // u: envase [singular, plural] (por defecto, el del grupo); x: cuántos de ese envase equivalen a una unidad del grupo
+  const ej = (t, o = {}) => ({ t, tags: o.tags || [], cocinar: !!o.cocinar, u: o.u, x: o.x || 1 });
+  const U = { paquete: ["paquete", "paquetes"], bote: ["bote", "botes"], lata: ["lata", "latas"], brik: ["brik", "briks"],
+    bolsa: ["bolsa", "bolsas"], botella: ["botella", "botellas"] };
+  const EJEMPLOS = {
+    cereales: { max: 3, u: U.paquete, l: [ej("arroz", { cocinar: true }), ej("pasta", { tags: ["G"], cocinar: true }), ej("galletas", { tags: ["G", "L", "AZ"] }),
+      ej("picos o pan tostado", { tags: ["G"] }), ej("copos de avena", { tags: ["G"] }),
+      ej("tortitas de arroz o maíz", { u: ["paquete pequeño", "paquetes pequeños"], x: 4 })] },
+    legumbres: { max: 3, u: U.bote, l: [ej("garbanzos cocidos"), ej("lentejas cocidas"), ej("alubias cocidas")] },
+    proteina: { max: 3, u: U.lata, l: [ej("sardinas en aceite", { tags: ["P", "C"] }), ej("caballa en aceite", { tags: ["P", "C"] }),
+      ej("pollo o pavo en conserva", { tags: ["C"] }), ej("atún (de 80 g)", { tags: ["P", "C"], u: ["lata pequeña", "latas pequeñas"], x: 2 }),
+      ej("hummus que no necesite nevera", { u: U.bote }), ej("soja texturizada (100 g)", { tags: ["S"], cocinar: true, u: U.bolsa }),
+      ej("garbanzos o lentejas cocidos, de más", { u: U.bote })] },
+    grasas: { max: 3, u: U.bolsa, l: [ej("frutos secos (almendras, nueces o cacahuetes)", { tags: ["FS"] }), ej("crema de cacahuete", { tags: ["FS"], u: U.bote }),
+      ej("aceite de oliva (250 ml)", { u: U.botella }), ej("semillas de girasol o calabaza")] },
+    lacteos: { max: 1, u: U.brik, l: [ej("leche UHT entera o semidesnatada", { tags: ["L", "LA", "AN"] }), ej("leche UHT sin lactosa", { tags: ["L", "AN"] }),
+      ej("bebida de soja enriquecida en calcio", { tags: ["S"] }), ej("bebida de avena enriquecida en calcio", { tags: ["G"] }), ej("bebida de arroz enriquecida en calcio")] },
+    frutaVerdura: { max: 4, u: U.lata, l: [ej("fruta en su jugo (melocotón o piña)"), ej("maíz dulce"), ej("judías verdes o menestra", { u: U.bote }), ej("tomate triturado", { u: U.bote })] },
+  };
+  const unir = (l) => (l.length > 1 ? l.slice(0, -1).join(", ") + " y " + l[l.length - 1] : l[0] || "");
+  const coma = (n) => String(n).replace(".", ",");
+  // Devuelve el texto «Por ejemplo» para lo que falta de un tipo, o "" si no hay ejemplo
+  function ejemplos(id, falta, entrada = {}) {
+    if (!(falta > 0)) return "";
+    if (id === "agua") {
+      const g = Math.ceil(falta / 5), b = Math.ceil(falta / 1.5);
+      return `${plural(g, "garrafa", "garrafas")} de 5 L (o ${b} botellas de 1,5 L)`;
+    }
+    if (id === "mascotas") {
+      const saco = [1.5, 3, 4].find((k) => k >= falta);
+      const sacos = saco ? `1 saco de ${coma(saco)} kg` : `${Math.ceil(falta / 4)} sacos de 4 kg`;
+      return `${sacos} de su pienso de siempre (o unas ${Math.ceil(falta * 10)} latas de 400 g de comida húmeda)`;
+    }
+    const E = EJEMPLOS[id];
+    if (!E) return "";
+    const prohib = new Set(Object.keys(entrada.necesidades || {}).flatMap((n) => PROHIBIDOS[n] || []));
+    let l = E.l.filter((e) => !e.tags.some((t) => prohib.has(t)) && !(entrada.sinFuego && e.cocinar));
+    if (!l.length) l = [E.l[E.l.length - 1]]; // la última opción de cada grupo no lleva etiquetas
+    const n = Math.ceil(falta - 1e-9), k = Math.min(E.max, l.length, n);
+    return unir(l.slice(0, k).map((e, j) => {
+      const c = (Math.floor(n / k) + (j < n % k ? 1 : 0)) * e.x, [us, up] = e.u || E.u;
+      return `${plural(c, us, up)} de ${e.t}`;
+    }));
+  }
   const SEGURO = {
     desayuno: pl("Bebida de arroz, tortitas de arroz o maíz con aceite de oliva y fruta en su jugo"),
     comida: pl("Garbanzos de bote enjuagados con maíz, pimiento asado y aceite de oliva"),
@@ -463,7 +512,7 @@
     return sec;
   }
 
-  const api = { MASCOTAS, compute, sanear, aguaDia, menu, gotasLejia, distanciaRumbo, parseCoords, aMorse, deMorse, secuenciaMorse, MORSE, MORSE_ORDEN, SOS, HORIZONTES, KCAL, AGUA, LIMITES, PERROS, NECESIDADES, GRUPOS, AVISOS, MENU_DIAS, PROHIBIDOS };
+  const api = { MASCOTAS, ejemplos, EJEMPLOS, compute, sanear, aguaDia, menu, gotasLejia, distanciaRumbo, parseCoords, aMorse, deMorse, secuenciaMorse, MORSE, MORSE_ORDEN, SOS, HORIZONTES, KCAL, AGUA, LIMITES, PERROS, NECESIDADES, GRUPOS, AVISOS, MENU_DIAS, PROHIBIDOS };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.PrepCalc = api;
 })(typeof window !== "undefined" ? window : globalThis);

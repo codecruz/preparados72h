@@ -407,3 +407,18 @@ test("mascotas: la comida se calcula por tamaño y días", () => {
   assert.ok(sum(r, "mascotasConsejo"));
   assert.equal(run({ adultos: 1 }).pienso.total, 0);
 });
+
+test("ejemplos concretos de compra: reparto y necesidades", () => {
+  assert.equal(C.ejemplos("legumbres", 16), "6 botes de garbanzos cocidos, 5 botes de lentejas cocidas y 5 botes de alubias cocidas");
+  assert.equal(C.ejemplos("agua", 69.3), "14 garrafas de 5 L (o 47 botellas de 1,5 L)");
+  assert.match(C.ejemplos("mascotas", 1.2), /^1 saco de 1,5 kg/);
+  assert.equal(C.ejemplos("legumbres", 0), "");
+  // Celíaco y sin hornillo: ni pasta ni arroz; se convierte a paquetes pequeños de tortitas
+  assert.equal(C.ejemplos("cereales", 7, { necesidades: { celiaco: 1 }, sinFuego: true }), "28 paquetes pequeños de tortitas de arroz o maíz");
+  // Alergia al pescado: nada de sardinas ni atún
+  assert.doesNotMatch(C.ejemplos("proteina", 24, { necesidades: { pescado: 1 } }), /sardina|caballa|atún/);
+  // Vegano: sin leche de vaca
+  assert.match(C.ejemplos("lacteos", 7, { necesidades: { vegano: 1 } }), /^7 briks de bebida/);
+  // Cada grupo de la calculadora tiene ejemplos y la última opción no lleva etiquetas (siempre hay algo)
+  for (const g of C.GRUPOS) { const E = C.EJEMPLOS[g.id]; assert.ok(E, g.id); assert.equal(E.l[E.l.length - 1].tags.length, 0, g.id); }
+});
