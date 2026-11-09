@@ -422,3 +422,17 @@ test("ejemplos concretos de compra: reparto y necesidades", () => {
   // Cada grupo de la calculadora tiene ejemplos y la última opción no lleva etiquetas (siempre hay algo)
   for (const g of C.GRUPOS) { const E = C.EJEMPLOS[g.id]; assert.ok(E, g.id); assert.equal(E.l[E.l.length - 1].tags.length, 0, g.id); }
 });
+
+test("caso completo: 2 adultos y 3 gatos durante una semana", () => {
+  const r = run({ dias: 7, adultos: 2, ninos: 0, gatos: 3 });
+  assert.equal(r.agua.personas, 42);          // 2 × 3 L × 7 días
+  assert.equal(r.agua.gatos, 6.3);            // 3 × 0,3 L × 7 días
+  assert.equal(r.agua.total, 48.3);
+  assert.equal(r.agua.garrafas5L, 10);
+  assert.equal(r.kcal.total, 30800);          // 2 × 2.200 × 7
+  assert.equal(r.pienso.gatos, 1.2);          // 3 × 55 g × 7 = 1.155 g
+  const n = Object.fromEntries(r.grupos.map((g) => [g.id, g.base.cantidad]));
+  assert.deepEqual(n, { cereales: 7, legumbres: 16, proteina: 24, grasas: 4, lacteos: 7, frutaVerdura: 21 });
+  assert.match(sum(r, "gatos"), /1,2 kg de su pienso.*6,3 L de agua.*un transportín por animal \(3\)/);
+  assert.equal(C.ejemplos("mascotas", r.pienso.gatos), "1 saco de 1,5 kg de su pienso de siempre (o unas 12 latas de 400 g de comida húmeda)");
+});

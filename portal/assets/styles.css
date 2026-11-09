@@ -640,3 +640,9 @@ main:focus { outline: none; }
 .desp-faltan-ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
 .desp-faltan-ul li { display: flex; flex-direction: column; align-items: flex-start; gap: .2rem; padding-bottom: .5rem; border-bottom: 1px solid var(--line); }
 .desp-faltan-ul li:last-child { border-bottom: 0; padding-bottom: 0; }
+.desp-filtro { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; padding: .6rem .8rem; margin: .4rem 0; border-radius: var(--radius); background: color-mix(in srgb, var(--ember) 10%, var(--card)); border: 1px solid color-mix(in srgb, var(--ember) 35%, transparent); font-size: .92rem; }
+.desp-filtro[hidden] { display: none; }
+#desp-filtro, #inv-form, #desp-faltan { scroll-margin-top: 130px; }
+@keyframes flash { from { box-shadow: 0 0 0 4px color-mix(in srgb, var(--ember) 55%, transparent); } to { box-shadow: 0 0 0 0 transparent; } }
+.flash { animation: flash 1.4s ease-out; }
+@media (prefers-reduced-motion: reduce) { .flash { animation: none; outline: 3px solid var(--ember); } }

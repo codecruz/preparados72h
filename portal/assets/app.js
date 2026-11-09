@@ -344,7 +344,13 @@
   $("#inv-faltan").addEventListener("click", (e) => {
     const b = e.target.closest("[data-inv-tipo]");
     if (!b) return;
-    invForm.elements.tipo.value = b.dataset.invTipo; syncUnit(); invForm.elements.nombre.focus();
+    invForm.elements.tipo.value = b.dataset.invTipo; syncUnit();
+    // Que se note: ejemplo en «Qué es», formulario a la vista y resaltado un momento
+    const f = faltas()?.[b.dataset.invTipo], ejm = f ? porEjemplo(f) : "";
+    invForm.elements.nombre.placeholder = ejm ? "Ej.: " + ejm.split(/, | y /)[0].replace(/^\d+ /, "").replace(/ \(.*\)$/, "") : "Ej.: garbanzos de bote";
+    invForm.scrollIntoView({ block: "start", behavior: "smooth" });
+    invForm.classList.remove("flash"); void invForm.offsetWidth; invForm.classList.add("flash"); setTimeout(() => invForm.classList.remove("flash"), 1500);
+    invForm.elements.nombre.focus({ preventScroll: true });
   });
 
   function renderInventory() {
@@ -875,6 +881,10 @@
          }).join("")}</ul>`;
     const lista = DS.productos.filter((x) => (despCat === "todo" || x.cat === despCat) && (!sinFuego || !x.cocinar) && (!soloFalta || falta(x)) && (!despTipo || x.tipo === despTipo));
     $("#desp-count").textContent = `${plural(lista.length, "producto", "productos")}${sinFuego ? " que se comen sin cocinar" : ""}${soloFalta || despTipo ? " de lo que te falta" : ""}.`;
+    // Aviso visible del filtro activo, con botón para quitarlo
+    const ft = despTipo && F?.[despTipo];
+    $("#desp-filtro").hidden = !ft;
+    $("#desp-filtro").innerHTML = ft ? `<span>Mostrando lo que sirve para <strong>${esc(ft.t.nombre)}</strong>: te faltan ${esc(cuanto(ft))}.</span> <button type="button" class="btn btn-ghost btn-xs" id="desp-filtro-x">Ver todos ✕</button>` : "";
     $("#desp-grid").innerHTML = lista.map((x) => {
       const en = despLista.includes(x.id);
       const f = F?.[x.tipo];
@@ -920,7 +930,13 @@
       despTipo = despTipo === dt.dataset.dtipo && dt.closest("#desp-faltan") ? null : dt.dataset.dtipo;
       if (despTipo) { despCat = "todo"; $$("#desp-cats [data-dcat]").forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.dcat === "todo"))); }
       renderDespensa();
-      if (despTipo && dt.closest("#desp-lista-faltan")) $("#desp-faltan").scrollIntoView({ block: "start" });
+      // Baja hasta los productos para que se vea el resultado (en el móvil quedan fuera de la pantalla)
+      if (despTipo) $("#desp-filtro").scrollIntoView({ block: "start", behavior: "smooth" });
+      return;
+    }
+    if (e.target.closest("#desp-filtro-x")) {
+      despTipo = null; renderDespensa();
+      $("#desp-faltan").scrollIntoView({ block: "start", behavior: "smooth" });
       return;
     }
     const l = e.target.closest("[data-dlista]");
