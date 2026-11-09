@@ -1127,7 +1127,27 @@
   /* ---------- Offline (PWA) ---------- */
   try {
     if (!embedded && !NATIVE && "serviceWorker" in navigator && location.protocol.startsWith("http")) {
-      navigator.serviceWorker.register("sw.js").catch(() => {});
+      const sw = navigator.serviceWorker;
+      const reg = sw.register("sw.js").catch(() => null);
+      // El navegador solo busca una versión nueva al cargar la página. En el móvil la pestaña se queda abierta
+      // días enteros: se comprueba también al volver a ella y al recuperar la conexión.
+      const buscar = () => reg.then((r) => r && r.update()).catch(() => {});
+      addEventListener("visibilitychange", () => { if (!document.hidden) buscar(); });
+      addEventListener("online", buscar);
+      // Cuando se activa la versión nueva, la página abierta sigue con el código antiguo: se recarga una vez.
+      // Si estás escribiendo, espera a que salgas del campo o de la pestaña (lo escrito ya está guardado).
+      if (sw.controller) {
+        let hecho = false;
+        const recargar = () => {
+          if (hecho) return;
+          if (!document.hidden && document.activeElement?.matches("input, textarea, select")) {
+            document.activeElement.addEventListener("blur", recargar, { once: true });
+            return;
+          }
+          hecho = true; location.reload();
+        };
+        sw.addEventListener("controllerchange", recargar);
+      }
     }
   } catch { /* sin service worker */ }
 })();
