@@ -1,7 +1,55 @@
 // Generado automáticamente por scripts/update-news.mjs. No editar a mano.
 window.PREP_NEWS = {
-  "actualizado": "2026-11-10T01:06:21.921Z",
+  "actualizado": "2026-11-10T14:12:20.661Z",
   "items": [
+    {
+      "titulo": "Protección Civil ordena la evacuación del municipio de Piedralaves (Ávila) debido al \"posible desbordamiento\" de la presa de Horcajo",
+      "enlace": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxOWmJ1VGl5Q0gwZ3FIaFV4bzd6bjVCaEx5Q0QycXhXR1J3ZEo2a0pNUWM2clRTLXdneHBNTVZsNE5JQXJlZWlOeHpfY2F1UmpQVDF4UDVkNXEyTmhQX3BCdTVONVhWZFRGSVpIUVZOQ0ZxNTkxNjBic3ZkMFotZ2FBNFo5ZTdkd0ZQWDBfbTRjZi1CLU9YZF9mWUdxT3lJLVg5NVUtT252dG5Xc1Y4SlNpcXZJNWEzZ1pSX0VkbGJmbUI5NGJWM1pFcU1PQW1oT0VWdTBpRWpPcGNyZzFkMkVrSnFYQU5HTVVnSmlLa0pxQ19yN0JSMjZr?oc=5",
+      "fuente": "MARCA",
+      "fecha": "2026-11-10T13:49:43.000Z",
+      "tema": "Protección civil",
+      "zona": "europa"
+    },
+    {
+      "titulo": "Planes para las primeras 72 horas ante ciberataques a bancos, hospitales y redes eléctricas",
+      "enlace": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxOMVV1QVRlN2NmX1ZXSUxxOURMQ2dITTdlNm1mU3ctM1lacjJaYXU1QVlwSFFCVXN0YWt0a3JDbjdyMXAtbjdPeGZrN1RYTHhHRFJBeGZBaXE2U0QwVjRzM3FUN2dPUFhYcllvV18xbUtRMDZNek1WWHozTU1NLU15akxfNFEtNDF4VE1CZm9GVHJ4NEVwQ1hfb1JmOVJhNzFuckd5aDFGV2J1aHZON1Y5c1RSVVdWR3YyZHFzS2RQY0UyeVRDSFJ6dk9sNFFodURrVEFZY25zUl8tYTNBSlFkYVBFRQ?oc=5",
+      "fuente": "elconurbano.com.ar",
+      "fecha": "2026-11-10T13:36:14.000Z",
+      "tema": "Ciberataques",
+      "zona": "europa"
+    },
+    {
+      "titulo": "Protección Civil envía un Es-Alert por la evacuación de Piedralaves por el riesgo de inundación de la borrasca Bruna en Ávila",
+      "enlace": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOUE1YUm5Ob3ZzU25HOXhCZ2RKazQzeHVhbTZaZ2ZPS3pGTkFOOWhQTnFEbTdVQWdWcjlValVfSzFGR1ZVT1Frd25zMFZrOXNjVnFHb2xrMTJNRTBOSGp2RjhuU1RhNnNTN2VIVF9veWVLUUxfNUFDZWtjdEd5TUdGTFdHMjJPaERVUHJGeGJZOWdJZFhlSFd6ZURQak13cTlJYnZtS2VoeS1Rb0JvcU4xNE9MRXpETTBMVzZ2TDFpSzFLQmdhUDM2RVJzNm9qd0NtNkHSAdcBQVVfeXFMUHJSanBHQ0tOa0VoYXREMWVSQ1NXSmRnN2lOVWFqSGYwY29aQU96UGJydU15ZFpWcHY1TnJld3lNem5Mc3plRlFscXc1ZmhBQWdMUDJIZ1pTTURGX3M5ZFNETWh1MGJucmVGcHQ2eEVaeUpOTXh3OXlSajFTUEY5WF9Teld2dHRVRXFnRlJIT0lVcDNqUDMtZjJjQUZ3aklna3Z6RlBuaDBOTFdHdExtenktNkhnb3lWUjV6ZHN2QjBLMVREVjJQRDhwaUkwZ1Y0TDRJUGF1QzQ?oc=5",
+      "fuente": "elDiario.es",
+      "fecha": "2026-11-10T13:21:41.000Z",
+      "tema": "Desastres naturales",
+      "zona": "europa"
+    },
+    {
+      "titulo": "El Gobierno canario analiza los informes de Red Eléctrica y Endesa sobre el apagón en Lanzarote",
+      "enlace": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxPM2xmTmpMVDg5cWRfNlFEU2c5Z1FkamVNQkJieUhfZ28xOGtsWm14dEJpVk90V0l6NF9XX0xsOFExcFl6eEI3MWItM0JERkgwenh3YU11TGdyR3pIbHJqZzY0REdQLUtUaWJ0TmJ6ay1DZjkzVkdobEY2SFJTdGRrdGdKT1lSeC1VT3hKM0Nwd0sybUlXQ2FCQ0lvYTQ1ekdrQkJWcENva3lXNjJZSkRBRmR2RjE1WE16aXRZWkw0blJVbHZZcGdmTjRGVF9ocnhHRU5DYzFvWThnSUFEdUdXYnZNQjM5YlNZX0NXNnJXeV_SAfYBQVVfeXFMTzd5VVM3MHlSaXJDWko1M1BLVXl5dXkyQ0tYRUJ4NGpqYlJUSTBTZ1FockRlTGo1anczLXBMMHpBaERrSjJKY2xQS2k5YTFmZ1hadlpxZnljRHRuTng0TFA2czQ5NkJqS0ZhY1NQYl9WUU5zeWdTa29EbkxIci1rUWxBZG5BbXB5VnBLV2tZOEw2QjVwR2s3WjljUUREN0Y2d0RtUk1VUHA4ZEZyWkZ4UUVabzFvaTUxZGpqVmdINE1pVTlxckZ1bnRRR2ItT3ZwU2I2RTZrRDV4V0UycENEWW1UUkdxRkpxSlFQZXNXVFFSNU5VSkVB?oc=5",
+      "fuente": "La Voz de Lanzarote",
+      "fecha": "2026-11-10T13:01:40.000Z",
+      "tema": "Apagones",
+      "zona": "europa"
+    },
+    {
+      "titulo": "Protección Civil Jalisco ofrecerá charla gratuita sobre mochila de emergencia; fecha y cómo participar",
+      "enlace": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQNnZ1NE9ramVkSWpibFNpZVRRT3dPVmZPQXc1ek5yOUNmRV9Fck4tbmNRRzI2cVUyWG9hWWNYMzFteGwyWmtvWHVfTWhhUUp3cGdCNG5kcnhJVHo0Tk5sS2lLc0xGREhBWmJYMklCSVFkUThwWDVGNTdIc3NVckQwYTNXOThyUjNEMVVueGk0VDladTQ1c3JpTm1ZbzRid2ZsZ3NiTWJpand0aWh3WTc1eEpwVzVUUEp0dV9SYklfaTJ4UWZ3RnQwV2l3RURtMjJSZ19QZzhpNGlsTFQ1SjRtemtRdklQVElDNXfSAe8BQVVfeXFMUHBqVGVGV0F2ZUhJdzNkNzF2bzJNMWVIZll6UW5RcGxlcURMWmpkTzlnYlFXMUlYd3lMOWRVT1RZcUhVNnF3TE1OcUozbGFhTEtGWVVENFFEaUJ1LVpSMmFmZjY5WEVZUmZ1MWlCSFYybmlMTXFDR3B0czloV3c5WjhuNWd5cHpxRFNfbmIyYWxaNXhiOXhtRnNQbkstWlBfYTMxWEg0WXA0MVJsRGVSa3ZSRkJIRThDOGhTaFgybFpmMzlONWtUdUZCNHpFMkNoLWZ1c2N1QkduWjVOcXY3ZG1JVDl0bmllVEdfVkw0a1U?oc=5",
+      "fuente": "El Informador",
+      "fecha": "2026-11-10T03:54:19.000Z",
+      "tema": "Protección civil",
+      "zona": "latam"
+    },
+    {
+      "titulo": "Qué hay detrás de intrigante teoría de apagón mundial; hay preocupación por cinco ciudades en Colombia",
+      "enlace": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPUzNKZFZwbnZfNTVhaUt6ZWJfY0gwRHFZbVIzamQ1N1VqdThESHNacV9LaW5UalpXV3VsZUZzM0VNV2MyNW05bkVFMDEtZnZ5WVU0aGxrR3ZKXzNTdjlSejY3OTEwZXVYSGw4LTBqOU5GYnoxYTc3TktIYnZCRXNMVGxHRFNURVcwYlE1M0haM3RNOXl2SjR5THNSWmdkbmZqZHFjOU5iR3JnUFlrNTBiddIBtgFBVV95cUxPWGx5QkpleVdILTJONTN5RjZDZFZFdXpDdXJxZVdJSEtnYTNza3JCY3dqRWhMS3daMF9idmhDeW05UGM5SXpERjZ1TGJQdXl5VEFYcV9udDR0ZDRYU0N4WHd0Z2tFXzhfU0pNQ0c4bmVNZUtBTUhSNnpqMmZUcXdCVkFYOGZaQU0xVnZhSUduWmlzNmM2S2RWUW1UbUpFbFUzNThpdHpIei1ldDBoemhwSW9PVWZvZw?oc=5",
+      "fuente": "Pulzo",
+      "fecha": "2026-11-10T02:13:47.000Z",
+      "tema": "Apagones",
+      "zona": "latam"
+    },
     {
       "titulo": "¡Aseguran que no se quedará así! Francia acusa a Irán de ciberataque a refrigeradores en supermercados",
       "enlace": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOdjZmdklTa2lQTzFsWUxTX1pGUFFuQjJMeGJ0UkFDUHkwSTd4TVZobWtjRkF3RnlQU0VfbnVNTWZXaEI0YXRjdEVaUFhZdTFvV3hwbzh3YTJwSlVjNGRycjh1RjJFckp1WG1FaHI5cWFXOXNiT1VQTzFRcTA0VWY3UmRNRGlzamVkZGhIdHJ1LXMxMURPSTJiUTFqbW9veVpl0gGgAUFVX3lxTE15X1djNU16dW9ROHMwRE1QOVYwRUhYRGhDUmxUMW9OZHM2ZmhIYmNqRDBXVWYwZlYzSzRKTF85OUcyZ1RFYkM5N01UZHQwS2hKal82T3h5WERweE1JUGdGaEZ4b1F4WUlXeWJtcFR3MzJQcWJOM2JhR0xQdEZ5clBHdFVWTnpvTlFKNkFCSmtMblFUSXpRQXRVR3Q2RFBIOGU?oc=5",
@@ -33,6 +81,14 @@ window.PREP_NEWS = {
       "fecha": "2026-11-09T19:57:38.000Z",
       "tema": "Protección civil",
       "zona": "europa"
+    },
+    {
+      "titulo": "España queda anclada al modo reforzado eléctrico durante meses para evitar otro apagón a costa de precios récord",
+      "enlace": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPWGRrakRIbHg5YnQtbHp5VTY4Tm1vb0ZSTFpxNlU0M0kyVHZCR29VOHN2ck80dWVvWXBCcm1CdkQ2ZFJnUzVYUnFXOTdVeXRuenhtc0h2ZUQ1cG1Cbm50RkVLYXlRSEZpUTdtR0F2WFd5dGZQbVpScFJOZWxlRXhPcXhFak80cDNpNDBmVkRzZ0VCMWFhVjMzbDJRWjJLUlJFTE5JWmRFdzFEbGxGb0o3SFVCeUNqNG9PYXJCZUdR0gHDAUFVX3lxTFBTQnlCV3RGX0RoNXpTNmtCcExSWERPYXNEbUhfNkF4clh4SlhHN0o4MFdMOG9TZ3dKb0p6YTY2RWpXQUZzVXAzWUdpaWpFSng2cFRtWHRqd1FHWDFtVVlFbXU1b0xKWThMYjBJVlZwSmdkcFFoS2owZDRsdGVobmNBRHkwZ2pjMTQ0dW5yRm1xNnByMTFXaUtMNHdVVmdSSzJqbV9pdUxsMEc1bWppT1U3TTRaRGlEN2ZWbVFLYkpNaVJaSQ?oc=5",
+      "fuente": "ABC",
+      "fecha": "2026-11-09T19:47:02.000Z",
+      "tema": "Apagones",
+      "zona": "latam"
     },
     {
       "titulo": "Circula alerta de sismo en El Chilar; Protección Civil no tiene reporte oficial",
@@ -379,14 +435,6 @@ window.PREP_NEWS = {
       "zona": "latam"
     },
     {
-      "titulo": "¿Realmente necesitas una mochila de emergencia? Esto es lo que se sabe",
-      "enlace": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOSWVCd3pNeUN5azBmSFVDelFCMXhHT1E2SmVzYTVkeHhEb0dtYWF1MTBtVm1hTzFsLWJybFVwRzJTcVFxeXRTX1lEakF6Vm05c2JmX254a0ZSMTJwOWpSNHdBem54UkV5OFdjRkRPSURTT0NzeXJCcllKM1VjRGNKcTdCX29WV3ladFc3eTdGS1JFMldGQk94eXIwWDJ2ZmRObnNxZnM0OWRiRHYzNmhPR3lwTmQ1NUt0alow?oc=5",
-      "fuente": "Red Uno",
-      "fecha": "2026-11-07T00:48:29.000Z",
-      "tema": "Protección civil",
-      "zona": "europa"
-    },
-    {
       "titulo": "Corte de CFE en Veracruz: Fecha del Apagón y Zonas Afectadas en Noviembre 2026",
       "enlace": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNODNULU1LX3YxYXdxaWt6VUhESFJRdC1rRHh5ZF91VUlGNkpKSmlxQ2swSlZMSTdvVTBieGxCX0w4Ql91Q3VkYlcwaHI5dXNIZ21LWHZTV215cWhHeEJxNGpJNHJfVzl5UFk4UkZmS1loNzZBQUxXUkhsR1VlUG5aUUZyT0VnZTZac0wtb1NQTXh1OEhxblFyMDNKNUlzbGY0RWg3NmF0Vk1jRW9hWFBGSmgwRFBnQQ?oc=5",
       "fuente": "N+",
@@ -411,36 +459,12 @@ window.PREP_NEWS = {
       "zona": "latam"
     },
     {
-      "titulo": "Protección Civil de Panamá contabiliza más de 55.000 damnificados por terremoto de octubre",
-      "enlace": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBYc1VVQkw2eDJCdnljNy1nMVlIWnJaZ2VTd3pTZVZXcFBtbTZEcDV6WU5zX2YwX0tCTTVyalhYb3RrR1pNQzlKM2dUWmlTOGFBc2tpT1RyeXdqUm92R09yVnZSUzJJWGRoM044bWhYV3BqQnBq?oc=5",
-      "fuente": "teleSUR",
-      "fecha": "2026-11-06T20:50:51.000Z",
-      "tema": "Desastres naturales",
-      "zona": "europa"
-    },
-    {
-      "titulo": "Europa y España piden tener en casa un kit de emergencia",
-      "enlace": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1ldlR1UDFqcEdWN1RiTk9NckI1UjUwbU9kdE5HZ3p5TE1rNGx0YjA1Q2p5Zy1XNEstSHllMlBXUkxEdHRFT3JRQU8zRlNHVjNIQzd2MkNYUWlLalp4MWZrMHJPZXgxdjN1LTJkY2FzUkt3YzM5bmZySHln?oc=5",
-      "fuente": "Malagaes",
-      "fecha": "2026-11-06T20:28:17.000Z",
-      "tema": "Protección civil",
-      "zona": "europa"
-    },
-    {
       "titulo": "Activa Protección Civil alerta por lluvias intensas y posibles nevadas en Chihuahua",
       "enlace": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNaExWR08tT01aRHRNOTBKbGdXN2Zzc0xHanlOdnRQUm9LR1c2OU0tSzlyaEhmZkJKbmpnM095Z3NZakZNc0dqVDlyejlETm9RLWl2eFdaQzZqcmx4aHpWdk1Ucm4yOWlwZW9rVWFLZjRadW1VMlM5eV9RNnJjUzdfdFJZYlFSRkVWYW1DYnJtSVpKRHhnYmQzaUd0ZWhGNE0wSExtNHBZN09JektneUxDSWVZaWk?oc=5",
       "fuente": "ADN | A Diario Network",
       "fecha": "2026-11-06T20:06:36.000Z",
       "tema": "Protección civil",
       "zona": "latam"
-    },
-    {
-      "titulo": "¿Habrá un apagón mundial? La verdad detrás de las alertas virales",
-      "enlace": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQYnhzMF9XeXE2a3VWY1dIOTRQcURZTDNodHJCRDRZamxIbWFnUF9xeGZfNVdrSmN6N2Y4NzVBY2o2T3dXSW5SMmZOc3NUNG9ReG52aFhQaGx2aEF6WThWa3B2aFhGMmNoWHZDcjhHMmxzZEpMYUtvNUptcmRGbnVmV3IwVEtZTFdEVlZZSmZOU2NETlloNFRRNlJYeGo?oc=5",
-      "fuente": "www.laprensa.hn",
-      "fecha": "2026-11-06T20:02:51.000Z",
-      "tema": "Apagones",
-      "zona": "europa"
     },
     {
       "titulo": "Alerta en Moldavia: un ciberataque deja al descubierto los datos personales de casi medio millón de ciudadanos",
@@ -459,35 +483,11 @@ window.PREP_NEWS = {
       "zona": "latam"
     },
     {
-      "titulo": "La OTAN activa por primera vez helicópteros españoles en Rumanía mientras Bruselas insiste en el kit de emergencia",
-      "enlace": "https://news.google.com/rss/articles/CBMiggJBVV95cUxQVW1tRDVVVjBnanlwdWdpblpWSzN0aFNCVzFzME1WbDRuOFl4NTZWRnVLSThNM1l0UDR3WGdlSlFySHd2VlFfQnRtVlgtNmpyZXN3ZElsOWlMc3ZSMU13S1diS2E5cFlGWEl3RTJzRXBWUVhsYlZiblVYVTBZRHNKMTFoOUxuQ2tucnQwRXlIa3ZWRmhDZVZocS1IMU85bnY5VXU1WFA1bzBQODlINmFHZ3duN2VVX3h1TGUyY2xrb3ZsTEQwOXR0cEsyakxZMGVvSFZsdEt5TmpoR3k2cERvTkh3Vl8tZC1vbEV5SHdBZUJ3UnA4ZXZwMVBxMy05VWhWQ2fSAYICQVVfeXFMTS1DYThCaWF5Q2J6b0pRRnRSd0ZXc2JfRFhackt2NUVRT3A5aXF6VHI4dzhMcjN0SFdBSndzSkVpM0pwYUM5ZUxVWUVqSVdBTlVmVHVRSHlMblZndjFDRTJqU3BTYWxrZC1PR3A2aXZEUWFwV00tc1FDUktVVGhBVms5ZTIzYVQ4NFo4LXdaOGtEVnY4MmxKYUZ2aVJwRHR2ZUJQR3lHR3NXZ1c0bzhtTzg0X3hlT2xaTVI2RExfMEFlMzNkeTdfczVzSVUyMUpLVEpGN2wxYzJnWXpVVWNVaXEwQWFOZW1VX0NOd0ZaZzBkT0lCbVNwb0dmWXhPUmJpcWtR?oc=5",
-      "fuente": "Antena 3 Noticias",
-      "fecha": "2026-11-06T14:33:49.000Z",
-      "tema": "Protección civil",
-      "zona": "latam"
-    },
-    {
       "titulo": "Protección Civil mantiene la alerta por lluvias en la Península y Canarias hasta la próxima semana por la borrasca Bruna",
       "enlace": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxQQ2Y1bVVlcGR2Y1F5Q1huRmhIbVBOMHZCSklJTm5GZ3BlQzRubmZWN0pTbmNhX1pWNTJFQ0ZUUFFNWVFpb213NjhJUlhLX2RGS0lmNnZIcWRvcm8ydEVqb1BtXzhZYkduQlFxYmNHRHNWd2JIS0ZRbEx6Y0RxU0RjUFN1WjY0NkVUeDdGR2pzMllpUmRPNU5zNjBPMFpDei1IU3YxSDFOblc5SUVoR3EwRkRfQUdXZnp6Z29CU0cycmNIQlFPdE1xdWdQdmxZQnNZcXZ5ZzA0VXRHQ1dzVmhzS2hnenA5VXN1?oc=5",
       "fuente": "Europa Press",
       "fecha": "2026-11-06T13:22:47.000Z",
       "tema": "Protección civil"
-    },
-    {
-      "titulo": "Mochila de emergencia, el tema del que todos hablan",
-      "enlace": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOMkQ2elNkZE1ZM2dSSnlNeTY0a2hrNGxkNnExS2JUTldJaDJRVVc2VGdCX2FqcjY3VWJEZjhPYVhxU0ZGbU9lb2s2ejNZOEJUUE5MY3dhTmJVXzBEanBvWGFKQTdOSW9RcVY4VmI4VklVZEt6a0xEMkVDa1dmLURwY2ZZX0hEV3N3c0gzd3pJZG1uUmlrcjdXeU5wZFozNk5RYkRPT1BYaVc?oc=5",
-      "fuente": "El Sol de México",
-      "fecha": "2026-11-06T12:18:50.000Z",
-      "tema": "Protección civil",
-      "zona": "latam"
-    },
-    {
-      "titulo": "Mochila de Emergencia: la realidad detrás de la tendencia",
-      "enlace": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPN1kyVHN4NnlqNEo3MVB6djdoUmt5S19HVlR1Z3ZUakFVUkpJY05KbVMwYkhhVEhGMS1hTFJCY1M5WHVqY1VZT0JFUG1nODRqdkg3WXFjUkVodHNEY0g2RGVGSXVmSWNtZWQ2SkNKTEVIU2x3czhkQ3ljOWZVQmFOTEhnOVR5ZVpONjFVbnBBUHNRem5i?oc=5",
-      "fuente": "El Norte",
-      "fecha": "2026-11-06T11:02:27.000Z",
-      "tema": "Protección civil",
-      "zona": "latam"
     },
     {
       "titulo": "Oferta antiapagones: si tienes miedo a otro, esta batería con panel solar es un auténtico salvavidas",
