@@ -1,7 +1,47 @@
 // Generado automáticamente por scripts/update-news.mjs. No editar a mano.
 window.PREP_NEWS = {
-  "actualizado": "2026-11-11T04:22:22.184Z",
+  "actualizado": "2026-11-11T13:27:19.762Z",
   "items": [
+    {
+      "titulo": "Ante un posible apagón global y las fallas de los bancos: ¿Cuánto dinero en efectivo se recomienda tener?",
+      "enlace": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxNQzFiMTZDUXdZemd2dWlTTGxtei1NVk0ycnhPVzhZb0lYMmk4WWcwNzZwLWUwdXdXa3Iyd1ROSk1fZ09EXzR3Y3VJT3hOR0IyelZiNF9pbEd4QzIzMGk3NUVxMjVmSWFLcUprNVJnb2h4RmRMMHJRMTc3Mldva2RNSGFzMm51bUFTU1dEU3Ftanpkb1VhcThxX1BpLThlU2VQSnpYVElrYkRycEdkaUFUdUMzTmFzVGJodU16SjRHWVFENTZOWEg3SXZ3ZE1wdk9zZ1VIcEg4NlpHcm9vUkRRYm5faEQ?oc=5",
+      "fuente": "FayerWayer",
+      "fecha": "2026-11-11T13:15:51.000Z",
+      "tema": "Apagones",
+      "zona": "latam"
+    },
+    {
+      "titulo": "Apagón mundial de tres días: ¿Por qué 33 países llaman a prepararse?",
+      "enlace": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPLUxJSEJQa3pNSGt0RVhuNTZWWjNwNXFoX29GVkdublJ1UjdvUmJuSUdNY3lDenVTMGpFLW95em9iVUJ0R2pfYTNjSVZfQ0E4SlBvTXVuc1FCaHRJVTZRZVYtVmRXd2g0d3FtV2lRU25COGpxVENXMlNaTThNMWwtU2RkdEs4TjFfWE80VHJZN3o0cGFpNEJEZU96a0ltZ19jTHVMeW5INHdQelEtQTl0UkJMNA?oc=5",
+      "fuente": "FayerWayer",
+      "fecha": "2026-11-11T12:52:58.000Z",
+      "tema": "Apagones",
+      "zona": "latam"
+    },
+    {
+      "titulo": "Irán rechaza 'acusaciones infundadas' sobre ciberataque a frigoríficos franceses",
+      "enlace": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPMG50QmZZUjJEWHB5cENYSVM4Mk1YeTRoZTVEVkIzTjAtRnZlTTB1Vkpvc25xWXVtdmtfOVpPSkJVaW9QLVpieHZHMmNOX1FiSlNLM3lfNHctMGNEVkY3Q29Xb3BfQ05fQXVWcFk0SG5VTmVmQWdIQlZsUHZZSnNFbWZYZEwxYWVvbUd4SEJfalN3MTNKeFd1VzhVdGd5M2FQYmtQU2x4M0wtcXJPY3RhRG1KNkhfRUFQcGFhNXNxaVhxZzNtb2JKelZrb9IB0AFBVV95cUxNSHl6ZW1Ib1JCRW9yWXc5Qk01RmxiTnA0Z1JETzZ2bG5rVWxCN1VvSzRIOFV1U0tVbzdOSF82YzB4R1BZdm1udUtYOXdEYjlrbk1jYzlaN3BFTUNONHdxTUpGWG41TDhRRzBDeVg0UFQwblMyRFV0Q3VXQW9xY0xPWHMwT0Fyd3lyUnR6N0xBWlB6VWpYdjBoZFZYVHhBRTE2aDI2eWZXY1dTT2NFdG80eGNpUW5zYnRpemFueHBwb2RDZ0NaV0szOGUzdDF6WW1i?oc=5",
+      "fuente": "El Tiempo",
+      "fecha": "2026-11-11T12:22:56.000Z",
+      "tema": "Ciberataques",
+      "zona": "latam"
+    },
+    {
+      "titulo": "Experto en ciberseguridad alerta: 1 de cada 2 personas puede sufrir un ciberataque",
+      "enlace": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQbDVJYzFvd2wwTmpTeE9lemJkdlVMR2U3ZkNMRlFOS1lncTIyLWZCWmRWNEg5SGVmTUViRVIyaWhuM3ZwMl96SVBGWXpyTGd3QUVxRnJXY0lxWkZVQ2tjY20wR0pfbHVjU0UzclBraV9zTHRpNk5SU0dSRTY1S2o3bjZwRzM0YmNMOTM0c1lBRjRFNGo3Q1dsenByUzczTDRaQUFHSzFMcl9Vbks5NGlLMnlqN2VwQk0?oc=5",
+      "fuente": "Euronews.com",
+      "fecha": "2026-11-11T09:35:21.000Z",
+      "tema": "Ciberataques",
+      "zona": "latam"
+    },
+    {
+      "titulo": "Armar una mochila de emergencia cuesta más de mil pesos en Acapulco",
+      "enlace": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPWmxZNDRZaEllMUNlOVk5NFoxd3BNWnJrMkQxd2dscE9PSFZZSlJBenVNS2pfQnkxMWEzRUYweVpiOFBZdFhEZzZPRUdzTW5sYTdsbGMtOWRwd0ZXZUZMMUhFT3JzY09OLXk1cFZId3lacTM2X1VNSlJKUlpyVTBQYU9EZnhEc2ZoOGFUN2hWS0UtNHJ6TFZMQ3VxYmRVQUtESGxkUV85NmhPUWV1LWdwYWM4Q0hnNEst?oc=5",
+      "fuente": "El Sol de México",
+      "fecha": "2026-11-11T06:12:47.000Z",
+      "tema": "Protección civil",
+      "zona": "latam"
+    },
     {
       "titulo": "¿Apagón el 17 de noviembre por una IA descontrolada? La verdad detrás del rumor viral y la famosa teoría de Los Simpson",
       "enlace": "https://news.google.com/rss/articles/CBMiggJBVV95cUxPcmdUVWZ1bzRRbWowdXg0TmlHMFZNMlM0Yml2VlBjLWNRek1SSERQSjUzaGo0R3A2UnZtT041OHBXQjZaSHRMTHZJaW5YaXJaSjZ0ckQ4Mm1TZHk5M0c3WTNRaWhRWm9yTkNjQldvZGJxeVN4YzdEeDVhcHJRcmstMTZkQUhEZUtzamFENEtRSm96S005UHFUS0x4Wmk0ZXFzenJCZWIyRDNNcXgxVW9HM29zamFaUHNFTWxDZVVMLTBjZzJRbU4wTl90Qk1sNVhtU3VfNHBHZVFURUJWR3pKdnZtV3hITjRDSVhPNEtPaUxWV0std1lpeTF4Wlhwb0FVQmc?oc=5",
@@ -9,6 +49,14 @@ window.PREP_NEWS = {
       "fecha": "2026-11-11T02:04:36.000Z",
       "tema": "Apagones",
       "zona": "latam"
+    },
+    {
+      "titulo": "MSP sugiere preparar mochila de emergencia ante el fenómeno de El Niño en Ecuador",
+      "enlace": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOYmF6M3E5NF93NmFIRjJTQm9ieHJLcGJqU1lBYkFjVElpd3I0bGFla01MaEVTUmpKVUx2bTFtMVNVM3JDMDJuX3g4WU9ZNGZqQWJiM3JPQVhlZ1VpMEhMeEdVZHZmNE5nQjVTbEU3X1hFWjdvbm5jdzZLTE50Y19iUkJkX3hpbEg4ajE2aHppVzFvcUI1S2REb1Z3S25tVkJ0S190Rm9zWW0zMi1NOGfSAbMBQVVfeXFMUFRGTE1qeVhzdk5fUk1KNVpfRGFyejh2azZXN0hJNkUxOHc0TGR1enFqa0Jka1F6UHFMcXlxM2lXejFmajYtNkxtdEJQV0c1RVdqTHEwcGN2U0QxSUlmeGVNWEsxRTJJWkFBanIweXRWa2xZX0ZIVXRxYk9KWVJQV0FhcElLZXczcml0ZjFzRFV6N2xnWjlud1hOeFpKLV9uOEpXaXhVTzI3MkxqUFZiTWlxbFE?oc=5",
+      "fuente": "Vistazo",
+      "fecha": "2026-11-11T00:11:00.000Z",
+      "tema": "Protección civil",
+      "zona": "europa"
     },
     {
       "titulo": "Sheinbaum descarta alerta de peligro en México y explica por qué tener una mochila de emergencia",
@@ -267,6 +315,14 @@ window.PREP_NEWS = {
       "zona": "latam"
     },
     {
+      "titulo": "UNAM / Mochila de emergencia y otras 6 medidas preventivas urgentes ante la intensidad de El Niño",
+      "enlace": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOY2JueEtjdmpQSjkyczF2VU51cGMxdlRhcmtQblRTRjJXVkNtMjRPY2p1NTRwT0ozZkxYeU13TEQxQmt1eFVXUzdFRWVremRBd1VVallnWU9VSFMxZjBfTHdvemEzUWt0U1o2bzZpXy1XakVOWjNIMXlqUm05QTBBQUhralZMcWN1alRtOXNzaHNxdWF2LU5nMzc3NnQ0TC11c1VsVTNjc1l1azR5MGpRYW9Bak9fZzZR?oc=5",
+      "fuente": "Almomento.mx",
+      "fecha": "2026-11-09T23:00:45.000Z",
+      "tema": "Protección civil",
+      "zona": "europa"
+    },
+    {
       "titulo": "UNAM pidió alistar tu Mochila de Emergencia ante amenazas de “El Niño” por clima extremo para el 2027",
       "enlace": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPU3lYZ3BFTktIeDgyS3dnaW15dlBBazdWdWxSRUZkSktYc3hJT01oUlNlMXFvRF9XcXM2RGU5QkFOOVBabDI4UUN0elc0V0dPeDFZWXNwRm9RUTlFUkZNZVUwUHJxSTE0ZlpnVjhhdHJDUDg4WFd5R2xGYlpfaE85OEVwMGFpYUU3Mnp5ckRaZ2VmaGpwU0RyUnNNa1lod2F6dEFXOGY4QTR3MzhDVFpVbkptdmdmYmt5XzhxYXgxOUlJQ09aaGZYaWVhTTRzT3dIdF91VnE1cGowNVk0S1ZZ0gH6AUFVX3lxTE5haDI4bUJId0luNUdXYnhvRVphVlFfRWtOSUgtU2pyLUdLMmthWkpqdGlJaGp1WjA1SVVRaTJOOWxTZXoydE1mUjZwTWRFOU0zQkVWVVpSM2NfWXR6Mlk5Uk85QnFqaDVEdkRZU2JYNmRKcW90dHNPeTFFN000ZklPOGJTVWVVV2h4bGlTZXF5RXdTLTNnbUlOMmxhODJqU3oxRnVCWUNreEJjQ2JZLUs4S2ZfMDdCOVRjN0lQMVczdzdJMWVPeHV6Wk5SNkRxYjNPQzVWbFpJT1JyRDNlS3VmMldHUEZJTEZoZjlEbndzOTU5WkRKamdpR2c?oc=5",
       "fuente": "El Imparcial",
@@ -339,6 +395,14 @@ window.PREP_NEWS = {
       "zona": "europa"
     },
     {
+      "titulo": "Francia investiga a la Guardia Revolucionaria Iraní por los ciberataques a supermercados",
+      "enlace": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPTVlQZ0ZWbEJrWlNyZkRQWjhubkZUdXFOOUhWX29hRjFjd2FuUXpQU3JGYWh5ajBUU0p4MmhqOWp6cGwtVEVEU1BSZDZBRjRFeHltSzVFMGxXV0FOeDg3ZjdiczVNYlJfQWdSTXZ4STQxZUMyZXY4YWxUTVd6M3FUSGlYN19pWFhncENhX3dqOWVYLXpLOTc4S1BaMGl3VkNlaHRXV3V6TWFuMTlTZjBNZWExR3V0cmtKdUdqbXYtOWlrdF9uNGJnZ1M3SDh1aDVac2VOczlHOEdxQURsS3VzSS03RXNQZ2ZYSlhQdkdWVdIB7wFBVV95cUxPVjc3Nk5FdmRmVzVfM0N3Yy1MZVEwNWctRGxqbjZSV1FzNjc4WjlOT2Y4RXhBdUZqZDlzMVNjc241aDdvbk84N2tKYkp3eVZ1a2YyeXg3VnJwMi04eC0zTjhnQi1zY1pFcjhXdC0xalVpRXpMclg5MjhoMks1bHdPdVZaX1hzaXVCTTFEWnIwNEdTRnlYbmJmSndJcWl0dl9RNmRya0h0OG5HZ21IZlFoWTgyRWUwZWIxRktUbl85VEFQUERlZGhzckJvTVJGYlBKbzAzS0xTSEdETmp3NmlRMTVDUzFtaUI0Vm81VW9PNA?oc=5",
+      "fuente": "LaSexta",
+      "fecha": "2026-11-09T17:07:03.000Z",
+      "tema": "Ciberataques",
+      "zona": "europa"
+    },
+    {
       "titulo": "Una avería en la subestación de Son Oms de Red Eléctrica provoca un apagón de 18 minutos en Palma",
       "enlace": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOWldYV0pOTU5nWkJSRGh4dDJCcUFPVWVrSHdDLW1Lal96b29XV3VCWDdyMC1LUjBUSXFaYng3UGQtMEFfci12UENrbU9IODM0TUkxd3hGUDBwcDdFUFR5YmNyQi1iUHVibFhwS29qMTlfVHdqUHZYeTZLVWxtcmhXeGo0bnRlUXdLa3VHVm1hUS1fWjBBQnJyeEZGcUo0QXZPdjMwbkwxdno0OEJuWDNnMHlWeldGMHJuRTFnN19RT3loVy13X0dMWDY5SWkxYTJrT1A5ZTNxVGs?oc=5",
       "fuente": "Europa Press",
@@ -363,20 +427,20 @@ window.PREP_NEWS = {
       "zona": "latam"
     },
     {
+      "titulo": "Alerta CFE por apagón de 6 horas: ¿Qué estados y municipios se quedarán sin luz?",
+      "enlace": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5RWTBoUWhocXloZWQwM3dkeTFVRDZ3dWYzUlRBZ2pONGJsN1NJQVBFNTRoQ3l3UlNsSmpfRG44Q0RQQmRyVWhFbUNaRkZPWTd3bzRrekpzeld2SEczLXJVZkQtZmIwQl85S0ZSbUR3eVpvQ3F1?oc=5",
+      "fuente": "Grupo Marmor",
+      "fecha": "2026-11-09T15:12:45.000Z",
+      "tema": "Apagones",
+      "zona": "latam"
+    },
+    {
       "titulo": "Borja Pérez, ingeniero, sobre cómo prepararse para un apagón: “Con una batería de menos de 500 euros me puedo desconectar de la red eléctrica”",
       "enlace": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxQWEN6UVplbDNJbko1Y1VDLUpLdVhRLXF2SDJka2UyMzNBMF9lY3A2a0JjbEVlQTRtR05ONi10YzdvSUh0WFhSM0hyYVRhR2YzVy1zYjdPeHZPS0RieUlrZnlxdlk1aVBrM09Eby1IdExTb1RqbWtPZmlDS21fcy1McC1GeG1faEpIYTkxdzBUZkNfVTAwVTd3TnMtNmJOTDVLek1PTXM5SlFJdEt0eUVOWEtreTFUajdzSnJjWTVBdmluYUM4SnBNMF9UY2ZKbkI1RmktQUxRcTd4ODctak1xUkhMaTPSAeQBQVVfeXFMTTdSQnZvQlpYdXZ6MTRBb3ZUenp6VGhFcHNlQ0RvSXI4S3JOdFA3NmFEMk42RE5lZ2YtS0NMSWhPQjJrLTNsSV9ObTg0aXk5VmpibjN1UXo2OTdybGVPOFF0UGU0ZW1rSDY5VDlQS2hMOTdQbThMam51RHZ1ZzktcWZSQVJGdkhfMGtHSmpnWWEyR3FwQWwtWVoyUGdfT1NJa0JQTlJaaU0zU0NsRVk0WXd1UWhpU3FHM3IzZF83SGRRamJNR3hISUJoODZuSWdvaGYzemktMEMyVUVESmYybEtZb0xt?oc=5",
       "fuente": "MARCA",
       "fecha": "2026-11-09T14:38:02.000Z",
       "tema": "Apagones",
       "zona": "europa"
-    },
-    {
-      "titulo": "Niño ‘Godzilla’ se intensifica y amenaza a México... expertos recomiendan mochila de emergencia ante riesgo de sequías, calor extremo e inundaciones",
-      "enlace": "https://news.google.com/rss/articles/CBMimwJBVV95cUxQVWtlbGg4RVh5NnIyN3l1T2wwbmJWSTlwOHh0MzJDLWMzNUV6SDRHTUZWR1lCUnNIUWlrOWl0U2dKNWozOWFQQ3hfaThjdlBnLXhvYUhkczlUbWh2VzZoRXJYcHNNRkRQd2NrdTJlX0VKVVFBdHlLOF9jWks1RlgzUE9iUVRobzdBV1BNYnc1Qlppa2k1aVhHTEhueXQ5M3ZvRFNVSDJPVTVNMGN3endHSVJLX0VWcEdTNkNNd0xFZmxJNWpPcWgzeHdNc3d1Yy0yMGotT3JmeWdMSjRXS2JkNlZ5b2tYWjVYZldyWGlqRjBhcVpoYTZqU20wVldiMkU0RGpvVDZZVlBYdVR5Z2xkY3c3bndHYTlDLVlr?oc=5",
-      "fuente": "vanguardia.com.mx",
-      "fecha": "2026-11-09T14:08:19.000Z",
-      "tema": "Desastres naturales",
-      "zona": "latam"
     },
     {
       "titulo": "UNAM actualiza recomendaciones para la mochila de emergencia en México: qué objetos sí sirven y cuáles no",
@@ -417,70 +481,6 @@ window.PREP_NEWS = {
       "fecha": "2026-11-09T08:28:48.000Z",
       "tema": "Desastres naturales",
       "zona": "europa"
-    },
-    {
-      "titulo": "Protección Civil de Toro celebra la festividad de sus patrones tras recibir la Medalla de Oro al Mérito de la Protección Ciudadana",
-      "enlace": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxPLWk1SzNKVHktU3l4MFhOVU9PdzhSakN0OHdHZGU1Z3RhWFdhVnA3dkVTal9Pa01GZVpkWE44YjhoMDZHWXF5X2xLbzYtY3FWNmItWEsxRTNrTnpaNXhtYWVDLThDdmNfMHl4NzJxYk9wNEc2Y0F1dGxPSUFVWE1Hb3NPRC1RdlpVc2VwcTVBWE84VFliSV95ZVVocnZJM0YtYnBZa0JTd2haV1poRlV3MWVmU195NGtkWldaNVQ1YVg3WkR2cjVrWURsVV9GWmJXQ3B4bzNQNlRGcDRaTXMzTTBTWnFXQnFRM3ozc3dBX2d1SnF0RllKTDl30gH_AUFVX3lxTE4xWjZqTzhSUEdLMnFWcnl3Uy1CSkIwNm9tZHVYNi1XXy16UFg5aC1FS2tSeG5vdFJzUEZJaVVTVURlelA2SWxMcEpxTkFQTV9NV01TMXhadUxqYnZFYXlxSkNBQktiNnJVWHlGalItRDQ0djI4Q3ZSZ3B1WDNRRmVhc0tTX1BfMWZfZGJha1BGM2VUTFVFODRGczNubGJHTWVvSmNXX3JJZFk4TUl3MHJlcUo3X3gwT0xXLXlMcVpvTzBuR21oNUZVZFhrZEpCcXBRTTZZb3dsVmRxMmZ4YWM3U1lCY3J1QzYxN3lDWTItaDJQZ2lTbG0tS2RORG9FOA?oc=5",
-      "fuente": "Zamora News",
-      "fecha": "2026-11-09T08:08:23.000Z",
-      "tema": "Desastres naturales",
-      "zona": "europa"
-    },
-    {
-      "titulo": "Las energéticas sospechan que la operación antiapagones de Red Eléctrica será permanente",
-      "enlace": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQZE9uaHNYRGhOdk80NkRpWmZxMWhlZ0sxZzNDMklxQ1V6NXQ4WFh3OW05SmpyVkQ5MDdNcnpwcXVxWS1CSWVLMXY4R21lYW0wOFJWekFoeGFBNi1FaDFGWnMySmVLMTd4SjNyMHlNcEZMVTB1MXZOci1BYW10cFRvSERVZURPTmw5bnU4STQ0QU9neTZBcmNZOEgyUUdCSnluVzUyTXBZOUhqZmFIb2NnNXFRcXczMEN6aXExZTVTN1JnWktPYlRhV0VEMjRaUmFTbHfSAdcBQVVfeXFMT2lwbUF5UFhwWldBdHdpcnBtb0FhQ2V6MjJOV0trazdwbC1VR3hWeWhQOE5qdmF5a09GY09iMU90ZUZRblUweWF4VjcyOWNmYkdSdTA2Rmc0Snl4VDVPZVF6ZS1kVkx5bGpkRmo5RXFZM19ERFJKQzJMaDZQc3M3N0FON3dqQXQ2NzM3dkJXUTlzRXVzQ0ViZVFaTGxjYmN3c21nSEdsWGlnRGdyWTBFLUFkaUliUXZpZmoxZ0o0WFFLa2pHMVBtZ1FSZ1BrcUs0ZnpnRGtEME0?oc=5",
-      "fuente": "Vozpopuli",
-      "fecha": "2026-11-09T03:45:00.000Z",
-      "tema": "Apagones",
-      "zona": "europa"
-    },
-    {
-      "titulo": "Rescata Protección Civil a perro atrapado en fosa en San Pedro",
-      "enlace": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQZFI0TGdsei05NE8ySHlxdEhCR2xwaDNueHpyYkdTMjBuRVk0MU5LeTRwamExQ29YcGJqdFNVNVNLamttd2tKbWdPUGM3dGtpbHU3aXVuT2FGWFh4WXBIUUpHZ1R2Q2ppalN0NTMxODNWTVc4ZWhHNXRHSUJtSWpVRUFnWkNyQ2hSRllKbnZzYw?oc=5",
-      "fuente": "MILENIO",
-      "fecha": "2026-11-09T03:26:00.000Z",
-      "tema": "Protección civil",
-      "zona": "europa"
-    },
-    {
-      "titulo": "Ensenada enfrenta pendientes en prevención de desastres; Protección Civil anuncia limpieza de arroyos tras las recientes inundaciones",
-      "enlace": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxPa1JYclBJMFBXU0hTSEtpc1pZMVdVVkRFWHd0LTNYVjRudzFlQTZFUHNNUENKNnFrRURFVTNhTzdSS2ktRm1Rd2Jva2VFVzB1bUw1aFJxWkE0ek11OWZlZ2l5eC1qMFJIUkVJeWo3M3ZrSWhvQW5KQVBMdmdYVndnN2RjWjZycXJ0NHhJd1NwMEFFZGhIb0pGR2FXQjFzLTU5Y0RrWHE3LXR2c2lrOHJ6N0tDUUhCV3NjeFU5LTBMcHVEa2drblVqRk40UXgxMFpRZE9GVFJMMGc5LWZRZ1EwTDVJRG1TWTIyWGE5dlVSQ1Y1R0tsRXdvY3oyaXI?oc=5",
-      "fuente": "Baja News",
-      "fecha": "2026-11-08T22:40:15.000Z",
-      "tema": "Desastres naturales",
-      "zona": "latam"
-    },
-    {
-      "titulo": "¿En Durango es necesario contar con una mochila de emergencia ?",
-      "enlace": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPTThnNkJ3WVlaUmxIdGJ0dl9QM2N0cjJTWEpPV1p1MXk4VG9BQXFTOWRHSHZDM1dwYjdmdnpRS3liMktSeWRxdzJZWmpQOHd1OWdUb3o0Sk9CWWxsUEh6Vy1WZEJOMVdZVDc2THBIaEdwYnNPYWV5RG5lVmg3aDEwMUUzMV9aREFvSUV6V29JU3lER1d6aVlXa1VocmNsMnFkdmNlM0h0VHdaODAtOEE?oc=5",
-      "fuente": "El Sol de México",
-      "fecha": "2026-11-08T12:10:51.000Z",
-      "tema": "Protección civil",
-      "zona": "latam"
-    },
-    {
-      "titulo": "¿Habrá un supuesto apagón mundial?: Estos son los 25 elementos que debe incluir en una mochila de emergencia",
-      "enlace": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxORDFxN2trUjhyUkhlUmhZRTNFaDZZSHhHUkh5bnRhNjVXbWs3dUdObnpmbnAtc2FHQjJvZXNycXpqZlU1NllLUmdRVkc3aW1nMjQ4WXJDbTRsRzUxQ2szdFQ2bDRFYTZ6ZVlNelc1Wk9KMGN0Nl8yNi1pdTNvbW41NVdRZksyTnRZM0ZnV0Znc245NTY3WDBabEdaYmNnMlNMT1dLRFlnWUotR0dLMERjUmk4cXFxRko1eGhTZlUtX2s5OEZGQnBXRFg2eDRGdFpTWXNZYlZYeDFrdmd2QXJQNE5ZdWvSAeoBQVVfeXFMT3dpSE42YkFQNDZGc2tlWGR4SU14T2lBczkzb09GVFlsY3pBTUt3NlNJbWRpNlA1b3h1a0hiLTJoNUt3VVlkbDJsN1FKempSeUZMbHlUdEJZd0dZcEZfa1dwWl9VdkV4SzlTdldzYWZUb2J3bVllMWZBak9melN5eEktWndCMkZ6Wlo0OWYzcTB4TnNSWmZtaGhlNy1QR1hoOVI2cWF3UGRIWFZUekFGOVBwaW9kejc5YWR0aGN1RUJFVXNtVVNyc2FnYkNXZmJqM1lxbXREVC1WcE9mRk1JSlBtRDVVT05OTnpR?oc=5",
-      "fuente": "El País",
-      "fecha": "2026-11-08T08:18:00.000Z",
-      "tema": "Apagones",
-      "zona": "latam"
-    },
-    {
-      "titulo": "Apagón bancario sin precedentes recientes en Japón: ¿qué falló realmente?",
-      "enlace": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPeU1seElLWDNhd2s5MXN6T3YwekhvZW1BTlF3UXFQTG95MXQ3SDFUQUZKWkdWR01KTTkyWU5udzlURHlXbWtmMDRvUDVjSFJRV1Qza1ZuQlB4NGJwQVFKSjEwOWJGaG1HMDF4cElpTERKaFhYeHc4Zmczc01VUkd1UEtScDZtNThQMjBCZFNqb1R5TkhsV0hkV0lBcVhBRlptclF4RlZDRmxOWmxlQWhYN0VvNGlhNWpIeHpXeXdPN1J5UkJWQWxoYkhn0gHPAUFVX3lxTFBXWGhNbU94ZGVHcVdYaGhVbzNLN3p3Tm1pYmF4T0xTZS10WjFwbXJnQnlHdVJVT1lpcUFUbG1uYS1DejdGd3JZSDFLTzMtcDhWS1puYkExbDhCdUx0bjVKVmNqQTI5WDBjVnZ3SWJGMUpXYlh4RzQxUXJsekE1TThhZmR3LVVGZmZ4djg0VkdRQ001MTlxcGFORmFRMkZNQTU0U1dCZUZmRmQ1R3Y2S3dhbERYYUNxTWhlVHQ0MFl4YTVFVmR4R2phVWJCVDFlTQ?oc=5",
-      "fuente": "Negocios.com",
-      "fecha": "2026-11-08T07:56:14.000Z",
-      "tema": "Apagones",
-      "zona": "latam"
-    },
-    {
-      "titulo": "Protección Civil capacita a 36 nuevos voluntarios en Parral para atender situaciones de emergencia",
-      "enlace": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOei1Xdk5yZEs2el9EanlFdks2Qk1TRlU1VUhsNGJQVHNwVmpIMDhUMWUxdWt0WEpodWZ5LXNkTnR2dlRQeUdvcElNaGZ5OExaYnVheDhYRVNSR0k1YXVkU3lBQTBNSk9JNHpJcUNmdDdDTVJIY1V4NmJLM2lOVXZBTVRNamxCMURVbWh6b1RyYkhxLUFsOFBxWkpJZTlVamVFTk9WNHY2WGRSU0VYVVdmSVlKRHpKWlFwbjdJamt2NTJkX2R5bE5LU3ZfLUlVdGw5dlhjSS1JS0dodmJ0MHdB?oc=5",
-      "fuente": "El Sol de México",
-      "fecha": "2026-11-08T02:55:35.000Z",
-      "tema": "Protección civil",
-      "zona": "latam"
     },
     {
       "titulo": "Protección Civil mantiene la alerta por lluvias en la Península y Canarias hasta la próxima semana por la borrasca Bruna",
