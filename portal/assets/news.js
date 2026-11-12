@@ -1,7 +1,79 @@
 // Generado automáticamente por scripts/update-news.mjs. No editar a mano.
 window.PREP_NEWS = {
-  "actualizado": "2026-11-12T06:25:14.091Z",
+  "actualizado": "2026-11-12T19:27:38.904Z",
   "items": [
+    {
+      "titulo": "Apagón mundial 2026: ¿qué pasará el 17 de noviembre y cómo afectará a México?",
+      "enlace": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPa0JTZW1WZHJwaFZQUHF4cFVZWEhUUHZudk01enQ1YzhIRVZLM2huUDJZbE5EdXZLVnNZMGJ3WVlwQlN6MzNmZ0I4aHlWUmhOUDY1R3htTTVvTWpIT0hkTjQyVEJydHhWS21raU1kMzdjLUxIdHlEVW5lLXk0cUgxWTRoMDVEMlpQN3o5T3lmSFEtNzc4MVdzUUV4LWhOYUxNNXJlclFwa09aUUNWSlpINHB0cmhIajFWWUJfMDRDSFIzd25IbFNjTA?oc=5",
+      "fuente": "Récord",
+      "fecha": "2026-11-12T18:28:00.000Z",
+      "tema": "Apagones",
+      "zona": "latam"
+    },
+    {
+      "titulo": "La escasez de manzana en Europa podría provocar desabastecimiento a partir de enero",
+      "enlace": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPR2Y5Qk9pTE5vZERUZVBrVEszMnJqSFZsQWhHYUFrZ0xRWGxzT1FSYU1mY09FQW9jMy1zNGMwWG9BX09tQUFxTlJ0WmdxQWgwZnRId2w5ZFVNcDhIbXhzTUs1aG9XUF9rNGhwQVhWNWpQR09DUzAxR0pvSmVncFB0dDdRN2l4Y2J4MXRXb1BGZU50cy1EMWpXVVhZUFJJdHdrZE5YdTNFOEU0Y0lyQzFXcEg1Q3dJOUFPVDF2QVVROWlFNFBwTFRTY1BNNXo?oc=5",
+      "fuente": "FreshPlaza",
+      "fecha": "2026-11-12T15:03:00.000Z",
+      "tema": "Suministro",
+      "zona": "europa"
+    },
+    {
+      "titulo": "Apagón mundial el 17 de noviembre: ¿Qué es lo que va a suceder? Todo lo que debes saber",
+      "enlace": "https://news.google.com/rss/articles/CBMiugFBVV95cUxONDVTa3V0U2c3M1Rfb3MyZ2xhOXdyd1E3TGVlanlCaFNOV2l1LTVLSWlvVklaQTRIRXpfdXcwd045ZHhjanBNVDBQYXhRN3lDenBNa1ZWYmdwb0VBUUpXdmRTQ2szbGh0NUIzUnVMQVNZVDJSZEJEaEJkLWVyTXd5UGkxRlU3ZjA2YmRuSVZ0MHZ0QzJMT1ZfQ01JTXBZMkJpM0l0TzkzZEIwbjB6c0RrMzM3ZGhPci14MlE?oc=5",
+      "fuente": "TV Azteca",
+      "fecha": "2026-11-12T14:02:05.000Z",
+      "tema": "Apagones",
+      "zona": "latam"
+    },
+    {
+      "titulo": "Están circulando vídeos sobre un apagón de tres días sin luz ni internet. La realidad detrás del bulo tiene una explicación sencilla",
+      "enlace": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOY1o5NWxVc2dGMWJmRHpvdmpFclZwQTRoWElCQ25lWGptaWE5Ql9XX0pQUVMxeXZmbnNFWEhJbktyRmN3WERmb1haWVlfZ2ZhQnVVY3JDRV9WUU1RRUV6a29KMFk0SzZRcElqYlZCRlNyTVVHRVIxVHREZW03T3JQY3QtMWFaQmtUVVJ2QjB0ZTNIa1BkYjE1UWt2Vjlscy1qUHR1dGNqekdOc2NIY2kta1pKeXpkZWhZTjladW83VVk4SzFyVFlacEs0SFhVVHFiR0tYaUVDZ2RuN0VZVVRB0gHkAUFVX3lxTFBidUE4SWhxZm50eUlXTzNHSmNtRmwxNWJoYlVZRkVEbXUzRXJ5Q2hNbnhuUUdNUWJzT281VEoxQXl4ZmczZTVGUjNVRFhHeVc0TEZXanBqbEVGZzd2YkVpbGMyamNDSHRoTW8wOVVfTjlsOENqQU91QVlmV1N4YWZkSE5rYW1GNk9hRzF2bFp0cVdsYUNVZkN4RU01OHZ3UXR2aW5xaHFHOHNBa1U0a2Fvb2lEZXFtOGYxRDFHZnBpRGw1WHE0MW4tejdFQ2luN25WNmx1U2tzUVZ0SjltemJEcDg3SQ?oc=5",
+      "fuente": "Xataka Móvil",
+      "fecha": "2026-11-12T13:03:23.000Z",
+      "tema": "Apagones",
+      "zona": "latam"
+    },
+    {
+      "titulo": "Protección Civil y Emergencias da por finalizadas las alertas por lluvias y vientos",
+      "enlace": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNc3IwRlNTRkpheGQzbVVNSjYyS3plTERwbi1rcmFnWFZpR05qNG83TjBReFNtNWdCbjlRM0FYVW9QX0RpR2RRaUhEc0tXQUZndVFoTlFGLVNSRTI1V0VnMXpSSUpOYWhSZ1NmVXFrRERKdmIxSV8yV0xYcXE1bWlpQU4wOVk2Q2Y2MGg5VFBvakNhbDFsbzFmVUd2TjAyZlR4UkR4QWFtVUtkYVBfSTRDMHdoNDhpdw?oc=5",
+      "fuente": "Astorga Digital",
+      "fecha": "2026-11-12T12:59:53.000Z",
+      "tema": "Protección civil",
+      "zona": "europa"
+    },
+    {
+      "titulo": "Sospechan de un ciberataque contra el mercado online de LEGO",
+      "enlace": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQWGhNWXczVm0yVk5BSFFkcUxrUmZzRF9DZ0FscDZabVB0MVRuUm1tU184NUgzLUI1RDZFOUEycld5RWhqQVI5MWJSUTdkbDZPNHEySXVReFNHRFFWYVZKVFNZNlk1YWJqOERUU2s1NEVGUm90enpReGVqRW96VTdxbm9QM2FwLWdkalp5RDlmeEV2VUplMWxSN2VYQ01rM3RpT05hTzZwaHRIRHZwY3pCdTk1aw?oc=5",
+      "fuente": "Euronews.com",
+      "fecha": "2026-11-12T12:47:21.000Z",
+      "tema": "Ciberataques",
+      "zona": "latam"
+    },
+    {
+      "titulo": "Qué hay detrás del supuesto 'apagón' que ocurrirá el 17 de noviembre: así surgió el rumor que circula por redes",
+      "enlace": "https://www.20minutos.es/internacional/que-hay-detras-supuesto-apagon-mundial-que-ocurrira-17-noviembre-asi-surgio-rumor-que-circula-por-redes_7060153_0.html",
+      "fuente": "20minutos",
+      "fecha": "2026-11-12T11:25:29.000Z",
+      "tema": "Apagones",
+      "zona": "europa"
+    },
+    {
+      "titulo": "Maletas sospechosas abandonadas en Andalucía: seis alertas en 72 horas",
+      "enlace": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPTGNaNFNEUWtzdXhvRjEtU1RXdWEwcHVaWldtVEgxRFJWSU1WRXJrRnJVcnZsNUpXN0lfS3U2d3prSEZJbkQtSUVJLVg1UGMyQUVBR3dURHRXeHVSUEtKY1M1TEhDcW5rbnhLSlJVbXdxbjZ2UTNFUS1ZVEwtUU9GSVRCUl8xU3BZVERJNEhBOWZOT3ZEN1dBZTFrWklSWV83SG5nMmZkQQ?oc=5",
+      "fuente": "Diario de Sevilla",
+      "fecha": "2026-11-12T11:24:59.000Z",
+      "tema": "Protección civil",
+      "zona": "europa"
+    },
+    {
+      "titulo": "¿Habrá un apagón mundial el 17 de noviembre? 72 horas sin luz, televisión e Internet y la explicación real de lo que está pasando",
+      "enlace": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQNkF3WFc1ei1yMC1LZ2V6cE90VFpFMm91NnlodHgzQzJaRmdEY1Q1QXJLRGtoeEhnYmtQVHpoTjZLNHNBM3FQTDJxeXBteXpKWTZhd1pod1dWbU45TjRaRnVzekFEckdlV3o5Q3gtbllzb2dBWFFQZWF6ZlBmSC1fbHJfVXNIdw?oc=5",
+      "fuente": "ADSLZone",
+      "fecha": "2026-11-12T07:02:18.000Z",
+      "tema": "Apagones",
+      "zona": "europa"
+    },
     {
       "titulo": "Israeli strike on hospital kills at least five Palestinians, Gaza civil defence agency says",
       "enlace": "https://www.bbc.co.uk/news/articles/ckzd9p7e4eqeo?at_medium=RSS&at_campaign=rss",
@@ -25,6 +97,14 @@ window.PREP_NEWS = {
       "fecha": "2026-11-12T04:08:00.000Z",
       "tema": "Suministro",
       "zona": "europa"
+    },
+    {
+      "titulo": "Protección Civil Jalisco ofrecerá charla gratuita sobre mochila de emergencia; fecha y cómo participar",
+      "enlace": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQNnZ1NE9ramVkSWpibFNpZVRRT3dPVmZPQXc1ek5yOUNmRV9Fck4tbmNRRzI2cVUyWG9hWWNYMzFteGwyWmtvWHVfTWhhUUp3cGdCNG5kcnhJVHo0Tk5sS2lLc0xGREhBWmJYMklCSVFkUThwWDVGNTdIc3NVckQwYTNXOThyUjNEMVVueGk0VDladTQ1c3JpTm1ZbzRid2ZsZ3NiTWJpand0aWh3WTc1eEpwVzVUUEp0dV9SYklfaTJ4UWZ3RnQwV2l3RURtMjJSZ19QZzhpNGlsTFQ1SjRtemtRdklQVElDNXfSAe8BQVVfeXFMUHBqVGVGV0F2ZUhJdzNkNzF2bzJNMWVIZll6UW5RcGxlcURMWmpkTzlnYlFXMUlYd3lMOWRVT1RZcUhVNnF3TE1OcUozbGFhTEtGWVVENFFEaUJ1LVpSMmFmZjY5WEVZUmZ1MWlCSFYybmlMTXFDR3B0czloV3c5WjhuNWd5cHpxRFNfbmIyYWxaNXhiOXhtRnNQbkstWlBfYTMxWEg0WXA0MVJsRGVSa3ZSRkJIRThDOGhTaFgybFpmMzlONWtUdUZCNHpFMkNoLWZ1c2N1QkduWjVOcXY3ZG1JVDl0bmllVEdfVkw0a1U?oc=5",
+      "fuente": "El Informador",
+      "fecha": "2026-11-12T00:00:00.000Z",
+      "tema": "Protección civil",
+      "zona": "latam"
     },
     {
       "titulo": "Inauguran Foro Estatal de Protección Civil 2026 para fortalecer la prevención y respuesta ante emergencias",
@@ -251,6 +331,14 @@ window.PREP_NEWS = {
       "zona": "latam"
     },
     {
+      "titulo": "Ciberataque supermercados Francia: 700 tiendas sin frío y París prepara represalias contra Irán",
+      "enlace": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNWjI3VEhqZGhJbW9QaG5yM1Z5T0pfZ3dTTnN0OTBTdDhhdmhyaXgtM0VQS3pKQWdHa1RfbkREZ0l5aTNBUTFJX0tRN1Jla3BFYTU4MWxlVjcwSm4yZ2NwMVpCMVRWdUw1VDY5TFY0YkFyREJOZ1B2N0Rac3plb0haWjI0NUo3SEVxSnc?oc=5",
+      "fuente": "MONCLOA.COM",
+      "fecha": "2026-11-10T22:20:50.000Z",
+      "tema": "Ciberataques",
+      "zona": "europa"
+    },
+    {
       "titulo": "Ponferrada activa el Plan de Protección Civil ante la alerta por fuertes vientos",
       "enlace": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQSUZaRzlHMVFndXZBN1FlTTc4UmY2R1BrSmRSN0tsMU9pelYtOVN5c0FVQVZ0dVdoX2ktS25EZ1A5aFZJd1BuQU0tenRsSEhXRkwyeDlvTnhUUHJQYWRhWDlfZm1XaUlOQXMyd1BMVUgzVUZuVVF2aklQdWRQYVhHSkE4RXMwdFQ2aFdGbWF2blBMMzNKaUNGX1FQY05ZNW1reGVMb1lmRjc1clNaSUpMbDUzRQ?oc=5",
       "fuente": "El Bierzo Digital",
@@ -259,52 +347,12 @@ window.PREP_NEWS = {
       "zona": "europa"
     },
     {
-      "titulo": "CFE anuncia apagón eléctrico en Jalisco: Estas serán las colonias afectadas hasta el 14 de noviembre",
-      "enlace": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxPSkVzOFdvLV81ZUpXVmM0YUpsMEM3NGRNMkVDdzM2V2lsLWV1YnlhU0ZqVVlVVllxcjUxcFJ0UFF0S3F5OGlZWWY4X1dsVTdpNlFhRUY5UmYyY2hsWFhBWXBPcnc5Rzk0WmZ3OXFmRFZMS2tiMHlnUHhoYTN4MFZ1blhaaE9vOEl2NlRXZTQ1M1JKSmM3ODNDdjNOUTVJbmNBUW51Rm92aTBwLU5KZjM4dzltR0JrMjJ6NmNSQU1ndnpnQTIwWFd5ZkxhZS1iS0wzNVRXOF81U3RvWWh0LXdEUjJyU05FUTNFZVdkUDAwTGowVnhWeEdv?oc=5",
-      "fuente": "Reporte Indigo",
-      "fecha": "2026-11-10T22:02:11.000Z",
-      "tema": "Apagones",
-      "zona": "latam"
-    },
-    {
-      "titulo": "Niega Irán ciberataque a sistemas de refrigeración en Europa",
-      "enlace": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQSnFhbmw4UUtlZHdISlh0djFDQ3UzLTdrMWtsX2pSN0pjdC1ObHpiRU9vUDZSZFVyeGRjdGlYb3JSWklwaUhDMWd2YlBabzh6dHc3Q0VHTW1pQ2dybGx5aWdjandMN2NfWWR0MzhXTDY0SnNTMlA5VlVDWWVjQUxuUVlNQ0ZFZ3Y4OThDN2xzMXFSSTFCSUtSU3hVQTdZYk85c2VHYXlsbUdOUWxZNzdxdEJhdXVsaVlD0gG-AUFVX3lxTE9ZX29rT1NNOGFrMG1jQnVZTC1Pai10TDNSeUlFamJJOV9OM2k1YV9QUVlSSjBvTm1Hd1czMDVZUkFKVm5PaExidzdnTTU0RkhESGNIT2Y3WHdRMGhpeGl5X1l5b3pqZVo1cUMwazRxc0x5VjJFS0NMOUNTaXlwQ3ZTRkRTT0VUYXdGem1xbDl3M0cwS05YQXFiUEdtMDJTaGpyNHVOaW9vdXp3eDZENDl5X2c1Zi1BdVVpZ3MxS3c?oc=5",
-      "fuente": "El Diario",
-      "fecha": "2026-11-10T21:08:00.000Z",
-      "tema": "Ciberataques",
-      "zona": "latam"
-    },
-    {
-      "titulo": "\"Todo el mundo sufrirá un ciberataque en algún momento\", advierte el consejero delegado de Ledger",
-      "enlace": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxNRW40cW1KcXo4V3hZb0Qxek1tcHlGNEI1dHRveDZ2T0IyTkRiTU8tdXVTLUF1QUNGWVBYMEVWX2tXNTBfVzBXR29oNGlaWjdkN2lLR2JNY0s1YjFIdkZNQ2sxckpVVXBIRHpJM2RYa08tVUZRR0I3Uk5HUmtuU3pWaGNnTG5pN3JvZ2YyMjdIREhPTUJpTXpBV0pkZjBmZkxFRW5jcVZPVHZKNmRrS3dxZm1QcThtaFkzelFGMlpvOTJISDVEc21kamlNbkMtVDg0RDYwZk0tT1ZiM2RvNHl6WGEtbw?oc=5",
-      "fuente": "MarketScreener España",
-      "fecha": "2026-11-10T20:30:57.000Z",
-      "tema": "Ciberataques",
-      "zona": "latam"
-    },
-    {
       "titulo": "Activado el Plan de Emergencias de Huelva capital con dispositivo especial de Policía, Bomberos y Protección Civil",
       "enlace": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOUGY5Ti00LWR5V3VqQ0xXeFI0Vm8zWWJKYXlLOEdmOWZZM1R5cGFmVDJHX21EcTdzM01sbmpsTDdRb2RUbXlRUmtMOUlHYk1JLWltVEZhNGdsRUFZQ1owRnhKYy04ekYzOXI1VDAtQXZvUlpuWVh2b3Bwbm5rTTR2anltUnFoMHVRT1VtQjZFNGxFQlRQTHMtdF9LS3pkZmxjemVzM3k0UXhvYkdmZEJqYzltY2p6N0dwNVhLaDMtMkNmMWRGQmY3cTZqQjVYUWhLT012THdHUkNCZWEyM01yZDQzSVNwYTg?oc=5",
       "fuente": "1 Minuto Huelva",
       "fecha": "2026-11-10T20:16:46.000Z",
       "tema": "Protección civil",
       "zona": "europa"
-    },
-    {
-      "titulo": "Los sistemas de telecomunicaciones del mayor puerto de Brasil sufren un ciberataque",
-      "enlace": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5JNFpNZlJZSmRnaTFjNmZneDR6Ymp4TTJQanlhdHZod09vMGFna0FZQjh5TWhpZGZielNzTzBma2VyeHlCUWM1SjJtN2xIcUxlYVRHRE1KQnlPbDVMcFhNTkoxTzlVc1BLUnFQczlXa0RkeFlSVkNV?oc=5",
-      "fuente": "EFE - Agencia de noticias",
-      "fecha": "2026-11-10T20:07:04.000Z",
-      "tema": "Ciberataques",
-      "zona": "latam"
-    },
-    {
-      "titulo": "Percepción de seguridad más baja desde 2013, Paraguay y la mochila de emergencia: Mañanera 10 de noviembre",
-      "enlace": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQdE8yV0p4UkFqMml4YnF0QWdLOUxDZ3Z2WS1aZkVSejJOV1Y5Q0ZwRmt3YktRaVBvcjItbWFNdHprWWduVlRBeVFwR2tXLVdGWHFlTTZRb2FhQllNaDM1M0RRU0lrOTZraktGUWZqdWEwOHNONmF2dmZpTW5UT1RSeW1BYjZ4eW5wOWFqZHp3a1lucksyaDhITkpNNGFwbE9vM3hId2xPR1VBZTVTdXhBWk5CbGNmZTM5S0VjMjdMNXZjOFd6LUxvZg?oc=5",
-      "fuente": "RegeneraciónMX",
-      "fecha": "2026-11-10T19:55:15.000Z",
-      "tema": "Protección civil",
-      "zona": "latam"
     },
     {
       "titulo": "Los Simpson y kits de emergencia son parte del falso rumor de apagón mundial para el 17 de noviembre",
@@ -440,54 +488,6 @@ window.PREP_NEWS = {
       "fuente": "El Sol de México",
       "fecha": "2026-11-09T19:57:38.000Z",
       "tema": "Protección civil",
-      "zona": "europa"
-    },
-    {
-      "titulo": "CISA, FBI, HHS y el USDA alertan de ciberataques a la refrigeración industrial y la cadena de frío",
-      "enlace": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOS0JGaE1ROXBFWVc5X0R6RS1DcTFsbUZsY3YwUWlfMDd0bWhDU3RUV0FvQlE5R1BoTjZJbTU5TDdqM0RzcjBKQl9teE5EZGFLOENKX09OUHpjcU9xM3ZDdFhMWE9KdWc4V1JoYzd2Y1hvVFp3UXF5dTY0QzY0Vy13Q2ZFNWdTbjNURFZFN1pqRUpOdW5jTEtJcg?oc=5",
-      "fuente": "MONCLOA.COM",
-      "fecha": "2026-11-09T19:10:21.000Z",
-      "tema": "Ciberataques",
-      "zona": "europa"
-    },
-    {
-      "titulo": "¿Se puede hackear la cadena de frío? Un ciberataque puede alterar temperaturas y alarmas",
-      "enlace": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQU0haLWd3UndHVzcwLUZFWVBQRkdPWU1uOWlXeGdOQXFjRnlCUjBKTU1tSmdaSWxfbTRkbUdLTkZZd3JFaldhZ19Xenprb2M5MnZSVTRqenVWV3RLdHZHLUlHRU02NUE3UkwxLUFIWFBGanV5UkFvTVZQaDVwZ1N5X3k5TlNZWWY5NFZ1c2l5alZqNFdtam9Kdm1RbFRlX0JXbU13bS12RVdsX0tfcGc3RA?oc=5",
-      "fuente": "Portal Innova",
-      "fecha": "2026-11-09T17:42:17.000Z",
-      "tema": "Ciberataques",
-      "zona": "europa"
-    },
-    {
-      "titulo": "Francia investiga a la Guardia Revolucionaria Iraní por los ciberataques a supermercados",
-      "enlace": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPTVlQZ0ZWbEJrWlNyZkRQWjhubkZUdXFOOUhWX29hRjFjd2FuUXpQU3JGYWh5ajBUU0p4MmhqOWp6cGwtVEVEU1BSZDZBRjRFeHltSzVFMGxXV0FOeDg3ZjdiczVNYlJfQWdSTXZ4STQxZUMyZXY4YWxUTVd6M3FUSGlYN19pWFhncENhX3dqOWVYLXpLOTc4S1BaMGl3VkNlaHRXV3V6TWFuMTlTZjBNZWExR3V0cmtKdUdqbXYtOWlrdF9uNGJnZ1M3SDh1aDVac2VOczlHOEdxQURsS3VzSS03RXNQZ2ZYSlhQdkdWVdIB7wFBVV95cUxPVjc3Nk5FdmRmVzVfM0N3Yy1MZVEwNWctRGxqbjZSV1FzNjc4WjlOT2Y4RXhBdUZqZDlzMVNjc241aDdvbk84N2tKYkp3eVZ1a2YyeXg3VnJwMi04eC0zTjhnQi1zY1pFcjhXdC0xalVpRXpMclg5MjhoMks1bHdPdVZaX1hzaXVCTTFEWnIwNEdTRnlYbmJmSndJcWl0dl9RNmRya0h0OG5HZ21IZlFoWTgyRWUwZWIxRktUbl85VEFQUERlZGhzckJvTVJGYlBKbzAzS0xTSEdETmp3NmlRMTVDUzFtaUI0Vm81VW9PNA?oc=5",
-      "fuente": "LaSexta",
-      "fecha": "2026-11-09T17:07:03.000Z",
-      "tema": "Ciberataques",
-      "zona": "europa"
-    },
-    {
-      "titulo": "Una avería en la subestación de Son Oms de Red Eléctrica provoca un apagón de 18 minutos en Palma",
-      "enlace": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOWldYV0pOTU5nWkJSRGh4dDJCcUFPVWVrSHdDLW1Lal96b29XV3VCWDdyMC1LUjBUSXFaYng3UGQtMEFfci12UENrbU9IODM0TUkxd3hGUDBwcDdFUFR5YmNyQi1iUHVibFhwS29qMTlfVHdqUHZYeTZLVWxtcmhXeGo0bnRlUXdLa3VHVm1hUS1fWjBBQnJyeEZGcUo0QXZPdjMwbkwxdno0OEJuWDNnMHlWeldGMHJuRTFnN19RT3loVy13X0dMWDY5SWkxYTJrT1A5ZTNxVGs?oc=5",
-      "fuente": "Europa Press",
-      "fecha": "2026-11-09T17:00:45.000Z",
-      "tema": "Apagones",
-      "zona": "europa"
-    },
-    {
-      "titulo": "'Tenga Lista Una Mochila de Emergencia', PC Alerta por Lluvias Fuertes",
-      "enlace": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNeVk1S3RvM0t0RjNabEhnaUMwc2w3WHlKbW9rOU9JSUp4NkNiaVNQTXpMQzQ1elRBU0JzazJMNWtVbTNTZU1OeEoyZTUwS25vaUo3MGhvNktRMW1CSUFheFItWG5ZVnVJY2hSTlRacGhFUW5iQ01kWlRTSkMtUExlcnlqOWlybFUwSEs0RW9MTHluMHFwbTJGNzFKVWFRUEhQSV9fZEMxa2FmWVBQMy1MbXZJQklCSE8xbm55RA?oc=5",
-      "fuente": "N+",
-      "fecha": "2026-11-09T17:00:23.000Z",
-      "tema": "Protección civil",
-      "zona": "europa"
-    },
-    {
-      "titulo": "¿Habrá un supuesto apagón mundial?: Estos son los 25 elementos que debe incluir en una mochila de emergencia",
-      "enlace": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxORDFxN2trUjhyUkhlUmhZRTNFaDZZSHhHUkh5bnRhNjVXbWs3dUdObnpmbnAtc2FHQjJvZXNycXpqZlU1NllLUmdRVkc3aW1nMjQ4WXJDbTRsRzUxQ2szdFQ2bDRFYTZ6ZVlNelc1Wk9KMGN0Nl8yNi1pdTNvbW41NVdRZksyTnRZM0ZnV0Znc245NTY3WDBabEdaYmNnMlNMT1dLRFlnWUotR0dLMERjUmk4cXFxRko1eGhTZlUtX2s5OEZGQnBXRFg2eDRGdFpTWXNZYlZYeDFrdmd2QXJQNE5ZdWvSAeoBQVVfeXFMT3dpSE42YkFQNDZGc2tlWGR4SU14T2lBczkzb09GVFlsY3pBTUt3NlNJbWRpNlA1b3h1a0hiLTJoNUt3VVlkbDJsN1FKempSeUZMbHlUdEJZd0dZcEZfa1dwWl9VdkV4SzlTdldzYWZUb2J3bVllMWZBak9melN5eEktWndCMkZ6Wlo0OWYzcTB4TnNSWmZtaGhlNy1QR1hoOVI2cWF3UGRIWFZUekFGOVBwaW9kejc5YWR0aGN1RUJFVXNtVVNyc2FnYkNXZmJqM1lxbXREVC1WcE9mRk1JSlBtRDVVT05OTnpR?oc=5",
-      "fuente": "El País",
-      "fecha": "2026-11-09T15:53:00.000Z",
-      "tema": "Apagones",
       "zona": "europa"
     },
     {
