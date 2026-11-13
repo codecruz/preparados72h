@@ -1,7 +1,95 @@
 // Generado automáticamente por scripts/update-news.mjs. No editar a mano.
 window.PREP_NEWS = {
-  "actualizado": "2026-11-13T13:49:46.810Z",
+  "actualizado": "2026-11-13T23:10:25.663Z",
   "items": [
+    {
+      "titulo": "¿Apagón Mundial 2026?: Qué Implica y Cuándo Será la Prueba FEMA en EUA",
+      "enlace": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQZXlUWkJIZ2R3YWMzR0JJdHlzVlp3eEh0MFljOXNQSDJ3VlpWdEFuMzM2ZHI5ZFVtY21FT2tCWTBaQ19uWFFNaU9CYjZyeTlud2s4RVl6Sml4eURKVWd6Z3IwR1NqRUI0SWN1RGdMcmZtaEhOVlc4eDhTU2dIY0V5VHFHdnc3ZzZsQnY4WE9yUzdTbVI2VUh3NFJGNXNXcHI3YjdSanNEYS1PUQ?oc=5",
+      "fuente": "N+",
+      "fecha": "2026-11-13T22:50:12.000Z",
+      "tema": "Apagones",
+      "zona": "latam"
+    },
+    {
+      "titulo": "Secretario de Seguridad de EU descarta ciberataque en vuelos",
+      "enlace": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOV1d0SHB5VXlNZWN4bkFwRW91eXdIZ2RPZ3lLQzgwWjgtSE1yYTlzZDB1Vy1hVlVLTHhXQTVqblI0d3o3cmp5Rnc0LTNZWk5NMVdFc0NpcUFLdnRuYzBpVmthWkMxZzMzX2pJQnVjVDBkQ2F4Z2tFWXl3ZnZWUmxUaTYtd1l1dm9JeUgwWTU5UkdhazRzejl0Yk5xR3lQMUHSAZ8BQVVfeXFMTk1GZ3dJQ2M2My1LYjNJS3lqM25iNGkzeGU4LVNuWXNYMWZjQTVNNU5JbEVKRWtGMUdDenpFeG5lQi1aa2JSWDRxQmYwWm1kb2F6ME5fYlFSRVJwcWZpRUpSYlkxNjROMmEzbkdTamVRZU5iWW5rRk1ialhtZk4yQV9mcEhTRDQtdXppbkgzN1VrWUxfSzU0MjVsWG1iQUt3?oc=5",
+      "fuente": "Milenio",
+      "fecha": "2026-11-13T22:42:00.000Z",
+      "tema": "Ciberataques",
+      "zona": "latam"
+    },
+    {
+      "titulo": "Protección Civil Municipal ofrecerá capacitaciones gratuitas para actuar ante emergencias",
+      "enlace": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQcmZhbVZMNzRiOWJQRW1nME5FeW80M21ITFZvNFRJaDJ4X2JOemZZZUdzX1Jjd0RMTGpTVjVPeEZzeWJ5V3J1OEM5dFhrYm9GT0N5Z19FbFBTd184bE1QYW5WSDU1aGlET2poLXBJMTN5djFkQXdTZUl1OW5fa3RoaEJOb2NMN29tSTZfN2IyQUNaczFHWDJBOUFtd25Ub1E5azczb2RNdFRKX05wOE9iaU9ORl9xTzhHaWc?oc=5",
+      "fuente": "Revista Mujeres",
+      "fecha": "2026-11-13T21:59:46.000Z",
+      "tema": "Protección civil",
+      "zona": "europa"
+    },
+    {
+      "titulo": "Apagón de Microsoft expuso a usuarios al phishing y llevó a cuestionar la dependencia de M365",
+      "enlace": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPalJQMmR0ZnBmNHgzY0JQM24yZjAwOWhaTXhxUWQwUHpqaTVuVk4xR0dzb25Id0lfWXo2N1pBalBmaC01S2FYa0pyVnNpU0hyaVpRTjZQMkU5bFh0SW4tRUlwSkhieTN2bExIVExscmdYenBUbnUtQ1dTMEZ6bUkxTkN6SHVMNzZUUUFJRDlpSTNOTWUtM0RiRWY2dmlrUGJCTWp2cWlIYWVnY1ZiaDVUV2Z3SmN4dkRUSG4yYTdKUGRla0tNd3M5dE5kWlhSMHNI?oc=5",
+      "fuente": "Computer Weekly",
+      "fecha": "2026-11-13T21:19:10.000Z",
+      "tema": "Apagones",
+      "zona": "europa"
+    },
+    {
+      "titulo": "Protección Civil atiende hasta tres incendios en casas abandonadas durante la última semana",
+      "enlace": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPaU96VXdIODcwa1hEVmhPQ0oxaUpXVWl0YkJ5a0k4VE5xRGtadkhPZlNGQWZ2aXJGOHRoclFXbjljNmdxOVRKYmxBSnJqOXNQbzVYdl96NThKcTNrSzNEWEplc0lkMEVwOTZfTW83b1lOOFZINmM1SUtSbFc2VzF0YWpDcXlzeFJGMTdUaEhsY29HeUNzcEQwakdRbGE1YTlVOVhIUXdfeE1CU0kwSlFxOHpFcnBhV2hSSXFSVA?oc=5",
+      "fuente": "Plaza de Armas | Querétaro",
+      "fecha": "2026-11-13T19:42:35.000Z",
+      "tema": "Desastres naturales",
+      "zona": "europa"
+    },
+    {
+      "titulo": "¿Fue ciberataque?: Todo lo que se sabe de la caída mundial de Microsoft y Outlook",
+      "enlace": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPSFNRdkVIOUhWOUtrM2lnNmw2dTRXNEE2TnAtUkFzS25NZEpReWZXdWdzQW1aYWJTbFBTODdYUC15VVB0cEFCSzFZTk9DVi1faU13QVhBSGNNQXBOWUQtbjBqZnNOWE5WckhYRVZGUU1tdk95TWplMG40TTR6ZTlEbWZFRTFRSmpHeS14UFhhLWM0RXpNdGpVVDdtYngtRVh0aHVIa045VnJoU3lvT0hUU1IxUzFRWDh6Y3NB?oc=5",
+      "fuente": "Univision",
+      "fecha": "2026-11-13T19:15:00.000Z",
+      "tema": "Ciberataques",
+      "zona": "latam"
+    },
+    {
+      "titulo": "Microsoft asegura que un problema técnico fue la causa del apagón de sus servicios el jueves",
+      "enlace": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOM1UtMmdTQ2tmaTRjMllVb1JtN3dmcFB3NlBYYnhFT2dpc0VIT1FhcTBUc1lVRW4wbHAzNXhwRWlxc2ZpVkZtaGhKS0RHd2JlTXc3SzZzRDY3bVM4bW9qQXIzM0htSTRmRzd1bWJRdTctWGhSa0Z5QV82NXBQOEN5UmpLV3VHdndiNVNGNUhJWkM1aVhyMGdDRw?oc=5",
+      "fuente": "Yahoo",
+      "fecha": "2026-11-13T19:13:47.000Z",
+      "tema": "Apagones",
+      "zona": "latam"
+    },
+    {
+      "titulo": "Protección Civil alerta de los riesgos de refugiarse bajo un árbol durante una tormenta eléctrica",
+      "enlace": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxQZ0pIUUZJTFQ2a21tNmFuamhLYW5FYjJicTc2Vko3Y3huaF9Hd21aSkRFUGlLNzVVdWFmaXA1MlFJalFFWUVUbW9OOU5HYi1LTWZUOG5aeWtFS1BKeDNsS1N6TGszOWp2clZyMnBPemNWeFVwaGw0YU9kTDVFYXc0UHE1NVI3d1BtOThCOTZITWNOMHBvMEVmU0g0MkU0LW10cllWWENkZEpwYWxqUUFGMUxOb0pRTlRuUkY4Uzh2aXRDSUszaklDVjFURWlhMEVMbFVOeS1lN1lNZ0YwenVodUN5N1Q?oc=5",
+      "fuente": "Telecinco",
+      "fecha": "2026-11-13T19:00:20.000Z",
+      "tema": "Protección civil",
+      "zona": "europa"
+    },
+    {
+      "titulo": "Alerta Protección Civil por alto riesgo de encharcamientos ante lluvia",
+      "enlace": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPQ3RMN0toVnBELXlFOFBrN0lmOVJRZTZuWGV1ZUhoelVJVW5MYXA1eS1leVd3S3VEREpUX0Z2c2IxTldzLU84VU9DM2NiNVZfaUZ6WEhBOVJyR1h6MVdVS1ZxWXhwRmI2RXBXamxMUjhQVlBqaVF2UHYtSW4zUkNvcWdRTlg2QW5zQkF0QzdaZGtlTk5iRjcxRWRZRHpzN1cyX3VN?oc=5",
+      "fuente": "Puente Libre",
+      "fecha": "2026-11-13T16:58:17.000Z",
+      "tema": "Protección civil",
+      "zona": "latam"
+    },
+    {
+      "titulo": "Extreme cuidado: lanza alerta Protección Civil por posibles inundaciones este día",
+      "enlace": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQOFltd19SSHdHazlxRl9qcXh5VDJoemxER2ZFQUZUSkZBTnBWdTZHS3FzMFI5bnRxb1lSR3pNaDduSG5uTy1lQ2psSHdlQ21oX05HcHlrT1dNMUtLb2hodzNYQkNnYU52SUhwRmVjNXMxS3pQNnhVZVlfUXVVTy03SXFOTktEMkJXMVI3dG9TODZRcWlvQXFfV1AxeGdFZ2s0MDNUMEhJTnE?oc=5",
+      "fuente": "Norte de Ciudad Juárez",
+      "fecha": "2026-11-13T16:37:00.000Z",
+      "tema": "Desastres naturales",
+      "zona": "europa"
+    },
+    {
+      "titulo": "El kit de emergencia de las 72 horas también vale para la vida digital",
+      "enlace": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPWU9qRU82MGEwc3VPalpQRlVZZmhDVDJDalM1aEVEbGJhZkpzdmdGa09LTndfa29iX1dJdkRScjF6UlFDZmxGeFJ4VUdJMWZKTHM4cjJWR3R1UDF0b0dfSTRkaGNsVjFaZm5DTkh5a1lXM2J2dFdLMmpUM1NELXU3QVBzMmJwbUU?oc=5",
+      "fuente": "Pasquale Pillitteri",
+      "fecha": "2026-11-13T13:51:32.000Z",
+      "tema": "Protección civil",
+      "zona": "europa"
+    },
     {
       "titulo": "La acción de Microsoft cae tras el apagón de Outlook y Teams",
       "enlace": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOeVU3VGZub2w3TjZVcVhxS1FqX2tzbmFnajFndW91RVFhWTdzR0xHcVhaaGhua3NHZlJaYS0xeV9DNTFFM2k4eDN4Y01yTzJSSnFNdUZSdHo3SlJfVXNHN282ZW0zOHpFSW5xWjVYQXkxUmhDdVBWLVgxa1paVnRhUnJsV2N2N3hhZ1laY1F3?oc=5",
@@ -144,6 +232,14 @@ window.PREP_NEWS = {
       "fuente": "Récord",
       "fecha": "2026-11-12T18:28:00.000Z",
       "tema": "Apagones",
+      "zona": "latam"
+    },
+    {
+      "titulo": "Alerta en Las Choapas por intenso olor a combustible; protección civil busca el origen",
+      "enlace": "https://news.google.com/rss/articles/CBMixAFBVV95cUxON2JRaHpjSTFFeGxtN0pHYmZPRjY5ZXRiczVib3dhSWJRdFFLd3AwUGFJUW5rV0d2WFU1dTIyUDdJSTdvcVcyanJ2eUZtOWFNZkMyY0pnVmNKa0w3RDZ5cDFUd3BfTFB2ODJOSl9OeGdIeXJzQXVmMDltSHRlM0d2a3pNc3RqZTQ3UzJNMHBLWmZqQTZlNE1sS1FWV1ZybjBmWlNTekNqNDFBb3ppRkNCUmp6RWxWWVVfeGhEYlJsVGNoUzZN?oc=5",
+      "fuente": ":: Foro Coatza ::",
+      "fecha": "2026-11-12T17:23:43.000Z",
+      "tema": "Protección civil",
       "zona": "latam"
     },
     {
@@ -347,6 +443,14 @@ window.PREP_NEWS = {
       "zona": "latam"
     },
     {
+      "titulo": "Sheinbaum llama a preparar mochila de emergencia ante sismos, huracanes e inundaciones; esto es lo que debe contener",
+      "enlace": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxOMnh0RHg0VFdQRWlsTURpRW9ZOW9aVDMwVDVpODhmX1RxdGlJUVNxMTVMM18zQXE1OXY3dmp4OUNhaWo4REdtNVd6ZHQ5Q0J4QUMwTU5aTDNMUng4eFhJVWZZYW5ZZmJKV0xMaDNGSGcxMGZJOHZiZlZ6RUV6MURIMzgzY2dFWHNIZzlBR0hrcGhBYnZaeEs5ZGtWdDgwNWtuSkJpTjJraEM0ZjA4SlpLWHVoRW1MN3RBVTNHZ25vLWR5UXJGVnBSUEVlcF93czNKcjFQQm4tdDR6TGZQb3BPOHp1dnZFcWZPYVlhcTQzYnNVNjDSAY4CQVVfeXFMT2NCSDUzdXNkSU5oRWpaUENmSGd1Q0x3OFRPRkhsVTJ3Tmx3cXBCd0drWm04UFVtYW9CbEptN1hOdGg1bVJZUm1sY0ZqaXhkSnk3WjZMWThIbkZxZnRLTjlMX1FMTGVKcGs2MDdOdThlX2tuSzJFMTZKelJkc2JLNnJaQjJ3anU3b0FhQ1AtTXNGUVZZNjJrcEdRUW1Pd3pFdDBxUWd1X3NGUUFNZ003djJrY2RZS1NkN2h0N1RjUGNXenRZVmhDajgtUHhueEt5Rldsa2swVkZLQUJrWmhaQ3dUdFNmVXUtUGNxMUhfNlFVTjlXOEYxZUxveUEzUG1wSVMwLURBYlQ2LVZRY0t3?oc=5",
+      "fuente": "El Imparcial",
+      "fecha": "2026-11-11T15:55:23.000Z",
+      "tema": "Desastres naturales",
+      "zona": "latam"
+    },
+    {
       "titulo": "Los móviles de San Fernando reciben una alerta masiva de Protección Civil por la borrasca Charles",
       "enlace": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPNm9UNXdzMzhsVVNmU0c3aWo1Y0JsblZMUml2T0hBZnViaDlnMXVoNk1td3BMcTlRNGUyYXhSVHQxQjdNNGRVcHVFdUpTNmIyMmNKeHRWc0d5NVUwZHd6YjlRU3VJYUhtU21yV05ydC1WWEUxbTE5MURnWGJuQ1hRR0JlcE5lbzVOZkFraVBpcHVCeVlIb3pyaURMYUJ3TlRNWXJrR2c2QTFGNUVlekZ5UW5Ed1JISzJISmpLM1lZQ01ZY1ZSQi1qYTl4TktzVm00VFkzMThFalBKdnJhUnc?oc=5",
       "fuente": "El Castillo de San Fernando",
@@ -355,68 +459,12 @@ window.PREP_NEWS = {
       "zona": "europa"
     },
     {
-      "titulo": "Ciberataques bancarios aumentan 70% en México y hackers cambian modus operandi: ¿Cómo roban tu dinero?",
-      "enlace": "https://www.elfinanciero.com.mx/empresas/2026/11/11/ciberataques-bancarios-aumenta-70-por-ciento-en-mexico-kaspersky/",
-      "fuente": "El Financiero",
-      "fecha": "2026-11-11T14:08:14.000Z",
-      "tema": "Ciberataques",
-      "zona": "latam"
-    },
-    {
-      "titulo": "¿Tiene lista su mochila de emergencia ante El Niño? Esto recomienda el Ministerio de Salud",
-      "enlace": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPem9VcHN5YkFmSzZyN25Ydl9hX09KRm1MdWljRm9lWDdheFlfc3dlU3ZfNmNpemRXVTNLWkl0eWYwZDJvSmhqVHZNVVJoY01BRGY2eXIxQkZzV21NeE1VcmFsVmw0c2xBd25XZ2RwQml2UW1TMWxlWDVfdVdjUE43a3VNTUZfMjdfcGxLNWdtc0sxb0hsck5oM3dtMUVsVVljTF9DS2IyZkphQ1ZnN2pGSUJwbWQtckk4ZXdMUXpfYU1RemhGS055eEN3?oc=5",
-      "fuente": "El Diario Ecuador",
-      "fecha": "2026-11-11T13:38:23.000Z",
-      "tema": "Protección civil",
-      "zona": "latam"
-    },
-    {
-      "titulo": "Ante un posible apagón global y las fallas de los bancos: ¿Cuánto dinero en efectivo se recomienda tener?",
-      "enlace": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxNQzFiMTZDUXdZemd2dWlTTGxtei1NVk0ycnhPVzhZb0lYMmk4WWcwNzZwLWUwdXdXa3Iyd1ROSk1fZ09EXzR3Y3VJT3hOR0IyelZiNF9pbEd4QzIzMGk3NUVxMjVmSWFLcUprNVJnb2h4RmRMMHJRMTc3Mldva2RNSGFzMm51bUFTU1dEU3Ftanpkb1VhcThxX1BpLThlU2VQSnpYVElrYkRycEdkaUFUdUMzTmFzVGJodU16SjRHWVFENTZOWEg3SXZ3ZE1wdk9zZ1VIcEg4NlpHcm9vUkRRYm5faEQ?oc=5",
-      "fuente": "FayerWayer",
-      "fecha": "2026-11-11T13:15:51.000Z",
-      "tema": "Apagones",
-      "zona": "latam"
-    },
-    {
-      "titulo": "Apagón mundial de tres días: ¿Por qué 33 países llaman a prepararse?",
-      "enlace": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPLUxJSEJQa3pNSGt0RVhuNTZWWjNwNXFoX29GVkdublJ1UjdvUmJuSUdNY3lDenVTMGpFLW95em9iVUJ0R2pfYTNjSVZfQ0E4SlBvTXVuc1FCaHRJVTZRZVYtVmRXd2g0d3FtV2lRU25COGpxVENXMlNaTThNMWwtU2RkdEs4TjFfWE80VHJZN3o0cGFpNEJEZU96a0ltZ19jTHVMeW5INHdQelEtQTl0UkJMNA?oc=5",
-      "fuente": "FayerWayer",
-      "fecha": "2026-11-11T12:52:58.000Z",
-      "tema": "Apagones",
-      "zona": "latam"
-    },
-    {
-      "titulo": "Irán rechaza 'acusaciones infundadas' sobre ciberataque a frigoríficos franceses",
-      "enlace": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPMG50QmZZUjJEWHB5cENYSVM4Mk1YeTRoZTVEVkIzTjAtRnZlTTB1Vkpvc25xWXVtdmtfOVpPSkJVaW9QLVpieHZHMmNOX1FiSlNLM3lfNHctMGNEVkY3Q29Xb3BfQ05fQXVWcFk0SG5VTmVmQWdIQlZsUHZZSnNFbWZYZEwxYWVvbUd4SEJfalN3MTNKeFd1VzhVdGd5M2FQYmtQU2x4M0wtcXJPY3RhRG1KNkhfRUFQcGFhNXNxaVhxZzNtb2JKelZrb9IB0AFBVV95cUxNSHl6ZW1Ib1JCRW9yWXc5Qk01RmxiTnA0Z1JETzZ2bG5rVWxCN1VvSzRIOFV1U0tVbzdOSF82YzB4R1BZdm1udUtYOXdEYjlrbk1jYzlaN3BFTUNONHdxTUpGWG41TDhRRzBDeVg0UFQwblMyRFV0Q3VXQW9xY0xPWHMwT0Fyd3lyUnR6N0xBWlB6VWpYdjBoZFZYVHhBRTE2aDI2eWZXY1dTT2NFdG80eGNpUW5zYnRpemFueHBwb2RDZ0NaV0szOGUzdDF6WW1i?oc=5",
-      "fuente": "El Tiempo",
-      "fecha": "2026-11-11T12:22:56.000Z",
-      "tema": "Ciberataques",
-      "zona": "latam"
-    },
-    {
       "titulo": "Se desata nueva tormenta: SMN activa alerta por las próximas 72 horas",
       "enlace": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOZVJuaU5rZjNzSVhIVVo0V2tDZEZ4WTFzSzV0dE1nN2JFR0xyUzNnWmpqWFM2N01DMll0dHF4aHk4M0VNeTVUSUZyZVFGeDBneGZyVVUydU11a0hLcHZtVU9WMDFWODBDVlVGMXMwbWVJNlRqb09WZkpXT2V0NWQ3QlNRWmxNM1ZFeVZ5bzA2MlpMQWhueTFEWFA4MGVrNzY0QXQ4OHUzMGlXUdIBrwFBVV95cUxOQnlmZGMya3JnS3RzdjUxU2czQU5qMERHOE41eW5Gb2VHN2tlMW1MNDROcTlyZUZZLUtrbUlqZFFYTi1Pa1c4bG5FVzNRRWswc3Fkd0dSSFhQMVVpVFFjSl9DaENzU0ExUUpYdUoxOW80UmtvOE5EMnRWcm0xdUdfaFBnWElxT2JtTEt5Ul9IZGhMWnRFdjloMFB1MTN5YUwzb2QtQWFSTWpRcWYzM2kw?oc=5",
       "fuente": "Urgente24",
       "fecha": "2026-11-11T12:07:00.000Z",
       "tema": "Protección civil",
       "zona": "europa"
-    },
-    {
-      "titulo": "El contundente gesto de Silvia Intxaurrondo y el apagón sorpresa de Canal Sur: así afecta la huelga a la televisión",
-      "enlace": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxQbzJWeUh4cnk5ZV9XZjdMS3JCSzl6T0VGOTcta0FJd2RuNjljMGc1d2pLM1NrLWdKMENTVlhaRkxfQXQ1Z0d2RnVjYl9uVnEtQ0IwUUI4bG1za3F1NjJfZjFGMkl4WlE4OG1haGk4eEl1MkZlaW8xcVViajJGVVZCNENXVDRRajZZUE1IWWJwLTJFdTNCckxiZW1ySzJka0xDMUFPRFBoWW5NWUpyLXI1T1JJY1dKcGRWZFJGN3M2SkdUTlQ5S214SmRoM2hSWnFOcXlUbXBMcldTSkhnbGU2QUdOemhDUlhtS1Nuc2FB0gGIAkFVX3lxTE5WWGptaUtNMEtrTzRYOUF1Z2Fmd3o5TUFhZG5GNGpMWFJkQUNOWE45Zk1yZHBsbkZRSU1fOEd1enBWcFc0V0NWQVgyV2p2eVdNQ0pnaFpsZTQzeUlzQjNWeGExUmpuQmxPaU8wTkJ6ZVpDcVVWNDc5QWRMclh2YkU4SE9wUlppZkFCd3pLT1FoV0Q5TVZFYzVORERHTEk3c3ZOdjdNQm0yOHFFNWw2ck1SRm9VQ3dRaFAtN01IbGhFUDFoN1dQMGxhMTBleGhLN2dBOVFjSjZBMWV1NHcxN2tJV202UnhCWHBUR2swTUxfMFFuUkl4UkJOcmtMWm9VSGlQLVZselNpSg?oc=5",
-      "fuente": "Infobae",
-      "fecha": "2026-11-11T11:06:00.000Z",
-      "tema": "Apagones",
-      "zona": "latam"
-    },
-    {
-      "titulo": "Experto en ciberseguridad alerta: 1 de cada 2 personas puede sufrir un ciberataque",
-      "enlace": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQbDVJYzFvd2wwTmpTeE9lemJkdlVMR2U3ZkNMRlFOS1lncTIyLWZCWmRWNEg5SGVmTUViRVIyaWhuM3ZwMl96SVBGWXpyTGd3QUVxRnJXY0lxWkZVQ2tjY20wR0pfbHVjU0UzclBraV9zTHRpNk5SU0dSRTY1S2o3bjZwRzM0YmNMOTM0c1lBRjRFNGo3Q1dsenByUzczTDRaQUFHSzFMcl9Vbks5NGlLMnlqN2VwQk0?oc=5",
-      "fuente": "Euronews.com",
-      "fecha": "2026-11-11T09:35:21.000Z",
-      "tema": "Ciberataques",
-      "zona": "latam"
     },
     {
       "titulo": "Sheinbaum pide preparar mochila de emergencia y descarta una alerta por riesgos internacionales",
@@ -440,54 +488,6 @@ window.PREP_NEWS = {
       "fuente": "MONCLOA.COM",
       "fecha": "2026-11-10T22:20:50.000Z",
       "tema": "Ciberataques",
-      "zona": "europa"
-    },
-    {
-      "titulo": "Ponferrada activa el Plan de Protección Civil ante la alerta por fuertes vientos",
-      "enlace": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQSUZaRzlHMVFndXZBN1FlTTc4UmY2R1BrSmRSN0tsMU9pelYtOVN5c0FVQVZ0dVdoX2ktS25EZ1A5aFZJd1BuQU0tenRsSEhXRkwyeDlvTnhUUHJQYWRhWDlfZm1XaUlOQXMyd1BMVUgzVUZuVVF2aklQdWRQYVhHSkE4RXMwdFQ2aFdGbWF2blBMMzNKaUNGX1FQY05ZNW1reGVMb1lmRjc1clNaSUpMbDUzRQ?oc=5",
-      "fuente": "El Bierzo Digital",
-      "fecha": "2026-11-10T22:05:16.000Z",
-      "tema": "Protección civil",
-      "zona": "europa"
-    },
-    {
-      "titulo": "Activado el Plan de Emergencias de Huelva capital con dispositivo especial de Policía, Bomberos y Protección Civil",
-      "enlace": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOUGY5Ti00LWR5V3VqQ0xXeFI0Vm8zWWJKYXlLOEdmOWZZM1R5cGFmVDJHX21EcTdzM01sbmpsTDdRb2RUbXlRUmtMOUlHYk1JLWltVEZhNGdsRUFZQ1owRnhKYy04ekYzOXI1VDAtQXZvUlpuWVh2b3Bwbm5rTTR2anltUnFoMHVRT1VtQjZFNGxFQlRQTHMtdF9LS3pkZmxjemVzM3k0UXhvYkdmZEJqYzltY2p6N0dwNVhLaDMtMkNmMWRGQmY3cTZqQjVYUWhLT012THdHUkNCZWEyM01yZDQzSVNwYTg?oc=5",
-      "fuente": "1 Minuto Huelva",
-      "fecha": "2026-11-10T20:16:46.000Z",
-      "tema": "Protección civil",
-      "zona": "europa"
-    },
-    {
-      "titulo": "Los Simpson y kits de emergencia son parte del falso rumor de apagón mundial para el 17 de noviembre",
-      "enlace": "https://news.google.com/rss/articles/CBMigAJBVV95cUxPd2R0SzAxTGhWMW4xSnI2Z0hzRG9vSFFLbV9aSXVnNU92XzEySzhhV3kwWHdWeG15U1NJWkJuaE9SUzhvUXgtZGlIMGJYZ3NxWnVRX2MtMTVVOXlJa3RnWnV0UEJnV09zVThMWkhaM1RDS2ZwTDFFUHpvZkdEdTZyLUI2OEVUV0RtRHBjX1NlUU9Ka2dHenVMQ3VOZVRjTV9yNFhjSVJNUGhOdFBydHZsTGNpc29JdUEyLURZT080M2REQXBfcTF1SUgyY0JJbnpraW92cE1DMTRHaGYyV0pKaEZXd2RmTG9PV2FyVERzRVRVLXk0OEhENm84RlVxcndM?oc=5",
-      "fuente": "BioBioChile",
-      "fecha": "2026-11-10T19:52:18.000Z",
-      "tema": "Apagones",
-      "zona": "europa"
-    },
-    {
-      "titulo": "Extremadura mantiene activos los planes de inundaciones y protección civil por lluvias y viento este miércoles",
-      "enlace": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxPWXRiOXpQdHZrODI5dXVyWDVlTmYtVVY5WkRETjR2b29ZQ0ppN2NQTDRLN28xTlFaR19CSHpBb0NoQ01ybS1TZzdmQy1IcjVtelUyaU1qYkozUHBEZDd0R2pId1RwSHJNbjgyazJqdDhpN2daX2t3Z1l2dkZRNWF5YU51UFF1X1YwMzh2bWdnQVBnU0pQbXNVU3lrak9WYjdYUGdubzdaRG9TcjM2QXVTYnlySWpYQ0pWNWtnX1hlckltN1kwUWZrMEE2WjcwcHFrUzVnQ1MtTXZ6dVlPSjlrSW16WUR2dFY2aFNaal9aSjVBdU1Pd1Yw?oc=5",
-      "fuente": "La Portada de Extremadura",
-      "fecha": "2026-11-10T19:17:19.000Z",
-      "tema": "Desastres naturales",
-      "zona": "europa"
-    },
-    {
-      "titulo": "Action rebaja a 7,95 euros el dispositivo que no puede faltar en tu kit de emergencia: una radio 4 en 1 con linterna, panel solar y función power bank",
-      "enlace": "https://news.google.com/rss/articles/CBMikgJBVV95cUxOZTNjMG1uXzN3YUVaOWdaV0ZPbGloWWNOOV9VSU50OUptWTZDUUFoWEZtX2duS202QVRiQ2U4SUVhVEk0dEk2cUN1R194dU1kcE5MVjRVSTV3ZXk2Tk92a1hsNlo4SXhxWmtaVTQ4enhCdEZ3enVrZHRIRlZodnpWd2pMX3hhVk5BdVRDN1E2bjJPT0VGOXhBZldQazFpU1RtYUJYazVzWWg3eWZROEd6V2dnRE5TTWpCUDNwNVZBQjdXblRFaE5PWGNXYzA1OUNNWFBvVHMzUjQ2YmtZd2kxQlFDY0RNd1VhSVF6UDVKNko4NTZRWk5qRjRrQldLamNzdjdFMk5vZlM2OUNwOVhJY2dn?oc=5",
-      "fuente": "La Razón",
-      "fecha": "2026-11-10T19:09:00.000Z",
-      "tema": "Protección civil",
-      "zona": "europa"
-    },
-    {
-      "titulo": "Costco vende kit de emergencia que dura 25 años en un cubo con 150 raciones; qué incluye, calorías totales y precio",
-      "enlace": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQSnFRZWJYMGh3MlJndGF1bkIwYk1uS3ZEbDhzME1TWVdrTjU0d3dWNnlScFgxVEtkTUhDUmh1XzRHWVN1al9yNWNKN0tHOUVfd1BvaWQ4ZzJIOWwzdC13RFdaZ0xrUy1nOEZTUTNodEJHNzlhVkYxYk9kLU9IUUhZSDhvOEFLdmlVRkl2SG9rYjFJLUNDOGRzS0pCSTZVSlA0d3FQSzFtZkJhVFpmQjZuYWtKVGtzc2xHbnFJUjB2Ql9uV1RjYXowZUxJeFVqMVhHTWllZGowajFTLVp6cEs3Y2J1NENhYVJFLVJj?oc=5",
-      "fuente": "Eje Central",
-      "fecha": "2026-11-10T18:34:20.000Z",
-      "tema": "Protección civil",
       "zona": "europa"
     },
     {
